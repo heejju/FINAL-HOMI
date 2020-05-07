@@ -46,6 +46,7 @@
         <c:url var="mlist" value="mlist.ma"/><!-- 텃밭 관리 -->
         <c:url var="statistics" value="statistics.st"/><!-- 통계 -->
         <c:url var="reportList" value="reportList.fo"/>
+        <c:url var="friend" value="friend.fo"/>
         <nav id="renav">
         <div class="nav-wrap">
             <div class="login" style="margin-bottom:10px; line-height:100px; padding-left:20px;">
@@ -64,16 +65,17 @@
 						<c:if test="${ loginUser.mKind == 2 }">
 							<c:url var="myPage" value="teacherPage.mp" />
 						</c:if>
+						<c:if test="${ loginUser.mKind == 0 }">
+							<c:url var="myPage" value="myinfo.me" />
+							<!-- 운영자는 마이페이지 없이 개인정보 열람 페이지로 바로 이동하도록 함 -->
+						</c:if>
 						<a onclick="msgPopup();" style="cursor: pointer; display:inline-block; margin-left:10px;"> 
 							<img style="width: 30px; margin-bottom:-10px;" src="${contextPath }/resources/images/message.png">
 						</a>
-						<a href="friend.fo" style="cursor: pointer; display:inline-block; margin-left:10px;">
+						<a href="${friend}" style="cursor: pointer; display:inline-block; margin-left:10px;">
                				<img style="width: 30px; margin-bottom:-10px;" src="${contextPath }/resources/images/friends.png">
                			</a>
-               			<c:if test="${ loginUser.mKind != 0 }">
-							<!-- 운영자는 마이페이지 없이 개인정보 열람 페이지로 바로 이동하도록 함 -->
-							<a href="${myPage}" class="login-btn">정보보기</a>
-						</c:if>
+						<a href="${myPage}" class="login-btn">정보보기</a>
 						<a href="${logout}" class="join-btn">로그아웃</a>
 					</c:if>
 				</div>
@@ -109,7 +111,7 @@
             </div>
             <div class="suv-menu-4">
                 <div class="menu-line">
-                    <a href="${reportList}">서브 메뉴3</a>
+                    <a href="${ reportList }">서브 메뉴3</a>
                     <a href="">서브 메뉴4</a>
                     <a href="">서브 메뉴5</a>
                 </div>

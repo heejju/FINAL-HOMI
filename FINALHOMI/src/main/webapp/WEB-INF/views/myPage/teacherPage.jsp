@@ -88,18 +88,11 @@
 							<button class="buttonPay" style="cursor: default;">결제 완료</button>
 						</div>
 					</c:if>
-
 				
-					<c:url var="myinfo" value="infoN.me"/>
-					<c:url var="google" value="infoG.me"/>
+					<c:url var="myinfo" value="myinfoView.me"/>
 					
 				<div class="heightSet">
-					<c:if test="${loginUser.userPwd != null }">
-						<div class="infoTable" style="color: rgb(103, 81, 65);"><a href="${myinfo}" style="font-size: 15px;">${loginUser.nickName} 님</a></div>
-					</c:if>
-					<c:if test="${loginUser.userPwd == null }">
-						<div class="infoTable" style="color: rgb(103, 81, 65);"><a href="${google}" style="font-size: 15px;">${loginUser.nickName} 님</a></div>
-					</c:if>
+					<div class="infoTable" style="color: rgb(103, 81, 65);"><a href="${myinfo}" style="font-size: 15px;">${loginUser.nickName} 님</a></div>
 					<c:if test="${loginUser.vipYn == 'Y' }">
 						<div class="infoTable" style="width: 50px;">
 							<img style="width: 30px;" src="${contextPath }/resources/images/VIP.png">

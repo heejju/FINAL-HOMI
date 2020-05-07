@@ -71,16 +71,10 @@
 					<div class="infoTable" style="width: 250px; height: 150px; float: right; line-height: 150px;"></div>
 				</div>
 				
-				<c:url var="myinfo" value="infoN.me"/>
-				<c:url var="google" value="infoG.me"/>
-				
+				<c:url var="myinfo" value="myinfoView.me"/>
+					
 				<div class="heightSet">
-					<c:if test="${loginUser.userPwd != null }">
-						<div class="infoTable" style="color: rgb(103, 81, 65);"><a href="${myinfo}" style="font-size: 15px;">${loginUser.nickName} 님</a></div>
-					</c:if>
-					<c:if test="${loginUser.userPwd == null }">
-						<div class="infoTable" style="color: rgb(103, 81, 65);"><a href="${google}" style="font-size: 15px;">${loginUser.nickName} 님</a></div>
-					</c:if>
+					<div class="infoTable" style="color: rgb(103, 81, 65);"><a href="${myinfo}" style="font-size: 15px;">${loginUser.nickName} 님</a></div>
 					<div class="infoTable" style="width: 50px;"></div>
 					<div class="infoTable infoSpace" style="border:none;"></div>
 					<div class="infoTable" style="font-size: 15px; border-bottom: 1px solid gray;">참여중인 모임</div>

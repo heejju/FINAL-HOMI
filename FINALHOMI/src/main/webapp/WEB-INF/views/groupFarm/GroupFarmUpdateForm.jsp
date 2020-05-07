@@ -322,7 +322,7 @@
 						<li>
 							<b>인원</b> : 최대 <input type="number" name="personnel" id="personnel" min=2 value=${ gf.personnel }> 명
 							<c:url var="friends" value="fdList.gf"/>
-							<button id="inviteBtn" onclick="window.open('${friends}', 'window팝업', 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');">친구 초대</button>
+							<button type="button" id="inviteBtn" onclick="window.open('${friends}', 'window팝업', 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');">친구 초대</button>
 							<%-- <button id="inviteBtn" onclick="window.open('${ friends }', 'friendsList', 'width=1000, height=1000, resizable=no')">친구 초대</button> --%>
 							
 						</li>

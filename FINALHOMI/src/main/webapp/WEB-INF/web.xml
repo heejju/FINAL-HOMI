@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			<!-- /WEB-INF/spring/root-context.xml -->
+			classpath:root-context.xml
+			/WEB-INF/spring/spring-security.xml
+		</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 공지 사항 -->
+	<servlet>
+		<servlet-name>noticeServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/notice-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>noticeServlet</servlet-name>
+		<url-pattern>*.no</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 강의 -->
+	<servlet>
+		<servlet-name>lectureServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/lecture-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>lectureServlet</servlet-name>
+		<url-pattern>*.lec</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 모임텃밭 등록 -->
+	<servlet>
+		<servlet-name>groupFarmServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/groupFarm-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>groupFarmServlet</servlet-name>
+		<url-pattern>*.gf</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 네이버에디터 사진업로드 관련 -->
+	<servlet>
+		<servlet-name>PhotoServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/photo-context.xml
+			</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PhotoServlet</servlet-name>
+		<url-pattern>*.photo</url-pattern>
+	</servlet-mapping>
+	
+	
+  	<!-- 로그인 -->
+  	<servlet>
+      <servlet-name>MemberServlet</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+      		<param-name>contextConfigLocation</param-name>
+      		<param-value>/WEB-INF/spring/appServlet/member-context.xml</param-value>
+      </init-param>
+    </servlet>
+    <servlet-mapping>
+       <servlet-name>MemberServlet</servlet-name>
+       <url-pattern>*.me</url-pattern>
+    </servlet-mapping>
+    
+   
+    <!-- 1:1문의 게시판 -->
+	<servlet>
+		<servlet-name>questionServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/questions-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>questionServlet</servlet-name>
+		<url-pattern>*.qu</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 회원 관리 -->
+	<servlet>
+		<servlet-name>ManagementServlet</servlet-name>
+	   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	   	<init-param>
+	     	<param-name>contextConfigLocation</param-name>
+	     	<param-value>/WEB-INF/spring/appServlet/management-context.xml</param-value>
+	   	</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ManagementServlet</servlet-name>
+		<url-pattern>*.ma</url-pattern>
+	</servlet-mapping>
+	 
+	 
+	<!-- 통계 -->
+	<servlet>
+		<servlet-name>StatisticsServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+	 		<param-value>/WEB-INF/spring/appServlet/statistics-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StatisticsServlet</servlet-name>
+		<url-pattern>*.st</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 쪽지함 -->
+	<servlet>
+		<servlet-name>messageServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/message-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>messageServlet</servlet-name>
+		<url-pattern>*.msg</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 마이페이지 -->
+	<servlet>
+		<servlet-name>myPageServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/mypage-context.xml</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>myPageServlet</servlet-name>
+		<url-pattern>*.mp</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 친구 -->
+	<servlet>
+		<servlet-name>FriendServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/friend-context.xml</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>FriendServlet</servlet-name>
+		<url-pattern>*.fo</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 에러페이지 -->
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+	    <location>/WEB-INF/views/common/errorPage.jsp</location>
+	</error-page>
+	  
+	<!-- 인코딩 필터 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+	    </init-param>
+	</filter>
+	 
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+  
+  	<!-- 이미지 및 파일 연결 -->
+  	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.gif</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+</web-app>

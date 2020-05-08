@@ -92,7 +92,7 @@
 	<section>
 		<div id="realMain">
 			<div id="postMain">
-				<form action="insert.gf" id="form" method="post" enctype="Multipart/form-data" accept-charset="UTF-8">
+				<form action="bmodify.gf" id="form" method="post" enctype="Multipart/form-data" accept-charset="UTF-8">
 					<div class="thumbnailWrapper">
 						<div id="centerd">
 							<img id="thumbnailImg" name="thumbnailImg" src="${ contextPath }/resources/uploadFiles/${img.changeName}"/>
@@ -124,7 +124,8 @@
 					
 					<!-- 파일 업로드 하는 부분 -->
 					<div id="fileArea">
-						<input type="file" id="inputThumbnailImg" multiple="multiple" name="thumbnailImg" onchange="LoadImg(this,1)">
+						<input type="file" id="inputThumbnailImg" multiple="multiple" 
+							value="${img.changeName}" name="thumbnailImg" onchange="LoadImg(this,1)">
 					</div>
 					
 					<script>
@@ -329,9 +330,17 @@
 						<li>
 							<b>인원</b> : 최대 <input type="number" name="personnel" id="personnel" min=2 value=${ gf.personnel }> 명
 							<c:url var="friends" value="fdList.gf"/>
-							<button id="inviteBtn" onclick="window.open('${friends}', 'window팝업', 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');">친구 초대</button>
-							<%-- <button id="inviteBtn" onclick="window.open('${ friends }', 'friendsList', 'width=1000, height=1000, resizable=no')">친구 초대</button> --%>
-							
+							<button id="inviteBtn" type="button" onclick="invite();">친구 초대</button>
+							<input type="hidden" name="inviteFriends" id="inviteFriends">
+							<script>
+								function invite(){
+									 //var data = document.querySelector('#friends').value;
+									var child
+									var friendsPopup;						
+									fdPopup = window.open('${friends}', 'friendsPopup', 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');
+									
+								}
+							</script>
 						</li>
 						<li>
 							<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
@@ -673,7 +682,6 @@
                 		.then(확인 => {
                 		  if(확인) {
                 		    $('#form').submit();
-                		    $('#form').attr('action', 's')
                 		    swal("모임 텃밭에 등록되었습니다.", {
                 		      icon: "success",
                 		      button: false,

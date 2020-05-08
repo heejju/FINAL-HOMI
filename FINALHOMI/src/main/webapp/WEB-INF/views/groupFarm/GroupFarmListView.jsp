@@ -283,9 +283,9 @@
 					</c:forEach>
 				</div>
 					
-					<%-- <c:if test="${ !empty loginUser && loginUser.mKind eq 1}"> --%>
+					<c:if test="${ !empty loginUser && loginUser.mKind eq 1}">
 						<button type="button" id="writeBtn" onclick="location.href='insertView.gf';">글쓰기</button>
-					<%-- </c:if> --%>
+					</c:if>
 			</div>
 		</div>
 	

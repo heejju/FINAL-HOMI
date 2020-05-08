@@ -44,10 +44,6 @@
 	.arrows{background: rgb(103, 81, 65); color: white;}
 	
 	
-	/* 날짜 페이징 */
-	.date{float: left; text-align: center; word-spacing: 5px;}
-	.dateBtn{width: 50px; border: none; color: white; border-radius: 3px; padding: 8px 0; background: #888c43;}
-	
 </style>
 </head>
 <body style="line-height: 2em;">
@@ -122,37 +118,14 @@
 				
 			<div class="subTitle">내 강의 리스트</div>
 			<div style="background: white; margin: 15px; padding: 10px;">
-				<iframe width="100%" height="750" src="lectureList.mp" frameborder="0"></iframe>
+				<iframe width="100%" height="300" src="lectureList.mp" frameborder="0"></iframe>
 			</div>
 		
 		
 		<div> <!-- 시간표 -->
 			<div class="subTitle">시간표</div>
 			<div style="background: white; margin: 15px; padding: 15px;">
-				<div style="margin-left: 270px;"> <!-- 날짜 선택 -->
-					<div class="dateBtn date" style="margin-right: 3%;">이전</div>
-					<div class="date" style="width: 200px; font-size: 25px;">00월 00일</div>
-					<div class="dateBtn date" style="margin-left: 3%;">다음</div>
-				</div>
-				<div style="clear: both; border-bottom: 1px solid gray; padding: 5px;"></div>
-				<table class="table classList" id="timeTable" style="width: 100%; text-align: center;">
-					<tr style="border-bottom: 1px solid gray; line-height: 30px;">
-						<th style="width: 120px;">시간</th>
-						<th>제목</th>
-						<th style="width: 120px;">모종</th>
-						<th style="width: 80px;">종류</th>
-						<th style="width: 80px;">인원</th>
-					</tr>
-				<% for(int i = 9; i < 23; i++) { %>
-							<tr style="border-bottom: 1px solid rgb(225, 225, 225); line-height: 25px;">
-								<td><%= i %>:00 - <%= i+1 %>:00</td>
-								<td>제목이 들어갈 자리입니다 호호호</td>
-								<td>뜨개질</td>
-								<td>모임</td>
-								<td>4/5</td>
-							</tr>
-				<% } %>
-				</table>
+				<iframe width="100%" height="580" src="timeLine.mp" frameborder="0"></iframe>
 			</div>
 		</div>
 	</div>
@@ -163,15 +136,6 @@
 		/* 내 강의 마우스 오버 효과 */
 		$(function() {
 			$('#listTable').find("td").mouseenter(function() {
-				$(this).parents("tr").css({"background":"rgb(137, 139, 77)", "color":"white", "cursor":"pointer"});
-			}).mouseout(function() {
-				$(this).parents("tr").css({"background":"none", "color":"black"});
-			});
-		});
-	
-		/* 시간표 마우스 오버 효과 */
-		$(function() {
-			$('#timeTable').find("td").mouseenter(function() {
 				$(this).parents("tr").css({"background":"rgb(137, 139, 77)", "color":"white", "cursor":"pointer"});
 			}).mouseout(function() {
 				$(this).parents("tr").css({"background":"none", "color":"black"});

@@ -65,7 +65,7 @@
 	</table>
 	
 	<!-- 페이징 -->
-			<div class="pagingArea" style="text-align: center; padding-top: 10px; position: absolute; bottom: 0; left: 47%;">
+			<div class="pagingArea" style="text-align: center; padding-top: 10px; position: absolute; bottom: 0; left: 28%;">
 				<!-- [이전] -->
             <c:if test="${ pi.currentPage <= 1 }">
                <button id="before" style="background:lightgray; color:white" disabled>&lt;</button>

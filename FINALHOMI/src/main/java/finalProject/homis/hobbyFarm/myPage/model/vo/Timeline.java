@@ -13,6 +13,7 @@ public class Timeline {
 	private String hobbyName; // 취미 이름
 	private String learnerId; // 배우는 사람 아이디(미니 마이페이지 접근을 위함)
 	private String learnerNick; // 배우는 사람 닉네임(표시용)
+	private int otTime; // 강의 수강시간(n시간)
 	
 	private String tKind; // 강의, 모종 구분
 	
@@ -21,8 +22,9 @@ public class Timeline {
 	
 	public Timeline() {}
 
-	public Timeline(int tableNo, String userId, int postNo, String timeline, String date, String time, String title,
-			String hobbyName, String learnerId, String learnerNick, String tKind, int personnel, int personCount) {
+	public Timeline(int tableNo, String userId, int postNo, String timeline, String date, String time, int concNo,
+			String title, String hobbyName, String learnerId, String learnerNick, int otTime, String tKind,
+			int personnel, int personCount) {
 		super();
 		this.tableNo = tableNo;
 		this.userId = userId;
@@ -30,10 +32,12 @@ public class Timeline {
 		this.timeline = timeline;
 		this.date = date;
 		this.time = time;
+		this.concNo = concNo;
 		this.title = title;
 		this.hobbyName = hobbyName;
 		this.learnerId = learnerId;
 		this.learnerNick = learnerNick;
+		this.otTime = otTime;
 		this.tKind = tKind;
 		this.personnel = personnel;
 		this.personCount = personCount;
@@ -150,13 +154,21 @@ public class Timeline {
 	public void setConcNo(int concNo) {
 		this.concNo = concNo;
 	}
+	
+	public int getOtTime() {
+		return otTime;
+	}
+
+	public void setOtTime(int otTime) {
+		this.otTime = otTime;
+	}
 
 	@Override
 	public String toString() {
 		return "Timeline [tableNo=" + tableNo + ", userId=" + userId + ", postNo=" + postNo + ", timeline=" + timeline
 				+ ", date=" + date + ", time=" + time + ", concNo=" + concNo + ", title=" + title + ", hobbyName="
-				+ hobbyName + ", learnerId=" + learnerId + ", learnerNick=" + learnerNick + ", tKind=" + tKind
-				+ ", personnel=" + personnel + ", personCount=" + personCount + "]";
+				+ hobbyName + ", learnerId=" + learnerId + ", learnerNick=" + learnerNick + ", otTime=" + otTime
+				+ ", tKind=" + tKind + ", personnel=" + personnel + ", personCount=" + personCount + "]";
 	}
 
 }

@@ -10,6 +10,7 @@ import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmBoard;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
+import finalProject.homis.hobbyFarm.myPage.model.vo.Timeline;
 
 @Repository
 public class myPageDAO {
@@ -54,6 +55,10 @@ public class myPageDAO {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("myPageMapper.myFarm", id, rowBounds);
+	}
+
+	public ArrayList<Timeline> getTimeline(SqlSessionTemplate sqlSession, Timeline tl) {
+		return (ArrayList)sqlSession.selectList("myPageMapper.getTimeline", tl);
 	}
 
 

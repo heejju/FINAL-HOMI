@@ -47,6 +47,8 @@ img{width:6%;height:6%;}
 		$('#bName').text('공지');
 		$('#bNameAfter').text('사항');
 	</script>
+	<!-- swal 선언 -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<section>
 		<div class="container">
 			<!-- 공지사항 제목 -->
@@ -98,8 +100,15 @@ img{width:6%;height:6%;}
 	
 	<script>
 		function ndelete(){
-			var isTrue = confirm("정말 삭제하시겠습니까?");
-			if(isTrue) location.href='${ ndelete }';
+			var flag;
+			var swal = swal({
+				title : "정말 삭제하시겠습니까?",
+				text : "삭제한 게시물은 복구할 수 없습니다.",
+				icon : "info",
+				buttons : ["취소", "삭제"]
+			}).then((삭제) => {
+				location.href='${ ndelete }';
+			});
 		}
 	</script>
 </body>

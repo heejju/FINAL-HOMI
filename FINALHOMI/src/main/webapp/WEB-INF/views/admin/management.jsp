@@ -379,8 +379,9 @@ a{display:inline !important;}
 		function search(){
 			var searchSelect = $('#searchSelect').val();
 			var word = $('#word').val();
-			
-			location.href="maSearchList.ma?searchSelect=" + searchSelect + "&word=" + word;
+			if(window.event.keyCode == 13){
+				location.href="maSearchList.ma?searchSelect=" + searchSelect + "&word=" + word;
+			}
 		}
 	</script>
 

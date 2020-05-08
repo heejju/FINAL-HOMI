@@ -134,7 +134,9 @@ div.graph{width:100%; height:600px; margin:2% 2%;}
 				</div>
 				<div class="wrap">
 				<div class="graph" style="width:50%; float:left; ">
-					<canvas id="myChart" style="width:500px; height:500px;"></canvas>
+					<canvas id="myChart1" style="width:500px; height:500px; display:none;"></canvas>
+					<canvas id="myChart2" style="width:500px; height:500px; display:none;"></canvas>
+					<canvas id="myChart3" style="width:500px; height:500px; display:none;"></canvas>
 				</div>
 				<table id="listArea" style="display:block; width:45%; height:500px; overflow-x: hidden; float:left;">
 						<thead>
@@ -205,8 +207,12 @@ div.graph{width:100%; height:600px; margin:2% 2%;}
 	  // 차트를 그려보자
 	  
 	  $('#first-btn').click(function(){
-	      var ctx = document.getElementById("myChart").getContext('2d');
+	      var ctx = document.getElementById("myChart1").getContext('2d');
 	     
+	      $('#myChart1').css('display','block');
+	      $('#myChart2').css('display','none');
+	      $('#myChart3').css('display','none');
+	      
 	      var myChart = new Chart(ctx, {
 	          type: 'bar',
 	          data: {
@@ -269,8 +275,12 @@ div.graph{width:100%; height:600px; margin:2% 2%;}
 		
 	  
 	  $('#second-btn').click(function(){
-	      var ctx = document.getElementById("myChart").getContext('2d');
+	      var ctx = document.getElementById("myChart2").getContext('2d');
 	     
+	      $('#myChart2').css('display','block');
+	      $('#myChart1').css('display','none');
+	      $('#myChart3').css('display','none');
+	      
 	      var myChart = new Chart(ctx, {
 	          type: 'bar',
 	          data: {
@@ -333,8 +343,12 @@ div.graph{width:100%; height:600px; margin:2% 2%;}
 	      });
 	  });
 	  $('#third-btn').click(function(){
-	      var ctx = document.getElementById("myChart").getContext('2d');
+	      var ctx = document.getElementById("myChart3").getContext('2d');
 	     
+	      $('#myChart3').css('display','block');
+	      $('#myChart1').css('display','none');
+	      $('#myChart2').css('display','none');
+	      
 	      var myChart = new Chart(ctx, {
 	          type: 'bar',
 	          data: {

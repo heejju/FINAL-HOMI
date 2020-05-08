@@ -13,6 +13,7 @@
 
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
@@ -78,17 +79,23 @@
 		<script>
 		 	$('#bName').text('동네');
 		 	$('#bNameAfter').text('텃밭');
+		 	
+		 	$('#spanWrapper').click(function(){
+		 		location.href="blist.gf";
+		 	}).mouseover(function(){
+		 		$(this).css('cursor','pointer');
+		 	}).mouseout(function(){
+		 		$(this).css('cursor','default');
+		 	});
 		</script>
 	</header>
 	<section>
 		<div id="realMain">
 			<div id="postMain">
-				<form action="insert.gf" id="form" method="post" enctype="Multipart/form-data">
+				<form action="insert.gf" id="form" method="post" enctype="Multipart/form-data" accept-charset="UTF-8">
 					<div class="thumbnailWrapper">
 						<div id="centerd">
 							<img id="thumbnailImg" name="thumbnailImg" src="${ contextPath }/resources/uploadFiles/${img.changeName}"/>
-							<%-- <img id="thumbnail" alt="thumbnail" src="${ contextPath }/resources/images/vegetables3.jpg"> --%>
-							<%-- <img id="thumbnail" alt="thumbnail" src="${ contextPath }/resources/images/vegetables4.jpg"> --%>
 						</div>
 						<div id="imgGuide">썸네일 이미지를 변경하시려면 클릭하세요</div>
 					</div>
@@ -190,7 +197,7 @@
 						<li>
 							<b>지역</b> :
 							<div class="locationArea">
-								<select name="selectSido" class="selectLocation" id="selectSido" onchange="selectLocation();" required>
+								<select name="selectSido" class="selectLocation" id="selectSido" onchange="categoryChange();" required>
 									<option value=''>시/도 선택</option>
 									<option value='서울특별시'>서울특별시</option>
 									<option value='경기도'>경기도</option>
@@ -322,7 +329,7 @@
 						<li>
 							<b>인원</b> : 최대 <input type="number" name="personnel" id="personnel" min=2 value=${ gf.personnel }> 명
 							<c:url var="friends" value="fdList.gf"/>
-							<button type="button" id="inviteBtn" onclick="window.open('${friends}', 'window팝업', 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');">친구 초대</button>
+							<button id="inviteBtn" onclick="window.open('${friends}', 'window팝업', 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');">친구 초대</button>
 							<%-- <button id="inviteBtn" onclick="window.open('${ friends }', 'friendsList', 'width=1000, height=1000, resizable=no')">친구 초대</button> --%>
 							
 						</li>

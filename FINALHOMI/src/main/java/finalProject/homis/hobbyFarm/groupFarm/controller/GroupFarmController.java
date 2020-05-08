@@ -32,6 +32,7 @@ import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.common.model.vo.Reply;
 import finalProject.homis.hobbyFarm.common.model.vo.SearchSelect;
 import finalProject.homis.hobbyFarm.common.model.vo.Teacher;
+import finalProject.homis.hobbyFarm.friends.model.service.FriendService;
 import finalProject.homis.hobbyFarm.groupFarm.model.exception.GroupFarmBoardException;
 import finalProject.homis.hobbyFarm.groupFarm.model.service.GroupFarmService;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmApplication;
@@ -40,6 +41,8 @@ import finalProject.homis.hobbyFarm.groupFarm.model.vo.Pagination;
 import finalProject.homis.hobbyFarm.lecture.model.service.LectureBoardService;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
+import finalProject.homis.hobbyFarm.message.model.service.MessageService;
+import finalProject.homis.hobbyFarm.message.model.vo.Message;
 
 @Controller
 public class GroupFarmController {
@@ -48,7 +51,10 @@ public class GroupFarmController {
 	private GroupFarmService gfService;
 	
 	@Autowired
-	private LectureBoardService lecService;
+	private FriendService fService;
+	
+	@Autowired
+	private MessageService msgService;
 	
 	// 게시글 목록 조회
 	@RequestMapping("blist.gf")
@@ -95,9 +101,6 @@ public class GroupFarmController {
 			}
 		}
 		
-		System.out.println(sido);
-		System.out.println(gugun);
-		System.out.println(hobby);
 		
 		int currentPage = 1;
 		
@@ -159,19 +162,23 @@ public class GroupFarmController {
 	
 	// 친구 리스트 조회
 	@RequestMapping("fdList.gf")
-	public String friendsListView() {
-		return "FriendsListView";
+	public ModelAndView friendsListView(ModelAndView mv, HttpSession session) {
+		
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		ArrayList<Member> list = gfService.selectFdList(userId);
+		
+		mv.addObject("list",list).setViewName("FriendsListView");
+		
+		return mv;
 	}
 	
 	// 게시글 작성
 	@RequestMapping("insert.gf")
-//	public ModelAndView insertBoard(@ModelAttribute GroupFarmBoard gf, @ModelAttribute Image img,
-//			@RequestParam("sido") String sido, @RequestParam("gugun") String gugun,
-//			@RequestParam("hobby") int hobbyNo, @RequestParam("thumbnailImg") MultipartFile thumbnail,
-//			HttpServletRequest request, ModelAndView mv) {
 	public String insertBoard(@ModelAttribute GroupFarmBoard gf, @ModelAttribute Image img,
 								@RequestParam("sido") String sido, @RequestParam("gugun") String gugun,
 								@RequestParam("hobby") int hobbyNo, @RequestParam("thumbnailImg") MultipartFile thumbnail,
+								@RequestParam("inviteFriends") String inviteFriends, HttpSession session, 
 								HttpServletRequest request, ModelAndView mv) {
 		
 		// 주소 저장
@@ -196,9 +203,50 @@ public class GroupFarmController {
 			}
 		}
 		
+		String msg = "";
+
 		int result = gfService.insertBoard(gf, img);
-		
+		int msgResult = 0;
 		if(result > 0) {
+			
+
+			Message message = new Message();
+			String id = ((Member)session.getAttribute("loginUser")).getUserId();
+			String nickName = ((Member)session.getAttribute("loginUser")).getNickName();
+			GroupFarmBoard newGF = gfService.selectLastInsertInfo(id);
+			String url = "\"window.open('bdetail.gf?postNo="+newGF.getPostNo()+"')\"";
+
+			System.out.println("newGF = " + newGF);
+			
+			System.out.println("inviteFriends = " + inviteFriends);
+			String[] invitedFriends = inviteFriends.split(",");
+			
+			for(int i = 0; i < invitedFriends.length; i++) {
+				
+				System.out.println("invitedFriends["+i+"] = " + invitedFriends[i]);
+
+				String content = "<span>안녕하세요, <img id=\"logo\" src=\"${ contextPath }/resources/Logo.png\"/>입니다!</span><br>" +
+						"<span>" + nickName + " 님께서 회원님을 #" + newGF.getTitle() + " 모임으로 초대하셨습니다.</span><br>" + 
+						"<span>" + nickName + " 님이 모집하고 계신 모임 텃밭이 궁금하시다면 아래 버튼을 눌러 해당 게시글로 바로 이동해보세요!</span><br>" + 
+						"<div id='boardBtnWrapper'>" + 
+						"<button id='goDetail' onclick=" + url + "'>보러가기</button>"+
+						"</div>";
+				
+				message.setMsg_to(invitedFriends[i]); //받을사람 id
+				message.setMsg_from(id);
+				message.setMsg_title(newGF.getTitle() + " 모임초대입니다!"); //쪽지 제목
+				message.setMsg_content(content);
+				
+				msgResult += msgService.insertMsg(message);
+			}
+			
+			
+			if(msgResult == invitedFriends.length) {
+				msg = "success";
+			} else {
+				throw new GroupFarmBoardException("초대 메세지 전송에 실패하였습니다.");
+			}
+			
 			
 			if(gf.getOfferYN().equals("Y")) {
 				return "redirect:/blist.gf?isNeededTeacher=Y";
@@ -253,6 +301,7 @@ public class GroupFarmController {
 			
 			ArrayList<Teacher> tList = new ArrayList<Teacher>();
 			ArrayList<Teacher> randomTList = new ArrayList<Teacher>();
+			
 			// ArrayList에 Teacher 추가
 			for(Teacher t : teacherList){
 				tList.add(t);
@@ -287,20 +336,18 @@ public class GroupFarmController {
 										GroupFarmBoard gf, ModelAndView mv) {
 		
 		gf = gfService.selectBoard(postNo);
-		System.out.println("recommend Controller : \n"+gf);
 		
 		ArrayList<Teacher> teacherList = gfService.teacherList(gf);
 		// 추천 강사 랜덤 3명 추출 -- 메소드
 		ArrayList<Teacher> tList = RandomTeacherList(teacherList);
-
-		ArrayList<LectureBoard> lecList = null;
+		
+		ArrayList<LectureBoard> lecList = new ArrayList<LectureBoard>();
 
 		for(int i=0; i<tList.size(); i++) {
-			LectureBoard lec = gfService.recentLec(tList.get(i).getUserId());
-			
-			System.out.println("i번째 : " + lec);
+			System.out.println("tList.get(i) = " + tList.get(i));
+			LectureBoard lec = new LectureBoard();
+			lec = gfService.recentLec(tList.get(i).getUserId());
 			lecList.add(lec);
-			System.out.println("i번째 : " + lecList);
 		}
 		
 		//gfService.selectLecture(tList);
@@ -357,6 +404,7 @@ public class GroupFarmController {
 		return mv;
 	}
 	
+	// 댓글 목록
 	@RequestMapping("rList.gf")
 	public void getReplyList(HttpServletResponse response, @RequestParam("postNo") int postNo) throws JsonIOException, IOException {
 		ArrayList<Reply> rList = gfService.selectReplyList(postNo);
@@ -539,35 +587,51 @@ public class GroupFarmController {
 			  .addObject("selectedGugun", gugun)
 			  .addObject("selectedHobby", gf.getHobbyNo())
 			  .setViewName("GroupFarmUpdateForm");
-		} else {
-			throw new GroupFarmBoardException("수정 페이지로 이동할 수 없습니다.");
 		}
-		
 		return mv;
 	}
 	
 	// 글 수정 
 	@RequestMapping("bmodify.gf")
-	public ModelAndView modifyBoard(ModelAndView mv, @RequestParam("postNo") int postNo, @RequestParam("page") Integer page) {
+	public String modifyBoard(@RequestParam("postNo") int postNo, @RequestParam("page") Integer page,
+								@RequestParam("sido") String sido, @RequestParam("gugun") String gugun,
+								@RequestParam("hobby") int hobbyNo, HttpServletRequest request,
+								@RequestParam("thumbnailImg") MultipartFile thumbnail, ModelAndView mv) {
 		
 		GroupFarmBoard gf = gfService.selectBoard(postNo);
 		Image img = gfService.selectImage(postNo);
-		ArrayList<GroupFarmApplication> gfa = gfService.selectGfaList(postNo);
-		ArrayList<Hobby> hlist = gfService.selectHList();
+		
+		// 주소 저장
+		gf.setLocation(sido + " " + gugun);
+		gf.setHobbyNo(hobbyNo);
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\uploadFiles";
+		
+		
+		// 파일이 있으면 saveFile이라고 하는 메소드에 thumbnail 담아주기
+		if(thumbnail !=null && !thumbnail.isEmpty()) {
+			String renameFileName = saveFile(thumbnail, request);
 
-		if(gf != null) {
-			mv.addObject("gf", gf)
-			  .addObject("img", img)
-			  .addObject("gfaList", gfa)
-			  .addObject("hlist", hlist)
-			  .setViewName("GroupFarmUpdateForm");
-		} else {
-			throw new GroupFarmBoardException("게시글을 수정할 수 없습니다.");
+			// 파일이 저장되었으면
+			if(renameFileName != null) {
+				img.setPostNo(gf.getPostNo());
+				img.setOriginName(thumbnail.getOriginalFilename());
+				img.setChangeName(renameFileName);
+				
+				img.setImgSrc(savePath);
+			}
 		}
 		
+		int result = gfService.updateBoard(gf, img);
 		
+		if(result > 0) {
+			return "redirect:/bdetail.gf?postNo="+postNo+"&page="+page;
+
+		} else {
+			throw new GroupFarmBoardException("게시글 수정에 실패하였습니다.");
+		}
 		
-		return mv;
 	}
 
 	// 글 삭제

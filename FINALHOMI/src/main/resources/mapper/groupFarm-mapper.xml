@@ -20,18 +20,14 @@
 		FROM GF_VIEW			<!-- VIEW에서 MEMBER테이블과 JOIN한 이후에 NICKNAME 값을 갖고와야 함 -->
 		<where>
 			DELETE_YN='N'
-			<if test="searchValue != null">
-				<choose>
-					<when test="writer != null">
-						AND NICKNAME = #{writer}
-					</when>
-					<when test="title != null">
-						AND TITLE LIKE '%' || #{title} || '%'
-					</when>
-					<when test="content != null">
-						AND CONTENT LIKE '%' || #{content} || '%'
-					</when>
-				</choose>
+			<if test="writer != null">
+				AND NICKNAME = #{writer}
+			</if>
+			<if test="title != null">
+				AND TITLE LIKE '%' || #{title} || '%'
+			</if>
+			<if test="content != null">
+				AND CONTENT LIKE '%' || #{content} || '%'
 			</if>
 			<if test="location != null">
 				AND LOCATION LIKE '%' || #{location} || '%'
@@ -48,18 +44,14 @@
 		FROM GF_VIEW
 		<where>
 			DELETE_YN='N'
-			<if test="searchValue != null">
-				<choose>
-					<when test="writer != null">
-						AND NICKNAME = #{writer}
-					</when>
-					<when test="title != null">
-						AND TITLE LIKE '%' || #{title} || '%'
-					</when>
-					<when test="content != null">
-						AND CONTENT LIKE '%' || #{content} || '%'
-					</when>
-				</choose>
+			<if test="writer != null">
+				AND NICKNAME = #{writer}
+			</if>
+			<if test="title != null">
+				AND TITLE LIKE '%' || #{title} || '%'
+			</if>
+			<if test="content != null">
+				AND CONTENT LIKE '%' || #{content} || '%'
 			</if>
 			<if test="location != null">
 				AND LOCATION LIKE '%' || #{location} || '%'
@@ -102,18 +94,14 @@
 		FROM GFI_VIEW
 		<where>
 			DELETE_YN='N'
-			<if test="searchValue != null">
-				<choose>
-					<when test="writer != null">
-						AND NICKNAME = #{writer}
-					</when>
-					<when test="title != null">
-						AND TITLE LIKE '%' || #{title} || '%'
-					</when>
-					<when test="content != null">
-						AND CONTENT LIKE '%' || #{content} || '%'
-					</when>
-				</choose>
+			<if test="writer != null">
+				AND NICKNAME = #{writer}
+			</if>
+			<if test="title != null">
+				AND TITLE LIKE '%' || #{title} || '%'
+			</if>
+			<if test="content != null">
+				AND CONTENT LIKE '%' || #{content} || '%'
 			</if>
 			<if test="location != null">
 				AND LOCATION LIKE '%' || #{location} || '%'
@@ -272,18 +260,43 @@
                     OR HOBBY_NO = #{hobbyNo}
 	</select>
 	
-	<!-- <select id="selectLecture">
-		SELECT TITLE
-		FROM (SELECT ROWNUM, TITLE
-              FROM (SELECT * FROM BOARD JOIN MEMBER ON(WRITER = USER_ID) WHERE WRITER=#{userId} ORDER BY POST_NO DESC)
-              WHERE ROWNUM = 1 );
-	</select> -->
-	
-	<select id="selectLecture" resultMap="gfBoardResultSet">
+	<select id="selectLecture" resultMap="LBResultSet">
+		<!-- SELECT POST_NO, BOARD_NO, TITLE, WRITER, CONTENT, WRITE_DATE
+		FROM (SELECT ROWNUM, POST_NO, BOARD_NO, TITLE, WRITER, CONTENT, WRITE_DATE
+		      FROM (SELECT * FROM BOARD JOIN MEMBER ON(WRITER = USER_ID) 
+		            WHERE WRITER=#{userId} AND DELETE_YN = 'N' AND BOARD_NO = 2
+					ORDER BY POST_NO DESC)
+		      WHERE ROWNUM = 1) -->
 		SELECT *
-		FROM BOARD
-		WHERE WRITER = #{userId} AND POST_NO = (SELECT MAX(POST_NO) FROM BOARD)
+		FROM (SELECT * FROM BOARD B JOIN MEMBER ON(WRITER = USER_ID) 
+		            WHERE WRITER=#{userId} AND DELETE_YN = 'N' AND BOARD_NO = 2
+		             ORDER BY POST_NO DESC)
+		WHERE ROWNUM = 1
 	</select>
+	
+	<resultMap type="LectureBoard" id="LBResultSet">
+		<id column="POST_NO" property="postNo"/>
+		<result column="WRITER" property="writer"/>
+		<result column="NICKNAME" property="nickName"/>
+		<result column="TITLE" property="title"/>
+		<result column="CONTENT" property="content"/>
+		<result column="VIEW_COUNT" property="viewCount"/>
+		<result column="WRITE_DATE" property="writeDate"/>
+		<result column="MODIFY_DATE" property="modifyDate"/>
+		<result column="HOBBY_NO" property="hobbyNo"/>
+		<result column="OT_TUITION" property="otTuition"/>
+		<result column="OT_TIME" property="otTime"/>
+		<result column="OT_ALL_TIME" property="otAllTime"/>
+		<result column="LEARNER" property="learner"/>
+		<result column="TEACHER_INFO" property="teacherInfo"/>
+		<result column="ABLE_TIME" property="ableTime"/>
+		<result column="ABLE_PLACE" property="ablePlace"/>
+		
+		<result column="HOBBY_NAME" property="hobbyName"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="IMG_SRC" property="imgSrc"/>
+	</resultMap>
 	
 	<resultMap id="TeacherResultSet" type="Teacher">
 		<result property="userId" column="USER_ID"/>
@@ -303,6 +316,15 @@
 		where writer = #{loginId} and post_no = (select max(post_no) 
 		                                    	from gf_view)
 	</select>
+	
+	<update id="updateBoard" parameterType="list">
+		UPDATE BOARD AS B, "GROUP" AS G
+		SET B.POST_NO=#{postNo}, B.WRITER=#{writer}, B.TITLE=#{title}, B.CONTENT=#{content}, 
+			B.MODIFY_DATE=SYSDATE
+		SET G.HOBBY_NO=#{hobbyNo}, G.LOCATION=#{location}, G.PERSONNEL=#{personnel}
+			G.START_DATE=#{startDate}, G.END_DATE=#{endDate}, G.DAY=#{day}
+			G.START_HOUR=#{startHour}, G.END_HOUR=#{endHour}, G.OFFER_YN=#{offerYN}
+	</update>
 	
 	
 </mapper>

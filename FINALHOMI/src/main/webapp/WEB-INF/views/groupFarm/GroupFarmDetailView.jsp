@@ -52,8 +52,8 @@
 	/* 댓글 */
 	#commentMain{min-height:130px; background-color: white; margin:10% auto;
 				overflow:hidden; height:auto; padding:3% 6%; font-size: 16px;}
-	.replyUpdate{cursor: pointer; font-size: 15px;}
-	.replyDelete{cursor: pointer; font-size: 15px;}
+	#replyNickName{cursor: pointer; padding-left:5px;}
+	.replyUpdate, .replyDelete{cursor: pointer; font-size: 15px;}
 	.contentTR{display:inline-block; margin: 5px 0 15px 0; word-break:break-all; wrap:hard;}
 	.contentTd{width:100%;}
 	
@@ -85,6 +85,14 @@
 		<script>
 		 	$('#bName').text('동네');
 		 	$('#bNameAfter').text('텃밭');
+		 	
+		 	$('#spanWrapper').click(function(){
+		 		location.href="blist.gf";
+		 	}).mouseover(function(){
+		 		$(this).css('cursor','pointer');
+		 	}).mouseout(function(){
+		 		$(this).css('cursor','default');
+		 	});
 		</script>
 	</header>
 	
@@ -564,9 +572,22 @@
 					$('#deleteBtn').click(function(){
 						var check = confirm('게시글을 삭제하시겠습니까?');
 						
-						if(check){
-		                     location.href='${ bdelete }';
-		                  }
+						swal({
+	                		  title: "글을 삭제하시겠습니까?",
+	                		  text: "모임이 끝나지 않았다면 참여 회원에게 정보가 제공되지 않습니다.",
+	                		  icon: "warning",
+	                		  buttons: true,
+	                		  dangerMode: true,
+	                		  buttons: ["취소", "확인"]
+	                		}).then(확인 => {
+	                		  if(확인) {
+	                		    swal("게시글을 삭제합니다.", {
+	                		      icon: "success",
+	                		      button: false,
+	                		    });
+	                			  location.href='${ bdelete }';
+	                		  }
+	                		});
 					});
 				</script>
 			</div>
@@ -626,7 +647,9 @@
 	function miniMypage(e){
 		var userId = $(e).children().eq(0).val();
 		window.open('userInfo.fo?userId='+ userId + '&page=1','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');
+	
 	}
+
 	
 	// 댓글 리스트 불러오기
 		function getReplyList(){
@@ -664,7 +687,7 @@
 							$td2 = $('<td class="contentTd" id="rContent' + data[i].rNo +'">');
 							
 							$rImg = $('<img src="${ contextPath }/resources/uploadFiles/' + data[i].changeName + '" style="width:auto; height:6%; vertical-align:middle;">');
-							$rWriter = $('<span style="font-weight:bold;" onclick="miniMypage(this);">').html(decodeURIComponent(data[i].rNickName)+"<input type='hidden' value='" + data[i].rWriter+"'>");
+							$rWriter = $('<span style="font-weight:bold;" id="replyNickName" onclick="miniMypage(this);">').html(decodeURIComponent(data[i].rNickName)+"<input type='hidden' value='" + data[i].rWriter+"'>");
 							//$rWriter = $('<span style="font-weight:bold;" onclick="window.open(\'location.href=userId=\'+data[i].rWriter+\'&page=1\', \'window팝업\', \'width=600, height=702\').text(decodeURIComponent(data[i].rNickName));
 							$rWriteDate = $('<span style="font-size: 15px; color: rgb(190, 190, 190);">').text(data[i].rWriteDate);
 							
@@ -705,7 +728,7 @@
 				}
 			});
 		}
-
+	
  		$(function() {
 			getReplyList();
 			

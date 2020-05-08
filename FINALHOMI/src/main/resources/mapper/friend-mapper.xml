@@ -102,7 +102,7 @@
 		<result property="imgSrc"		column="CHANGE_NAME" />
 		<result property="mKind"		column="M_KIND" />
 	</resultMap>
-	
+	 
 	<resultMap	type="Member"			id="memberResultSet">
 		<id		property="userId"		column="USER_ID"/>
 		<result property="userPwd"		column="USER_PWD"/>

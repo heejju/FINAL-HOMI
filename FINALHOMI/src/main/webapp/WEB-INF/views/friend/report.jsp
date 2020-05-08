@@ -11,7 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>Insert title here</title>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/common/reset.css" type="text/css">
-<style>
+<style> 
     .report-wrap{width:600px;}
     header > h1 {width:45%; height:50px; margin:0 auto; line-height: 50px;}
     header > p {width: 95%; font-size:12px; margin:0 auto; background: rgb(232, 232, 232); font-style: italic;}

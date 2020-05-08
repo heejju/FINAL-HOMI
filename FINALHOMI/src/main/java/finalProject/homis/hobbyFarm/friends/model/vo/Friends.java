@@ -11,7 +11,7 @@ public class Friends {
 	private String nickName;
 	private String imgSrc;
 	private	int	   mKind ;
-	private String changeName;
+	private String changeName; 
 	
 	public Friends() {}
 	

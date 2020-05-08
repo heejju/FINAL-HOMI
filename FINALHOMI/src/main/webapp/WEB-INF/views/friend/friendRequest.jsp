@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture|Nanum+Brush+Script&display=swap" rel="stylesheet">
 <c:import url="../common/boardCommon.jsp"/>
-<style>
+<style> 
     body{background:rgb(255, 246, 240); font-family: 'Nanum Gothic', sans-serif;}
     section{width:70%; margin:0 auto; }
     .sc-header{width:100%; height:100px; /* border-bottom:1px solid #000; */ box-sizing: border-box;}

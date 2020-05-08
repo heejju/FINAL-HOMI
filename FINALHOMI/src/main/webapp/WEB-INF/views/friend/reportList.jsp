@@ -57,7 +57,7 @@ select{height:30px; width:100px;}
     
 </style>
 <body>
-    
+     
     <section>		
 		<!-- 표 -->
 		<div class="divTable" align="center">

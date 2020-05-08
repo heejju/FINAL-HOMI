@@ -7,10 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/reset.css" type="text/css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <style>
 	body{align:center; font-family: 'Nanum Gothic', sans-serif; width:90%;}
 	.listName{hegiht:100px; font-size:24px; margin:0px auto; text-align:left; padding:30px;}
@@ -30,7 +33,7 @@
 	#introduction{height:30px; padding:5px 0px; font-family: 'Nanum Gothic', sans-serif; }
 	
 	#inviteBtnWarpper{display:inline-block; height:80px;}
-	#cinviteBtn{border-radius:30px; border:0px; width:80px; height:30px;
+	.cinviteBtn{border-radius:30px; border:0px; width:80px; height:30px;
 				color:white; font-weight:bold; font-size:15px; background:#888c43;}
 	#cancleBtn{border-radius:30px; border:0px; width:80px; height:30px;
 				color:white; font-weight:bold; font-size:15px; background:#675141;}		
@@ -62,7 +65,7 @@
 		<c:if test="${ list.size() ne 0 }">
 			<div id="list">
 				<c:forEach var="friend" items="${ list }">
-					<c:if test="${ friend.mKind eq 1 }">
+					<c:if test="${ friend.mKind ne 1 }">
 					<c:url var="userInfo" value="userInfo.fo">
 						<c:param name="userId" value="${ friend.userId }"/>
 		                <c:param name="page" value="1"/>
@@ -97,7 +100,15 @@
 							</div>
 							<div id="inviteBtnWarpper">
 								<input type="hidden" class=friend value="${friend.userId}">
-								<button id="cinviteBtn" type="button">초대 하기</button>
+								<button class="cinviteBtn" type="button">초대 하기</button>
+								
+								<script>
+									$('.cinviteBtn').mouseover(function(){
+										$(this).css('cursor','pointer');
+									}).mouseout(function(){
+										$(this).css('cursor','default');
+									});
+								</script>
 							</div>
 						</div>
 					</c:if>
@@ -121,7 +132,7 @@
 			
 			var idArr = [];
 			
-			$(document).on('click', '#cinviteBtn', function(){	
+			$(document).on('click', '.cinviteBtn', function(){	
 				var userId = $(this).parent().children().eq(0).val();
 				
                 console.log("초대");

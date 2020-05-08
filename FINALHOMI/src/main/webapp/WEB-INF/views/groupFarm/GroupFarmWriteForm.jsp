@@ -12,6 +12,9 @@
 
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
 
+<!-- swal -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
@@ -23,9 +26,6 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-
-<!-- swal -->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 	body{background-color: #fff6f0; font-family: 'Nanum Gothic', sans-serif;}
@@ -299,7 +299,6 @@
 							<b>인원</b> : 최대 <input type="number" name="personnel" id="personnel" min=2 value=2> 명
 							<c:url var="friends" value="fdList.gf"/>
 							<button id="inviteBtn" type="button" onclick="invite();">친구 초대</button>
-							<%-- <button id="inviteBtn" onclick="window.open('${ friends }', 'friendsList', 'width=1000, height=1000, resizable=no')">친구 초대</button> --%>
 							<input type="hidden" name="inviteFriends" id="inviteFriends">
 							<script>
 								function invite(){
@@ -307,7 +306,7 @@
 									var child
 									var friendsPopup;						
 									fdPopup = window.open('${friends}', 'friendsPopup', 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');
-									 
+									
 								}
 							</script>
 						</li>

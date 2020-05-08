@@ -11,8 +11,6 @@
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
 
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -22,8 +20,6 @@
 <!-- 에디터 -->
 <script type="text/javascrip" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="${ contextPath }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
-<%-- <script type="text/javascript" src="${ contextPath }/resources/naver_editor/js/service/HuskyEZCreator.js" charset="utf-8"></script> --%>
-<!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script> -->
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -92,7 +88,7 @@
 	<section>
 		<div id="realMain">
 			<div id="postMain">
-				<form action="insert.gf" id="form" method="post" enctype="Multipart/form-data" accept-charset="UTF-8">
+				<form action="bmodify.gf" id="form" method="post" enctype="Multipart/form-data" accept-charset="UTF-8">
 					<div class="thumbnailWrapper">
 						<div id="centerd">
 							<img id="thumbnailImg" name="thumbnailImg" src="${ contextPath }/resources/uploadFiles/${img.changeName}"/>
@@ -124,7 +120,8 @@
 					
 					<!-- 파일 업로드 하는 부분 -->
 					<div id="fileArea">
-						<input type="file" id="inputThumbnailImg" multiple="multiple" name="thumbnailImg" onchange="LoadImg(this,1)">
+						<input type="file" id="inputThumbnailImg" multiple="multiple" 
+							value="${img.changeName}" name="thumbnailImg" onchange="LoadImg(this,1)">
 					</div>
 					
 					<script>
@@ -329,9 +326,17 @@
 						<li>
 							<b>인원</b> : 최대 <input type="number" name="personnel" id="personnel" min=2 value=${ gf.personnel }> 명
 							<c:url var="friends" value="fdList.gf"/>
-							<button id="inviteBtn" onclick="window.open('${friends}', 'window팝업', 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');">친구 초대</button>
-							<%-- <button id="inviteBtn" onclick="window.open('${ friends }', 'friendsList', 'width=1000, height=1000, resizable=no')">친구 초대</button> --%>
-							
+							<button id="inviteBtn" type="button" onclick="invite();">친구 초대</button>
+							<input type="hidden" name="inviteFriends" id="inviteFriends">
+							<script>
+								function invite(){
+									 //var data = document.querySelector('#friends').value;
+									var child
+									var friendsPopup;						
+									fdPopup = window.open('${friends}', 'friendsPopup', 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');
+									
+								}
+							</script>
 						</li>
 						<li>
 							<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
@@ -673,7 +678,6 @@
                 		.then(확인 => {
                 		  if(확인) {
                 		    $('#form').submit();
-                		    $('#form').attr('action', 's')
                 		    swal("모임 텃밭에 등록되었습니다.", {
                 		      icon: "success",
                 		      button: false,

@@ -9,9 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
+
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <style>
 	.clear-both{clear:both;}
 	div{margin:0; padding:0;}
@@ -283,9 +285,9 @@
 					</c:forEach>
 				</div>
 					
-					<%-- <c:if test="${ !empty loginUser && loginUser.mKind eq 1}"> --%>
+					<c:if test="${ !empty loginUser && loginUser.mKind eq 1}">
 						<button type="button" id="writeBtn" onclick="location.href='insertView.gf';">글쓰기</button>
-					<%-- </c:if> --%>
+					</c:if>
 			</div>
 		</div>
 	

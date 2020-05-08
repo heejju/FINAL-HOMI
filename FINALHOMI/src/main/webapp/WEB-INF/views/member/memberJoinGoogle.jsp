@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/member/member.css"  type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<title>#회원가입</title>
+	<title>#취미텃밭</title>
 	<meta name="google-signin-client_id" content="1039608716257-rpi2mbri0nh18klpqq0r99ar6g0gh719.apps.googleusercontent.com">
 	<style>
 		.checkRule {

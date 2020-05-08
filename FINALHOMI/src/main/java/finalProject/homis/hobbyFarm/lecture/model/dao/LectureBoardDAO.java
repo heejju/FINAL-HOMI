@@ -11,6 +11,7 @@ import finalProject.homis.hobbyFarm.common.model.vo.Image;
 import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.common.model.vo.Reply;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Search;
+import finalProject.homis.hobbyFarm.lecture.model.vo.Timeline;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
 
@@ -104,4 +105,21 @@ public class LectureBoardDAO {
 		return sqlSession.update("lectureMapper.updateImg",img);
 	}
 
+	public Conclusion selectConclusion(SqlSession sqlSession, Conclusion c) {
+		return sqlSession.selectOne("lectureMapper.selectConclusion", c);
+	}
+
+	public int insertTimeline(SqlSession sqlSession, Timeline timeline) {
+		return sqlSession.insert("lectureMapper.insertTimeline", timeline);
+	}
+
+	public int selectCCCount(SqlSession sqlSession) {
+		return sqlSession.selectOne("lectureMapper.selectCCCount") ;
+	}
+
+	public ArrayList<LectureBoard> selectCCPage(SqlSession sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("lectureMapper.selectCCPage", rowBounds) ;
+	}
 }

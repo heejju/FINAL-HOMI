@@ -495,14 +495,20 @@ hr {
 	border: none; padding: 10px 0; margin: 4px;  
 	text-align: center; border-radius: 5px;
 	margin: 0 auto;
-	margin-left: 250px;
-	margin-bottom: 45px;
+	margin-bottom: 28%;
+	margin-left: 110%;
+/* 	width: 110px; background-color: #675141; color: #fff; font-size: 15px;  */
+/* 	border: none; padding: 10px 0; margin: 4px;   */
+/* 	text-align: center; border-radius: 5px; */
+/* 	margin: 0 auto; */
+/* 	margin-left: 250px; */
+/* 	margin-bottom: 45px; */
 }
 
 .UpdateInputTxtArea {
 	height: 90px;
 	width: 80%;
-	margin-left: -100px;
+	margin-left: 3%;
 	resize: none;
 }
 

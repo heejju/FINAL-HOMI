@@ -142,6 +142,7 @@
 		//번호 삭제펑션
 		function hobbyNoDel(){
 			$("#hobbyNo").val("");
+			$("#hobbyName").val("");
 		}
 		//삭제를 위한 Btn 메소드
 		function forDelete(){

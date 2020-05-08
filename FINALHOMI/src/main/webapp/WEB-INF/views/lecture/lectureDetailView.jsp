@@ -334,7 +334,7 @@
 								<td>
 									<span style="font-weight: bold;">작성자</span>&nbsp; &nbsp; 
 									<span style="font-size: 15px; color: rgb(190, 190, 190);">2020-02-25</span>&nbsp; &nbsp; 
-									<span><input type="hidden" value='댓글번호'><span class="replyUpdate">수정</span>&nbsp;|&nbsp;<span class="replyDelete" onclick="replyDelete();">삭제</span></span>
+									<span><input type="hidden" value='댓글번호'><span class="replyUpdate">수정</span>&nbsp;|&nbsp;<span class="replyDelete" onclick="replyDelete(this);">삭제</span></span>
 								</td>
 							</tr>
 							<tr>
@@ -358,7 +358,7 @@
 						<div id="writeCount"><span id="count">0</span>/300</div>
 					</div>
 					<div id="uploadArea">
-						<button id="replyBtn" onclick="addReply();">등록</button>
+						<button type="button" id="replyBtn">등록</button>
 					</div>
 				</div>
 			</div>
@@ -400,7 +400,7 @@
 							$rWriter = $('<span style="font-weight:bold;">').text(decodeURI(data[i].rNickName));
 							$rWriteDate = $('<span style="font-size: 15px; color: rgb(190, 190, 190);">').text(data[i].rWriteDate);
 							
-							$rMoDel = $('<span>').html('<input type="hidden" value=' + data[i].rNo + '><span class="replyUpdate">수정</span> | <span class="replyDelete" onclick="replyDelete();">삭제</span>');
+							$rMoDel = $('<span>').html('<input type="hidden" value=' + data[i].rNo + '><span class="replyUpdate">수정</span> | <span class="replyDelete" onclick="replyDelete(this);">삭제</span>');
 							//$rModify = $('<span class="replyUpdate" onclick="replyUpdate(' + data[i].rNo + ', \''+decodeURIComponent(data[i].rContent.replace(/\+/g, " ")) + '\'' + ')">').text('수정');
 							//$rModify = $('<input type="hidden" id="rNo" value=' + data[i].rNo + '/><span class="replyUpdate"').text('수정');
 							//$rDelete = $('<span class="replyDelete">').text('삭제');
@@ -476,7 +476,7 @@
 		});
 		
 		//댓글 등록
-		async function addReply() {
+		$("#replyBtn").click(function() {
 			// addReply.bo 로 넘어가도록 ==> 댓글 내용, 게시글 번호를 꼭 가져가야함
 			var replyContent = $('#rContent').val();
 			console.log("replyContent = "+replyContent);
@@ -486,13 +486,12 @@
 			console.log("postNo = "+postNo);
 			console.log("rWriter = "+rWriter);
 			if(replyContent.length == 0) { //내용이 없을 경우에 alert 후 아래 이벤트 실행 안되게 return
-				await swal("내용을 입력해주세요.",{
+				swal("내용을 입력해주세요.",{
 					icon : "warning",
 					buttons : {
 						confirm : true,
 					}
 				});
-				console.log("내용을 입력해주세요.");
 				return;
 			} else if(replyContent.length > 300){
 				swal("300자 미만으로 작성해주세요.",{
@@ -520,7 +519,7 @@
 				}
 			});
 			
-		}
+		});
 		
 		// 댓글 수정창
 		$(document).on('click', '.replyUpdate', function(){
@@ -593,8 +592,8 @@
 		
 		// 댓글 삭제
 		 
-		async function replyDelete(){
-			var rNo = $(this).parent().children().eq(0).val();
+		async function replyDelete(e){
+			var rNo = $(e).parent().children().eq(0).val();
 			console.log(rNo);
 			/* if(confirm('댓글을 삭제하시겠습니까?')) {
 				$.ajax({
@@ -624,7 +623,7 @@
 				    });
 				}
 			});
-		});
+		}
 		</script>
 		
 	</div><!-- body -->
@@ -632,7 +631,7 @@
 	<div class="applyDiv">
 	<form action="applyLecture.lec" id="thisFrom2" method="post">
 	<!-- 목록으로 돌아갈수있게하기위한 정보 -->
-	<input type="hidden" name="seearchSido" value="${ sido }">
+	<input type="hidden" name="searchSido" value="${ sido }">
 	<input type="hidden" name="searchGugun" value="${ gugun }">
 	<input type="hidden" name="searchTag" value="${ searchTag }">
 	<input type="hidden" name="searchValue" value="${ searchValue }">
@@ -681,7 +680,7 @@
 						</div>
 					</c:forEach>
 				</c:if>
-				<label><b class="green" style="cursor:pointer;" onclick="ableTimePlus(this);">--------- 더보기 ---------</b></label>
+				<label><b id="moreTime" class="green" style="cursor:pointer;" onclick="ableTimePlus(this);">--------- 더보기 ---------</b></label>
 			</div>
 			<script>
 				// 가능한시간 text 클릭해도 radio버튼 클릭되게
@@ -691,6 +690,11 @@
 				// 가능한 시간 처음에는 3개만 보이기
 				var ableTimeCount = 3;
 				$(function(){
+					
+					if($("div[class='ableTime']").length < 4){
+						$("#moreTime")[0].innerText = "--------- 끝 ---------";
+					}
+					
 					for(var i = 0; i < ableTimeCount; i++){
 						$("div[class='ableTime']").eq(i).attr("style","display:block");
 					}
@@ -709,7 +713,6 @@
 				}
 				
 				async function applyLecture(){
-					alert("appyLecture in");
 					if($("#userId").val() == ""){
 						await swal("로그인 후 이용가능한 서비스입니다.",{
 							icon : "warning",
@@ -719,7 +722,6 @@
 						});
 						return;
 					}
-					alert("로그인 후 이용가능한 서비스입니다.");
 					
 					var isChecked = false;
 					for(var i = 0; i < $("input[class='ableTime']").length; i++){
@@ -731,22 +733,15 @@
 							isChecked = true;
 						}
 					}
-					alert("isChecked = "+isChecked);
-					alert("원하는 시간을 선택해주세요.1");
 					if(!isChecked){
-						alert("in1");
-						await swal("원하는 시간을 선택해주세요.",{
+						swal("원하는 시간을 선택해주세요.",{
 							icon : "warning",
 							buttons : {
-								confirm : false,
+								confirm : true,
 							}
 						});
-						alert("in2");
 						return;
-						alert("in3");
 					}
-					
-					alert("원하는 시간을 선택해주세요.2");
 					
 					if($("#userId").val() == '${ lb.writer }'){
 						swal("자신이 쓴글은 신청할수 없습니다.",{
@@ -757,8 +752,6 @@
 						});
 						return;
 					}
-					
-					alert("자신이 쓴글은 신청할수 없습니다.");
 					
 					var checkBeforeApply = ${checkBeforeApply};
 					console.log(checkBeforeApply);
@@ -795,18 +788,24 @@
 		</div>
 		
 		<div style="margin: 10px 0 10px 0">
-			<button type=button class="deleteButton" onclick="message();">쪽지 보내기</button><!-- 쪽지보내기 연결 비로그인시 alert로그인해주세요 -->
-			<c:if test="${ loginUser.mKind != 2 }">
-				<button type=button class="modifyButton" onclick="applyLecture();">신청하기</button>
-			</c:if>
-			<button type=button onclick="applyLecture();">신청2</button>
+			<button type='button' class="deleteButton" onclick="message2();">쪽지 보내기</button><!-- 쪽지보내기 연결 비로그인시 alert로그인해주세요 -->
+			<button type='button' class="modifyButton" onclick="applyLecture();">신청하기</button>
 		</div>
 	</form>
 	</div>
 	<script>
 		//메세지 보내기
-		function message(){
+		function message2(){
 			//팝업설정하기
+			if("${lb.writer}" == "${loginUser.userId}"){
+				swal("자신에게는 쪽지를 보낼수 없습니다.",{
+					icon : "warning",
+					buttons : {
+						confirm : true,
+					}
+				});
+				return;
+			}
 			var url = "insertForm.msg?to=${lb.nickName}";
 			var option = "resizable = no, scrollbars = no, width = 500, height = 550";
 			window.open(url, "쪽지함", option);
@@ -822,7 +821,7 @@
 			$('.option','.region').click(function(){
 				if($('#region').hasClass('on')){
 					boxheight=($(this).find('.box').height()+40);
-					if($(this).hasClass('on')){;
+					if($(this).hasClass('on')){
 						//$( "#region" ).animate({ "height": "-="+boxheight+"px" }, "slow" );
 						$(this).removeClass('on');
 						b_box=0;

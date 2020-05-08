@@ -7,7 +7,7 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<link rel="stylesheet" href="${contextPath}/resources/css/member/member.css"  type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
-	<title>#회원가입</title>
+	<title>#취미텃밭</title>
 </head>
 <body>
 	<header>

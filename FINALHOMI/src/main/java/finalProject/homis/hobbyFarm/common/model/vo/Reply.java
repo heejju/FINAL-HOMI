@@ -23,6 +23,7 @@ public class Reply {
 	
 	public Reply() {}
 
+
 	public Reply(int rNo, int refPno, String rWriter, String rNickName, String rContent, Date rWriteDate,
 			Date rmodifyDate, String rDeleteYN, int imgId, String originName, String changeName, String imgSrc) {
 		super();

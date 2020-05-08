@@ -13,7 +13,6 @@ public class SearchSelect {
 	private String hobby;
 	private String searchValue;
 	
-	// 기본 생성자
 	public SearchSelect() {}
 
 	public SearchSelect(String title, String content, String writer, String userId, String nickName, String userName,

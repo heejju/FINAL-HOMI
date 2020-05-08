@@ -11,6 +11,7 @@ import finalProject.homis.hobbyFarm.common.model.vo.Image;
 import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.common.model.vo.Reply;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Search;
+import finalProject.homis.hobbyFarm.lecture.model.vo.Timeline;
 import finalProject.homis.hobbyFarm.lecture.model.dao.LectureBoardDAO;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
@@ -122,5 +123,25 @@ public class LectureBoardServiceImp implements LectureBoardService{
 	@Override
 	public int updateImg(Image img) {
 		return lbDAO.updateImg(sqlSession, img);
+	}
+	
+	@Override
+	public Conclusion selectConclusion(Conclusion c) {
+		return lbDAO.selectConclusion(sqlSession, c);
+	}
+	
+	@Override
+	public int insertTimeline(Timeline timeline) {
+		return lbDAO.insertTimeline(sqlSession, timeline);
+	}
+
+	@Override
+	public int selectCCCount() {
+		return lbDAO.selectCCCount(sqlSession) ;
+	}
+
+	@Override
+	public ArrayList<LectureBoard> selectCCPage(PageInfo pi) {
+		 return lbDAO.selectCCPage(sqlSession, pi) ;
 	}
 }

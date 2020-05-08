@@ -209,5 +209,62 @@
 		set origin_name = #{originName}, change_name = #{changeName}, img_src = #{imgSrc}, upload_date = sysdate
 		where post_no = #{postNo} and file_level = 0
 	</update>
-
+	
+	<select id="selectConclusion" resultMap="ConcResultSet">
+		select con_no
+		from conclusion
+		where post_no = #{postNo} and proposer = #{proposer} and to_char(start_date,'YYYY-MM-DD HH24') = #{startDate} and to_char(finish_date,'YYYY-MM-DD HH24') = #{finishDate}
+	</select>
+	
+	<resultMap type="Conclusion" id="ConcResultSet">
+		<id property="concNo" column="CON_NO"/>
+	</resultMap>
+	
+	<insert id="insertTimeline" parameterType="Timeline2">
+		insert into timetable values(
+			seq_tno.nextval, #{userId}, #{postNo}, #{timeline}, #{concNo} 
+		)
+	</insert>
+	
+	<select id="selectCCCount" resultType="_int">
+		SELECT	COUNT(*)
+		FROM	BOARD
+		JOIN	CONCLUSION	USING(POST_NO)
+		JOIN	MEMBER		ON(WRITER = USER_ID)
+	</select>
+	
+	<select id="selectCCPage" resultMap="CCResultSet">
+		SELECT	B.*, C.*, H.*, M.*, I.CHANGE_NAME
+		FROM	BOARD B
+		JOIN	CONCLUSION C USING(POST_NO)
+		JOIN	HOBBY	   H USING(POST_NO)
+		JOIN	MEMBER	   M ON(WRITER = USER_ID)
+        JOIN	IMAGE	   I USING(POST_NO)
+		<where>	B.BOARD_NO = 2 </where>
+		ORDER	BY POST_NO DESC
+	</select>
+	
+	<resultMap type="LectureBoard" id="CCResultSet">
+		<id		column="POST_NO" property="postNo"/>
+		<result column="WRITER" property="writer"/>
+		<result column="NICKNAME" property="nickName"/>
+		<result column="TITLE" property="title"/>
+		<result column="CONTENT" property="content"/>
+		<result column="VIEW_COUNT" property="viewCount"/>
+		<result column="WRITE_DATE" property="writeDate"/>
+		<result column="MODIFY_DATE" property="modifyDate"/>
+		<result column="HOBBY_NO" property="hobbyNo"/>
+		<result column="OT_TUITION" property="otTuition"/>
+		<result column="OT_TIME" property="otTime"/>
+		<result column="OT_ALL_TIME" property="otAllTime"/>
+		<result column="LEARNER" property="learner"/>
+		<result column="TEACHER_INFO" property="teacherInfo"/>
+		<result column="ABLE_TIME" property="ableTime"/>
+		<result column="ABLE_PLACE" property="ablePlace"/>
+		
+		<result column="HOBBY_NAME" property="hobbyName"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="IMG_SRC" property="imgSrc"/>
+	</resultMap>
 </mapper>

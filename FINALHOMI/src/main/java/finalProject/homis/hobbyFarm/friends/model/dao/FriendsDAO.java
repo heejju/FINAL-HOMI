@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.friends.model.vo.Friends;
 import finalProject.homis.hobbyFarm.friends.model.vo.Report;
+import finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
 
 @Repository("fDAO")
@@ -101,6 +102,11 @@ public class FriendsDAO {
 
 	public int deleteFrd(SqlSessionTemplate sqlSession, Friends friend) {
 		return sqlSession.delete("friendMapper.deleteFrd", friend) ;
+	}
+
+	public ArrayList<Conclusion> selectClass(SqlSessionTemplate sqlSession, String userId) {
+		ArrayList<Conclusion> list = (ArrayList)sqlSession.selectList("friendMapper.selectClass", userId);
+		return list;
 	}
 
 }

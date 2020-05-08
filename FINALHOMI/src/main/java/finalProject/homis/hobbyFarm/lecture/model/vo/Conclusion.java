@@ -7,15 +7,17 @@ public class Conclusion {
 	private String proposer;
 	private String startDate;
 	private String finishDate;
+	private String conTent;
 	
 	public Conclusion() {}
 
-	public Conclusion(int postNo, String proposer, String startDate, String finishDate) {
+	public Conclusion(int postNo, String proposer, String startDate, String finishDate, String conTent) {
 		super();
 		this.postNo = postNo;
 		this.proposer = proposer;
 		this.startDate = startDate;
 		this.finishDate = finishDate;
+		this.conTent = conTent;
 	}
 
 	public int getPostNo() {
@@ -49,11 +51,20 @@ public class Conclusion {
 	public void setFinishDate(String finishDate) {
 		this.finishDate = finishDate;
 	}
+	
+	
+	public String getConTent() {
+		return conTent;
+	}
+
+	public void setConTent(String conTent) {
+		this.conTent = conTent;
+	}
 
 	@Override
 	public String toString() {
 		return "Conclusion [postNo=" + postNo + ", proposer=" + proposer + ", startDate=" + startDate + ", finishDate="
-				+ finishDate + "]";
+				+ finishDate + ", conTent="+ conTent + "]";
 	}
 	
 	

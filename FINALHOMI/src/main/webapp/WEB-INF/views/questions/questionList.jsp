@@ -178,7 +178,7 @@
 					<option value="content">내용</option>
 					<option value="writer">작성자</option>
 				</select>
-					<input type="text" id="searchContent" name="searchContent" style="height: 35px; width: 200px;">
+					<input type="text" onKeyDown="if(event.keyCode == 13) questionSearch()" id="searchContent" name="searchContent" style="height: 35px; width: 200px;">
 					<button class="pagingBtn" style="background: #888c43; color: white;" onclick="questionSearch();">검색</button>
 			</div>
 		</c:if>

@@ -216,15 +216,10 @@ public class GroupFarmController {
 			GroupFarmBoard newGF = gfService.selectLastInsertInfo(id);
 			String url = "\"window.open('bdetail.gf?postNo="+newGF.getPostNo()+"')\"";
 
-			System.out.println("newGF = " + newGF);
-			
-			System.out.println("inviteFriends = " + inviteFriends);
 			String[] invitedFriends = inviteFriends.split(",");
 			
 			for(int i = 0; i < invitedFriends.length; i++) {
 				
-				System.out.println("invitedFriends["+i+"] = " + invitedFriends[i]);
-
 				String content = "<span>안녕하세요, <img id=\"logo\" src=\"${ contextPath }/resources/Logo.png\"/>입니다!</span><br>" +
 						"<span>" + nickName + " 님께서 회원님을 #" + newGF.getTitle() + " 모임으로 초대하셨습니다.</span><br>" + 
 						"<span>" + nickName + " 님이 모집하고 계신 모임 텃밭이 궁금하시다면 아래 버튼을 눌러 해당 게시글로 바로 이동해보세요!</span><br>" + 
@@ -344,7 +339,6 @@ public class GroupFarmController {
 		ArrayList<LectureBoard> lecList = new ArrayList<LectureBoard>();
 
 		for(int i=0; i<tList.size(); i++) {
-			System.out.println("tList.get(i) = " + tList.get(i));
 			LectureBoard lec = new LectureBoard();
 			lec = gfService.recentLec(tList.get(i).getUserId());
 			lecList.add(lec);
@@ -486,17 +480,11 @@ public class GroupFarmController {
 		redirect.addAttribute("page", page);
 		redirect.addAttribute("postNo", postNo);
 		
-		System.out.println(gfa.getmKind());
-		
 		if(gfa.getmKind() == 1) {
-			System.out.println("postNo : " + postNo);
-			System.out.println("page : " + page);
 			
 			GroupFarmBoard gf = gfService.selectBoard(postNo);
 			ArrayList<GroupFarmApplication> gfaList = gfService.selectGfaList(postNo);
 			
-			System.out.println("gfaList.size() : " + gfaList.size());
-			System.out.println("gf.getPersonnel(): " + Integer.parseInt(gf.getPersonnel()));
 			if(gfaList.size() == Integer.parseInt(gf.getPersonnel())){
 				return "redirect:closeGroup.gf?postNo=" + postNo + "&page=" + page;
 			}

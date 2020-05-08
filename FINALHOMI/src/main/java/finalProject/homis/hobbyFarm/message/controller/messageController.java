@@ -135,7 +135,7 @@ public class messageController {
 	}
 	
 	@RequestMapping("insertForm.msg")
-	public ModelAndView msgInsertForm(ModelAndView mv, @RequestParam(value="to", required=false) String to, HttpSession session) { 
+	public ModelAndView msgInsertForm(ModelAndView mv, @RequestParam(value="to", required=false) String to,@RequestParam(value="nick", required=false) String nick, HttpSession session) { 
 																	
 		Message message = new Message();
 		
@@ -150,8 +150,8 @@ public class messageController {
 	      }
 		/* 친구 목록 불러오기 끝 */
 		
-		if(to != null) { //답장하기를 눌렀을 경우 상대방 아이디 넣기
-			String[] toArr = to.split(",");
+		if(nick != null) { //닉네임이 들어왔을 경우 상대방 아이디 넣기
+			String[] toArr = nick.split(",");
 			String msg_to = "";
 			for(int i = 0; i < toArr.length; i++) {
 				//상대방 닉네임의 id 가져오기
@@ -163,9 +163,20 @@ public class messageController {
 					msg_to += to_id + ",";
 				}
 			}
-			
 			message.setMsg_to(msg_to);
-		} 
+		} else if(to != null) { // 아이디가 들어왔을 경우
+			String[] toArr = to.split(",");
+			String msg_to = "";
+			for(int i = 0; i < toArr.length; i++) {
+				if(i == toArr.length -1) {
+					msg_to += toArr[i];
+				} else {
+					msg_to += toArr[i] + ",";
+				}
+			}
+			message.setMsg_to(msg_to);
+		}
+		
 		mv.addObject("message", message).setViewName("sendMsgForm");
 		
 		return mv;

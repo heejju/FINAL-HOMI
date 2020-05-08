@@ -52,7 +52,7 @@
 		<div class="swiper-wrapper">
 			<c:forEach var="lb" items="${lbList}">
 				<div class="swiper-slide">
-				 			<img class="thumbnail" src="${ contextPath }/resources/uploadFiles/${ lb.changeName }">	
+				 			<a target="_blank" href="detail.lec?postNo=${lb.postNo}"><img class="thumbnail" src="${ contextPath }/resources/uploadFiles/${ lb.changeName }"></a>	
 						<div style="position: absolute; bottom: 5px;">
 							<input type="hidden" value="${lb.postNo}">
 							${lb.title}

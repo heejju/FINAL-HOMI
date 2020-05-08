@@ -10,17 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import finalProject.homis.hobbyFarm.common.Pagination;
 import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.friends.model.service.FriendService;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmBoard;
 import finalProject.homis.hobbyFarm.lecture.model.exception.LectureBoardException;
 import finalProject.homis.hobbyFarm.lecture.model.service.LectureBoardService;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
-import finalProject.homis.hobbyFarm.lecture.model.vo.Pagination;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Search;
 import finalProject.homis.hobbyFarm.member.model.service.MemberService;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
@@ -117,7 +118,7 @@ public class myPageController {
 		String nick = ((Member)session.getAttribute("loginUser")).getNickName(); // 로그인 닉네임(학생 닉네임)
 		String id = ((Member)session.getAttribute("loginUser")).getUserId(); // 로그인 아이디
 		
-		int runningGroup = mpService.getRunningGroup(id); // 1. 참여중인 모임 수
+		int runningGroup = mpService.getListCount(id);  // 1. 참여중인 모임 수
 		mpc.setMyFarmCount(runningGroup);
 		int runningLecture = mpService.getRunningLecture(id); // 2. 참여중인 강의 수
 		mpc.setStLectureCount(runningLecture);
@@ -128,12 +129,24 @@ public class myPageController {
 		return mv;
 	}
 	@RequestMapping("myFarm.mp")
-	public ModelAndView myFarm(ModelAndView mv, HttpSession session) {
+	public ModelAndView myFarm(ModelAndView mv, HttpSession session,
+								@RequestParam(value="page", required=false) Integer page) {
+		/* 현재 페이지 설정 */
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		/* 학생 아이디에 맞는 게시글 갯수 가져오기 */
 		String id = ((Member)session.getAttribute("loginUser")).getUserId();
 		
-		ArrayList<GroupFarmBoard> gfList = mpService.myFarm(id);
+		int listCount = mpService.getListCount(id);
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<GroupFarmBoard> gfList = mpService.myFarm(pi, id);
 		if(gfList != null) {
 			mv.addObject("gfList", gfList);
+			mv.addObject("pi", pi);
 			mv.setViewName("myFarmList");
 		} else {
 			throw new myPageException("gfList 가져오기 실패");

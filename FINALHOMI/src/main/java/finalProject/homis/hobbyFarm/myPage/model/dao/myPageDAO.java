@@ -2,9 +2,11 @@ package finalProject.homis.hobbyFarm.myPage.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmBoard;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
@@ -44,8 +46,15 @@ public class myPageDAO {
 		return (ArrayList)sqlSession.selectList("myPageMapper.myFinishedLectureList", id);
 	}
 
-	public ArrayList<GroupFarmBoard> myFarm(SqlSessionTemplate sqlSession, String id) {
-		return (ArrayList)sqlSession.selectList("myPageMapper.myFarm", id);
+	public int getListCount(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.selectOne("myPageMapper.getListCount", id);
 	}
+
+	public ArrayList<GroupFarmBoard> myFarm(SqlSessionTemplate sqlSession, PageInfo pi, String id) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("myPageMapper.myFarm", id, rowBounds);
+	}
+
 
 }

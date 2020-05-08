@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
 <style>
-
+	.thumbnail{border: 2px solid black;
+	border-radius: 70%;
+	width: 150px;
+	height: 150px;}
 	.outer{
 		width:900px; min-height:50px; padding-bottom: 50px;
 		margin-left:auto; margin:auto; margin-top:50px; margin-bottom: 50px; 

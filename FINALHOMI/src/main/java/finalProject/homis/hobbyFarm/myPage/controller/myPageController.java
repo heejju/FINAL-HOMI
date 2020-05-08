@@ -87,16 +87,13 @@ public class myPageController {
 		String id = ((Member)session.getAttribute("loginUser")).getNickName(); // 로그인 닉네임(강사 닉네임)
 		
 		Search search = new Search("", "writer", id, 0);
-		System.out.println(search);
 		int listCount = lbService.selectLBCount(search);
 		
 		int currentPage = 1;
-		System.out.println("page = "+request.getParameter("page"));
 		if(request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		System.out.println("currentPage = "+currentPage);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		mv.addObject("pi",pi);
 		
@@ -204,7 +201,6 @@ public class myPageController {
 		Member m = new Member() ;
 		m.setUserId(id);
 		Member loginUser = mService.memberLogin(m);
-		System.out.println(loginUser);
 		model.addAttribute("loginUser", loginUser);
 		
 		return "redirect:teacherPage.mp";

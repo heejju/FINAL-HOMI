@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${ contextPath }/resources/css/reset.css" type="text/css">
-<link rel="stylesheet" href="${ contextPath }/resources/css/menu.css" type="text/css">
+<link rel="stylesheet" href="${ contextPath }/resources/css/menu.css"  type="text/css">
 
 <title>Insert title here</title>
 <style>
@@ -15,7 +15,6 @@
 	#subHeader{margin-bottom:50px;}
 	#boardName{width:100%; height:70px; margin-top:10%; border-bottom: 1.5pt solid gray; text-align:center;
 				font-size: 30pt; font-weight: bold; display : inline-table; }
-	#spanWrapper{width:auto; hegith:auto; display:inline;}
 </style>
 </head> 
 <body>
@@ -34,11 +33,9 @@
         
         <div id="subHeader">
 			<div id="boardName">
-				<div id="spanWrapper">
-					<span>#</span>
-					<span id="bName" style="color:#888c43">동네</span>
-					<span id="bNameAfter" style="color:#675141">텃밭</span>
-				</div>
+				<label>#</label>
+				<label id="bName" style="color:#888c43">동네</label>
+				<label id="bNameAfter" style="color:#675141">텃밭</label>
 			</div>
 		</div>
         
@@ -69,7 +66,7 @@
 							<c:url var="myPage" value="teacherPage.mp" />
 						</c:if>
 						<c:if test="${ loginUser.mKind == 0 }">
-							<c:url var="myPage" value="myinfo.me" />
+							<c:url var="myPage" value="myinfoView.me" />
 							<!-- 운영자는 마이페이지 없이 개인정보 열람 페이지로 바로 이동하도록 함 -->
 						</c:if>
 						<a onclick="msgPopup();" style="cursor: pointer; display:inline-block; margin-left:10px;"> 

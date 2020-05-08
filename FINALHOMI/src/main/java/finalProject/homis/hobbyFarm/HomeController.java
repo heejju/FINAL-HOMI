@@ -71,8 +71,8 @@ public class HomeController {
 		int currentPage = 1 ;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount) ;
 		ArrayList<LectureBoard> list = lbService.selectCCPage(pi) ;
-		for(LectureBoard i : list)
-			System.out.println(i) ;
+//		for(LectureBoard i : list)
+//			System.out.println(i) ;
 		return list ;
 	}
 }

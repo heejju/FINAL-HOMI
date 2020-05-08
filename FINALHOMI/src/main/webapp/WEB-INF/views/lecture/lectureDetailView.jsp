@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>모종구하기 - 상세보기</title>
+<title>#취미텃밭</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -24,6 +24,18 @@
 <script>
 	$('#bName').text('모종');
 	$('#bNameAfter').text('구하기');
+	
+	
+	$('#bName').click(function(){
+ 		location.href="list.lec";
+ 	}).mouseover(function(){
+ 		$(this).css('cursor','pointer');
+ 	});
+	$('#bNameAfter').click(function(){
+ 		location.href="list.lec";
+ 	}).mouseover(function(){
+ 		$(this).css('cursor','pointer');
+ 	});
 </script>
 <style>
 	body, html, div{padding: 0; margin:0;}
@@ -169,7 +181,6 @@
 <body style="overflow-x: hidden; line-height: normal;"><!-- div.body에 인라인블럭하니까 생겨서 없애줌 -->
 
 	<br><br><br>
-	
 	<div class="body">
 		
 		<br><br><br>
@@ -185,7 +196,7 @@
 		<div class="body2">
 			<div class="header">
 				<div class="imgDiv">
-					<img src="${pageContext.request.contextPath}/resources/buploadFiles/${ lb.changeName }">
+					<img src="${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }">
 				</div>
 				<div class="firstInfo">
 					<p>
@@ -260,7 +271,7 @@
 				var isTrue;
 				await swal("정말 삭제하시겠습니까?",{
 					icon : "warning",
-					buttons : ["NO","YES"],
+					buttons : ["취소","확인"]
 				}).then((YES) => {
 					if(YES) {
 						isTrue = true;
@@ -368,7 +379,6 @@
 		// 댓글 리스트 불러오기
 		function getReplyList(){
 			var postNo = ${ lb.postNo};
-			console.log("getReplyList postNo = "+postNo);
 			$.ajax({
 				url: "rList.lec",
 				data : {postNo:postNo},
@@ -397,7 +407,8 @@
 							$td2 = $('<td class="contentTd" id="rContent' + data[i].rNo +'">');
 							
 							$rImg = $('<img src="${ contextPath }/resources/uploadFiles/' + data[i].changeName + '" style="width:auto; height:6%; vertical-align:middle;">');
-							$rWriter = $('<span style="font-weight:bold;">').text(decodeURI(data[i].rNickName));
+							$rWriter = $('<span style="font-weight:bold;" id="replyNickName" onclick="miniMypage(this);">').html(decodeURIComponent(data[i].rNickName)+"<input type='hidden' value='" + data[i].rWriter+"'>");
+							//$rWriter = $('<span style="font-weight:bold;">').text(decodeURI(data[i].rNickName));
 							$rWriteDate = $('<span style="font-size: 15px; color: rgb(190, 190, 190);">').text(data[i].rWriteDate);
 							
 							$rMoDel = $('<span>').html('<input type="hidden" value=' + data[i].rNo + '><span class="replyUpdate">수정</span> | <span class="replyDelete" onclick="replyDelete(this);">삭제</span>');
@@ -452,6 +463,13 @@
 			});
 		}
 		
+		//미니 마이페이지 연결 연진누나 감사합니다....
+		function miniMypage(e){
+			var userId = $(e).children().eq(0).val();
+			window.open('userInfo.fo?userId='+ userId + '&page=1','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');
+		
+		}
+		
 		$(function() {
 			getReplyList();
 			/* setInterval(function() {
@@ -479,26 +497,26 @@
 		$("#replyBtn").click(function() {
 			// addReply.bo 로 넘어가도록 ==> 댓글 내용, 게시글 번호를 꼭 가져가야함
 			var replyContent = $('#rContent').val();
-			console.log("replyContent = "+replyContent);
-			console.log("replyContent.length = "+replyContent.length);
 			var postNo = ${lb.postNo};
 			var rWriter = '${loginUser.userId}';
-			console.log("postNo = "+postNo);
-			console.log("rWriter = "+rWriter);
+			if("${ loginUser == null }" == "true"){
+				swal("로그인을 해주세요.",{
+					icon : "warning",
+					buttons : "확인"
+				});
+				return;
+			}
+			
 			if(replyContent.length == 0) { //내용이 없을 경우에 alert 후 아래 이벤트 실행 안되게 return
 				swal("내용을 입력해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return;
 			} else if(replyContent.length > 300){
 				swal("300자 미만으로 작성해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return;
 			}
@@ -561,21 +579,16 @@
 		//댓글 수정
 		function replyUpdate(rNo){
 		    var rContent = $('#rModifyContent').val();
-		    console.log("댓글수정 rNo = "+rNo);
 		    if(rContent.length = 0) { //내용이 없을 경우에 alert 후 아래 이벤트 실행 안되게 return
 				swal("내용을 입력해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return;
 			} else if(rContent.length > 300){
 				swal("300자 미만으로 작성해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return;
 			}
@@ -594,22 +607,9 @@
 		 
 		async function replyDelete(e){
 			var rNo = $(e).parent().children().eq(0).val();
-			console.log(rNo);
-			/* if(confirm('댓글을 삭제하시겠습니까?')) {
-				$.ajax({
-			        url : 'deleteReply.lec',
-			        type : 'post',
-			        data : {'rNo' : rNo},
-			        success : function(data){
-			        	getReplyList();
-			        	console.log('댓글삭제 여부 = '+data);
-			        }
-			    });
-			} */
-			
 			await swal("댓글을 삭제하시겠습니까?",{
 				icon : "warning",
-				buttons : ["NO","YES"]
+				buttons : ["취소","확인"]
 			}).then((YES) => {
 				if(YES) {
 					$.ajax({
@@ -618,7 +618,6 @@
 				        data : {'rNo' : rNo},
 				        success : function(data){
 				        	getReplyList();
-				        	console.log('댓글삭제 여부 = '+data);
 				        }
 				    });
 				}
@@ -690,7 +689,6 @@
 				// 가능한 시간 처음에는 3개만 보이기
 				var ableTimeCount = 3;
 				$(function(){
-					
 					if($("div[class='ableTime']").length < 4){
 						$("#moreTime")[0].innerText = "--------- 끝 ---------";
 					}
@@ -702,8 +700,6 @@
 				// 가능한 시간 5개추가로 보이게 만들기
 				function ableTimePlus(e){
 					ableTimeCount += 4;
-					console.log("length = "+$("div[class='ableTime']").length);
-					console.log("abletimeCount = "+ableTimeCount);
 					if(ableTimeCount >= $("div[class='ableTime']").length){
 						$(e)[0].innerText = "--------- 끝 ---------";
 					}
@@ -716,16 +712,13 @@
 					if($("#userId").val() == ""){
 						await swal("로그인 후 이용가능한 서비스입니다.",{
 							icon : "warning",
-							buttons : {
-								confirm : true,
-							}
+							buttons : "확인"
 						});
 						return;
 					}
 					
 					var isChecked = false;
 					for(var i = 0; i < $("input[class='ableTime']").length; i++){
-						console.log($("input[class='ableTime']").eq(i)[0].checked);
 						if($("input[class='ableTime']").eq(i)[0].checked){
 							if($("input[class='ableTime']").eq(i).val() == '가능한 시간이 없습니다.'){
 								return;
@@ -736,9 +729,7 @@
 					if(!isChecked){
 						swal("원하는 시간을 선택해주세요.",{
 							icon : "warning",
-							buttons : {
-								confirm : true,
-							}
+							buttons : "확인"
 						});
 						return;
 					}
@@ -746,41 +737,28 @@
 					if($("#userId").val() == '${ lb.writer }'){
 						swal("자신이 쓴글은 신청할수 없습니다.",{
 							icon : "warning",
-							buttons : {
-								confirm : true,
-							}
+							buttons : "확인"
 						});
 						return;
 					}
-					
+					var isTrue = true;
 					var checkBeforeApply = ${checkBeforeApply};
-					console.log(checkBeforeApply);
 					if(checkBeforeApply != 0){
 						//return confirm("이전에 들은 강의입니다. 한번 더 신청하시겠습니까?");
 						await swal("이전에 들은 강의입니다. 한번 더 신청하시겠습니까?",{
 							icon : "warning",
-							buttons : {
-								confrim : {
-									text : "cancel",
-									value : false
-								},
-								confirm : {
-									text : "true",
-									value : true
-								}
-							}
+							buttons : ["취소","확인"]
 						}).then((YES) => {
+							console.log(YES);
 							if(YES) {
-								console.log("true 선택");
-								return;
 							} else {
-								console.log("false 선택");
-								return;
+								isTrue = false;
 							}
 						});
 					}
-					console.log(1);
-					$("#thisFrom2").submit();
+					if(isTrue){
+						$("#thisFrom2").submit();
+					}
 					return;
 				}
 			</script>
@@ -800,9 +778,7 @@
 			if("${lb.writer}" == "${loginUser.userId}"){
 				swal("자신에게는 쪽지를 보낼수 없습니다.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return;
 			}
@@ -890,7 +866,6 @@
 				} else {
 					newPosition =$("div[class='body2']")[0].offsetTop+"px";
 				}
-				console.log(newPosition);
 				/* 애니메이션 없이 바로 따라감
 				 $("#floatMenu").css('top', newPosition);
 				 */
@@ -909,14 +884,11 @@
 		$(function(){
 			var place = new Array();
 			var sidoArr = new Array();
-			console.log(sidoArr);
-			
+
 			//처음 시도는 c:foreach문을 통해서 전부 생기게 하고 거기서 만날떄 sidoArr에 없는 이름은 추가해서 // 다시 전부지우고 sidoArr안의 값을 넣는다
-			console.log($("select[class='selectSido']").children().length);
 			for(var i = 0; i < $("select[class='selectSido']").children().length; i++){
 				var isIn = true;
 				var sido = $("select[class='selectSido']").children();
-				console.log(sido.eq(i).val());
 				
 				for(var j = 0; j < sidoArr.length; j++){
 					
@@ -929,28 +901,21 @@
 					sidoArr.push(sido.eq(i).val());
 				}
 			}
-			console.log(sidoArr);
 			
 			$("select[class='selectSido']").empty();
 			var sidoVal = "";
-			console.log("sidoArr.length = "+sidoArr.length);
 			for(var i = 0; i < sidoArr.length; i++){
 				sidoVal += "<option value='"+sidoArr[i]+"'>"+sidoArr[i]+"</option>";
 			}
 			$("select[class='selectSido']").append(sidoVal);
 			
-			console.log($("select[class='selectSido']").val());
 			
-			console.log()
-			console.log($("input[id^='ablePlace']"));
 			
 			var abless = new Array();
 			abless.push($("input[id^='ablePlace']").eq(0).val().substring(1, $("input[id^='ablePlace']").eq(0).val().length - 1).split(", "));
-			console.log(abless);
 			for(var i = 0; i < $("input[id^='ablePlace']").length; i++){
 				ablePlaceArr[i] = $("input[id^='ablePlace']").eq(i).val().substring(1, $("input[id^='ablePlace']").eq(i).val().length - 1).split(", ");
 			}
-			console.log(ablePlaceArr);
 			changeGugun();
 			changeDong();
 		});
@@ -960,7 +925,6 @@
 			$("#gugun").empty();
 			for(var i = 0; i < ablePlaceArr.length; i++){
 				if(ablePlaceArr[i][0] == sido){
-					console.log(1);
 					var option = "<option value='"+ ablePlaceArr[i][1] +"'>"+ablePlaceArr[i][1]+"</option>";
 					$("#gugun").append(option);
 				}
@@ -974,7 +938,6 @@
 			var option = "";
 			for(var i = 0; i < ablePlaceArr.length; i++){
 				if(ablePlaceArr[i][1] == gugun){
-					console.log(1);
 					for(var j = 2; j < ablePlaceArr[i].length; j++){
 						option += "<option value='"+ ablePlaceArr[i][j] +"'>"+ablePlaceArr[i][j]+"</option>";
 					}

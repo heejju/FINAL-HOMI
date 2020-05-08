@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +36,7 @@ import finalProject.homis.hobbyFarm.common.model.vo.Image;
 import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.common.model.vo.Reply;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Search;
-import finalProject.homis.hobbyFarm.lecture.model.vo.Timeline;
+import finalProject.homis.hobbyFarm.myPage.model.vo.Timeline;
 import finalProject.homis.hobbyFarm.lecture.model.exception.LectureBoardException;
 import finalProject.homis.hobbyFarm.lecture.model.service.LectureBoardService;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion;
@@ -350,9 +352,11 @@ public class LectureController implements Comparator<ArrayList<String>>{
 	}
 		
 	@RequestMapping("adminCate.lec")
-	public String cateInsert(@RequestParam(value="hobbyNo", required=false) String hobbyNoS, @RequestParam("hobbyName") String hobbyName, @RequestParam("delYN") String delYN) {
+	public String cateInsert(@RequestParam(value="hobbyNo", required=false) String hobbyNoS, @RequestParam("hobbyName") String hobbyName, @RequestParam("delYN") String delYN,
+							 HttpServletRequest request) {
 		System.out.println("------------ adminCate.lec in --------------");
 		int hobbyNo = 0;
+		
 		if(!hobbyNoS.equals("")) {
 			hobbyNo = Integer.parseInt(hobbyNoS);
 		}
@@ -360,12 +364,18 @@ public class LectureController implements Comparator<ArrayList<String>>{
 		System.out.println("hobbyNo = "+hobbyNo);
 		System.out.println("hobbyName = "+hobbyName);
 		System.out.println("delYN = "+delYN);
-		
 		if(delYN.equals("Y")) {
 			System.out.println("delYN이 Y일 경우");
-			int result = lbService.deleteCategory(hobbyNo);
-			if(result < 0) {
-				throw new LectureBoardException("취미 삭제에 실패했습니다.");
+			try {
+				
+				int result = lbService.deleteCategory(hobbyNo);
+				if(result < 0) {
+					throw new LectureBoardException("취미 삭제에 실패했습니다.");
+				}
+			} catch (Exception e) {
+				System.out.println("이게 캐치가 되나.......");
+				request.getSession().setAttribute("cantDel", "cantDel");
+				return "redirect:/adminCateView.lec";
 			}
 		} else {
 			if(hobbyNo == 0) {

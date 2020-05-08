@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>#취미텃밭</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -70,6 +70,19 @@
 </style>
 </head>
 <body>
+<script>
+	$(function(){
+		//만약 쓰이는 취미여서delete가 안됐다면
+		if("${cantDel}" == "cantDel"){
+			swal("사용되는 취미여서 삭제할수 없습니다.",{
+				icon:"error",
+				buttons: "확인"
+			});
+		}
+	});
+</script>
+	<c:set var="cantDel" value='<%=request.getSession().getAttribute("cantDel") %>'/>
+	<%request.getSession().setAttribute("cantDel", null); %>
 	<form id="cateForm" action="adminCate.lec" method="post">
 	<section>
 		<div id="logoWrapper">
@@ -160,9 +173,7 @@
 			if(hobbyNo == ""){
 				swal("삭제할 취미를 골라주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true
-					}
+					buttons : "확인"
 				});
 				return;
 			}
@@ -170,7 +181,7 @@
 				swal("삭제할 취미의 이름과 번호를 정확히 입력해주세요.",{
 					icon : "warning",
 					buttons : {
-						confrim : true
+						button : "확인"
 					}
 				});
 				return;
@@ -179,13 +190,14 @@
 			
 			swal("정말로 "+hobbyName+"를 삭제하시겠습니까?",{
 				icon : "warning",
-				buttons : ["NO","YES"]
+				buttons : ["취소","확인"]
 			}).then((YES) => {
+				console.log(YES);
 				if(YES) {
 					$("#delYN").val("Y");
 					$("#cateForm").submit();
 				} else {
-								
+					return;
 				}
 			});
 		}
@@ -210,9 +222,7 @@
 						if(hobbyNameCheck == tr.children().eq(j)[0].innerText){
 							swal("해당 이름의 취미가 이미 존재합니다.",{
 								icon : "warning",
-								buttons : {
-									confirm : true,
-								}
+								buttons : "확인"
 							});
 							return;
 						}
@@ -225,8 +235,8 @@
 					return;
 				}*/
 				swal(hobbyNameCheck+"를 정말로 추가하시겠습니까?",{
-					icon : "warning",
-					buttons : ["NO","YES"]
+					icon : "info",
+					buttons : ["취소","확인"]
 				}).then((YES) => {
 					if(YES) {
 						$("#cateForm").submit();
@@ -238,9 +248,7 @@
 				if(hobbyName == hobbyNameCheck){
 					swal("현재이름과 수정하려는 이름이 같습니다.",{
 						icon : "warning",
-						buttons : {
-							confirm : true,
-						}
+						buttons : "확인"
 					});
 					return;
 				} else {
@@ -252,7 +260,7 @@
 					}*/
 					swal(hobbyName+"을(를) "+hobbyNameCheck+"로 수정하시겠습니까?",{
 						icon : "warning",
-						buttons : ["NO","YES"]
+						buttons : ["취소","확인"]
 					}).then((YES) => {
 						if(YES) {
 							$("#cateForm").submit();

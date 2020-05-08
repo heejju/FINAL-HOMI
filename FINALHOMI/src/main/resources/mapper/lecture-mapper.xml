@@ -220,7 +220,7 @@
 		<id property="concNo" column="CON_NO"/>
 	</resultMap>
 	
-	<insert id="insertTimeline" parameterType="Timeline2">
+	<insert id="insertTimeline" parameterType="Timeline">
 		insert into timetable values(
 			seq_tno.nextval, #{userId}, #{postNo}, #{timeline}, #{concNo} 
 		)

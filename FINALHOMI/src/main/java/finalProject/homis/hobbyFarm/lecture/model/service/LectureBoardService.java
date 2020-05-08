@@ -7,7 +7,7 @@ import finalProject.homis.hobbyFarm.common.model.vo.Image;
 import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.common.model.vo.Reply;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Search;
-import finalProject.homis.hobbyFarm.lecture.model.vo.Timeline;
+import finalProject.homis.hobbyFarm.myPage.model.vo.Timeline;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
 
@@ -57,8 +57,5 @@ public interface LectureBoardService {
 
 	int insertTimeline(Timeline timeline);
 
-	int selectCCCount() ;
 
-	ArrayList<LectureBoard> selectCCPage(PageInfo pi) ;
-	
 }

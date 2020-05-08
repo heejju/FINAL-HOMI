@@ -9,7 +9,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<%@include file="../common/boardCommon.jsp"%>
 	<!-- include libraries(jQuery, bootstrap) -->
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
@@ -18,7 +17,24 @@
 	<!-- include summernote css/js-->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<title>모종 구하기 - 글쓰기</title>
+<title>#취미텃밭</title>
+<%@include file="../common/boardCommon.jsp"%>
+<script>
+	$('#bName').text('모종');
+	$('#bNameAfter').text('구하기');
+	
+	
+	$('#bName').click(function(){
+		location.href="list.lec";
+	}).mouseover(function(){
+ 		$(this).css('cursor','pointer');
+ 	});
+	$('#bNameAfter').click(function(){
+		location.href="list.lec";
+	}).mouseover(function(){
+ 		$(this).css('cursor','pointer');
+ 	});
+</script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
 	body, html, div{padding: 0; margin:0; line-height: normal;}
@@ -33,7 +49,9 @@
 	.greenOP{color: rgb(136, 140, 67); font-weight: bold;}
 	
 	
-	
+	select{
+		cursor: pointer;
+	}
 	.inputS{
 		font-weight: bold; border: 0px; height: 21px;
 		padding: 0 5px 0 5px;
@@ -56,6 +74,7 @@
 	div.header > div.titleImgArea{
 		width : 45%; height: 245px; border: 1px solid lightgray; box-sizing:border-box;
 		margin: 0 0 0 4%; display: inline-block; float: none; padding:5px; text-align: center;
+		cursor: pointer;
 	}
 	
 	div.header > div.firstInfo {
@@ -121,11 +140,11 @@
 		overflow: auto;
 	}
 	input.insertBtn{
-		background: rgb(136, 140, 67); color: white; font-size: 20px; font-weight: bold; height: 35px; width: 75px;
+		background: rgb(136, 140, 67); color: white; font-size: 23px; font-weight: bold; height: 40px; width: 100px;
 		border: 0px solid white; border-radius: 5px; vertical-align: middle; text-align: center; cursor: pointer;
 	}
 	input.cancleBtn{
-		background: rgb(103, 81, 65); color: white; font-size: 20px; font-weight: bold; height: 35px; width: 75px;
+		background: rgb(103, 81, 65); color: white; font-size: 23px; font-weight: bold; height: 40px; width: 100px;
 		border: 0px solid white; border-radius: 5px; vertical-align: middle; text-align: center; cursor: pointer;
 	}
 	span.selectDong{
@@ -389,7 +408,7 @@
 						<i onclick="beforeCal();" class="fas fa-chevron-circle-left" style="width: 30px; height: 30px; vertical-align: middle; color: rgb(103, 81, 65);"></i>
 					</div>
 					<div style="display: inline-block;">
-						<input type=text class="dateSelect" readonly="readonly" value="날짜선택" onchange="ableTimeController(this);">
+						<input type=text class="dateSelect" readonly="readonly" value="날짜선택" onchange="ableTimeController(this);" onclick="swal('밑의 날짜를 클릭해주세요',{icon: 'warning',buttons: '확인'});">
 						
 						<select class="timeSelect" id="timeSelect">
 							<option class='lightgray'>시간선택</option>
@@ -580,18 +599,14 @@
 							if($("#otTime").val() == "" || $("#otTime").val() == 0){
 								swal("회당 시간을 먼저입력해주세요.",{
 									icon : "warning",
-									buttons : {
-										confirm : true,
-									}
+									buttons : "확인"
 								});
 								return false;
 							}
 							if(today > clickDay){
 								swal("오늘 날짜 이후로 선택해주세요.",{
 									icon : "warning",
-									buttons : {
-										confirm : true,
-									}
+									buttons : "확인"
 								});
 							} else {
 								$("input.dateSelect").val($(this)[0].innerText);
@@ -665,9 +680,7 @@
 									if(inDate){
 										swal("날짜를 다시 선택해주세요.",{
 											icon : "warning",
-											buttons : {
-												confirm : true,
-											}
+											buttons : "확인"
 										});
 										return;
 									}
@@ -676,24 +689,19 @@
 								} else {
 									swal("시간을 선택해주세요.",{
 										icon : "warning",
-										buttons : {
-											confirm : true,
-										}
+										buttons : "확인"
 									});
 									return;
 								}
 							} else {
 								swal("날짜를 선택해주세요.",{
 									icon : "warning",
-									buttons : {
-										confirm : true,
-									}
+									buttons : "확인"
 								});
 								return;
 							}
 							allDate.sort(sortFunction);
 							ableTimeController();
-							console.log(allDate);
 						});
 						
 						
@@ -706,7 +714,7 @@
 							
 							await swal("추가된 시간을 삭제하시겠습니까?",{
 								icon : "warning",
-								buttons : ["NO","YES"]
+								buttons: ["취소","확인"]
 							}).then((YES) => {
 								if(YES) {
 									isTrue = true;
@@ -714,9 +722,6 @@
 									isTrue = false;			
 								}
 							});
-							
-							
-							
 							if(isTrue){
 								$(e)[0].outerHTML = "";
 								for(var i = 0; i < allDate.length; i++){
@@ -1189,12 +1194,8 @@
 		    }
 		    else {
 		    	if( parseInt(a[0].split("/")[0]) < parseInt(b[0].split("/")[0]) ){
-		    		console.log("parseInt(a[0].split('/')[0]) = "+parseInt(a[0].split('/')[0]));
-		    		console.log("parseInt(b[0].split('/')[0]) = "+parseInt(b[0].split('/')[0]));
 					return parseInt(a[0].split("/")[0]) < parseInt(b[0].split("/")[0]) ? -1 : 1;
 				} else if( parseInt(a[0].split("/")[1].split("(")[0]) < parseInt(b[0].split("/")[1].split("(")[0]) ){
-					console.log("parseInt(a[0].split('/')[1].split('(')[0]) = "+parseInt(a[0].split('/')[1].split('(')[0]));
-					console.log("parseInt(b[0].split('/')[1].split('(')[0]) = "+parseInt(b[0].split('/')[1].split('(')[0]));
 					return parseInt(a[0].split("/")[1].split("(")[0]) < parseInt(b[0].split("/")[1].split("(")[0]) ? -1 : 1;
 				}
 		    	
@@ -1207,9 +1208,7 @@
 			if(titleImg == ""){
 				swal("썸네일 이미지를 넣어주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return false;
 			}
@@ -1218,9 +1217,7 @@
 			if(title == ""){
 				swal("제목을 작성해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return false;
 			}
@@ -1229,9 +1226,7 @@
 			if(hobbyNo == "" || hobbyNo == 0){
 				swal("카테고리를 설정해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return false;
 			}
@@ -1240,9 +1235,7 @@
 			if(otTuition == ""){
 				swal("수강료를 입력해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return false;
 			}
@@ -1251,9 +1244,7 @@
 			if(otTime == "" || otTime == 0){
 				swal("수강 시간을 입력해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return false;
 			}
@@ -1262,9 +1253,7 @@
 			if(otAllTime == "" || otAllTime == 0){
 				swal("총 수강 횟수를 입력해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return false;
 			}
@@ -1273,9 +1262,7 @@
 			if(learner == ""){
 				swal("수강 대상을 선택해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return false;
 			}
@@ -1284,9 +1271,7 @@
 			if(content == ""){
 				swal("수업소개를 입력해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return false;
 			}
@@ -1295,9 +1280,7 @@
 			if(teacherInfo == ""){
 				swal("강사소개를  입력해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return false;
 			}
@@ -1323,9 +1306,7 @@
 				if(!isChecked[i]){
 					swal((i+1)+'번째 가능한 장소의 동을 선택해주세요.',{
 						icon : "warning",
-						buttons : {
-							confirm : true,
-						}
+						buttons : "확인"
 					});
 					return false;
 				}
@@ -1335,9 +1316,7 @@
 			if(allDateC == ""){
 				swal("가능한 시간을 하나이상 추가해주세요.",{
 					icon : "warning",
-					buttons : {
-						confirm : true,
-					}
+					buttons : "확인"
 				});
 				return false;
 			}

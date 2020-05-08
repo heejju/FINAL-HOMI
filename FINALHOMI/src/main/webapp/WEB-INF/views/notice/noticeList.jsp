@@ -28,8 +28,8 @@ img{width:20px; height:20px;}
 .farmTable>thead>th:last-child{border-radius:0 5% 5% 0;}
 
 .farmTable>tbody tr:hover{cursor:pointer; background: #888c43; color:#fff;}
-.buttonG{width:100px; background-color:#888c43; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
-.buttonB{width:100px; background-color:#675141; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
+.buttonG{width:120px; background-color:#888c43; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
+.buttonB{width:120px; background-color:#675141; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
 
 .tr-no > th:nth-child(1){width:5%;}
 .tr-no > th:nth-child(2){width:45%;}
@@ -55,11 +55,10 @@ a{display:inline !important;}
 /* 검색창 */
 .searchArea{text-align:center; margin:0 20px 20px 20px;}
 .selectArea{margin-top:0px; display:inline-block; border:0.5px solid lightgray;}
-.nSelect{height:27px; border:1px solid lightgray; padding:5px;}
-.wordArea{width:250px; margin-top:10px; border:1px solid lightgray; background:#fff; display:inline-block; vertical-align:bottom;}
-#nWord{font-size:12px; width:195px; height:auto; padding:5px; margin:3px 0 0 5px; border: 0px; outline:none; float:left;}
-#searchBtn{width:40px; border: 0px; border-radius:0px; padding:5px;background: #888c43; outline: none; float:right; color: #fff;}
-#nSelect{border-raidus:5px; width:100%; height:100%; padding:5px; border-radius:5px; margin:0px auto;font-size:14px; font-family: 'Nanum Gothic', sans-serif; font-weight:bold;}
+#nSelect{height: 37px; width: 80px; font-size: 20px; text-align: center;}
+.wordArea{width:300px; height:35px; border:1px solid lightgray; background:#fff; display:inline-block; vertical-align:bottom;}
+#nWord{font-size:18px; height:auto; padding:5px; border: 0px; outline:none; float:left;}
+#searchBtn{width:60px; height:36px; border: 0px; border-radius:0px; background: #888c43; outline: none; float:right; color: #fff; font-size:18px;}
 
 
 </style>

@@ -66,11 +66,10 @@ a{display:inline !important;}
 /* 검색창 */
 .searchArea{text-align:center; margin:0 20px 20px 20px;}
 .selectArea{margin-top:0px; display:inline-block; border:0.5px solid lightgray;}
-.searchSelect{height:27px; border:1px solid lightgray; padding:5px;}
-.wordArea{width:250px; margin-top:10px; border:1px solid lightgray; background:#fff; display:inline-block; vertical-align:bottom;}
-#word{font-size:12px; width:195px; height:auto; padding:5px; margin:3px 0 0 5px; border: 0px; outline:none; float:left;}
-#searchBtn{width:40px; border: 0px; border-radius:0px; padding:5px;background: #888c43; outline: none; float:right; color: #fff;}
-#searchSelect{border-raidus:5px; width:100%; height:100%; padding:5px; border-radius:5px; margin:0px auto;font-size:14px; font-family: 'Nanum Gothic', sans-serif; font-weight:bold;}
+#searchSelect{height:37px; width:80px; border:1px solid lightgray; padding:5px;}
+.wordArea{width:300px; height:35px; border:1px solid lightgray; background:#fff; display:inline-block; vertical-align:bottom;}
+#word{font-size:18px; height:auto; padding:5px; border: 0px; outline:none; float:left;}
+#searchBtn{width:60px; height:35px; border: 0px; border-radius:0px; padding:5px;background: #888c43; outline: none; float:right; color: #fff; font-size:18px;}
 
 </style>
 </head>

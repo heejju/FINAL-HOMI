@@ -187,12 +187,9 @@
 					var checkVal = "";
 					swal("정말 삭제하시겠습니까?",{
 						icon : "warning",
-						buttons : {
-							cancel : true,
-							confirm : true,
-						}
-					}).then((result) => {
-						if(result) {
+						buttons : ["취소", "확인"],
+					}).then((YES) => {
+						if(YES) {
 							var checkbox = document.getElementsByName("checkbox");
 							for (var i = 0; i < checkbox.length; i++) {
 								if (checkbox[i].checked == true) {
@@ -201,7 +198,9 @@
 							}
 							location.href = 'deleteGetMsg.msg?checkVal=' + checkVal
 									+ '&id=${loginUser.userId}';
-						} 
+						} else {
+							return;
+						}
 					});
 				});
 	</script>

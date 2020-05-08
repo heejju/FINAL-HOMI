@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmBoard;
 import finalProject.homis.hobbyFarm.lecture.model.dao.LectureBoardDAO;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
@@ -72,8 +73,13 @@ public class myPageServiceImpl implements myPageService {
 	}
 
 	@Override
-	public ArrayList<GroupFarmBoard> myFarm(String id) {
-		return mpDAO.myFarm(sqlSession, id);
+	public int getListCount(String id) {
+		return mpDAO.getListCount(sqlSession, id);
 	}
+	@Override
+	public ArrayList<GroupFarmBoard> myFarm(PageInfo pi, String id) {
+		return mpDAO.myFarm(sqlSession, pi, id);
+	}
+
 
 }

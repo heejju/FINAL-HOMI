@@ -54,6 +54,23 @@
 		]]>
 	</select>
 	
+	<!-- 학생 페이지 내 모임 리스트 카운트 -->
+	<select id="getListCount" resultType="_int">
+		<![CDATA[
+			select count(*)
+			from(
+				select post_no
+				from gfapp_view g
+				    join gf_view gv using(post_no)
+				where g.user_id = #{id} and delete_yn = 'N' and end_date >= sysdate
+				union
+				select post_no
+				from gfapp_view g
+				    join gf_view gv using(post_no)
+				where gv.writer = #{id} and delete_yn = 'N' and end_date >= sysdate
+			)		
+		]]>
+	</select>
 	<!-- 학생 페이지 내 모임 리스트 -->
 	<select id="myFarm" resultMap="gfBoardResultSet">
 		<![CDATA[

@@ -7,20 +7,19 @@
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
 <style>
-	.qTable{overflow:hidden; max-width:800px; width:100%; margin:0 auto; padding: 5px; font-size: 15px; border: 1px solid rgb(200,200,200); border-radius: 10px; background: white;}
+	.qTable{overflow:hidden; width:100%; margin:0 auto; padding: 5px; font-size: 15px; border: 1px solid rgb(200,200,200); border-radius: 10px; background: white;}
 	.qTable th{height:30px; color: rgb(103,81,65);}
 	.qTable td{ text-align: left;}
 	
-	.buttonG{width:70px; background-color:#888c43; color:#fff; border:none; padding:5px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
-	.buttonB{width:70px; background-color: rgb(135, 135, 135); color:#fff; border:none; padding:5px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
-	.buttonO{width:70px; height: 70px; background-color: orange; color:#fff; border:none; padding:5px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
+	.buttonG{width:80px; background-color:#888c43; color:#fff; border:none; padding:7px 0; text-align:center; font-size:20px; margin:4px; cursor:pointer; border-radius:5px;}
+	.buttonB{width:80px; background-color: rgb(135, 135, 135); color:#fff; border:none; padding:7px 0; text-align:center; font-size:20px; margin:4px; cursor:pointer; border-radius:5px;}
+	.buttonO{width:70px; height: 70px; background-color: orange; color:#fff; border:none; padding:5px 0; text-align:center; font-size:20px; margin:4px; cursor:pointer; border-radius:5px;}
 
 	.outer{
-		width:900px; min-height:50px; padding-bottom: 50px;
-		margin-left:auto; margin:auto; margin-top:50px; margin-bottom: 50px; 
+		width:60%; min-height:50px; padding-bottom: 50px; margin: 5% auto;
 	}
 	
-	.detailTable{margin: auto; text-align: center; width: 85%;}
+	.detailTable{margin: auto; text-align: center; width: 95%;}
 	
 	table{border-collapse: unset !important; border-spacing: none !important;}
 	
@@ -30,7 +29,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <c:import url='../common/boardCommon.jsp'/>
 	<div class="outer">
-		<div>
+		<div style="width: 100%;">
 			<div>
 				<!-- 답변완료, 수정, 삭제 버튼 -->
 				<div class="utilArea" style="position: relative; left: 60px;">
@@ -52,10 +51,11 @@
 					<th>제목</th><td style="width: 250px;">${ question.title }</td>
 					<th>작성자</th>
 						<td>
-							<c:url var="userInfo" value="userInfofo.mp">
-								<c:param name="userId" value="${ question.writer }"/>
+							<c:url var="userInfo" value="userInfo.fo">
+								<c:param name="nickName" value="${ question.writer }"/>
+								<c:param name="page" value="1"/>
 							</c:url>
-							<a href="${ userInfo }">${ question.writer }</a>
+							<a onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${ question.writer }</a>
 						</td>
 					<th>게시일</th><td>${ question.modify_date }</td>
 				</tr>
@@ -68,6 +68,7 @@
 					</td>
 				</tr>
 			</table>
+				<div style="margin-top: 1.5%;">
 					<c:if test="${ loginUser.nickName == question.writer || loginUser.mKind == 0}"> <!-- 운영자이거나 글쓴이의 경우에만 보이는 버튼 -->
 						<c:url var="edit" value="qupdateView.qu">
 							<c:param name="post_no" value="${question.post_no}" />
@@ -75,13 +76,14 @@
 						</c:url>
 						
 						<c:if test="${loginUser.nickName == question.writer}"> <!-- 글쓴이의 경우에만 보이는 버튼 -->
-							<button onclick="location.href='${edit}'" class="buttonG" style="float: right; position: relative; right: 160px;">수정</button>
-							<button onclick="deletethis();" class="buttonB" style="float: right; position: relative; right: -20px;">삭제</button>
+							<button onclick="location.href='${edit}'" class="buttonG" style="float: right; position: relative; right: 110px;">수정</button>
+							<button onclick="deletethis();" class="buttonB" style="float: right; position: relative; right: -80px;">삭제</button>
 						</c:if>
 						<c:if test="${loginUser.nickName != question.writer}"> <!-- 운영자의 경우에만 보이는 버튼 -->
-							<button onclick="deletethis();" class="buttonB" style="float: right; position: relative; right: 50px;">삭제</button>
+							<button onclick="deletethis();" class="buttonB" style="float: right; position: relative; right: 20px;">삭제</button>
 						</c:if>
 					</c:if>
+				</div>
 			</div>
 		</div>
 		<div style="padding: 20px;"></div>
@@ -99,7 +101,7 @@
 				<c:if test="${ loginUser != null}">
 					<tr>
 						<td>
-							<textarea id="replyBox" cols=95 style="width: 650px; font-size: 15px; border: 1px solid rgb(220, 220, 220); height: 70px; resize: none;"></textarea>
+							<textarea id="replyBox" cols=95 style="width: 97%; font-size: 15px; border: 1px solid rgb(220, 220, 220); height: 70px; resize: none;"></textarea>
 						</td>
 						<td>
 							<button class="buttonO" id="replySubmit">등록</button>

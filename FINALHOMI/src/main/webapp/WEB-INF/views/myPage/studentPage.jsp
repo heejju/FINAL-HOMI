@@ -7,7 +7,10 @@
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
 <style>
-
+	.thumbnail{border: 2px solid black;
+	border-radius: 70%;
+	width: 150px;
+	height: 150px;}
 	.outer{
 		width:1000px; height: auto; padding-bottom: 50px;
 		margin-left:auto; margin:auto; margin-top:50px; margin-bottom: 50px; 
@@ -93,18 +96,18 @@
 		<!-- 참여한 동네 텃밭 -->
 		<div style="width: 300px; float: left; margin: 10px;"> 
 			<div class="subTitle" >참여한 동네 텃밭</div>
-			<iframe width="100%" height="660" src="myFarm.mp" frameborder="0"></iframe>
+			<iframe style="width:100%; height:660px;"" src="myFarm.mp" frameborder="0"></iframe>
 		</div>
 		<div style="width: 650px; float: left; margin: 10px;">
 			<div class="subTitle" style="width: 600px;">주문한 모종</div>
-			<div style="width: 620px; border: 1px solid black; padding: 10px;">
+			<div style="width: 620px; padding: 10px;">
 				<iframe width="100%" height="250" src="myLectureSt.mp" frameborder="0"></iframe>
 			</div>
 			
 		</div>
 		<div style="width: 650px; float: left; margin: 10px;">
 			<div class="subTitle" style="width: 600px;">재배한 모종</div>
-			<div style="width: 620px; border: 1px solid black; padding: 10px;">
+			<div style="width: 620px; padding: 10px;">
 				<iframe width="100%" height="250" src="myFinishedLectureSt.mp" frameborder="0"></iframe>
 			</div>
 		</div>

@@ -7,26 +7,25 @@
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
 <style>
-	.qTable{overflow:hidden; max-width:800px; width:100%; margin:0 auto; padding: 10px; font-size: 13px;}
-	.qTable td{padding: 10px; text-align: center;}
+	.qTable{overflow:hidden; width:100%; margin:0 auto; padding: 10px; font-size: 16px;}
+	.qTable td{padding: 16px; text-align: center;}
 	thead th{height:30px; color: rgb(103,81,65);}
 	
-	.tableLine{border: 1px solid rgb(200,200,200); border-radius: 10px;}
+	.tablaLine tr{border: 1px solid red;}
 	
-	#pagingArea{text-align: center; padding: 30px;}
+	#pagingArea{text-align: center; padding: 5%;}
 	#buttonTab > button {width:40px; height:40px; border-radius:5px; border:0px; background-color:white; font-size:16px; padding:5px;}
  	#start:hover, #end:hover{font-wieght:bold; background:#675141; color:white}
-	#searchArea{text-align: center; padding: 30px;}
+	#searchArea{text-align: center; margin-bottom: 5%;}
 	
 	.startBtn, .end, .pageNum, #before, #next {width:40px; height:40px; border-radius:5px; border:0px; background-color:white; font-size:16px; padding:5px;}
 	
-	.buttonG{width:100px; background-color:#888c43; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
-	.pagingBtn{width: 30px; height: 30px; text-align: center; vertical-align: middle; border: none; border-radius: 3px;}
+	.buttonG{width:100px; background-color:#888c43; color:#fff; border:none; padding:10px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
+	.pagingBtn{width: 60px; height: 40px; text-align: center; vertical-align: middle; border: none; border-radius: 3px; font-size: 18px;}
 			   
 
 	.outer{
-		width:1000px; min-height:50px; padding-bottom: 50px;
-		margin-left:auto; margin:auto; margin-top:50px; margin-bottom: 50px; 
+		width:70%; min-height:50px; margin:auto; 
 	}
 	
 	a{display: inline !important; }
@@ -51,7 +50,7 @@
 	
 	<div class="outer">
 		<!-- 글 목록 테이블 -->
-		<div>
+		<div style="border: 1px solid #000; border-radius: 10px; padding: 1%;">
 			<table class="qTable tableLine">
 				<tr>
 					<th>No.</th>
@@ -61,6 +60,8 @@
 					<th>답변</th>
 				</tr>
 			</table>
+		</div>
+		<div>
 			<table class="qTable" id="tableCon" style="border-collapse: collapse;">
 				<c:forEach var="q" items="${ list }">
 						<c:if test="${loginUser.nickName == q.writer || loginUser.mKind == 0}">
@@ -170,13 +171,13 @@
 		<!-- 검색 -->
 		<c:if test="${loginUser != null}">
 			<div id="searchArea">
-				<select id="searchOption" name="searchOption" style="height: 30px; width: 50px;">
+				<select id="searchOption" name="searchOption" style="height: 40px; width: 80px; font-size: 20px; text-align: center;">
 					<option value="title">제목</option>
 					<option value="content">내용</option>
 					<option value="writer">작성자</option>
 				</select>
-					<input type="text" id="searchContent" name="searchContent" style="height: 23px;">
-					<button class="pagingBtn" style="background: #888c43; color: white;" onclick="questionSearch();">Q</button>
+					<input type="text" id="searchContent" name="searchContent" style="height: 35px; width: 200px;">
+					<button class="pagingBtn" style="background: #888c43; color: white;" onclick="questionSearch();">검색</button>
 			</div>
 		</c:if>
 	</div>

@@ -29,7 +29,7 @@
 </head>
 <body>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<div style=" background: white; padding: 5px;">
+	<div style=" background: white; padding: 5px; height: 630px;">
 	<table class="table">
 				<tr style="border-bottom: 1px solid gray;">
 					<th style="padding: 10px;">텃밭 이름</th>
@@ -37,17 +37,26 @@
 					<th>모종 종류</th>
 					<th>인원</th>
 				</tr>
-				<c:forEach var="gf" items="${gfList}">
+				<c:if test="${!empty gfList}">
+					<c:forEach var="gf" items="${gfList}">
+						<tr>
+							<td><input type="hidden" value="글번호넣기">${gf.title}</td>
+							<td>${gf.nickName}</td>
+							<td>${gf.hobbyName}</td>
+							<td>${gf.personnel}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty gfList}">
 					<tr>
-						<td><input type="hidden" value="글번호넣기">${gf.title}</td>
-						<td>${gf.nickName}</td>
-						<td>${gf.hobbyName}</td>
-						<td>${gf.personnel}</td>
+						<td colspan="4" style="text-align: center;">
+							현재 진행중인 모임이 없네요
+						</td>
 					</tr>
-				</c:forEach>
+				</c:if>
 			</table>
 			<div class="pagingArea"> <!-- 페이징 -->
-				<div id="pagingArea" style="position: relative; text-align: center;">
+				<div id="pagingArea" style="position: absolute; left: 38%; bottom: 20px; text-align: center;">
 				<!-- [이전] -->
 	            <c:if test="${ pi.currentPage <= 1 }">
 	               <button class="pagingBtn" id="before">&lt;</button>

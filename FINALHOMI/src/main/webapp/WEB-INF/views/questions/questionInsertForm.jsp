@@ -15,19 +15,19 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <title>#취미텃밭</title>
 <style>
-	.buttonG{width:100px; background-color:#888c43; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
+	.buttonG{width:120px; background-color:#888c43; color:#fff; border:none; padding:15px 0; text-align:center; font-size:20px; margin:4px; cursor:pointer; border-radius:5px;}
 	.outer{
-		width:900px; min-height:50px; padding-bottom: 50px;
+		width:70%; min-height:50px; padding-bottom: 50px;
 		margin-left:auto; margin:auto; margin-top:50px; margin-bottom: 50px; 
 	}
-	#inputTitle{width: 100%; font-size: 50px; margin-bottom: 20px; }
+	#inputTitle{padding:7px; border:1px solid #7f7f7f; width:100%; font-size:40px; margin-bottmon:10px;}
 </style>
 </head>
 <body style="background:#fff6f0;">
 <c:import url='../common/boardCommon.jsp'/>
 	<div class="outer">
 		<form action="qinsert.qu" method="post">
-			<div style="margin: 0 auto; width: 700px;">
+			<div style="margin: 0 auto; width: 100%;">
 				<!-- 제목 -->
 					<input id="inputTitle" type="text" name="title" placeholder="제목을 입력해주세요" style="font-style: italic" onkeyup="changeFont();">
 					<input type="hidden" name="writer" readonly value="${ loginUser.userId }">
@@ -55,7 +55,7 @@
 	/* 썸머노트 관련 설정 */
 	$(document).ready(function() {
 	     $('#summernote').summernote({
-	             height: 300,                 // set editor height
+	             height: 500,                 // set editor height
 	             toolbar: [
 	     		    ['style', ['style']],
 	     		    ['font', ['bold', 'italic', 'underline', 'clear']],

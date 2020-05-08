@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <style>
 	#logoWrapper{width:20%; float:right; margin-top:50px; margin-right:30px;}
-	#logo{width:100%;}
+	#logo{width:100%; height:100%;}
 	#subHeader{margin-bottom:50px;}
 	#boardName{width:100%; height:70px; margin-top:10%; border-bottom: 1.5pt solid gray; text-align:center;
 				font-size: 30pt; font-weight: bold; display : inline-table; }

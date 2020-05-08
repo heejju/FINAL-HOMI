@@ -167,12 +167,10 @@
 				});
 				
 				function LoadImg(value){
-					console.log(value.files[0]);
 					if(value.files && value.files[0]){
 						var reader = new FileReader();
 						reader.onload = function(e){								
 							$("#titleImg").attr("src", e.target.result);
-							console.log(e);
 						}
 						reader.readAsDataURL(value.files[0]);
 					}
@@ -217,8 +215,6 @@
 					
 					function notMinusAndPlus(d) {
 						var e = event;
-						console.log(e.keyCode);
-						console.log($(d).val());
 						if(e.keyCode == 37 || e.keyCode == 39){
 							return true;
 						}
@@ -226,19 +222,12 @@
 					      || (e.keyCode > 47 && e.keyCode < 58)
 					      || e.keyCode == 8)) {
 					        return false;
-					        console.log("이건 뜨면안돼");
 						}
-					    console.log("이것도안됌");
-					    
 					    var name = $(d);
-					    console.log(name[0].name);
 					    if($("#allDate").val() != ""){
-					    	console.log("allDate에 값있다");
 						    if(name[0].name == "otTime"){
-						    	console.log("name이 otTime이다.");
 						    	var isTrue = confirm("회당 시간을 바꾸면 지금까지 추가한 시간이 삭제됩니다. 정말로 삭제하시나요?");
 						    	if(isTrue){
-						    		console.log("allTime리셋과 date들 리셋하기");
 						    		ableTimeReset();
 						    	} else {
 						    		return false;
@@ -447,6 +436,20 @@
 								date.setDate(date.getDate() - to1);
 							}
 							for(var i = 0; i < $("div.date").length; i++){
+								var month;
+								if(date.getMonth()+1 < 10){
+									month = "0"+(date.getMonth()+1);
+								} else {
+									month = date.getMonth()+1;
+								}
+								
+								var stringDate;
+								if(date.getDate() < 10){
+									stringDate = "0"+date.getDate();
+								} else {
+									stringDate = date.getDate();
+								}
+								
 								var weekday = new Array(7);
 								weekday[0] = "일";
 								weekday[1] = "월";
@@ -457,7 +460,7 @@
 								weekday[6] = "토";
 								var n = weekday[date.getDay()];
 								
-								$("div.date").eq(i)[0].innerHTML = "<span style='vertical-align: middle;'>"+(date.getMonth()+1)+"/"+date.getDate()+"("+n+")<input id='"+(date.getMonth()+1)+"/"+date.getDate()+"("+n+")' type='hidden' value='"+date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()+"'></span>";
+								$("div.date").eq(i)[0].innerHTML = "<span style='vertical-align: middle;'>"+month+"/"+stringDate+"("+n+")<input id='"+month+"/"+stringDate+"("+n+")' type='hidden' value='"+date.getFullYear()+"/"+month+"/"+stringDate+"'></span>";
 								date.setDate(date.getDate()+1);
 							}
 						});
@@ -469,6 +472,19 @@
 								date.setDate(date.getDate() - to1);
 							}
 							for(var i = 0; i < $("div.date").length; i++){
+								var month;
+								if(date.getMonth()+1 < 10){
+									month = "0"+(date.getMonth()+1);
+								} else {
+									month = date.getMonth()+1;
+								}
+								
+								var stringDate;
+								if(date.getDate() < 10){
+									stringDate = "0"+date.getDate();
+								} else {
+									stringDate = date.getDate();
+								}
 								var weekday = new Array(7);
 								weekday[0] = "일";
 								weekday[1] = "월";
@@ -479,7 +495,7 @@
 								weekday[6] = "토";
 								var n = weekday[date.getDay()];
 								
-								$("div.date").eq(i)[0].innerHTML = "<span style='vertical-align: middle;'>"+(date.getMonth()+1)+"/"+date.getDate()+"("+n+")<input id='"+(date.getMonth()+1)+"/"+date.getDate()+"("+n+")' type='hidden' value='"+date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()+"'></span>";
+								$("div.date").eq(i)[0].innerHTML = "<span style='vertical-align: middle;'>"+month+"/"+stringDate+"("+n+")<input id='"+month+"/"+stringDate+"("+n+")' type='hidden' value='"+date.getFullYear()+"/"+month+"/"+stringDate+"'></span>";
 								date.setDate(date.getDate()+1);
 								
 							}
@@ -506,6 +522,19 @@
 					
 						function nextCal(){
 							for(var i = 0; i < $("div.date").length; i++){
+								var month;
+								if(date.getMonth()+1 < 10){
+									month = "0"+(date.getMonth()+1);
+								} else {
+									month = date.getMonth()+1;
+								}
+								
+								var stringDate;
+								if(date.getDate() < 10){
+									stringDate = "0"+date.getDate();
+								} else {
+									stringDate = date.getDate();
+								}
 								var weekday = new Array(7);
 								weekday[0] = "일";
 								weekday[1] = "월";
@@ -516,7 +545,7 @@
 								weekday[6] = "토";
 								var n = weekday[date.getDay()];
 								
-								$("div.date").eq(i)[0].innerHTML = "<span style='vertical-align: middle;'>"+(date.getMonth()+1)+"/"+date.getDate()+"("+n+")<input id='"+(date.getMonth()+1)+"/"+date.getDate()+"("+n+")' type='hidden' value='"+date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()+"'></span>";
+								$("div.date").eq(i)[0].innerHTML = "<span style='vertical-align: middle;'>"+month+"/"+stringDate+"("+n+")<input id='"+month+"/"+stringDate+"("+n+")' type='hidden' value='"+date.getFullYear()+"/"+month+"/"+stringDate+"'></span>";
 								date.setDate(date.getDate()+1);
 								
 							}
@@ -662,7 +691,9 @@
 								});
 								return;
 							}
+							allDate.sort(sortFunction);
 							ableTimeController();
+							console.log(allDate);
 						});
 						
 						
@@ -1050,15 +1081,12 @@
 		}
 		// 동선택하면 실행되는 메소드
 		function checkBtn(e){
-			console.log("checkBtn in");
 			if($(e)[0].checked){
 				$(e).attr("checked","checked");
 			} else {
 				$(e).removeAttr("checked");
 			}
 			
-			console.log($(e).parent().parent().children());
-			console.log($(e).parent().parent().children().length);
 			var isTrue = true;
 			for(var i = 0; i < $(e).parent().parent().children().length; i++){
 				if(!$(e).parent().parent().children().eq(i).children().eq(1)[0].checked){
@@ -1093,7 +1121,6 @@
 				} else {
 					option = "<option>"+insertSelectTime+":00</option>";
 				}
-				console.log(1);
 				$("#timeSelect").append(option);
 			}
 			
@@ -1101,7 +1128,6 @@
 				//현재의 allDate를 2차원배열로 만든다
 				var thisAllDate = new Array();
 				var allDateVal = $("#allDate").val();
-				console.log("leng = "+allDateVal.split(",").length);
 				var j = -1;
 				var k = 0;
 				for(var i = 0; i < allDateVal.split(",").length; i++){
@@ -1117,30 +1143,23 @@
 					}
 					
 				}
-				console.log(thisAllDate);
 				var usingTime;
 				for(var i = 0; i < thisAllDate.length; i++){
 					var textDate = thisAllDate[i];
-					console.log(textDate[0]);
 					if(textDate[0] == nowDate){
-						console.log("textDate[0].innerText == nowDate");
 						usingTime = textDate;
 					}
 				}
 				
-				console.log(usingTime);
 				// usingTime에 따라서 추가가능시간선택제어
 				// 그전에 비우기
 				if(usingTime == null){
-					console.log("usingTime 비어있따.암것도안함");
+					
 				} else {
-					console.log("usingTime 있다 이거대로  시간 그거하기");
 					//현재 저장되어 있는 시간을 disabled하기
 					for(var i = 1; i < usingTime.length; i++){
 						for(var j = 0; j < $("#timeSelect").children().length; j++){
-							console.log($("#timeSelect").children().eq(j)[0].innerText.substring(0,2));
 							if($("#timeSelect").children().eq(j)[0].innerText.substring(0,2) == usingTime[i]){
-								console.log("시간이 같은걸 찾았다 그러면 disabled하기");
 								$("#timeSelect").children().eq(j).attr('disabled','disabled');
 							}
 						}
@@ -1150,8 +1169,6 @@
 						for(var j = 0; j < $("#timeSelect").children().length; j++){
 							if($("#timeSelect").children().eq(j)[0].innerText.substring(0,2) == usingTime[i]){
 								// k = j 현재 시간과 같은곳을 찾고 같다면 + otTime까지 disabled
-								console.log($("#otTime").val());
-								console.log(j + Number($("#otTime").val()));
 								//현재 저장되어 있는 시간 - otTime부터 저장시간 + otTime까지 disabled
 								for(var k = j - Number($("#otTime").val()); k <= j + Number($("#otTime").val()); k++){
 									$("#timeSelect").children().eq(k).attr('disabled','disabled');
@@ -1161,17 +1178,26 @@
 					}
 				}
 			}
-			console.log(allDate);
 			allDate.sort(sortFunction);
-			console.log(allDate);
 			
 		}
 		
 		function sortFunction(a, b) {
-		    if (a[0] === b[0]) {
+			var amonth;
+		    if (a[0] == b[0]) {
 		        return 0;
 		    }
 		    else {
+		    	if( parseInt(a[0].split("/")[0]) < parseInt(b[0].split("/")[0]) ){
+		    		console.log("parseInt(a[0].split('/')[0]) = "+parseInt(a[0].split('/')[0]));
+		    		console.log("parseInt(b[0].split('/')[0]) = "+parseInt(b[0].split('/')[0]));
+					return parseInt(a[0].split("/")[0]) < parseInt(b[0].split("/")[0]) ? -1 : 1;
+				} else if( parseInt(a[0].split("/")[1].split("(")[0]) < parseInt(b[0].split("/")[1].split("(")[0]) ){
+					console.log("parseInt(a[0].split('/')[1].split('(')[0]) = "+parseInt(a[0].split('/')[1].split('(')[0]));
+					console.log("parseInt(b[0].split('/')[1].split('(')[0]) = "+parseInt(b[0].split('/')[1].split('(')[0]));
+					return parseInt(a[0].split("/")[1].split("(")[0]) < parseInt(b[0].split("/")[1].split("(")[0]) ? -1 : 1;
+				}
+		    	
 		        return (a[0] < b[0]) ? -1 : 1;
 		    }
 		}
@@ -1255,7 +1281,6 @@
 			}
 			
 			var content = $("textarea[name=content]").val();
-			console.log("content ="+content);
 			if(content == ""){
 				swal("수업소개를 입력해주세요.",{
 					icon : "warning",
@@ -1267,7 +1292,6 @@
 			}
 			
 			var teacherInfo = $("textarea[name=teacherInfo]").val();
-			console.log("teacherInfo = "+teacherInfo);
 			if(teacherInfo == ""){
 				swal("강사소개를  입력해주세요.",{
 					icon : "warning",
@@ -1279,10 +1303,8 @@
 			}
 			
 			var isChecked = new Array();
-			console.log("dong length = "+$('ul[id=dong]').length);
 			for(var i = 0; i < $("ul[id=dong]").length; i++){
 				isChecked[i] = false;
-				console.log($("ul[id=dong]").eq(i));
 				for(var j = 0; j < $("ul[id=dong]").eq(i).children().length;j++){
 					if($("ul[id=dong]").eq(i).children().length > 1){
 						if($("ul[id=dong]").eq(i).children().eq(j).children().eq(1)[0].checked){
@@ -1291,7 +1313,6 @@
 					}
 				}
 			}
-			console.log(isChecked);
 			var isCheckedLen;
 			if(isChecked.length < 2){
 				isCheckedLen = isChecked.length; 
@@ -1299,7 +1320,6 @@
 				isCheckedLen = isChecked.length - 1;
 			}
 			for(var i = 0; i < isCheckedLen; i++){
-				console.log(!isChecked[i]);
 				if(!isChecked[i]){
 					swal((i+1)+'번째 가능한 장소의 동을 선택해주세요.',{
 						icon : "warning",

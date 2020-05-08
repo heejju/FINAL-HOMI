@@ -34,13 +34,14 @@ import finalProject.homis.hobbyFarm.common.model.vo.Image;
 import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.common.model.vo.Reply;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Search;
-import finalProject.homis.hobbyFarm.lecture.model.vo.TimeTable;
+import finalProject.homis.hobbyFarm.lecture.model.vo.Timeline;
 import finalProject.homis.hobbyFarm.lecture.model.exception.LectureBoardException;
 import finalProject.homis.hobbyFarm.lecture.model.service.LectureBoardService;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Pagination;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
+import oracle.sql.TIMESTAMPLTZ;
 
 @Controller
 public class LectureController implements Comparator<ArrayList<String>>{
@@ -205,7 +206,7 @@ public class LectureController implements Comparator<ArrayList<String>>{
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		//웹 서버 contextPath를 불러와서 폴더의 경로 받아옴 (webapp 하위의 resources에 도달)
 		
-		String savePath = root +"\\buploadFiles";
+		String savePath = root +"\\uploadFiles";
 		
 		File folder = new File(savePath);
 		
@@ -330,7 +331,7 @@ public class LectureController implements Comparator<ArrayList<String>>{
 		mv.addObject("searchValue",searchValue);
 		mv.addObject("hobbyNo",hobbyNo);
 		mv.addObject("currentPage", currentPage);
-		
+		mv.addObject("applySuccess", request.getParameter("applySuccess"));
 		System.out.println("------------------------ list.lec out ------------------------");
 		return mv;
 	}
@@ -546,7 +547,7 @@ public class LectureController implements Comparator<ArrayList<String>>{
 	}
 	
 	@RequestMapping("applyLecture.lec")
-	public ModelAndView applyLecture(@RequestParam("postNo") String postNoS,@RequestParam("selectSido") String sido,
+	public String applyLecture(@RequestParam("postNo") String postNoS,@RequestParam("selectSido") String sido,
 							 @RequestParam("selectGugun") String gugun,@RequestParam("selectDong") String dong,
 							 @RequestParam("ableTime") String ableTime, @RequestParam("userId") String proposer,
 							 
@@ -615,9 +616,6 @@ public class LectureController implements Comparator<ArrayList<String>>{
 			//c에 startDateS와 finishDateS를 set함
 			int conResult = lbService.insertConclusion(c);
 			System.out.println("conResult = "+conResult);
-		//TIMETABLE INSERT
-			//타임테이블 물어보고 하자 뭔가 이상함 날짜 별로 총강의 횟수만큼 들어가얗지 않나
-			TimeTable t = new TimeTable();
 			
 		//LECTUREBOARD UPDATE 시간 뺴서 저장하기 남은 시간이 없다면 삭제
 			System.out.println("lb.getAbleTime() = "+ lb.getAbleTime());
@@ -707,13 +705,34 @@ public class LectureController implements Comparator<ArrayList<String>>{
 		
 			
 			mv = list(searchSido, searchGugun, searchTag, searchValue, searchHobbyNo, request);
-		mv.setViewName("lectureListView");
 		// timetable에 insert하기....
-		
+			//concNo를 넣어야하기 때문에 conclusion을 select해서 가져온다.
+			c = lbService.selectConclusion(c);
+			System.out.println(c);
+			//cal에 다시 startDate 넣기
+			cal.set(cal.get(Calendar.YEAR), ableMonth-1, ableDay, ableHrs, 00);
+			//fm도 새로운 형식으로바꿈
+			fm = new SimpleDateFormat("yyyyMMddHH");
+			Timeline timeline = new Timeline();
+			java.sql.Date timelineDate = new java.sql.Date(cal.getTimeInMillis());
+			//otAllTime만큼 추가한다.
+			for(int i = 0; i < lb.getOtAllTime(); i++) {
+				timelineDate = new java.sql.Date(cal.getTimeInMillis());
+				timeline.setUserId(lb.getWriter());
+				timeline.setPostNo(postNo);
+				timeline.setConcNo(c.getConcNo());
+				timeline.setTimeline(fm.format(timelineDate));
+				int result = lbService.insertTimeline(timeline);
+				cal.add(Calendar.DATE, 7);
+				System.out.println("conc의 result = "+result);
+			}
+		mv.setViewName("redirect:/list.lec");
+		//?sido="+searchSido+"&gugun="+searchGugun+"&searchTag="+searchTag+"&searchValue="+searchValue+"&hobbyNo="+searchHobbyNo+"&request="+request
+		mv.addObject("applySuccess","applySuccess");
 		System.out.println("-------------- applyLecture.lec out --------------");
+		request.getSession().setAttribute("applySuccess", "applySuccess");
 		
-		
-		return mv;
+		return "redirect:/list.lec";
 	}
 	
 	@RequestMapping("rList.lec")

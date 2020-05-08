@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard" project="0_HobbyFarm" 
+    file="/0_HobbyFarm/src/main/java/finalProject/homis/hobbyFarm/lecture/model/vo/LectureBoard.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="1215" width="209" x="-44" y="-244"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion" project="0_HobbyFarm" 
+    file="/0_HobbyFarm/src/main/java/finalProject/homis/hobbyFarm/lecture/model/vo/Conclusion.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="280" y="-49"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="finalProject.homis.hobbyFarm.lecture.model.service.LectureBoardService" 
+    project="0_HobbyFarm" 
+    file="/0_HobbyFarm/src/main/java/finalProject/homis/hobbyFarm/lecture/model/service/LectureBoardService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1095" y="-31"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" name="finalProject.homis.hobbyFarm.lecture.model.service.LectureBoardServiceImp" 
+    project="0_HobbyFarm" 
+    file="/0_HobbyFarm/src/main/java/finalProject/homis/hobbyFarm/lecture/model/service/LectureBoardServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="778" y="-13"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="finalProject.homis.hobbyFarm.lecture.model.vo.Pagination" project="0_HobbyFarm" 
+    file="/0_HobbyFarm/src/main/java/finalProject/homis/hobbyFarm/lecture/model/vo/Pagination.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="504" y="579"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="finalProject.homis.hobbyFarm.lecture.model.dao.LectureBoardDAO" 
+    project="0_HobbyFarm" 
+    file="/0_HobbyFarm/src/main/java/finalProject/homis/hobbyFarm/lecture/model/dao/LectureBoardDAO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1125" y="417"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="finalProject.homis.hobbyFarm.lecture.controller.LectureController" 
+    project="0_HobbyFarm" 
+    file="/0_HobbyFarm/src/main/java/finalProject/homis/hobbyFarm/lecture/controller/LectureController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="720" y="851"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="finalProject.homis.hobbyFarm.common.model.vo.Hobby" project="0_HobbyFarm" 
+    file="/0_HobbyFarm/src/main/java/finalProject/homis/hobbyFarm/common/model/vo/Hobby.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="770" y="336"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="finalProject.homis.hobbyFarm.common.model.vo.Image" project="0_HobbyFarm" 
+    file="/0_HobbyFarm/src/main/java/finalProject/homis/hobbyFarm/common/model/vo/Image.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="281" y="426"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="finalProject.homis.hobbyFarm.common.model.vo.Reply" project="0_HobbyFarm" 
+    file="/0_HobbyFarm/src/main/java/finalProject/homis/hobbyFarm/common/model/vo/Reply.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="765" width="217" x="398" y="-241"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="11">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="12" name="lbService">        
+        <position height="0" width="0" x="547" y="2"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="1">        
+        <position height="0" width="0" x="547" y="2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="14">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="15">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="16" name="lbDAO">        
+        <position height="0" width="0" x="236" y="440"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="1">        
+        <position height="0" width="0" x="236" y="440"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

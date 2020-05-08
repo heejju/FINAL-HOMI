@@ -3,6 +3,7 @@ package finalProject.homis.hobbyFarm.lecture.model.vo;
 import java.sql.Date;
 
 public class Conclusion {
+	private int concNo;
 	private int postNo;
 	private String proposer;
 	private String startDate;
@@ -16,6 +17,16 @@ public class Conclusion {
 		this.proposer = proposer;
 		this.startDate = startDate;
 		this.finishDate = finishDate;
+	}
+	
+	
+	
+	public int getConcNo() {
+		return concNo;
+	}
+
+	public void setConcNo(int concNo) {
+		this.concNo = concNo;
 	}
 
 	public int getPostNo() {
@@ -52,9 +63,10 @@ public class Conclusion {
 
 	@Override
 	public String toString() {
-		return "Conclusion [postNo=" + postNo + ", proposer=" + proposer + ", startDate=" + startDate + ", finishDate="
-				+ finishDate + "]";
+		return "Conclusion [concNo=" + concNo + ", postNo=" + postNo + ", proposer=" + proposer + ", startDate="
+				+ startDate + ", finishDate=" + finishDate + "]";
 	}
+
 	
 	
 	

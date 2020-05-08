@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/member/member.css"  type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<title>#내 정보 수정 - HobbyFarm</title>
+	<title>#취미텃밭</title>
 </head>
 <body>
 	<header>
@@ -60,7 +60,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><pre id="nickNameCheck" style="text-align: right; color: green;">기존과 동일한 닉네임입니다..                          </pre></td>
+						<td colspan="2"><pre id="nickNameCheck" class="joinCheck" style="text-align: right; color: green;">기존과 동일한 닉네임입니다..</pre></td>
 					</tr>
 					<tr>
 						<th rowspan="2"><div id="buttonB_update">이름</div></th>
@@ -70,7 +70,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><pre id="userNameCheck" style="text-align: right; color: green;">사용 가능한 이름입니다.                          </pre></td>
+						<td colspan="2"><pre id="userNameCheck" class="joinCheck" style="text-align: right; color: green;">사용 가능한 이름입니다.</pre></td>
 					</tr>
 					<tr>
 						<th rowspan="2"><div id="buttonB_update">이메일</div></th>
@@ -83,14 +83,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><pre id="emailCheck" style="text-align: right; color: green;">사용 가능한 이메일입니다.                          </pre></td>
+						<td colspan="2"><pre id="emailCheck" class="joinCheck" style="text-align: right; color: green;">사용 가능한 이메일입니다.</pre></td>
 					</tr>
 					<tr>
 						<th rowspan="2"><div id="buttonB_update">전화번호</div></th>
 						<td colspan="2"><input type="text" id="phone" name="phone" class="JoinInput" placeholder=" 전화번호를 입력하세요! '-' 기호는 빼구요! 꼭 입력하실 필요는 없습니다!" value="${loginUser.phone}"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><pre id="phoneCheck" style="text-align: right; color:green;">사용 가능한 전화번호입니다.                          </pre></td>
+						<td colspan="2"><pre id="phoneCheck" class="joinCheck" style="text-align: right; color:green;">사용 가능한 전화번호입니다.</pre></td>
 					</tr>
 					<tr>
 						<th rowspan="2"><div id="buttonB_update">성별</div></th>
@@ -110,7 +110,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><pre id="genderCheck" style="text-align: right; color: green;">입력하신 성별은 [남자]에요! 계속하시죠!                          </pre></td>
+						<td colspan="2"><pre id="genderCheck" class="joinCheck" style="text-align: right; color: green;">입력하신 성별은 [남자]에요! 계속하시죠!</pre></td>
 					</tr>
 					<tr>
 						<th rowspan="2"><div id="buttonB_update">생년월일</div></th>
@@ -140,7 +140,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><pre id="birthCheck" style="text-align: right; color: green;">1920년 1월 1일 생이시군요! 알겠습니다!                          </pre></td>
+						<td colspan="2"><pre id="birthCheck" class="joinCheck" style="text-align: right; color: green;">1920년 1월 1일 생이시군요! 알겠습니다!</pre></td>
 					</tr>
 					<tr>
 						<th rowspan="4"><div id="addressBtn">주소</div></th>
@@ -169,7 +169,7 @@
 						<td colspan="2"><input type="text" id="address2" name="address2" class="postcodify_extra_info JoinInput" value="${loginUser.lAddress}" placeholder="&nbsp;상세 주소(직접 입력 가능)"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><pre id="addressCheck" style="text-align: right; color: green;">사용 가능한 주소입니다!                          </pre></td>
+						<td colspan="2"><pre id="addressCheck" class="joinCheck" style="text-align: right; color: green;">사용 가능한 주소입니다!</pre></td>
 					</tr>
 					<tr>
 						<th rowspan="1"><div id="buttonB_update" style="margin-bottom: 80px;">자기 소개</div></th>
@@ -179,7 +179,7 @@
 					<tr class="teacherTr">
 						<th rowspan="1"><div id="buttonB_update" style="margin-bottom: 60px;">활동 지역</div></th>
 						<td colspan="2">
-							<select id="sido" name="sido" class="selectLocation" onchange="categoryChange();" style="margin-left: -08%; margin-top: -05%;">
+							<select id="sido" name="sido" class="selectLocation" onchange="categoryChange();" style="margin-left: 3%; margin-top: -05%;">
 								<option value=''>시/도 선택</option>
 								<option value='서울특별시'>서울특별시</option>
 								<option value='경기도'>경기도</option>
@@ -284,7 +284,7 @@
 						<th rowspan="1"><div id="buttonB_update" style="margin-bottom: 60px;">주요 강의</div></th>
 						<td colspan="2">
 							<div id="hobbyArea">
-								<select name="hobby" id="hobby" style="height: 35px; width: 80.5%; margin-left: -105px; text-indent: 10px; margin-bottom: 60px;">
+								<select name="hobby" id="hobby" style="height: 35px; width: 80.5%; margin-left: 3%; text-indent: 10px; margin-bottom: 60px;">
 									<option value="">취미를 선택하세요</option>
 									<c:forEach var="h" items="${ hlist }"> <!-- 정의 안될 경우 begin=0 / end=items-1 -->
 										<c:if test="${ h.hobbyNo == selectedHobby }">
@@ -396,17 +396,17 @@
 				var reg = /^[A-Za-zㄱ-ㅎ가-힣0-9_*!]{2,10}$/ ;
 				
 				if($nickName.trim().length == 0) {
-					$('#nickNameCheck').html("닉네임을 입력하세요.                          ") ;
+					$('#nickNameCheck').html("닉네임을 입력하세요.") ;
 					$('#nickNameCheck').css('color', 'red') ;
 					$('#isNickNameUsable').val("emptyNick") ;
 					isUsable = 0 ;
 				} else {
 					if(!reg.test($nickName)) {
-						$('#nickNameCheck').html("잘못된 닉네임입니다.                          ") ;
+						$('#nickNameCheck').html("잘못된 닉네임입니다.") ;
 						$('#nickNameCheck').css('color', 'red') ;
 						$('#isNickNameUsable').val("falseNick") ;
 					} else if($nickName == "${loginUser.nickName}") {
-						$('#nickNameCheck').html("기존과 동일한 닉네임입니다.                          ") ;
+						$('#nickNameCheck').html("기존과 동일한 닉네임입니다.") ;
 						$('#nickNameCheck').css('color', 'green') ;
 						$('#isNickNameUsable').val("trueNick") ;
 					} else {
@@ -422,11 +422,11 @@
 					data: {nickName:nickName},
 					success: function(data) {
 						if(data == 'true') {
-							$('#nickNameCheck').html("사용 가능한 닉네임입니다.                          ") ;
+							$('#nickNameCheck').html("사용 가능한 닉네임입니다.") ;
 							$('#nickNameCheck').css('color', 'green') ;
 							$('#isNickNameUsable').val("trueNick") ;
 						} else {
-							$('#nickNameCheck').html("중복된 닉네임입니다.                          ") ;
+							$('#nickNameCheck').html("중복된 닉네임입니다.") ;
 							$('#nickNameCheck').css('color', 'red') ;
 							$('#isNickNameUsable').val("dupNick") ;
 						}
@@ -441,17 +441,17 @@
 				var isUsable = 1 ;
 				
 				if($userName.trim().length == 0) {
-					$('#userNameCheck').html("이름을 입력하세요.                          ") ;
+					$('#userNameCheck').html("이름을 입력하세요.") ;
 					$('#userNameCheck').css('color', 'red') ;
 					$('#isUserNameUsable').val("emptyName") ;
 					isUsable = 0 ;
 				} else if(reg.test($userName)) {
-					$('#userNameCheck').html("사용 가능한 이름입니다.                          ") ;
+					$('#userNameCheck').html("사용 가능한 이름입니다.") ;
 					$('#userNameCheck').css('color', 'green') ;
 					$('#isUserNameUsable').val("trueName") ;
 					isUsable = 0 ;
 				} else {
-					$('#userNameCheck').html("잘못된 이름입니다.                          ") ;
+					$('#userNameCheck').html("잘못된 이름입니다.") ;
 					$('#userNameCheck').css('color', 'red') ;
 					$('#isUserNameUsable').val("falseName") ;
 				}
@@ -463,13 +463,13 @@
 				var reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i ;
 				
 				if($email.trim().length == 0) {
-					$('#emailCheck').html("이메일을 입력하세요.                          ") ;
+					$('#emailCheck').html("이메일을 입력하세요.") ;
 					$('#emailCheck').css('color', 'red') ;
 					$('#isEmailUsable').val("uncheckEmail") ;
 					isUsable = 0 ;
 				} else if(reg.test($email)) {
 					if($('#emailConfirmAnswer').val() == "#empty") {
-						$('#emailCheck').html("이메일을 인증해 주세요.                          ") ;
+						$('#emailCheck').html("이메일을 인증해 주세요.") ;
 						$('#emailCheck').css('color', 'red') ;
 						$('#isEmailUsable').val("uncheckEmail") ;
 					}
@@ -493,11 +493,11 @@
 							if(data != "#dup!") {
 								$('#emailConfirmAnswer').val(data) ;
 								$('#emailConfirm').prop('readonly', false) ;
-								$('#emailCheck').html("인증번호를 입력하세요!                          ") ;
+								$('#emailCheck').html("인증번호를 입력하세요!") ;
 								$('#emailCheck').css('color', 'red') ;
 								$('#isEmailUsable').val("falseEmail") ;
 							} else {
-								$('#emailCheck').html("중복된 이메일 입니다.다시 입력하세요!                          ") ;
+								$('#emailCheck').html("중복된 이메일 입니다.다시 입력하세요!") ;
 								$('#emailCheck').css('color', 'red') ;
 								$('#isEmailUsable').val("dupEmail") ;
 							}
@@ -508,11 +508,11 @@
 			
 			$('#emailConfirm').on('keyup', function() {
 				if($('#emailConfirm').val() == $('#emailConfirmAnswer').val()) {
-					$('#emailCheck').html("인증에 성공하였습니다!                          ") ;
+					$('#emailCheck').html("인증에 성공하였습니다!") ;
 					$('#emailCheck').css('color', 'green') ;
 					$('#isEmailUsable').val("trueEmail") ;
 				} else {
-					$('#emailCheck').html("인증번호가 다릅니다!                          ") ;
+					$('#emailCheck').html("인증번호가 다릅니다!") ;
 					$('#emailCheck').css('color', 'red') ;
 					$('#isEmailUsable').val("falseEmail") ;
 				}
@@ -530,12 +530,12 @@
 					$('#isPhoneUsable').val("emptyPhone") ;
 					isUsable = 0 ;
 				} else if(reg.test($phone)) {
-					$('#phoneCheck').html("사용 가능한 전화번호입니다!                          ") ;
+					$('#phoneCheck').html("사용 가능한 전화번호입니다!") ;
 					$('#phoneCheck').css('color', 'green') ;
 					$('#isPhoneUsable').val("truePhone") ;
 					isUsable = 0 ;
 				} else {
-					$('#phoneCheck').html("잘못된 전화번호입니다.                          ") ;
+					$('#phoneCheck').html("잘못된 전화번호입니다.") ;
 					$('#phoneCheck').css('color', 'red') ;
 					$('#isPhoneUsable').val("falsePhone") ;
 				}
@@ -545,7 +545,7 @@
 			$('#gender').on('keyup', function() {
 				var $gender = $('#gender').val() ;
 				var Ngender = ($gender == "M") ? "남자" : "여자" ;
-				$('#genderCheck').html("입력하신 성별은 ["+Ngender+"]네요! 계속하시죠!                          ") ;
+				$('#genderCheck').html("입력하신 성별은 ["+Ngender+"]네요! 계속하시죠!") ;
 			}) ;
 			
 			// 생년월일 변경 시 표시
@@ -553,16 +553,16 @@
 				var $year  = $('#year' ).val() ;
 				var $month = $('#month').val() ;
 				var $date  = $('#date' ).val() ;
-				$('#birthCheck').html($year+"년 "+$month+"월 "+$date+"일 생이시군요! 알겠습니다!                          ") ;
+				$('#birthCheck').html($year+"년 "+$month+"월 "+$date+"일 생이시군요! 알겠습니다!") ;
 			}) ;
 			
 			// 주소 변경 시 표시
 			$('#address2').on('keyup', function() {
 				if($('#post').val() != "") {
-					$('#addressCheck').html("주소를 입력하셨네요!                          ") ;
+					$('#addressCheck').html("주소를 입력하셨네요!") ;
 					$('#addressCheck').css('color', 'green') ;
 				} else {
-					$('#addressCheck').html("주소를 입력하지 않으셨네요! 괜찮으시겠어요?                          ") ;
+					$('#addressCheck').html("주소를 입력하지 않으셨네요! 괜찮으시겠어요?") ;
 					$('#addressCheck').css('color', '#5E5E5E') ;
 				}
 			}) ;

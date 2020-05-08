@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	String applySuccess = "applySuccess";
+	
+	request.getSession().getAttribute("applySuccess");
+%>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +34,7 @@
 	div.body{
 		margin: 0 auto;
 		text-align: center; border: 0px solid lightgray;
-		width: 80%; height: auto; background: rgb(255,246,240); padding-bottom: 50px;
+		width: 80%; height: auto; padding-bottom: 50px;
 	}
 	
 	select{
@@ -58,21 +66,22 @@
 	}
 	
 	div.content{
-		background: white; width: 300px; height: 280px; display: inline-block;
+		background: white; width: 300px; height: 255px; display: inline-block;
 		margin: 10px; border: 1px solid lightgray; cursor:pointer;
 	}
 	div.img{
 		width:300px; height: 200px; background-size: 300px 200px;
 		text-align: left;
 	}
-	div.contentTitle{
+	.contentTitle{
 		width: 190px; display: inline-block; font-weight: bold; display: inline-block; margin: 0; height: 100%;
 	}
-	.contentTitle{
+	div.contentTitle{
 		width: 190px; font-weight: bold; text-overflow: ellipsis; display: inline-block;
-		margin: 0;
+		margin: 0; padding : 0 5px 0 5px;
+		height: 100%; text-align: center; overflow: hidden; float: left;
 	}
-	p.contentWriter{
+	div.contentWriter{
 		display: inline-block; width: 90px; font-size: 12px;
 	}
 	p.contentTime{
@@ -106,16 +115,16 @@
 	}
 	
 	button.nextPBtn{
-		border: 0px; border-radius: 5px; background: rgb(103, 81, 65); color: white;
+		border: 0px; border-radius: 5px; background: rgb(103, 81, 65); color: white;  width: 40px; height: 36px;
 		padding: 7px 12px 7px 12px; font-weight: bold; cursor: pointer;
 	}
 	button.pagingBtn{
-		border: 0px; border-radius: 5px; background: white; color: black;
+		border: 0px; border-radius: 5px; background: white; color: black; width: 42px; height: 36px;
 		padding: 7px 12px 7px 12px; font-weight: bold; cursor: pointer;
 	}
 	button.pagingSelBtn{
 		border: 0px; border-radius: 5px; background: rgb(136, 140, 67); color: white;
-		padding: 7px 12px 7px 12px; font-weight: bold;
+		padding: 7px 12px 7px 12px; font-weight: bold; width: 42px; height: 36px;
 	}
 	
 	div.search2 > input.searchValue {
@@ -133,10 +142,24 @@
 </style>
 </head>
 <body>
+<script>
+	//신청하고왔따? 그럼 신청하고왔따뜸
+	$(function(){
+		if("${applySuccess}" == "applySuccess"){
+			swal("신청이 완료되었습니다.",{
+				icon : "warning",
+				buttons : {
+					confirm : true,
+				}
+			});
+		}
+	});
+
+</script>
 <form action="list.lec" method="post" id="lecForm" style="width: 1300px; margin: 0 auto;" onsubmit="whereFormGo();">
 <input type="hidden" name=currentPage id=currentPage value="${ currentPage }">
 <input type="hidden" name="postNo" id="postNo" value="0">
-
+<c:set var="applySuccess" value='<%=request.getSession().getAttribute("applySuccess") %>'/>
 <script>
 	//postNo가 0이면 list.lec 0이아니라 다른숫자면 detail.lec으로간다
 	function whereFormGo(){
@@ -145,8 +168,8 @@
 			$("#lecForm").attr("action", "detail.lec");
 		}
 	}
-
 </script>
+<%request.getSession().setAttribute("applySuccess", null); %>
 	<div class="body">
 		<div class="search1">
 			<br>
@@ -334,21 +357,23 @@
 					<input type=hidden value="${ lb.postNo }">
 					<div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/buploadFiles/${ lb.changeName }');">
 						<div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
-						<p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
-						<p class="contentTime">${ lb.otAllTime } time</p>
+							<p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
+							<p class="contentTime">${ lb.otAllTime } time</p>
 						</div>
 						<div style="width:300px; height: 60px; text-align: right; padding-top: 40px; background: rgba( 255, 255, 255,0.3);">
-						<p class="contentCate">${ lb.hobbyName }</p><br>
-						<p class="contentApply">농부 모집중</p>
+							<p class="contentCate">${ lb.hobbyName }</p><br>
+							<p class="contentApply">농부 모집중</p>
 						</div>
 					</div>
 					<div>
 						<hr>
 					</div>
-					<div style="height: 55px;">
-						<div class="contentTitle"><p class="contentTitle">${ lb.title }</p></div>
-						<div style="display: inline-block; height: 55px;">
-							<p class="contentWriter"><label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label></p>
+					<div style="height: 30px;">
+						<div class="contentTitle">${ lb.title }</div>
+						<div class="contentWriter">
+							<div>
+							<label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label>
+							</div>
 						</div>
 					</div>
 					<hr>

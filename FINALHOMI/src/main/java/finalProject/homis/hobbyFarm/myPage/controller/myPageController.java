@@ -1,7 +1,9 @@
 
 package finalProject.homis.hobbyFarm.myPage.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,6 +30,7 @@ import finalProject.homis.hobbyFarm.member.model.vo.Member;
 import finalProject.homis.hobbyFarm.message.model.service.MessageService;
 import finalProject.homis.hobbyFarm.myPage.model.exception.myPageException;
 import finalProject.homis.hobbyFarm.myPage.model.service.myPageService;
+import finalProject.homis.hobbyFarm.myPage.model.vo.Timeline;
 import finalProject.homis.hobbyFarm.myPage.model.vo.myPageCount;
 
 @SessionAttributes("loginUser")
@@ -106,6 +109,33 @@ public class myPageController {
 		mv.setViewName("lectureListFrame");
 		return mv;
 	}
+	
+	@RequestMapping("timeLine.mp")
+	public ModelAndView timeLine(@RequestParam(value="day", required=false) String day, ModelAndView mv, HttpSession session) {
+		SimpleDateFormat sysdate = new SimpleDateFormat ( "yyyyMMdd"); //현재 날짜 뽑기
+		Date time = new Date();
+		String date = sysdate.format(time); // date에 "yyyyMMdd" 담김
+		// 날짜 가져오기
+		if(day != null) {
+			date = day; // day가 null이 아니면 date에 값 넣음
+		}
+		Timeline tl = new Timeline();
+		tl.setDate(date); // 날짜 설정
+		String id = ((Member)session.getAttribute("loginUser")).getUserId(); // 로그인 아이디(강사 아이디) 가져옴
+		tl.setUserId(id); // 강사 아이디 설정
+		
+		ArrayList<Timeline> timeline = mpService.getTimeline(tl); // id와 date를 담은 객체를 보내 timeline에 필요한 정보 받아옴
+		
+		if(timeline != null) {
+			mv.addObject("date", date); //내가 선택했던 날짜 그대로 다시 돌려보내야하기 때문에 보냄
+			mv.addObject("timeline", timeline);
+			mv.setViewName("timeLine");
+		} else {
+			throw new myPageException("시간표 열람 실패!");
+		}
+		return mv;
+	}
+	
 	/* 강사 페이지 끝 */
 	
 	/* 학생 페이지 */

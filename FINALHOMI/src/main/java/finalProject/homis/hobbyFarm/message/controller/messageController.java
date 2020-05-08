@@ -100,7 +100,6 @@ public class messageController {
 	@RequestMapping("deleteGetMsg.msg")
 	public String msgGetDelete(@RequestParam("checkVal") String checkVal, @RequestParam("id") String id) {
 		String[] msgArr = checkVal.split(",");
-		System.out.println(checkVal);
 		
 		int result = 0;
 		

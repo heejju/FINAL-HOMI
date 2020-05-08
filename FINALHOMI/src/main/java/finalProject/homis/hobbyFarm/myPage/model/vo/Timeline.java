@@ -143,11 +143,20 @@ public class Timeline {
 		this.personCount = personCount;
 	}
 
+	public int getConcNo() {
+		return concNo;
+	}
+
+	public void setConcNo(int concNo) {
+		this.concNo = concNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Timeline [tableNo=" + tableNo + ", userId=" + userId + ", postNo=" + postNo + ", timeline=" + timeline
-				+ ", date=" + date + ", time=" + time + ", title=" + title + ", hobbyName=" + hobbyName + ", learnerId="
-				+ learnerId + ", learnerNick=" + learnerNick + ", tKind=" + tKind + ", personnel=" + personnel
-				+ ", personCount=" + personCount + "]";
+				+ ", date=" + date + ", time=" + time + ", concNo=" + concNo + ", title=" + title + ", hobbyName="
+				+ hobbyName + ", learnerId=" + learnerId + ", learnerNick=" + learnerNick + ", tKind=" + tKind
+				+ ", personnel=" + personnel + ", personCount=" + personCount + "]";
 	}
+
 }

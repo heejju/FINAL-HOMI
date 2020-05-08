@@ -7,9 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/reset.css" type="text/css">
+
 <style>
 	body{align:center; font-family: 'Nanum Gothic', sans-serif;}
 	.listName{hegiht:100px; font-size:24px; margin:0px auto; text-align:left; padding:30px;}
@@ -27,7 +29,7 @@
 	#profileImg{width:80px; height:80px; vertical-align:middle;}
 	
 	#informWrapper{display:inline-block; width:220px; height:80px; margin:0 5px; font-size:15px;}
-	.nickName{font-weight:bold; font-size:18px; color:#888c43;}
+	.nickName{font-weight:bold; font-size:23px; color:#888c43; margin:5px auto; }
 	#location{font-weight:bold; color:#675141;}
 	
 	#MsgBtnWarpper{display:inline-block; /* margin-left:15px; */}
@@ -65,39 +67,36 @@
 			<div class="list">
 				<c:forEach var="gfa" items="${ gfaList }">
 					<c:url var="userInfo" value="userInfo.fo">
-						<c:param name="userId" value="${ friend.userId }"/>
+						<c:param name="userId" value="${ gfa.userId }"/>
 		                <c:param name="page" value="1"/>
 		            </c:url>
 					<div class="listDetail">
-							<div class="userImgWrapper">
-								<c:if test="${ empty gfa.changeName }">
-									<img id="profileImg" src="${ contextPath }/resources/images/almond.png"/>
-								</c:if>
-								<c:if test="${ !empty gfa.changeName }">
-									<img id="profileImg" src="${ contextPath }/resources/uploadFiles/${ gfa.changeName }"/>
-								</c:if>
+						<div class="userImgWrapper">
+							<c:if test="${ empty gfa.changeName }">
+								<img id="profileImg" src="${ contextPath }/resources/images/almond.png"/>
+							</c:if>
+							<c:if test="${ !empty gfa.changeName }">
+								<img id="profileImg" src="${ contextPath }/resources/uploadFiles/${ gfa.changeName }"/>
+							</c:if>
+						</div>
+						<div id="informWrapper">
+							<c:if test="${ gfa.mKind eq 2 }">
+								<div style="font-weight:bold;"> 모종회원 </div>
+							</c:if>
+							<c:if test="${ gfa.mKind eq 1 }">
+								<div style="font-weight:bold;"> 농부회원 </div>
+							</c:if>
+							<div class="nickName" onclick="window.open('${ userInfo }','miniMypage','width=600, height=702, menubar=no, status=no, toolbar=no');">
+									${gfa.nickName}
 							</div>
-							<div id="informWrapper">
-								<c:if test="${ gfa.mKind eq 2 }">
-									<div style="font-weight:bold;"> 모종회원 </div>
-								</c:if>
-								<c:if test="${ gfa.mKind eq 1 }">
-									<div style="font-weight:bold;"> 농부회원 </div>
-								</c:if>
-								<div class="nickName" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">
-										${gfa.nickName}
-								</div>
-								<script>
-									$('.nickName').mouseover(function(){
-										$(this).css('cursor','pointer');
-									}).mouseout(function(){
-										$(this).css('cursor','default');
-									});
-								</script>
-							</div>
-							<div id="MsgBtnWarpper">
-								<button id="sendMsgBtn" type="button" onClick="">쪽지</button>
-							</div>
+							<script>
+								$('.nickName').mouseover(function(){
+									$(this).css('cursor','pointer');
+								}).mouseout(function(){
+									$(this).css('cursor','default');
+								});
+							</script>
+						</div>
 					</div>
 				</c:forEach>
 			</div>

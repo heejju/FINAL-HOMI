@@ -238,9 +238,7 @@ a{display:inline !important;}
 		function search(){
 			var nSelect = $('#nSelect').val();
 			var nWord = $('#nWord').val();
-			if(window.event.keyCode == 13){
 				location.href="nSearchList.no?nSelect=" + nSelect + "&nWord=" + nWord;
-			}
 		}
 		
 		// 페이징

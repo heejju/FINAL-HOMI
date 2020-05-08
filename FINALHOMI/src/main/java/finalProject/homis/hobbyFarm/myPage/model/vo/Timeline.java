@@ -5,9 +5,9 @@ public class Timeline {
 	private String userId; // 유저 아이디(로그인한 강사의 아이디)
 	private int postNo; // 강의, 모임 글 번호(디테일 접근 위함)
 	private String timeline; // 시간 저장해서 오는 곳(YYYYMMDDHH) 식으로 들어옴
-	
 	private String date; // subString으로 YYYYMMDD 저장하는 곳
 	private String time; // subString으로 HH 저장하는 곳(24시간 형식)
+	private int concNo; // conclusion No 받아오는거(준목씨 전용 변수ㅎ..)
 	
 	private String title; // 글 제목
 	private String hobbyName; // 취미 이름

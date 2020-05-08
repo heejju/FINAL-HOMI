@@ -21,8 +21,9 @@
 	#pagingArea{text-align: left; padding: 5px;}
 	#pagingArea button{font-weight: bold;}
 	
-	.pageNum, #before, #next, #current{width:30px; height:30px; border-radius:5px; border:1px solid rgb(200, 200, 200); background-color:white; font-size:14px; padding:5px;}
+	.pageNum, #before, #next, #current{width:30px; height:30px; border-radius:5px; background-color:white; font-size:14px; padding:5px;}
 	
+	button:hover{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -64,10 +65,10 @@
 	</table>
 	
 	<!-- 페이징 -->
-			<div class="pagingArea" style="text-align: center; padding-top: 10px;">
+			<div class="pagingArea" style="text-align: center; padding-top: 10px; position: absolute; bottom: 0; left: 47%;">
 				<!-- [이전] -->
             <c:if test="${ pi.currentPage <= 1 }">
-               <button id="before">&lt;</button>
+               <button id="before" style="background:lightgray; color:white" disabled>&lt;</button>
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
                <c:url var="before" value="lectureList.mp">
@@ -92,7 +93,7 @@
             
             <!-- [다음] -->
             <c:if test="${ pi.currentPage >= pi.maxPage }">
-               <button type="button" id=next>&gt;</button>
+               <button type="button" id=next style="background:lightgray; color:white" disabled>&gt;</button>
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
                <c:url var="after" value="lectureList.mp">

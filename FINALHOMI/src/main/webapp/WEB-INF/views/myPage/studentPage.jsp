@@ -47,6 +47,8 @@
 	<script>
 	$('#bName').text(' 마이 ');
 	$('#bNameAfter').text('페이지');
+	$('#bName').css('cursor', 'pointer');
+	$('#bNameAfter').css('cursor', 'pointer');
 	
 	$('#bName').click(function() {
 		location.href="studentPage.mp";

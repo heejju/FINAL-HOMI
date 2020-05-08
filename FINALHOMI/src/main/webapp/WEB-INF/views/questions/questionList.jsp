@@ -39,6 +39,8 @@
 	<script>
 	$('#bName').text(' 1:1 ');
 	$('#bNameAfter').text('문의게시판');
+	$('#bName').css('cursor', 'pointer');
+	$('#bNameAfter').css('cursor', 'pointer');
 	
 	$('#bName').click(function() {
 		location.href="qlist.qu";
@@ -104,20 +106,20 @@
 		<div id="pagingArea" style="position: relative;">
 			<!-- 맨 앞 -->
 			  <c:if test="${ pi.currentPage <= 1 }">
-                 <button class="startBtn" style="background:#e0e0e0; color:black" disabled>&lt;&lt;</button>
+                 <button class="startBtn" style="background:lightgray; color:white" disabled>&lt;&lt;</button>
               </c:if>
               <c:if test="${ pi.currentPage ne 1 }">
                  <c:url var="first" value="qlist.qu">
                     <c:param name="page" value="1"/>            
                  </c:url>
                  <a href="${ first }">
-                    <button class="startBtn">&lt;&lt;</button>
+                    <button class="startBtn" style="background:#675141; color:white">&lt;&lt;</button>
                  </a>
               </c:if>
           
             <!-- [이전] -->
             <c:if test="${ pi.currentPage <= 1 }">
-               <button id="before" style="background:#675141; color:white">&lt;</button>
+               <button id="before" style="background:lightgray; color:white" disabled>&lt;</button>
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
                <c:url var="before" value="qlist.qu">
@@ -142,7 +144,7 @@
             
             <!-- [다음] -->
             <c:if test="${ pi.currentPage >= pi.maxPage }">
-               <button id="next" style="background:#675141; color:white" disabled>&gt;</button>
+               <button id="next" style="background:lightgray; color:white;" disabled>&gt;</button>
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
                <c:url var="after" value="qlist.qu">
@@ -153,13 +155,13 @@
             
            <!-- 맨 뒤로 -->
               <c:if test="${ pi.currentPage >= pi.maxPage }">
-                 <button class="end" style="background:#e0e0e0; color:black;" disabled>&gt;&gt;</button>
+                 <button class="end" style="background:lightgray; color:white;" disabled>&gt;&gt;</button>
               </c:if>
               <c:if test="${ pi.currentPage < pi.maxPage }">
                  <c:url var="last" value="qlist.qu">
                     <c:param name="page" value="${ pi.maxPage }"/>            
                  </c:url>
-                 <a href="${ last }"><button class="end" >&gt;&gt;</button></a>
+                 <a href="${ last }"><button class="end" style="background:#675141; color:white">&gt;&gt;</button></a>
               </c:if>
 			<div style="float: right;">
 				<c:if test="${ !empty loginUser }">
@@ -208,7 +210,7 @@
          			swal("게시글 열람 권한이 없습니다.",{
 						icon : "info",
 						buttons : {
-							confirm : true,
+							확인 : true,
 						}
 					});
          		}

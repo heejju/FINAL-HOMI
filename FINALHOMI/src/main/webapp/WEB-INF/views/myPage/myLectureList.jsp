@@ -6,7 +6,7 @@
 <head>
 <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>#취미텃밭</title>
 <style>
     html, body {
       position: relative;

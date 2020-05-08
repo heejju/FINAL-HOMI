@@ -9,8 +9,8 @@
 <style>
 	
 	#title{text-align: center; color: #888c43;}
-	.buttonR{width:100px; background-color:#888c43; color:#fff; border:none; padding:5px 0; text-align:center; font-size:13px; cursor:pointer; border-radius:5px;}
-	.buttonG{width:50px; background-color:rgb(120, 120, 120); color:#fff; border:none; padding:5px 0; text-align:center; font-size:13px; cursor:pointer; border-radius:5px;}
+	.buttonR{width:100px; background-color:lightgray; color:#000; border:none; padding:5px 0; text-align:center; font-size:13px; cursor:pointer; border-radius:5px;}
+	.buttonG{width:50px; background-color:#888c43; color:#fff; border:none; padding:5px 0; text-align:center; font-size:13px; cursor:pointer; border-radius:5px;}
 	
 	
 	#msgTable{width: 100%; text-align: center; border-top: 1px solid gray; border-bottom: 1px solid gray;
@@ -45,7 +45,7 @@
 			<button class="buttonR" onclick="location.href='${get}'">받은 쪽지</button>
 			<button class="buttonR" onclick="location.href='${sent}'">보낸 쪽지</button>
 			<div style="float: right;">
-				<button id="deleteit" class="buttonG" style="position: absolute; right: 10px;">삭제</button>
+				<button id="deleteit" class="buttonG" style="position: absolute; right: 10px; background: #675141;">삭제</button>
 			</div>
 		</div>
 	</div>
@@ -82,7 +82,7 @@
 		<div id="pagingArea" style="position: relative; text-align: center;">
 			<!-- [이전] -->
             <c:if test="${ pi.currentPage <= 1 }">
-               <button id="before">&lt;</button>
+               <button id="before" style="background: lightgray;" disabled>&lt;</button>
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
                <c:url var="before" value="sentMsgList.msg">
@@ -107,7 +107,7 @@
             
             <!-- [다음] -->
             <c:if test="${ pi.currentPage >= pi.maxPage }">
-               <button type="button" id=next>&gt;</button>
+               <button type="button" id=next style="background: lightgray;" disabled>&gt;</button>
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
                <c:url var="after" value="sentMsgList.msg">
@@ -116,7 +116,7 @@
                <a href="${ after }"><button type="button" id=next style="font-wieght:bold; background:#675141; color:white">&gt;</button></a>
             </c:if>
 			<div style="float: right;">
-					<button class="buttonG" style="position: absolute; right: 10px;" onclick="location.href='${write}'">쪽지쓰기</button>
+					<button class="buttonG" style="width: 80px; position: absolute; right: 10px;" onclick="location.href='${write}'">쪽지쓰기</button>
 			</div>
 		</div>
 	</div>
@@ -187,21 +187,27 @@
 					var checkVal = "";
 					swal("정말 삭제하시겠습니까?",{
 						icon : "warning",
-						buttons : {
-							cancel : true,
-							confirm : true,
-						}
-					}).then((result) => {
-						if(result) {
+						buttons : ["취소", "확인"],
+					}).then((YES) => {
+						if(YES) {
 							var checkbox = document.getElementsByName("checkbox");
 							for (var i = 0; i < checkbox.length; i++) {
 								if (checkbox[i].checked == true) {
 									checkVal += checkbox[i].value + ",";
 								}
 							}
+							if(checkVal == "") {
+								swal("선택한 쪽지가 없습니다", {
+									icon : "info",
+									button : {확인 : true}
+								})
+								return;
+							}
 							location.href = 'deleteGetMsg.msg?checkVal=' + checkVal
 									+ '&id=${loginUser.userId}';
-						} 
+						} else {
+							return;
+						}
 					});
 				});
 	</script>

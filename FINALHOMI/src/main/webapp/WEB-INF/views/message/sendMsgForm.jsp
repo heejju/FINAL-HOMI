@@ -148,7 +148,7 @@ background:url(${contextPath}/resources/images/checkIcon.png) gold no-repeat cen
 			swal("받는 사람을 입력해주세요!",{
 				icon : "warning",
 				buttons : {
-					confirm : true,
+					"확인" : true,
 				}
 			});
 			event.preventDefault();
@@ -156,7 +156,7 @@ background:url(${contextPath}/resources/images/checkIcon.png) gold no-repeat cen
 			swal("쪽지 전송 완료!",{
 				icon : "success",
 				buttons : {
-					confirm : true,
+					"확인" : true,
 				}
 			});
 		}

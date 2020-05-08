@@ -46,7 +46,9 @@
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 		$('#bName').text(' 1:1 ');
+		$('#bName').css('cursor', 'pointer');
 		$('#bNameAfter').text('문의게시판');
+		$('#bNameAfter').css('cursor', 'pointer');
 	
 		$('#bName').click(function() {
 			location.href="qlist.qu";
@@ -87,7 +89,7 @@
 			swal("제목을 써주세요!",{
 				icon : "info",
 				buttons : {
-					confirm : true,
+					확인 : true,
 				}
 			});
 			event.preventDefault();

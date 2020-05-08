@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/reset.css" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <style>
-	body{align:center; font-family: 'Nanum Gothic', sans-serif;}
+	body{align:center; font-family: 'Nanum Gothic', sans-serif; background:#fff6f0;}
 	button:hover {cursor:pointer;}
 	#wrapper{width:500px; height:630px; background:#fff6f0; margin:0 auto;}
 	h2{text-align:left; padding:5%; padding-top:5%; margin:0% 0% 0% 3%; }
@@ -26,6 +26,7 @@
 	#informWrapper > div{padding:3px;}
 	#T_nickName{font-weight:bold; font-size:18px; color:#888c43;}
 	#recent_lecture, #location{font-weight:bold; color:#675141;}
+	.nickName{color:#888c43;}
 	
 	#MsgBtnWarpper{display:inline-block;}
 	.sendMsgBtn{border-radius:80%; border:0px; width:60px; height:60px;
@@ -50,7 +51,12 @@
 				</div>
 			</c:if>
 			<c:if test="${ tList.size() ne 0 }">
+				<c:set var="i" value="0"/>
 				<c:forEach var="teacher" items="${ tList }">
+				<c:url var="userInfo" value="userInfo.fo">
+					<c:param name="userId" value="${ teacher.userId }"/>
+	                <c:param name="page" value="1"/>
+	            </c:url>
 					<div class="listDetail">
 						<div class="imgWrapper">
 							<img id="profileImg" src="${ contextPath }/resources/uploadFiles/${ teacher.changeName }">
@@ -58,25 +64,32 @@
 						<div id="informWrapper">
 							<div id="T_nickName">
 								<input type="hidden" id="teacherId" value="${ teacher.userId }">
-								<span><a href="location.href='search.fo'">${ teacher.nickName }</a></span>
+								<span class="nickName" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">
+									${ teacher.nickName }
+								</span>
+								<script>
+									$('.nickName').mouseover(function(){
+										$(this).css('cursor','pointer');
+									}).mouseout(function(){
+										$(this).css('cursor','default');
+									});
+								</script>
 							</div>
 							<div id="recent_lecture">최근 강의</div>
 							<div id="T_lecture">
-								<c:forEach var="lec" items="${ lecList }">
-									<c:if test=" ${ lec eq null }">
+									<c:if test="${ lecList.get(i) eq null }">
 										<span>최근 강의가 없습니다.</span>
 									</c:if>
-									<c:if test=" ${ lec ne null }">
-										<c:if test="${ lec.writer eq teacher.userId }">
-											<c:if test="${ fn:length(lec.title) > 10 }">
-												<span>${ fn:substring(lec.title,0,10) }</span>
+									<c:if test="${ lecList.get(i) ne null }">
+										<c:if test="${ lecList.get(i).writer eq teacher.userId }">
+											<c:if test="${ fn:length(lecList.get(i).title) > 10 }">
+												<span>${ fn:substring(lecList.get(i).title,0,10) }</span>
 											</c:if>
-											<c:if test="${ fn:length(lec.title) < 10 }">
-												<span>${ lec.title }</span>
+											<c:if test="${ fn:length(lecList.get(i).title) < 10 }">
+												<span>${ lecList.get(i).title }</span>
 											</c:if>
 										</c:if>
 									</c:if>
-								</c:forEach>
 							</div>
 							<div id="location">지역</div>
 							<div id="T_location">${ teacher.activeLoc }</div>
@@ -85,6 +98,7 @@
 							<button class="sendMsgBtn" type="button">쪽지</button>
 						</div>
 					</div>
+					<c:set var="i" value="${ i + 1 }"/>
 				</c:forEach>
 				<script>
 					$('.sendMsgBtn').click(function(){
@@ -98,65 +112,6 @@
 					
 				</script>
 			</c:if>
-			
-			<!-- 예시 -->
-			<%-- 
-			<div class="listDetail">
-				<div class="imgWrapper">
-					<img id="profileImg" src="${ contextPath }/resources/images/bilyong.jpg"/>
-				</div>
-				<div id="informWrapper">
-					<div id="T_nickName">요리왕 비룡</div>
-					<div id="recent_lecture">최근 강의</div>
-					<div id="T_lecture">오..오옼 이맛은! 美! 味!</div>
-					<div id="location">지역</div>
-					<div id="T_location">서울특별시 강남구</div>
-				</div>
-				<div id="MsgBtnWarpper">
-					<button id="sendMsgBtn" type="button" onClick="sendMsg();">쪽지</button>
-				</div>
-				
-				<script>
-					function sendMsg(){
-						var writer = ${ gf.wirter };
-						var postNo = ${ gf.postNo };
-						var page = ${ page };
-						
-						location.href="invite.msg?postNo="+postNo+"page";
-					}
-					
-				</script>
-			</div>
-			<div class="listDetail">
-				<div class="imgWrapper">
-					<img id="profileImg" src="${ contextPath }/resources/images/wadles.jpg"/>
-				</div>
-				<div id="informWrapper">
-					<div id="T_nickName">와들스</div>
-					<div id="recent_lecture">최근 강의</div>
-					<div id="T_lecture">육식주의자를 위한 고기 요리 과외</div>
-					<div id="location">지역</div>
-					<div id="T_location">강남구 청담동</div>
-				</div>
-				<div id="MsgBtnWarpper">
-					<button id="sendMsgBtn" type="button" onClick="">쪽지</button>
-				</div>
-			</div>
-			<div class="listDetail">
-				<div class="imgWrapper">
-					<img id="profileImg" src="${ contextPath }/resources/images/cheif.jpg"/>
-				</div>
-				<div id="informWrapper">
-					<div id="T_nickName">이산호 셰프</div>
-					<div id="recent_lecture">최근 강의</div>
-					<div id="T_lecture">힐링 셰프의 메인 디쉬 마스터</div>
-					<div id="location">지역</div>
-					<div id="T_location">강남구 역삼동</div>
-				</div>
-				<div id="MsgBtnWarpper">
-					<button id="sendMsgBtn" type="button" onClick="">쪽지</button>
-				</div>
-			</div> --%>
 		</div>
 		
 		<div id="btnWarpper">

@@ -78,12 +78,20 @@
 		<script>
 		 	$('#bName').text('동네');
 		 	$('#bNameAfter').text('텃밭');
+		 	
+		 	$('#spanWrapper').click(function(){
+		 		location.href="blist.gf";
+		 	}).mouseover(function(){
+		 		$(this).css('cursor','pointer');
+		 	}).mouseout(function(){
+		 		$(this).css('cursor','default');
+		 	});
 		</script>
 	</header>
 	<section>
 		<div id="realMain">
 			<div id="postMain">
-				<form action="insert.gf" id="form" method="post" enctype="Multipart/form-data">
+				<form action="insert.gf" id="form" method="post" enctype="Multipart/form-data" accept-charset="UTF-8">
 					<div class="thumbnailWrapper">
 						<div id="centerd">
 							<img id="thumbnailImg" name="thumbnailImg"/>
@@ -292,22 +300,16 @@
 							<c:url var="friends" value="fdList.gf"/>
 							<button id="inviteBtn" type="button" onclick="invite();">친구 초대</button>
 							<%-- <button id="inviteBtn" onclick="window.open('${ friends }', 'friendsList', 'width=1000, height=1000, resizable=no')">친구 초대</button> --%>
-							<input type="hidden" id="inviteFriends" value="">
+							<input type="hidden" name="inviteFriends" id="inviteFriends">
 							<script>
 								function invite(){
 									 //var data = document.querySelector('#friends').value;
+									var child
+									var friendsPopup;						
+									fdPopup = window.open('${friends}', 'friendsPopup', 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');
 									 
-									 var friendsPopup = "friendsPopup";							
-									 window.open('${friends}', friendsPopup, 'width=490, height=605, menubar=no, status=no, toolbar=no, resizable=no');								
-									
-									 if($('#inviteFriends').val() != "" || $('#inviteFriends').val() != null){
-										 
-										 $('#inviteBtn').hide();
-	
-									 }
 								}
 							</script>
-							
 						</li>
 						<li>
 							<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
@@ -606,7 +608,6 @@
                 		.then(확인 => {
                 		  if(확인) {
                 		    $('#form').submit();
-                		    $('#form').attr('action', 's')
                 		    swal("모임 텃밭에 등록되었습니다.", {
                 		      icon: "success",
                 		      button: false,

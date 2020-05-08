@@ -17,6 +17,7 @@ import finalProject.homis.hobbyFarm.groupFarm.model.dao.GroupFarmDAO;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmApplication;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmBoard;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
+import finalProject.homis.hobbyFarm.member.model.vo.Member;
 
 @Service("gfService")
 public class GroupFarmServiceImpl implements GroupFarmService{
@@ -132,16 +133,6 @@ public class GroupFarmServiceImpl implements GroupFarmService{
 		return gfDAO.deleteBoard(sqlSession, postNo);
 	}
 
-//	@Override
-//	public ArrayList<GroupFarmBoard> selectFilterSearchList(PageInfo pi, SearchSelect ss) {
-//		return gfDAO.selectFilterSearchList(sqlSession, pi, ss);
-//	}
-//
-//	@Override
-//	public ArrayList<Image> selectFilterSearchTList(PageInfo pi, SearchSelect ss) {
-//		return gfDAO.selectFilterSearchTList(sqlSession, pi, ss);
-//	}
-
 	// 강사 추천 목록
 	@Override
 	public ArrayList<Teacher> teacherList(GroupFarmBoard gf) {
@@ -161,6 +152,18 @@ public class GroupFarmServiceImpl implements GroupFarmService{
 	@Override
 	public LectureBoard recentLec(String userId) {
 		return gfDAO.recentLec(sqlSession, userId);
+	}
+
+	// 친구 리스트
+	@Override
+	public ArrayList<Member> selectFdList(String userId) {
+		return gfDAO.selectFdList(sqlSession, userId);
+	}
+
+	// 게시글 수정
+	@Override
+	public int updateBoard(GroupFarmBoard gf, Image img) {
+		return gfDAO.updateBoard(sqlSession, gf, img);
 	}
 
 	

@@ -27,7 +27,7 @@
 	#profileImg{width:80px; height:80px; vertical-align:middle;}
 	
 	#informWrapper{display:inline-block; width:220px; height:80px; margin:0 5px; font-size:15px;}
-	#nickName{font-weight:bold; font-size:18px; color:#888c43;}
+	.nickName{font-weight:bold; font-size:18px; color:#888c43;}
 	#location{font-weight:bold; color:#675141;}
 	
 	#MsgBtnWarpper{display:inline-block; /* margin-left:15px; */}
@@ -64,6 +64,10 @@
 		<c:if test="${ gfaList.size() ne 0 }">
 			<div class="list">
 				<c:forEach var="gfa" items="${ gfaList }">
+					<c:url var="userInfo" value="userInfo.fo">
+						<c:param name="userId" value="${ friend.userId }"/>
+		                <c:param name="page" value="1"/>
+		            </c:url>
 					<div class="listDetail">
 							<div class="userImgWrapper">
 								<c:if test="${ empty gfa.changeName }">
@@ -80,7 +84,16 @@
 								<c:if test="${ gfa.mKind eq 1 }">
 									<div style="font-weight:bold;"> 농부회원 </div>
 								</c:if>
-								<div id="nickName">${gfa.nickName}</div>
+								<div class="nickName" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">
+										${gfa.nickName}
+								</div>
+								<script>
+									$('.nickName').mouseover(function(){
+										$(this).css('cursor','pointer');
+									}).mouseout(function(){
+										$(this).css('cursor','default');
+									});
+								</script>
 							</div>
 							<div id="MsgBtnWarpper">
 								<button id="sendMsgBtn" type="button" onClick="">쪽지</button>
@@ -99,11 +112,11 @@
 		<div class="btnArea">
 			<button type="button" id="okBtn" onClick="window.open('','_self').close();">확인</button>
 			<script>
-				$('.okBtn').mouseover(function(){
-					$(this).css('cursor','pointer');
-				}).click(function(){
-					
-				});
+				$('#okBtn').mouseover(function(){
+			 		$(this).css('cursor','pointer');
+			 	}).mouseout(function(){
+			 		$(this).css('cursor','default');
+			 	});
 			</script>
 		</div>
 	</div>

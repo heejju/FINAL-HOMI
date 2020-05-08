@@ -12,6 +12,7 @@ import finalProject.homis.hobbyFarm.common.model.vo.Teacher;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmApplication;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmBoard;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
+import finalProject.homis.hobbyFarm.member.model.vo.Member;
 
 public interface GroupFarmService {
 
@@ -22,18 +23,6 @@ public interface GroupFarmService {
 	ArrayList<GroupFarmBoard> selectList(PageInfo pi, SearchSelect ss);
 
 	ArrayList<Image> selectTList(PageInfo pi, SearchSelect ss);
-
-//	int getSearchListCount(SearchSelect ss);
-//
-//	ArrayList<GroupFarmBoard> selecSearchList(PageInfo pi, SearchSelect ss);
-//	
-//	ArrayList<Image> selectSearchTList(PageInfo pi, SearchSelect ss);
-//	
-//	int getFilterSearchListCount(SearchSelect ss);
-//
-//	ArrayList<GroupFarmBoard> selectFilterSearchList(PageInfo pi, SearchSelect ss);
-//
-//	ArrayList<Image> selectFilterSearchTList(PageInfo pi, SearchSelect ss);
 
 	int insertBoard(GroupFarmBoard gf, Image img);
 
@@ -67,6 +56,12 @@ public interface GroupFarmService {
 	int cancleClose(int postNo);
 
 	LectureBoard recentLec(String userId);
+
+	// 친구 리스트
+	ArrayList<Member> selectFdList(String userId);
+
+	// 게시글 수정
+	int updateBoard(GroupFarmBoard gf, Image img);
 
 
 

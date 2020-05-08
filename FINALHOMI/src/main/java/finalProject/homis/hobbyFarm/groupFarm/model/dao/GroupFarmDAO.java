@@ -17,6 +17,7 @@ import finalProject.homis.hobbyFarm.groupFarm.model.exception.GroupFarmBoardExce
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmApplication;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmBoard;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
+import finalProject.homis.hobbyFarm.member.model.vo.Member;
 
 @Repository("gfDAO")
 public class GroupFarmDAO {
@@ -52,22 +53,6 @@ public class GroupFarmDAO {
 	public int getSearchListCount(SqlSessionTemplate sqlSession, SearchSelect ss) {
 		return sqlSession.selectOne("groupFarmMapper.getSearchListCount");
 	}
-	
-//	// 게시글 검색 목록
-//	public ArrayList<GroupFarmBoard> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, SearchSelect ss) {
-//		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-//		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-//		
-//		return (ArrayList)sqlSession.selectList("groupFarmMapper.selectSearchList", ss, rowBounds);
-//	}
-//
-//	// 게시글 검색 목록 이미지
-//	public ArrayList<Image> selectSearchTList(SqlSessionTemplate sqlSession, PageInfo pi, SearchSelect ss) {
-//		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-//		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-//		
-//		return (ArrayList)sqlSession.selectList("groupFarmMapper.selectSearchTList", ss, rowBounds);
-//	}
 
 	// 게시글 작성
 	public int insertBoard(SqlSessionTemplate sqlSession, GroupFarmBoard gf, Image img) {
@@ -181,7 +166,23 @@ public class GroupFarmDAO {
 	}
 
 	public LectureBoard recentLec(SqlSessionTemplate sqlSession, String userId) {
-		return sqlSession.selectOne("gorupFarmMapper.selectLecture", userId);
+		return sqlSession.selectOne("groupFarmMapper.selectLecture", userId);
+	}
+
+	// 친구 리스트
+	public ArrayList<Member> selectFdList(SqlSessionTemplate sqlSession, String userId) {
+		return (ArrayList)sqlSession.selectList("friendMapper.selectList", userId);
+	}
+
+	public int updateBoard(SqlSessionTemplate sqlSession, GroupFarmBoard gf, Image img) {
+		
+		int result = sqlSession.insert("groupFarmMapper.updateBoard", gf);
+		
+		if(result > 0) {
+			return sqlSession.insert("groupFarmMapper.updateImg", img);
+		} else {
+			throw new GroupFarmBoardException("DB등록에 실패하였습니다.");
+		}
 	}
 	
 

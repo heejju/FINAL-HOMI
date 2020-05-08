@@ -11,6 +11,7 @@
 <title>#취미텃밭</title>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 	.clear-both{clear:both;}
 	div{margin:0; padding:0;}
@@ -76,6 +77,14 @@
 		<script>
 		 	$('#bName').text('동네');
 		 	$('#bNameAfter').text('텃밭');
+		 	
+		 	$('#spanWrapper').click(function(){
+		 		location.href="blist.gf";
+		 	}).mouseover(function(){
+		 		$(this).css('cursor','pointer');
+		 	}).mouseout(function(){
+		 		$(this).css('cursor','default');
+		 	});
 		</script>
 	</header>
 	<section>
@@ -126,7 +135,6 @@
 			<img src="${ contextPath }/resources/images/nextIcon.png" id="nextIcon"/>
 			<div class="locationArea" id="gugunArea" >
 				<select name="gugun" class="selectLocation" id="gugun">
-					<option value='' selected>시/군 을 선택하세요</option>
 				</select>
 			</div>
 			<!-- selectedSido
@@ -154,14 +162,24 @@
 					var gugun = $('#gugun').val();
 					var hobby = $('#hobby').val();
 					
-					$("#listForm").submit();
-					/* location.href="blist.gf?sido="+sido+"&gugun="+gugun+"&hobby="+hobby; */
+					
+					 if(sido == "" && gugun == "" && hobby == ""){
+							swal({
+			            		  title: "지역 및 취미를 선택해주세요!",
+			            		  text: "필터 검색은 회원님이 선택하신 정보를 기반으로 진행됩니다.",
+			            		  icon: "warning",
+			            		});
+					 } else if (sido != "" && gugun == ""){
+						swal({
+		            		  title: "시/군을 선택해주세요!",
+		            		  text: "모임은 지역을 기반으로 진행됩니다.",
+		            		  icon: "warning",
+		            		});
+					} else {
+						$("#listForm").submit();
+					}
+					
 				}
-				
-				/* var selectedHobby = '${selectedHobby}';
-				if(selectedHobby != null){
-					$('#')
-				} */
 			</script>
 			
 		</div>
@@ -178,7 +196,7 @@
 					$(function(){
 						
 					 	if('${ isNeededTeacher }' == 'Y'){
-					 		window.open('${recommend}', 'recommend', 'width=490, height=605, menubar=no, status=no, toolbar=no');
+					 		window.open('${recommend}', 'recommend', 'width=490, height=685, menubar=no, status=no, toolbar=no');
 					 	};
 				 	});
 				</script>
@@ -187,7 +205,8 @@
 					<c:forEach var="b" items="${ blist }">
 						<div class="postDetail">
 						
-							<input type="hidden" name="postNo" id="postNo" value="${ b.postNo }">
+							<input type="hidden" value="${ b.postNo }"/>
+							<%-- <c:set var="postNo" value="${ b.postNo }"/> --%>
 						
 							<div class="group_status">
 								<c:if test="${ b.closeYN eq 'N'}">
@@ -252,6 +271,7 @@
 									${ b.startHour } - ${ b.endHour } 
 									<c:if test="${ b.closeYN eq 'N'}">
 										참여가능
+										<script>$(".time").css("background","RGBA(136,140,67,0.7)")</script>
 									</c:if>
 									<c:if test="${ b.closeYN eq 'Y'}">
 										참여마감
@@ -389,7 +409,8 @@
 					<!-- <input type="hidden" name="searchSelect" id="searchSelect"> -->
 				</div>
 				<div class="wordArea">
-					<input type="text" placeholder="검색어 입력" name="searchValue" id="searchValue" value="${ searchValue }">
+					<input type="text" placeholder="검색어 입력" name="searchValue" id="searchValue" 
+						value="${ searchValue }" onKeyDown="if(event.keyCode == 13) search()">
 					<button type="button" id="searchBtn" onclick="search();">검색</button>
 				</div>
 			</div>
@@ -482,15 +503,19 @@
 
 		    $('#gugun').empty();
 		    
-		    for(var i = 0; i <= gugun.length; i++){    
-		    	if('${selectedSido}' == null || '${selectedSido}' == ""){
-		    		var option = $("<option value='' selected>시/군 을 선택하세요</option>");
-		    	} else if('${selectedgugun}' == gugun[i]){
+		    if('${selectedSido}' == null || '${selectedSido}' == "" || sido == "" || sido == null){
+		    	 $('#gugun').append("<option value='' selected>시/군 을 선택하세요</option>");
+	    	}
+		    
+		    
+    		for(var i = 0; i <= gugun.length; i++){
+	    		if('${selectedgugun}' == gugun[i]){
 				 	var option = $("<option value='"+gugun[i]+"' selected>"+gugun[i]+"</option>");
 				} else {
 				 	var option = $("<option value='"+gugun[i]+"'>"+gugun[i]+"</option>");
 				}
-			     $('#gugun').append(option);
+	    		$('#gugun').append(option);
+	    	
 			}
 			
 		}
@@ -553,10 +578,11 @@
 					location.href="loginView.me";
 				} else {
 					var postNo = $(this).children($("#postNo")).val();
-					location.href="bdetail.gf?postNo="+postNo+"&page="+${ pi.currentPage };
+					location.href="bdetail.gf?postNo="+ postNo +"&page="+${ pi.currentPage };
 				}
 			});
 		});
 	</script>
+	
 </body>
 </html>

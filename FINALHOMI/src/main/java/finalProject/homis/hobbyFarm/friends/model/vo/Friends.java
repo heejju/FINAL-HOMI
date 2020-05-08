@@ -11,11 +11,12 @@ public class Friends {
 	private String nickName;
 	private String imgSrc;
 	private	int	   mKind ;
+	private String changeName;
 	
 	public Friends() {}
 	
 	public Friends(int fdNo, String fdFrom, String fdTo, int fdStatus, String userId, String userName,
-			String introduction, String nickName, String imgSrc, int mKind) {
+			String introduction, String nickName, String imgSrc, int mKind, String changeName) {
 		super();
 		this.fdNo = fdNo;
 		this.fdFrom = fdFrom;
@@ -90,10 +91,18 @@ public class Friends {
 		return mKind;
 	}
 	
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
 	@Override
 	public String toString() {
 		return "Friends [fdNo=" + fdNo + ", fdFrom=" + fdFrom + ", fdTo=" + fdTo + ", fdStatus=" + fdStatus
 				+ ", userId=" + userId + ", userName=" + userName + ", introduction=" + introduction + ", nickName="
-				+ nickName + ", imgSrc=" + imgSrc + "]";
+				+ nickName + ", imgSrc=" + imgSrc + ", changeName=" + changeName + "]";
 	}	
 }

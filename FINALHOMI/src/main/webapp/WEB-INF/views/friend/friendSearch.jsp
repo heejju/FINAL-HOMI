@@ -45,6 +45,12 @@
     .pageing-box > div:nth-child(1){margin-left:4%;}
     .pageing-box > div:nth-child(2){background:rgb(136, 140, 67); color:#fff;}
     .numBox{font-size:1.2rem;}
+    
+    .msg-btn2{background:rgb(103, 81, 65);  display:inline-block; color:#fff; padding:5px 5px; box-sizing: border-box; border-radius: 5px; margin-top:-10px; margin-bottom:10px;}
+    .msg-btn3{width:12.5%; font-weight:700; box-sizing: border-box;}
+    .msg-btn3:hover{background:#000; color:#fff; cursor: pointer;}
+    .msg-btn1{width:12.5%; margin-top:10px; font-weight:700; box-sizing: border-box;}
+    .msg-btn1:hover{background:#000; color:#fff; cursor: pointer;}
 </style>
 </head>
 <body>
@@ -99,7 +105,7 @@
 						<c:param name="userId" value="${ f.userId }"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
-                    <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');" style="display:inline-block; font-weight:650;">${ f.nickName }</label>&nbsp;&nbsp;
+                    <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');" style="display:inline-block; font-weight:650; cursor: pointer;">${ f.nickName }</label>&nbsp;&nbsp;
                     <c:if test="${f.mKind eq 0}">	
                     	<label style="display:inline-block; font-weight:900; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;">( 운 영 자 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     </c:if>

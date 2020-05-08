@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture|Nanum+Brush+Script&display=swap" rel="stylesheet">
 <c:import url="../common/boardCommon.jsp"/>
@@ -31,11 +32,13 @@
     .content-one{width:80%; height:auto; margin:0 auto;}
     .friendBox{width:100%; background:#fff; margin:1%; height:120px; border:1px solid #000; float:left; box-sizing: border-box;}
     .check-box{float:left; margin-top:45px; margin-left:30px; margin-right:30px; width:20px; height:20px;}
-    .user-img{width:8.5%; height:90px; margin:13px; border: 1px solid #000; box-sizing: border-box; border-radius: 60px; box-shadow: 5px 3px 6px 0.1px gray; float:left; margin-right:5%;}
-    .i-img{width:100%;}
+    .user-img{width:8.5%; height:90px; margin:13px; border: 1px solid #000; box-sizing: border-box; border-radius: 60px; box-shadow: 5px 3px 6px 0.1px gray; float:left; margin-right:5%; overflow: hidden;}
+    .i-img{width:100%; }
+    .i-img > img {width:100%;}
     .user-info{width:55%; height:inherit; float:left;}
     .msgBtn-box{width:15%; float: right;}
     .msg-btn{width:120px; height:50px; background:rgb(136, 140, 67); color:#fff; font-weight: bold; font-size:1.2rem; border-radius:10px;}
+    .msg-btn:hover{cursor: pointer; background:#000; color:#fff;}
     #nickNameClick{cursor: pointer;}
     
     /*버튼*/
@@ -90,7 +93,7 @@
             </div>
             <script type="text/javascript">
 				function searchFriend(){
-					var searchValue = $(3"#searchValue").val();
+					var searchValue = $("#searchValue").val();
 						location.href="friendSearch.fo?searchValue="+searchValue;
 				}
 			</script> 
@@ -101,7 +104,7 @@
             <div class="friendBox">
                 <input type="checkbox" class="check-box" name="checkbox" value="${ f.userId }">
                 <div class="user-img">
-                    <div class="i-img"><img src="${imgSrc}" /></div>
+                    <div class="i-img"><img src="${contextPath}/resources/uploadFiles/${f.imgSrc}" /></div>
                 </div>
                 <div class="user-info">
                     <br>
@@ -111,22 +114,22 @@
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
 					<input type="hidden" class="frNick${status.count}" value="${f.userId}">
-                    <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${ f.nickName }${f.mKind}</label>&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
-                    <c:if test="${f.mKind eq 0}">
-                    	<label>운영자</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');" style="display:inline-block; font-weight:650;">${ f.nickName }${f.mKind}</label>&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+                    <c:if test="${f.mKind eq 0}">	
+                    	<label style="display:inline-block; font-weight:900; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;">( 운 영 자 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     </c:if>
                     <c:if test="${f.mKind eq 1}">
-                    	<label>농부회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    	<label style="display:inline-block; font-weight:900; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;">( 농 부 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     </c:if>
                     <c:if test="${f.mKind eq 2}">
-                    	<label>모종회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    	<label style="display:inline-block; font-weight:900; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;">( 모 종 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     </c:if><br><br>
-                    <label>자기소개 : </label>
+                    <label style="display:inline-block; font-weight:700; margin-bottom:8px;">자기소개 : </label>
                     <label>${ f.introduction }</label>
                 </div>
                 <div class="msgBtn-box">
                     <br><br>
-                    <input type="button" value="쪽 지" class="msg-btn">
+                    <input type="button" value="쪽 지" class="msg-btn" onclick="window.open('insertForm.msg?to=${f.userId}','쪽지보내기','resizable = no, scrollbars = no, width = 500, height = 550');">
                 </div>
             </div>
             </c:forEach>
@@ -162,32 +165,50 @@
 						userId.push($('.frNick'+i).val()) ;
 					}
 		    	}
+		    	swal({
+		    		   title: "정말 삭제하시겠습니까?",
+		    		   text: "네 - 버튼을 눌러 삭제하세요",
+	    		      icon : "warning",
+		    		   buttons: {
+		    		      cancel : "아니요!",
+		    		      defeat : {text:"네!", value:true},
+		    		   }
+		    		}).then((value) => {
+		    		   if(value == true) {
+		    			   $.ajax({
+		   		    		method: 'POST',
+		   		    		url: 'deleteFrd.fo',
+		   		    		traditional : true,
+		   		    		data: {'userId':userId},
+		   		    		success: function(data) {
+		   		    			if(data == 'true') {
+		   		    				swal({
+		   		    					title: '성공!',
+		   		    					text: '친구 삭제에 성공하였습니다!',
+		   		    					icon: 'success'
+		   		    				}).then(function() {
+		   		    					location.reload() ;
+		   		    				}) ;
+		   		    			} else {
+		   		    				swal({
+		   		    					title: '실패!',
+		   		    					text: '계속 이 문제가 발생한다면, 관리자에게 직접 문의해 주세요!',
+		   		    					icon: 'error'
+		   		    				}).then(function() {
+		   		    					location.reload() ;
+		   		    				}) ;
+		   		    			}
+		   		    		}
+		   		    	}) ;
+		    		   } else {
+		    		      swal({
+		    		    	  title: "취소!",
+		    		    	  text: "취소하셨습니다.",
+		    		    	  icon: "error"
+		    		      }) ;
+		    		   }
+		    		})
 		    	
-		    	$.ajax({
-		    		method: 'POST',
-		    		url: 'deleteFrd.fo',
-		    		traditional : true,
-		    		data: {'userId':userId},
-		    		success: function(data) {
-		    			if(data == 'true') {
-		    				swal({
-		    					title: '성공!',
-		    					text: '친구 삭제에 성공하였습니다!',
-		    					icon: 'success'
-		    				}).then(function() {
-		    					location.reload() ;
-		    				}) ;
-		    			} else {
-		    				swal({
-		    					title: '실패!',
-		    					text: '계속 이 문제가 발생한다면, 관리자에게 직접 문의해 주세요!',
-		    					icon: 'error'
-		    				}).then(function() {
-		    					location.reload() ;
-		    				}) ;
-		    			}
-		    		}
-		    	}) ;
 		    }
 	    </script>
        <%--  <div class="pageing-box" style="text-align: center;">

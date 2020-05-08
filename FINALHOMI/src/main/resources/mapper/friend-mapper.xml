@@ -7,18 +7,20 @@
 		where fd_from = #{id} OR FD_TO = #{id}	
 	</select>
 	<select id="selectList" parameterType="string" resultMap="friendResultset">
-	    SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, I.IMG_SRC, M.M_KIND
-	    FROM    FRIENDS F
-	            JOIN MEMBER M ON(FD_TO     = M.USER_ID)
-	            JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
-	    WHERE   FD_FROM = #{id} AND FD_STATUS = '1'
-	    UNION
-	    SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, I.IMG_SRC, M.M_KIND
-	    FROM    FRIENDS F
-	            JOIN MEMBER M ON(FD_FROM   = M.USER_ID)
-	            JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
-	    WHERE   FD_TO = #{id} AND FD_STATUS = '1'
-	</select>
+	    SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, M.M_KIND,
+             I.IMG_SRC, I.CHANGE_NAME
+	       FROM    FRIENDS F
+	               JOIN MEMBER M ON(FD_TO     = M.USER_ID)
+	               JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
+	       WHERE   FD_FROM = #{id} AND FD_STATUS = '1'
+	       UNION
+	       SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, M.M_KIND,
+	             I.IMG_SRC, I.CHANGE_NAME
+	       FROM    FRIENDS F
+	               JOIN MEMBER M ON(FD_FROM   = M.USER_ID)
+	               JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
+	       WHERE   FD_TO = #{id} AND FD_STATUS = '1'
+      </select>
 	<select id="getSearchList" resultType="_int">
 		SELECT COUNT(*)
 		FROM (

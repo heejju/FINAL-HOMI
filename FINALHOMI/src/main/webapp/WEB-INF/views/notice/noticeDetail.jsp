@@ -100,14 +100,16 @@ img{width:6%;height:6%;}
 	
 	<script>
 		function ndelete(){
-			var flag;
-			var swal = swal({
-				title : "정말 삭제하시겠습니까?",
-				text : "삭제한 게시물은 복구할 수 없습니다.",
-				icon : "info",
-				buttons : ["취소", "삭제"]
-			}).then((삭제) => {
-				location.href='${ ndelete }';
+			swal("정말 삭제하시겠습니까?",{
+				icon : "warning",
+				buttons : {
+					cancel : true,
+					confirm : true,
+				}
+			}).then((result) => {
+				if(result) {
+					location.href='${ ndelete }';
+				}
 			});
 		}
 	</script>

@@ -89,7 +89,7 @@ a{display:inline !important;}
 		<!-- 상단 버튼 -->
 		<div class="topB" align="right">
 			<button class="buttonG" onclick="msgPopup();">쪽지 보내기</button>
-			<button class="buttonB" onclick="location.href='madelete.ma'">회원 탈퇴</button>
+			<button class="buttonB" >회원 탈퇴</button>
 		</div>
 		
 		<!-- 표 -->
@@ -316,25 +316,28 @@ a{display:inline !important;}
 		
 		// 회원 탈퇴
 		$('.buttonB').on('click', function(){
-			var isTrue = confirm("정말 탈퇴시키겠습니까?");
-			if(isTrue){
-				var checkbox = document.getElementsByName("checkbox");
-				for(var i = 0; i < checkbox.length; i++){
-					if(checkbox[i].checked == true){
-						checkVal += checkbox[i].value + ",";
-					}
+			var checkbox = document.getElementsByName("checkbox");
+			for(var i = 0; i < checkbox.length; i++){
+				if(checkbox[i].checked == true){
+					checkVal += checkbox[i].value + ",";
 				}
-				var mNo = checkVal;
-				console.log(mNo);
 			}
-			swal({
-				title : '회원을 정상적으로 탈퇴시켰습니다.',
-				text : '이전 페이지로 돌아갑니다',
-				icon : 'error'
+			var mNo = checkVal;
+			console.log(mNo);
+			
+			swal("정말 탈퇴시겠습니까?",{
+				icon : "warning",
+				buttons : {
+					cancel : true,
+					confirm : true,
+				}
+			}).then((result) => {
+				if(result) {
+					location.href="madelete.ma?mNo=" + mNo;
+				}
 			});
-			alert('회원을 정상적으로 탈퇴시켰습니다.');
-			location.href="madelete.ma?mNo=" + mNo;
 		});
+			
 		
 		// 메세지 팝업
 		function msgPopup() {
@@ -346,12 +349,11 @@ a{display:inline !important;}
 			for(var i = 0; i < checkbox.length; i++){
 				if(checkbox[i].checked == true){
 					checkVal += checkbox[i].value + ",";
-				}
+				} 
 			}
 			
 			to = $('#mNo').val(checkVal).val();
-			
-			var url = "insertForm.msg?to="+to;
+			var url = "insertForm.msg?to=" + to;
 			var option = "resizable = no, scrollbars = no, width = 500, height = 550";
 			window.open(url, "쪽지함", option);
 			

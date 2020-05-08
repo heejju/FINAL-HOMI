@@ -7,8 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>#취미 텃밭</title>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <style>
 	body{background-color: #fff6f0; font-family: 'Nanum Gothic', sans-serif;}
 	#realMain{width:80%; height:auto; align:center; margin:0% auto; margin-top:5%;}

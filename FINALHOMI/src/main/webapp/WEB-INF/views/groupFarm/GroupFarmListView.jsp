@@ -9,9 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
+
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <style>
 	.clear-both{clear:both;}
 	div{margin:0; padding:0;}

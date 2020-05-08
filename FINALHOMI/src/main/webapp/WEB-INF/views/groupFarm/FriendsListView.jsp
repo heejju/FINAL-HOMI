@@ -7,10 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/reset.css" type="text/css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 <style>
 	body{align:center; font-family: 'Nanum Gothic', sans-serif; width:90%;}
 	.listName{hegiht:100px; font-size:24px; margin:0px auto; text-align:left; padding:30px;}

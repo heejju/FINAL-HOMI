@@ -11,8 +11,6 @@
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
 
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -22,8 +20,6 @@
 <!-- 에디터 -->
 <script type="text/javascrip" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="${ contextPath }/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
-<%-- <script type="text/javascript" src="${ contextPath }/resources/naver_editor/js/service/HuskyEZCreator.js" charset="utf-8"></script> --%>
-<!-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script> -->
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">

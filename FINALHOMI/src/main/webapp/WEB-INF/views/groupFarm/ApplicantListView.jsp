@@ -7,9 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/reset.css" type="text/css">
+
 <style>
 	body{align:center; font-family: 'Nanum Gothic', sans-serif;}
 	.listName{hegiht:100px; font-size:24px; margin:0px auto; text-align:left; padding:30px;}

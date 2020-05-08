@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>#취미텃밭</title>
 <style>
 	/* 테이블 */
 	.table{border-collapse: collapse; width: 100%;} /* 테두리 겹 없애기 */

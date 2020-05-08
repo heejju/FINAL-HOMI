@@ -60,6 +60,54 @@
 			padding: 10px 0;
 			margin-top: -2%;
 		}
+		
+        li {
+            list-style: none;
+        }
+        a {
+            font-family: "돋움";
+            font-size: 12px;
+            color: #000;
+            text-decoration: none;
+        }
+        #visual {
+            width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            top: 200px;
+        }
+        #pic {
+            height: 563px;
+            overflow: hidden;
+            position: relative;
+        }
+        #pic>div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+        #control {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            bottom: 30px;
+            text-align: center;
+        }
+        #control a {
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            background: #000;
+            color: #fff;
+            line-height: 26px;
+            font-size: 0.8em;
+            border-radius: 14px;
+            margin: 0 2px
+        }
+        #control a.on {
+            background: #ff6600;
+        }
 	</style>
 <style type="text/css">
 </style>
@@ -72,6 +120,33 @@
 	    	$('#subHeader').hide();
 		</script>
 	</header>
+	<script>
+		$(document).ready(function(){
+			$("#control a").click(function(){
+				var num = Number($(this).text()) - 1; //0,1,2,3
+				$(this).addClass("on").siblings().removeClass("on");
+				$("#pic > div").filter(":visible").stop(true).fadeOut(350).end().eq(num).stop(true).fadeIn(350);
+			}); /* stop 안넣으면 마우스로 막 눌렀을때 쌓여서 계속 실행됨 */
+			$("#control a:first").addClass("on").add("#pic > div:first").show();
+			return false
+		});
+	</script>
+	<div id="visual">
+        <div id="pic">
+            <div><a href="#"><img src="${ contextPath }/resources/images/f1.jpg" alt="1" style="width:1000px; "></a></div>
+            <div><a href="#"><img src="${ contextPath }/resources/images/f2.jpg" alt="2" style="width:1000px; "></a></div>
+            <div><a href="#"><img src="${ contextPath }/resources/images/f3.jpg" alt="3" style="width:1000px; "></a></div>
+            <div><a href="#"><img src="${ contextPath }/resources/images/f4.jpg" alt="4" style="width:1000px; "></a></div>
+        </div>
+        <div id="control">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+        </div>
+    </div>
+	
+	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<table class="rankTable">
 		<tr>
@@ -175,7 +250,7 @@
 						$('#newImg'+(i+1)).attr("src", "${contextPath}/resources/uploadFiles/"+data[i].changeName) ;
 					}
 				}
-			}) ;
+			});
 		}
 		
 		function rstList() {

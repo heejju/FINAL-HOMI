@@ -7,12 +7,12 @@
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
 <style>
-	.qTable{overflow:hidden; width:100%; margin:0 auto; padding: 5px; font-size: 15px; border: 1px solid rgb(200,200,200); border-radius: 10px; background: white;}
+	.qTable{overflow:hidden; width:100%; margin:0 auto; padding: 5px; font-size: 18px; border: 1px solid rgb(200,200,200); border-radius: 10px; background: white;}
 	.qTable th{height:30px; color: rgb(103,81,65);}
 	.qTable td{ text-align: left;}
 	
 	.buttonG{width:80px; background-color:#888c43; color:#fff; border:none; padding:7px 0; text-align:center; font-size:20px; margin:4px; cursor:pointer; border-radius:5px;}
-	.buttonB{width:80px; background-color: rgb(135, 135, 135); color:#fff; border:none; padding:7px 0; text-align:center; font-size:20px; margin:4px; cursor:pointer; border-radius:5px;}
+	.buttonB{width:80px; background-color: #675141; color:#fff; border:none; padding:7px 0; text-align:center; font-size:20px; margin:4px; cursor:pointer; border-radius:5px;}
 	.buttonO{width:70px; height: 70px; background-color: orange; color:#fff; border:none; padding:5px 0; text-align:center; font-size:20px; margin:4px; cursor:pointer; border-radius:5px;}
 
 	.outer{
@@ -88,10 +88,10 @@
 		</div>
 		<div style="padding: 20px;"></div>
 		<div>
-			<div class="commentList" style="text-align: left; font-size: 13px;">
+			<div class="commentList" style="text-align: left; font-size: 15px;">
 			</div>
 			<!-- 댓글 출력 부분 -->
-			<table class="detailTable" id="rtb" style="text-align: left; font-size: 13px;">
+			<table class="detailTable" id="rtb" style="text-align: left; font-size: 15px;">
 					<tbody>
 					</tbody>
 			</table>
@@ -101,7 +101,7 @@
 				<c:if test="${ loginUser != null}">
 					<tr>
 						<td>
-							<textarea id="replyBox" cols=95 style="width: 97%; font-size: 15px; border: 1px solid rgb(220, 220, 220); height: 70px; resize: none;"></textarea>
+							<textarea id="replyBox" cols=95 style="width: 97%; font-size: 17px; border: 1px solid rgb(220, 220, 220); height: 70px; resize: none;"></textarea>
 						</td>
 						<td>
 							<button class="buttonO" id="replySubmit">등록</button>
@@ -114,8 +114,10 @@
 </div>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
-		$('#bName').text(' 1:1 ');
-		$('#bNameAfter').text('문의게시판');
+	$('#bName').text(' 1:1 ');
+	$('#bName').css('cursor', 'pointer');
+	$('#bNameAfter').text('문의게시판');
+	$('#bNameAfter').css('cursor', 'pointer');
 		
 		$('#bName').click(function() {
 			location.href="qlist.qu";
@@ -130,16 +132,16 @@
 			var page = ${page};
 			swal("정말 삭제하시겠습니까?",{
 				icon : "warning",
-				buttons : {
-					cancel : true,
-					confirm : true,
-				}
-			}).then((result) => {
-				if(result) {
+				buttons : ["취소", "확인"]
+			}).then((YES) => {
+				if(YES) {
 					location.href='qdelete.qu?post_no='+post_no+'&page'+page;
-				} 
+				} else {
+					return;
+				}
 			});
 		};
+		
 		
 		// 답변 완료 버튼
 		$('#report_yn').on('click', function() {
@@ -151,7 +153,7 @@
 				success: function(data) {
 					swal("답변이 완료되었습니다.",{
 						icon : "success",
-						buttons : {confirm: true}
+						buttons : {확인: true}
 					});
 					$('#report_yn').attr('disabled', true);
 				},
@@ -174,7 +176,7 @@
 				swal("내용을 입력해주세요!",{
 					icon : "warning",
 					buttons : {
-						confirm : true
+						확인 : true
 					}
 				});
 				return;
@@ -229,17 +231,17 @@
 							if($id == data[i].rWriter) {
 								rp += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
 								rp += '<div><img src="${contextPath }/resources/uploadFiles/' + data[i].changeName + '" style="width: 30px;></div>'
-				                rp += '<div class="commentInfo'+data[i].rNo+'">'+'<span style="font-size: 17px; font-weight: bold;">'+decodeURIComponent(data[i].rNickName.replace(/\+/g, ' '))+'</span>';
+				                rp += '<div class="commentInfo'+data[i].rNo+'">'+'<span style="font-size: 19px; font-weight: bold;">'+decodeURIComponent(data[i].rNickName.replace(/\+/g, ' '))+'</span>';
 				                rp += '&nbsp;&nbsp;<span>'+data[i].rmodifyDate+'</span>';
-				                rp += '&nbsp;&nbsp;<a style="display: inline; font-size: 12px; cursor: pointer;" onclick="commentUpdate('+data[i].rNo+',\''+decodeURIComponent(data[i].rContent.replace(/\+/g, ' '))+'\');"> 수정 </a>';
-				                rp += '&nbsp;<a style="display: inline; font-size: 12px; cursor: pointer;" onclick="commentDelete('+data[i].rNo+');"> 삭제 </a> </div>';
+				                rp += '&nbsp;&nbsp;<a style="display: inline; font-size: 14px; cursor: pointer;" onclick="commentUpdate('+data[i].rNo+',\''+decodeURIComponent(data[i].rContent.replace(/\+/g, ' '))+'\');"> 수정 </a>';
+				                rp += '&nbsp;<a style="display: inline; font-size: 14px; cursor: pointer;" onclick="commentDelete('+data[i].rNo+');"> 삭제 </a> </div>';
 				                rp += '<div class="commentContent'+data[i].rNo+'"> <p>'+decodeURIComponent(data[i].rContent.replace(/\+/g, ' ')) +'</p>';
 				                rp += '</div></div>';
 
 							} else {
 								rp += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
 								rp += '<div><img src="${contextPath }/resources/uploadFiles/' + data[i].changeName + '" style="width: 30px;></div>'
-				                rp += '<div class="commentInfo'+data[i].rNo+'">'+'<span style="font-size: 17px; font-weight: bold;">'+decodeURIComponent(data[i].rNickName.replace(/\+/g, ' '))+'</span>';
+				                rp += '<div class="commentInfo'+data[i].rNo+'">'+'<span style="font-size: 19px; font-weight: bold;">'+decodeURIComponent(data[i].rNickName.replace(/\+/g, ' '))+'</span>';
 				                rp += '&nbsp;&nbsp;<span>'+data[i].rmodifyDate+'</span>';
 				                rp += '<div class="commentContent'+data[i].rNo+'"> <p>'+decodeURIComponent(data[i].rContent.replace(/\+/g, ' ')) +'</p>';
 				                rp += '</div></div>';
@@ -262,7 +264,7 @@
 		    var a ='';
 		    
 		    a += '<div>';
-		    a += '<textarea id="upReplyBox" name="content_'+rNo+'" cols=95 style="font-size: 15px; border: 1px solid rgb(220, 220, 220); height: 70px; resize: none;">'+content+'</textarea>';
+		    a += '<textarea id="upReplyBox" name="content_'+rNo+'" cols=95 style="font-size: 17px; border: 1px solid rgb(220, 220, 220); height: 70px; resize: none;">'+content+'</textarea>';
 		    a += '<div><button class="buttonG" style="width: 50px;" type="button" onclick="commentUpdateProc('+rNo+');">수정</button></div>';
 		    a += '</div>';
 		    
@@ -278,7 +280,7 @@
 		    	swal("내용을 입력해주세요!",{
 					icon : "warning",
 					buttons : {
-						confirm : true
+						확인 : true
 					}
 				});
 				return;
@@ -298,12 +300,9 @@
 		function commentDelete(rNo){
 			swal("정말 삭제하시겠습니까?",{
 				icon : "warning",
-				buttons : {
-					cancel : true,
-					confirm : true,
-				}
-			}).then((result) => {
-				if(result) {
+				buttons : ["취소", "확인"]
+			}).then((YES) => {
+				if(YES) {
 				    $.ajax({
 				        url : 'deleteReply.qu',
 				        type : 'post',
@@ -312,7 +311,9 @@
 				            	getReplyList(); //댓글 삭제후 목록 출력 
 				        }
 				    });
-				} 
+				} else {
+					return;
+				}
 			});
 		}
 

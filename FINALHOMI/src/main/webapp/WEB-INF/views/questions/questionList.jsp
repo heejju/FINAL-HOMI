@@ -38,7 +38,9 @@
 	<c:import url='../common/boardCommon.jsp'/>
 	<script>
 	$('#bName').text(' 1:1 ');
+	$('#bName').css('cursor', 'pointer');
 	$('#bNameAfter').text('문의게시판');
+	$('#bNameAfter').css('cursor', 'pointer');
 	
 	$('#bName').click(function() {
 		location.href="qlist.qu";
@@ -208,7 +210,7 @@
          			swal("게시글 열람 권한이 없습니다.",{
 						icon : "info",
 						buttons : {
-							confirm : true,
+							확인 : true,
 						}
 					});
          		}

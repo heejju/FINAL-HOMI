@@ -232,11 +232,15 @@
 			
 			<c:url var="HBSel" value="selectHobbyView.lec"/>
 			<div style="display: inline-block;">
+				<c:if test="${ hobbyNo eq null }">
+					<input type="hidden" name='hobbyNo' id='hobbyNo' value ="0">
+					<input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+				</c:if>
 				<c:if test="${ hobbyNo eq 0 }">
 					<input type="hidden" name='hobbyNo' id='hobbyNo' value ="0">
 					<input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
 				</c:if>
-				<c:if test="${ hobbyNo ne 0 }">
+				<c:if test="${ hobbyNo ne null }">
 					<c:forEach var="hobby" items="${ hList }">
 						<c:if test="${ hobbyNo eq hobby.hobbyNo }">
 							<input type="hidden" name='hobbyNo' id='hobbyNo' value ="${ hobby.hobbyNo }">

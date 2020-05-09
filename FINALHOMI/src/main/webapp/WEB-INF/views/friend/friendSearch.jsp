@@ -109,7 +109,7 @@ a{display:inline !important;}
                 <!-- <div class="h-img"></div>
                 <div class="hf-txt">친구</div> -->
                 <div class="right-w">
-                    <input type="search" id="searchValue" class="hr-serch">
+                    <input type="search" id="searchValue" class="hr-serch" onKeyDown="if(event.keyCode == 13) searchFriend()">
                     <button onclick="searchFriend();" class="hr-btn">검색</button>
                 </div>
             </div>

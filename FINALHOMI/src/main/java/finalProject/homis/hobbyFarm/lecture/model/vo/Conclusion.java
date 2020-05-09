@@ -9,14 +9,24 @@ public class Conclusion {
 	private String startDate;
 	private String finishDate;
 	
+	private String conTent;
 	public Conclusion() {}
-
+	
 	public Conclusion(int postNo, String proposer, String startDate, String finishDate) {
 		super();
 		this.postNo = postNo;
 		this.proposer = proposer;
 		this.startDate = startDate;
 		this.finishDate = finishDate;
+	}
+
+	public Conclusion(int postNo, String proposer, String startDate, String finishDate, String conTent) {
+		super();
+		this.postNo = postNo;
+		this.proposer = proposer;
+		this.startDate = startDate;
+		this.finishDate = finishDate;
+		this.conTent = conTent;
 	}
 	
 	
@@ -60,11 +70,20 @@ public class Conclusion {
 	public void setFinishDate(String finishDate) {
 		this.finishDate = finishDate;
 	}
+	
+	
+	public String getConTent() {
+		return conTent;
+	}
+
+	public void setConTent(String conTent) {
+		this.conTent = conTent;
+	}
 
 	@Override
 	public String toString() {
 		return "Conclusion [concNo=" + concNo + ", postNo=" + postNo + ", proposer=" + proposer + ", startDate="
-				+ startDate + ", finishDate=" + finishDate + "]";
+				+ startDate + ", finishDate=" + finishDate + ", conTent=" + conTent + "]";
 	}
 
 	

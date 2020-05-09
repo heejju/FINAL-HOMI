@@ -43,11 +43,9 @@ public class FriendController {
 		}
 		
 		int listCount = fService.getListCount();
-		System.out.println("넌받아???"+listCount);
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		System.out.println("id : "+id) ;
 		ArrayList<Member> list = fService.selectList(pi, id); 
 		if(list != null) {
 	         mv.addObject("list", list);
@@ -71,7 +69,6 @@ public class FriendController {
 			currentPage = page;
 		}
 		int listCount = fService.getSearchList(id);
-		System.out.println("페이지?"+ listCount);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
@@ -81,7 +78,6 @@ public class FriendController {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
 			mv.setViewName("friendSearch");
-			System.out.println("페이지?"+pi);
 		} else {
 			throw new FriendsException("회원 전체 조회에 실패하였습니다.");
 		}
@@ -101,7 +97,7 @@ public class FriendController {
 	      }
 	      
 	      Member m = fService.selectUser(userId);
-	      
+	      System.out.println("맴버는 뭐가 나 올까" + m);
 	      ArrayList<Conclusion> cList = fService.selectClass(userId);
 	      
 	      for(Conclusion i : cList)

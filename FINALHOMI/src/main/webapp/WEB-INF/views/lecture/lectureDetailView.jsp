@@ -701,7 +701,7 @@
 				});
 				return;
 			}
-			var url = "insertForm.msg?to=${lb.nickName}";
+			var url = "insertForm.msg?nick=${lb.nickName}";
 			var option = "resizable = no, scrollbars = no, width = 500, height = 550";
 			window.open(url, "쪽지함", option);
 		}

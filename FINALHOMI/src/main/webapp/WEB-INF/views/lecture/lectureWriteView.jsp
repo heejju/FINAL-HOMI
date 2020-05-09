@@ -91,7 +91,10 @@
 	textarea{
 		width: 100%; height: 300px; border: 1px solid lightgray
 	}
-	
+	#selectHobbyBtn{
+		border-radius:5px; border:0px;  width:90px; height:30px; background:#A5C3CF; vertical-align: middle;
+		cursor:pointer; color:white; font-weight:bold; font-size:16px;
+	}
 	.selectLocation{
 		height:40px; border: 3px solid rgb(103, 81, 65); text-align-last : center; width: 170px;
 		font-weight: bold; border-radius: 5px; font-size: 20px; box-sizing: border-box; vertical-align: middle;
@@ -199,13 +202,20 @@
 				<br>
 				<textarea class="title" id='title' name='title' placeholder="제목을 입력해주세요."></textarea>
 				<p>
+					<c:url var="HBSel" value="selectHobbyView.lec"/>
 					<b class="green" style="vertical-align: middle;">카테고리 : </b>
-					<select name="hobbyNo" id='hobbyNo'><!-- DB에서 불러오기 -->
+					<input type="hidden" name="hobbyNo" id="hobbyNo">
+					<span id="hobbyName" style="width:200px"></span>
+					<button type="button" id="selectHobbyBtn" 
+						onclick="window.open('${HBSel}', 'hobbyPopup', 'width=1100px, height=800px, menubar=no, status=no, toolbar=no, resizable=no');">
+						취미 선택
+					</button>
+					<%-- <select name="hobbyNo" id='hobbyNo'><!-- DB에서 불러오기 -->
 						<option style="color: lightgray" value='0'>선택</option>
 						<c:forEach var="hobby" items="${ hList }">
 							<option value="${ hobby.hobbyNo }">${ hobby.hobbyName }</option>
 						</c:forEach>
-					</select>
+					</select> --%>
 				</p>
 				<p>
 				<b class="green">회당 강의료: </b><b class="brown"><input onkeyup="numberVal(this);" onkeydown="return notMinusAndPlus(this);" name="otTuition" id='otTuition' min="0" type="Number" class="brown inputS" placeholder="수강료를 입력해주세요." style="text-align: right;">원</b>

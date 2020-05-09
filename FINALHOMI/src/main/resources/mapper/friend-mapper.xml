@@ -4,22 +4,22 @@
 	<select id="getListCount" resultType="_int">
 		select count(*)
 		FROM FRIENDS
-		where fd_from = #{id} OR FD_TO = #{id}	
+		where fd_from = #{id} OR FD_TO = #{id}
 	</select>
 	<select id="selectList" parameterType="string" resultMap="friendResultset">
-	    SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, M.M_KIND,
+	    SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, M.M_KIND, M.M_STATUS,
              I.IMG_SRC, I.CHANGE_NAME
 	       FROM    FRIENDS F
 	               JOIN MEMBER M ON(FD_TO     = M.USER_ID)
 	               JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
-	       WHERE   FD_FROM = #{id} AND FD_STATUS = '1'
+	       WHERE   FD_FROM = #{id} AND FD_STATUS = '1' AND M_STATUS = 'N'
 	       UNION
-	       SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, M.M_KIND,
+	       SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, M.M_KIND, M.M_STATUS,
 	             I.IMG_SRC, I.CHANGE_NAME
 	       FROM    FRIENDS F
 	               JOIN MEMBER M ON(FD_FROM   = M.USER_ID)
 	               JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
-	       WHERE   FD_TO = #{id} AND FD_STATUS = '1'
+	       WHERE   FD_TO = #{id} AND FD_STATUS = '1' AND M_STATUS = 'N'
 	</select>
 	
 	<select id="getSearchList" resultType="_int">
@@ -56,7 +56,7 @@
 	<select id="searchList" parameterType="string" resultMap="memberResultSet">
 		SELECT  M.*, NULL AS FD_FROM, NULL AS FD_TO, NULL AS FD_STATUS, i.change_name
 	    FROM    MEMBER M
-               JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
+               		JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
 	    WHERE   M.USER_ID != #{id} AND
 	            M.USER_ID NOT IN (
 	                SELECT FD_FROM AS F_USER_ID
@@ -88,7 +88,8 @@
 	<select id="selectUser" parameterType="string" resultMap="memberResultSet">
 		select *
 		from member
-		where user_id = #{userId}
+          left join IMAGE ON(image.user_id = member.user_id)
+		where image.user_id = #{userId}
 	</select>
 	
 	

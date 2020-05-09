@@ -168,14 +168,14 @@
 					<div id="groupInform">상세정보</div>
 					<ul id="informList">
 						<li>
+							<c:url var="hList" value="hList.gf"/>
 							<b>취미</b> : 
 							<div id="hobbyArea">
-								<select name="selectHobby" id="selectHobby">
-									<option value="">취미를 선택하세요</option>
-									<c:forEach var="h" items="${ hlist }"> <!-- 정의 안될 경우 begin=0 / end=items-1 -->
-										<option value="${ h.hobbyNo }">${ h.hobbyName }</option>
-									</c:forEach>
-								</select>
+								<span id="hobbyName" style="width:200px">${ gf.hobbyName }</span>
+								<button type="button" id="selectHobbyBtn" 
+									onclick="window.open('${hList}', 'hobbyPopup', 'width=1100px, height=800px, menubar=no, status=no, toolbar=no, resizable=no');">
+									취미 선택
+								</button>
 							</div>
 							
 							<script>
@@ -234,7 +234,7 @@
 								});
 							</script>
 							
-							<input type="hidden" name="hobby" id="hobby">
+							<input type="hidden" name="hobby" id="hobby" value="${ gf.hobbyNo }">
 							<input type="hidden" name="sido" id="sido">
 							<input type="hidden" name="gugun" id="gugun">
 							
@@ -555,7 +555,6 @@
 	            //도시 선택
 	            $('#sido').val($('#selectSido').val());
 	            $('#gugun').val($('#selectGugun').val());
-	            $('#hobby').val($('#selectHobby').val());
 	                  
 	           /*  //요일 선택
                  	var check = $("input:checkbox[name=days]:checked");

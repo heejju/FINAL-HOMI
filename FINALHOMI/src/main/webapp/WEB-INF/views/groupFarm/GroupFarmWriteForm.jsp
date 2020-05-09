@@ -37,7 +37,7 @@
 						text-align:center; overflow: hidden; position:relative;}
 	.centered{width:100%; height:500px;}
 	.thumbnailWrapper > img{width:80%; height:500px; vertical-align:middle;}
-	#thumbnailImg{vertical-align:middle;}
+	#thumbnailImg{vertical-align:middle; max-width:100%;}
 	#imgGuide{width:100%; height:100px; background:rgba(0, 0, 0, 0.4); z-index:3; font-size:30px; color:white;
 			 vertical-align:middle; position:absolute; top:40%; line-height:100px; font-style:italic;}
 	
@@ -45,18 +45,21 @@
 	.postWrapper{width:100%; margin:0% auto; padding-bottom:30px;}
 	#titleWrapper{width:100%; margin:5% 0;}
 	#title{font-size:3em; width:900px; height:60px; text-align:center; display:block; margin:0 auto;}
+	#selectHobbyBtn{border-radius:5px; border:0px;  width:90px; height:30px; background:#A5C3CF; vertical-align: middle;
+					cursor:pointer; color:white; font-weight:bold; font-size:16px; float:left;}
 	#date{color:gray; text-align:right; margin:3%; margin-right:3%;}
 	.border{border-bottom:1.2px solid gray; margin-bottom:3%;}
 	#groupIntro{margin-left:3%; font-size:1.5em; font-weight:bold; margin:3%;}
 	#contents{margin:0 5%;}
-	#content {width: 99%; height: 500px;}
+	#content {width: 99%; height: 500px; }
+	#content img{max-width:100%;}
 	#groupInform{margin-left:3%; font-size:1.5em; font-weight:bold; margin:3%;}
 	#informList{margin:0 5%;}
 	#informList > li {padding:5px;}
 	
 	input{height:20px;}
 	#personnel{width:80px;}
-	#hobbyArea , .locationArea{align:center; width:20%; height:5%; background-color:white;
+	#hobbyArea, .locationArea{align:center; width:20%; height:5%; background-color:white;
 					border-radius:5px; display:inline-block; margin:0px auto;}
 	#hobbyArea > select , .locationArea > select {width:180px; height:25px;}
 	#startDate > img{width:30px;}
@@ -170,14 +173,14 @@
 					<div id="groupInform">상세정보</div>
 					<ul id="informList">
 						<li>
+							<c:url var="hList" value="hList.gf"/>
 							<b>취미</b> : 
 							<div id="hobbyArea">
-								<select name="selectHobby" id="selectHobby">
-									<option value="">취미를 선택하세요</option>
-									<c:forEach var="h" items="${ hlist }"> <!-- 정의 안될 경우 begin=0 / end=items-1 -->
-										<option value="${ h.hobbyNo }">${ h.hobbyName }</option>
-									</c:forEach>
-								</select>
+								<span id="hobbyName" style="width:200px"></span>
+								<button type="button" id="selectHobbyBtn" 
+									onclick="window.open('${hList}', 'hobbyPopup', 'width=1100px, height=800px, menubar=no, status=no, toolbar=no, resizable=no');">
+									취미 선택
+								</button>
 							</div>
 						</li>
 						<li>
@@ -476,7 +479,7 @@
 	            //도시 선택
 	            $('#sido').val($('#selectSido').val());
 	            $('#gugun').val($('#selectGugun').val());
-	            $('#hobby').val($('#selectHobby').val());
+	            //$('#hobby').val($('#selectHobby').val());
 	                  
 	           /*  //요일 선택
                  	var check = $("input:checkbox[name=days]:checked");

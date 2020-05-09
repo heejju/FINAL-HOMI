@@ -94,8 +94,6 @@ public class FriendController {
 	                         @RequestParam(value="nickName", required=false) String nickName,
 	                        @RequestParam("page") Integer currentPage, 
 	                        ModelAndView mv, HttpSession session) {
-	      
-	      //String id = ((Member)session.getAttribute("loginUser")).getUserId();
 
 	      // 닉네임으로 아이디 찾기
 	      if(userId == null && nickName != null) {
@@ -108,10 +106,6 @@ public class FriendController {
 	      
 	      for(Conclusion i : cList)
 	    	  i.setStartDate(i.getStartDate().substring(0,10)) ;
-	      /*ArrayList<Conclusion> list = new ArrayList<Conclusion>() ;
-	      list.add(cList.get(0)) ;
-	      list.add(cList.get(1)) ;
-	      list.add(cList.get(2)) ;*/
 	      if(m != null) {
 	         mv.addObject("member", m);
 	         mv.addObject("cList", cList);
@@ -301,7 +295,6 @@ public class FriendController {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);	
 		
 		ArrayList<Report> list = fService.rePortPage(pi);
-		System.out.println("신고 리스트 : " + list);
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);

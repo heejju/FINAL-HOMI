@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>#취미 텃밭</title>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/common/reset.css" type="text/css">
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script> 

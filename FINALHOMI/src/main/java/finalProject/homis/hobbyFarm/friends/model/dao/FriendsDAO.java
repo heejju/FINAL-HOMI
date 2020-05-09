@@ -21,7 +21,6 @@ public class FriendsDAO {
 	
 	public int getSearchList(SqlSessionTemplate sqlSession, String id) {
 		int result = sqlSession.selectOne("friendMapper.getSearchList", id);
-		System.out.println("¼ýÀÚ¸É¹ö" + result);
 		return result;
 	}
 	
@@ -36,7 +35,6 @@ public class FriendsDAO {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		ArrayList<Member> list = (ArrayList)sqlSession.selectList("friendMapper.searchList", id, rowBounds);
-		System.out.println("¸É¹ö°³¼ö"+list);
 		return list;
 	}
 

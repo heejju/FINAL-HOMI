@@ -66,7 +66,6 @@ public class MemberController {
 		Member m = new Member() ;
 		m.setUserId(userId) ;
 		m.setUserPwd(userPwd) ;
-		
 		Member loginUser = mService.memberLogin(m) ;
 		if(loginUser != null) {
 			boolean passMatch = passEncoder.matches(m.getUserPwd(), loginUser.getUserPwd()) ;
@@ -229,35 +228,7 @@ public class MemberController {
 			String to = email ;
 			String title = "#취미텃밭 : 이메일 인증" ; // 제목
 			ranText = new TempKey().getKey() ;
-//			String content = "\n\n안녕하세요, 회원님!\n"
-//						   + "'#취미텃밭' 서비스를 이용해주셔서 진심으로 감사합니다.\n\n"
-//						   + "다음의 인증 코드를 이용하여 회원가입을 완료하세요.\n"
-//						   + " : ["+ranText+"]\n" ;
 			StringBuffer content = new StringBuffer() ;
-//			content.append("<!DOCTYPE html>") ;
-//			content.append("<html>") ;
-//			content.append("<head>") ;
-//			content.append("<meta charset=\"UTF-8\">") ;
-//			content.append("<link href=\"https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap\" rel=\"stylesheet\">") ;
-//			content.append("<style>") ;
-//			content.append("body {background-color: #fff6f0; font-family: 'Nanum Gothic', sans-serif; margin:0; padding:0;}") ;
-//			content.append("#mailForm {background: white; width: 80%: height: 80%; text-align: center; margin-left: 10%; margin-right: 10%; margin-top: 13%; margin-bottom: 13%;}") ;
-//			content.append("#codeArea {border: 2px solid; width: 40%; margin-left: 30%; margin-right: 30%; border-radius: 50px;}") ;
-//			content.append("#logo {width: 25%;}") ;
-//			content.append("</style>") ;
-//			content.append("</head>") ;
-//			content.append("<body>") ;
-//			content.append("<form id=\"mailForm\">") ;
-//			content.append("<div><br><br>") ;
-////			content.append("<img id='logo' alt='logo' src='/hobbyFarm/resources/images/Logo.png' onclick='location.href=\"http://localhost:9980/hobbyFarm\" style=\"cursor: pointer;\"") ;
-//			content.append("<h1>이메일 인증</h1>") ;
-//			content.append("<p><b>#취미텃밭</b>에서 보내진 메일입니다.<p>") ;
-//			content.append("<p>본인이 보내신 메일이 아니라면 ["+from+"]로 도용 여부를 알려주세요!<p><br>") ;
-//			content.append("<div id=\"codeArea\"><h2>"+ranText+"</h2></div><br><br><br>") ;
-//			content.append("</div>") ;
-//			content.append("</form>") ;
-//			content.append("</body>") ;
-//			content.append("</html>") ;
 			content.append("<form id=\"mailForm\" style='background: white; width: 80%: height: 80%; text-align: center; margin-left: 2%;'>") ;
 			content.append("<div><br><br>") ;
 			content.append("<h1>이메일 인증</h1>") ;
@@ -477,30 +448,44 @@ public class MemberController {
 		return "memberUpdatePwd" ;
 	}
 	
-//	@RequestMapping("changePwd.me") // AJAX : 비밀번호 변경
-//	@ResponseBody
-//	public String changePwd(@RequestParam("userId")	 String userId,
-//							@RequestParam("userPwd") String userPwd) {
-//		System.out.println(userPwd) ;
-//		int result = mService.updatePwd(userId, passEncoder.encode(userPwd)) ;
-//		if(result>0) {
-//			return "true" ;
-//		} else {
-//			return "false" ;
-//		}
-//	}
-	
-	@RequestMapping("changePwd.me") // 기능 : 비밀번호 변경
-	public String changePwd(HttpSession session,
-							@RequestParam("userPwd") String userPwd) {
+	@RequestMapping("changePwd.me") // AJAX : 비밀번호 변경
+	public void changePwd(@RequestParam("userPwd") String userPwd,
+						  HttpSession session,
+						  HttpServletResponse response,
+						  SessionStatus status) throws IOException {
 		String userId = ((Member)session.getAttribute("loginUser")).getUserId() ;
 		int result = mService.updatePwd(userId, passEncoder.encode(userPwd)) ;
 		if(result>0) {
-			return "redirect:logout.me" ;
+			status.setComplete() ;
+			response.getWriter().write("true") ;
 		} else {
-			throw new MemberException("비밀번호 수정에 실패했습니다. [아이디:"+userId+"]") ;
+			response.getWriter().write("false") ;
 		}
 	}
+	
+	@RequestMapping("checkPwd.me") // AJAX : 비밀번호 비교
+	@ResponseBody
+	public String checkPwd(HttpSession session, 
+						   @RequestParam("userPwd") String userPwd) {
+		String id = ((Member)session.getAttribute("loginUser")).getUserId() ;
+		String pwd = mService.getPwd(id) ;
+		boolean passMatch = passEncoder.matches(userPwd, pwd) ;
+		return passMatch+"" ; 	
+	}
+	
+//	@RequestMapping("changePwd.me") // 기능 : 비밀번호 변경
+//	public void changePwd(HttpSession session,
+//						  @RequestParam("userPwd") String userPwd,
+//						  HttpServletResponse response) throws IOException {
+//		passEncoder.encode(userPwd) ;
+//		String userId = ((Member)session.getAttribute("loginUser")).getUserId() ;
+//		int result = mService.updatePwd(userId, passEncoder.encode(userPwd)) ;
+//		if(result>0) {
+//			response.getWriter().write("true") ;
+//		} else {
+//			throw new MemberException("비밀번호 수정에 실패했습니다. [아이디:"+userId+"]") ;
+//		}
+//	}
  // - 비밀번호 수정 End
  // - 회원 수정 Start
 	@RequestMapping("updateGView.me") // VIEW : 내 정보 수정 : Google
@@ -593,16 +578,6 @@ public class MemberController {
 				throw new MemberException("일반 회원 수정에 실패하였습니다. (id:"+m.getUserId()+")") ;
 			}
 		}
-	}
-	
-	@RequestMapping("checkPwd.me") // AJAX : 비밀번호 비교
-	@ResponseBody
-	public String checkPwd(HttpSession session, 
-						   @RequestParam("userPwd") String userPwd) {
-		String id = ((Member)session.getAttribute("loginUser")).getUserId() ;
-		String pwd = mService.getPwd(id) ;
-		boolean passMatch = passEncoder.matches(userPwd, pwd) ;
-		return passMatch+"" ; 	
 	}
  // - 회원 수정 End
 //	내 정보 보기&수정 End ----------------------------------------------------------------------------------------------------------------

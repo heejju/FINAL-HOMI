@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>#취미 텃밭</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture|Nanum+Brush+Script&display=swap" rel="stylesheet">
@@ -52,6 +52,12 @@
     .msg-btn3:hover{background:#000; color:#fff; cursor: pointer;}
     .msg-btn1{width:12.5%; margin-top:10px; font-weight:700; box-sizing: border-box;}
     .msg-btn1:hover{background:#000; color:#fff; cursor: pointer;}
+    
+    /*이미지 마우스 올렸을때*/
+    .i-img{position:relative; cursor:pointer; /* background-color:#000; */ padding-top:88%; overflow:hidden; margin-bottom:15px;}
+	.i-img img{position:absolute; top:0; opacity:0.8; filter:alpha(opacity=80);}
+	.i-img .hover-op{-webkit-transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; opacity:1; filter:alpha(opacity=100); z-index:1; -webkit-filter:blur(0px); filter:blur(0px);}
+	.i-img:hover .hover-op{-webkit-transform:scale(1.2); transform:scale(1.2); opacity:0; filter:alpha(opacity=0); -webkit-filter:blur(1px); filter:blur(1px);}
     
     /*페이지*/
 	button.nextPBtn{
@@ -135,7 +141,10 @@ a{display:inline !important;}
             <c:forEach var="f" items="${ list }">
             <div class="friendBox">
                 <div class="user-img">
-                    <div class="i-img"><img src="${contextPath}/resources/uploadFiles/${f.changeName}"/></div>
+                    <div class="i-img">
+                    	<img src="${contextPath}/resources/uploadFiles/${f.changeName}"  class="img-responsive hover-op"/>
+                    	<img src="${contextPath}/resources/uploadFiles/${f.changeName}"  class="img-responsive hover-st"/>
+                   	</div>
                 </div>
                 <div class="user-info">
                     <br>

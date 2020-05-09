@@ -21,7 +21,7 @@ section{width:70%; height:100%; margin:0 auto;}
 /* 버튼 */
 .buttonG{width:120px; background-color:#888c43; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
 .buttonB{width:120px; background-color:#675141; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
-.buttonGray{width:120px; background-color:#7f7f7f; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
+.buttonGray{width:120px; background-color:lightgray; color:#000; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
 .button{margin:20px auto;}
 
 /* 제목 */
@@ -41,6 +41,16 @@ textarea{margin:0 auto; height:500px; border:1px solid #7f7f7f; resize:none; pad
 	<script>
 		$('#bName').text('공지');
 		$('#bNameAfter').text('사항');
+		
+		$('#bName').css('cursor', 'pointer');
+		$('#bNameAfter').css('cursor', 'pointer');
+		
+		$('#bName').click(function() {
+			location.href="nList.no";
+		});
+		$('#bNameAfter').click(function() {
+			location.href="nList.no";
+		});
 	</script>
 	<div class="outer">
 		<form action="ninsert.no" method="post">

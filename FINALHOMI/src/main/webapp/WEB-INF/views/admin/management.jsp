@@ -25,7 +25,7 @@ input[type=checkbox]{width:18px; height:18px;}
 .farmTable>thead>th:last-child{border-radius:0 5% 5% 0;}
 
 .farmTable>tbody tr:hover{cursor:pointer; background: #888c43; color:#fff;}
-.buttonG{width:100px; background-color:#888c43; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
+.buttonG{width:100px; background-color:lightgray; color:#000; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 .buttonB{width:100px; background-color:#675141; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 
 .tr-no > th:nth-child(1){width:5%;}
@@ -330,7 +330,7 @@ a{display:inline !important;}
 					cancel : true,
 					confirm : true,
 				}
-			}).then((result) => {
+			}).then((result) => { 
 				if(result) {
 					location.href="madelete.ma?mNo=" + mNo;
 				}

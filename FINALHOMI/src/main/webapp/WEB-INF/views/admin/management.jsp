@@ -259,22 +259,20 @@ a{display:inline !important;}
 	
 		<!-- 검색 -->
 		<div>
-			<form id="searchForm">
-			   <div class="searchArea">
-			      <div class="selectArea">
-			         <select name="searchSelect" id="searchSelect" style="border-radius:0px;">
-			            <option value="selectId" selected>아이디</option>
-			            <option value="selectNick">닉네임</option>
-			            <option value="selectName">이름</option>
-			         </select>
-			               <!-- <input type="hidden" name="searchSelect" id="searchSelect"> -->
-			      </div>
-			      <div class="wordArea">
-			         <input type="text" placeholder="검색어 입력" name="word" id="word">
-			         <button type="button" id="searchBtn"  onKeyDown="if(event.keyCode == 13) search()">검색</button>
-			       </div>
-			    </div>
-			</form>
+		   <div class="searchArea">
+		      <div class="selectArea">
+		         <select name="searchSelect" id="searchSelect" style="border-radius:0px;">
+		            <option value="selectId" selected>아이디</option>
+		            <option value="selectNick">닉네임</option>
+		            <option value="selectName">이름</option>
+		         </select>
+		               <!-- <input type="hidden" name="searchSelect" id="searchSelect"> -->
+		      </div>
+		      <div class="wordArea">
+		         <input type="text" placeholder="검색어 입력" name="word" id="word" onKeyDown="if(event.keyCode == 13) search()">
+		         <button type="button" id="searchBtn" onClick="search();">검색</button>
+		       </div>
+		    </div>
 		</div>
 	</section>
 	

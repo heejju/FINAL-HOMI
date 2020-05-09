@@ -43,6 +43,13 @@
     
     .listNull{text-align: center; margin-top: 50px; font-weight:700;}
     
+    /*이미지 마우스 올렸을때*/
+    .i-img{position:relative; cursor:pointer; /* background-color:#000; */ padding-top:100%; overflow:hidden; margin-bottom:15px;}
+	.i-img img{position:absolute; top:0; opacity:0.8; filter:alpha(opacity=80);}
+	.i-img .hover-op{-webkit-transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; opacity:1; filter:alpha(opacity=100); z-index:1; -webkit-filter:blur(0px); filter:blur(0px);}
+	.i-img:hover .hover-op{-webkit-transform:scale(1.2); transform:scale(1.2); opacity:0; filter:alpha(opacity=0); -webkit-filter:blur(1px); filter:blur(1px);}
+    
+    
     /*버튼*/
     .pageing-box{width:20%; height:30px; margin:0 auto;}
     .page-box1{float:left; background:#fff; margin-right:4%; font-size:1.5rem; width:9.71%; height:30px; line-height: 30px; text-align: center; border-radius: 5px; cursor: pointer;}
@@ -55,8 +62,10 @@
     
     /*버튼2*/
     .btn-box{width:100%; margin: 30px 0 30px 0;}
-    .whole-btn{width:8%; height:40px; float:left; font-size:1.2rem; line-height: 40px; text-align: center; margin-right:2%; background:#fff; margin-left:10.5%;}
-    .firendDelete{width:8%; height:40px; float:left; font-size:1.2rem; line-height: 40px; text-align: center; background:#fff;}
+    .whole-btn{width:8%; height:40px; float:left; font-size:1.2rem; line-height: 40px; text-align: center; margin-right:2%; background:#f39c12; margin-left:10.5%; font-weight:600; cursor: pointer; color:#fff;}
+    .whole-btn:hover{background:#000; color:#f39c12;}
+    .firendDelete{width:8%; height:40px; float:left; font-size:1.2rem; line-height: 40px; text-align: center; background:#675141; color:#fff; font-weight:600; cursor: pointer;}
+    .firendDelete:hover{background:#000;}
     
     
 </style>
@@ -105,6 +114,77 @@
             <div class="whole-btn" onclick="checkAll1();" name="checkAll">전체</div>
             <div class="firendDelete" onclick="deleteFriends();">삭제</div>
         </div>
+        <script>
+	        function checkAll1(){
+				var checkbox = document.getElementsByName("checkbox");
+				var checkAll = document.getElementsByName("checkAll");
+				
+				for(var i = 0; i < checkbox.length; i++){
+					if(checkbox[i].checked == false){
+						checkbox[i].checked = true;
+					} else {
+						checkbox[i].checked = false;
+					}
+				}
+			}
+        </script>
+        <script>
+        	function deleteFriends() {
+	    	var count = 0 ;
+	    	var checkbox = document.getElementsByName("checkbox");
+			var userId = [] ;
+	    	for(var i=1; i<=checkbox.length; i++) {
+	    		if(checkbox[i-1].checked == true) {
+	    			count++ ;
+					userId.push($('.frNick'+i).val()) ;
+				}
+	    	}
+	    	swal({
+	    		   title: "정말 삭제하시겠습니까?",
+	    		   text: "네 - 버튼을 눌러 삭제하세요",
+    		      icon : "warning",
+	    		   buttons: {
+	    		      cancel : "아니요!",
+	    		      defeat : {text:"네!", value:true},
+	    		   }
+	    		}).then((value) => {
+	    		   if(value == true) {
+	    			   $.ajax({
+	   		    		method: 'POST',
+	   		    		url: 'deleteFrd.fo',
+	   		    		traditional : true,
+	   		    		data: {'userId':userId},
+	   		    		success: function(data) {
+	   		    			if(data == 'true') {
+	   		    				swal({
+	   		    					title: '성공!',
+	   		    					text: '친구 삭제에 성공하였습니다!',
+	   		    					icon: 'success'
+	   		    				}).then(function() {
+	   		    					location.reload() ;
+	   		    				}) ;
+	   		    			} else {
+	   		    				swal({
+	   		    					title: '실패!',
+	   		    					text: '계속 이 문제가 발생한다면, 관리자에게 직접 문의해 주세요!',
+	   		    					icon: 'error'
+	   		    				}).then(function() {
+	   		    					location.reload() ;
+	   		    				}) ;
+	   		    			}
+	   		    		}
+	   		    	}) ;
+	    		   } else {
+	    		      swal({
+	    		    	  title: "취소!",
+	    		    	  text: "취소하셨습니다.",
+	    		    	  icon: "error"
+	    		      }) ;
+	    		   }
+	    		})
+	    	
+	    }
+        </script>
         <div class="clear-both"></div>
         <div class="content-one">
             <c:if test="${ empty list }">
@@ -116,7 +196,10 @@
             <div class="friendBox">
                 <input type="checkbox" class="check-box" name="checkbox" value="${ f.userId }">
                 <div class="user-img">
-                    <div class="i-img"><img src="${contextPath}/resources/uploadFiles/${f.imgSrc}" /></div>
+                    <div class="i-img">
+                    	<img src="${contextPath}/resources/uploadFiles/${f.imgSrc}"  class="img-responsive hover-op"/>
+                    	<img src="${contextPath}/resources/uploadFiles/${f.imgSrc}"  class="img-responsive hover-st"/>
+                   	</div>
                 </div>
                 <div class="user-info">
                     <br>
@@ -149,115 +232,7 @@
             
             <!-- 복붙박스 -->
         </div>
-        <div class="clear-both"></div>
-        
-        <script type="text/javascript">
-		    function checkAll1(){
-				var checkbox = document.getElementsByName("checkbox");
-				var checkAll = document.getElementsByName("checkAll");
-				
-				for(var i = 0; i < checkbox.length; i++){
-					if(checkbox[i].checked == false){
-						checkbox[i].checked = true;
-					} else {
-						checkbox[i].checked = false;
-					}
-				}
-			}
-		    
-		    function deleteFriends() {
-		    	var count = 0 ;
-		    	var checkbox = document.getElementsByName("checkbox");
-				var userId = [] ;
-		    	for(var i=1; i<=checkbox.length; i++) {
-		    		if(checkbox[i-1].checked == true) {
-		    			count++ ;
-						userId.push($('.frNick'+i).val()) ;
-					}
-		    	}
-		    	swal({
-		    		   title: "정말 삭제하시겠습니까?",
-		    		   text: "네 - 버튼을 눌러 삭제하세요",
-	    		      icon : "warning",
-		    		   buttons: {
-		    		      cancel : "아니요!",
-		    		      defeat : {text:"네!", value:true},
-		    		   }
-		    		}).then((value) = {
-		    		   if(value == true) {
-		    			   $.ajax({
-		   		    		method: 'POST',
-		   		    		url: 'deleteFrd.fo',
-		   		    		traditional : true,
-		   		    		data: {'userId':userId},
-		   		    		success: function(data) {
-		   		    			if(data == 'true') {
-		   		    				swal({
-		   		    					title: '성공!',
-		   		    					text: '친구 삭제에 성공하였습니다!',
-		   		    					icon: 'success'
-		   		    				}).then(function() {
-		   		    					location.reload() ;
-		   		    				}) ;
-		   		    			} else {
-		   		    				swal({
-		   		    					title: '실패!',
-		   		    					text: '계속 이 문제가 발생한다면, 관리자에게 직접 문의해 주세요!',
-		   		    					icon: 'error'
-		   		    				}).then(function() {
-		   		    					location.reload() ;
-		   		    				}) ;
-		   		    			}
-		   		    		}
-		   		    	}) ;
-		    		   } else {
-		    		      swal({
-		    		    	  title: "취소!",
-		    		    	  text: "취소하셨습니다.",
-		    		    	  icon: "error"
-		    		      }) ;
-		    		   }
-		    		})
-		    	
-		    }
-	    </script>
-       <%--  <div class="pageing-box" style="text-align: center;">
-            <!-- [이전] -->
-				<c:if test="${ pi.currentPage <= 1 }">
-					
-				</c:if>
-				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="friend.fo">
-						<c:param name="page" value="${ pi.currentPage - 1 }"/>
-					</c:url>
-					<a href="${ before }" class="next-box page-box1">&gt;</a> &nbsp;
-				</c:if>
-				
-				<!-- 페이지 -->
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<c:if test="${ p eq pi.currentPage }">
-						<font color="white" size="4"><b style="background:#888c43; display:inline-block; width:10%; padding:5px 0; border-radius: 5px;">${ p }</b></font>
-					</c:if>
-					
-					<c:if test="${ p ne pi.currentPage }">
-						<c:url var="pagination" value="friend.fo">
-							<c:param name="page" value="${ p }"/>
-						</c:url>
-						<a href="${ pagination }">${ p }</a> &nbsp;
-					</c:if>
-				</c:forEach>
-				
-				<!-- [다음] -->
-				<c:if test="${ pi.currentPage >= pi.maxPage }">
-					
-				</c:if>
-				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="friend.fo">
-						<c:param name="page" value="${ pi.currentPage + 1 }"/>
-					</c:url> 
-					<a href="${ after }" class="next-box page-box1">&gt;</a>
-				</c:if>
-        </div> --%>
+        <div class="clear-both"></div>     
     </section>
 </body>
 </html>

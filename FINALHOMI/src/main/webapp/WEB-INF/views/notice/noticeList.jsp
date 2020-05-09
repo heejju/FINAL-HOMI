@@ -68,6 +68,17 @@ a{display:inline !important;}
 	<script>
 		$('#bName').text('공지');
 		$('#bNameAfter').text('사항');
+		
+		$('#bName').css('cursor', 'pointer');
+		$('#bNameAfter').css('cursor', 'pointer');
+		
+		$('#bName').click(function() {
+			location.href="nList.no";
+		});
+		$('#bNameAfter').click(function() {
+			location.href="nList.no";
+		});
+		
 	</script>
 	
 	<section>

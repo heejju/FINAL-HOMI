@@ -20,7 +20,7 @@ section{width:80%; height:100%; margin:0 auto;}
 /* 버튼 */
 .buttonG{width:120px; background-color:#888c43; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
 .buttonB{width:120px; background-color:#675141; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
-.buttonGray{width:120px; background-color:#7f7f7f; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
+.buttonGray{width:120px; background-color:lightgray; color:#000; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
 .button{margin-top:20px; margin-bottom:3%;}
 
 /* 제목 */
@@ -44,6 +44,16 @@ input[type="checkbox"]{width:18px; height:18px; display: inline-block; float:lef
 	<script>
 		$('#bName').text('공지');
 		$('#bNameAfter').text('사항');
+		
+		$('#bName').css('cursor', 'pointer');
+		$('#bNameAfter').css('cursor', 'pointer');
+		
+		$('#bName').click(function() {
+			location.href="nList.no";
+		});
+		$('#bNameAfter').click(function() {
+			location.href="nList.no";
+		});
 	</script>
 	
 	<form action="nupdate.no" method="post">

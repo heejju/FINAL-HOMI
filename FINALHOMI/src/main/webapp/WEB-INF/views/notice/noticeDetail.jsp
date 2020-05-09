@@ -16,7 +16,7 @@ div.container{width:80%; height:80%; background-color:#fff; align:center; border
 /* 버튼 */
 .buttonG{width:120px; background-color:#888c43; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
 .buttonB{width:120px; background-color:#675141; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
-.buttonGray{width:120px; background-color:#7f7f7f; color:#fff; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
+.buttonGray{width:120px; background-color:lightgray; color:#000; border:none; padding:15px 0; text-align:center; font-size:18px; margin:4px; cursor:pointer; border-radius:5px;}
 
 /* 제목 */
 .title-box{width:80%; margin:80px auto;}
@@ -46,6 +46,16 @@ img{width:6%;height:6%;}
 	<script>
 		$('#bName').text('공지');
 		$('#bNameAfter').text('사항');
+		
+		$('#bName').css('cursor', 'pointer');
+		$('#bNameAfter').css('cursor', 'pointer');
+		
+		$('#bName').click(function() {
+			location.href="nList.no";
+		});
+		$('#bNameAfter').click(function() {
+			location.href="nList.no";
+		});
 	</script>
 	<!-- swal 선언 -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

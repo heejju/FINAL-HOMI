@@ -55,7 +55,7 @@
 								<c:param name="nickName" value="${ question.writer }"/>
 								<c:param name="page" value="1"/>
 							</c:url>
-							<a onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${ question.writer }</a>
+							<span style="cursor: pointer;"onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${ question.writer }</span>
 						</td>
 					<th>게시일</th><td>${ question.modify_date }</td>
 				</tr>
@@ -241,7 +241,7 @@
 							} else {
 								rp += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
 								rp += '<div><img src="${contextPath }/resources/uploadFiles/' + data[i].changeName + '" style="width: 30px;></div>'
-				                rp += '<div class="commentInfo'+data[i].rNo+'">'+'<span style="font-size: 19px; font-weight: bold;">'+decodeURIComponent(data[i].rNickName.replace(/\+/g, ' '))+'</span>';
+				                rp += '<div class="commentInfo'+data[i].rNo+'">'+'<span style="font-size: 19px; font-weight: bold; cursor: pointer;" onclick="miniMypage(this);">'+decodeURIComponent(data[i].rNickName.replace(/\+/g, ' '))+'</span>';
 				                rp += '&nbsp;&nbsp;<span>'+data[i].rmodifyDate+'</span>';
 				                rp += '<div class="commentContent'+data[i].rNo+'"> <p>'+decodeURIComponent(data[i].rContent.replace(/\+/g, ' ')) +'</p>';
 				                rp += '</div></div>';
@@ -259,13 +259,20 @@
 				}
 			})
 		}
+		// 미니 마이페이지 연결
+		function miniMypage(e){
+			var userId = $(e).text();
+			window.open('userInfo.fo?nickName='+ userId + '&page=1','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');
+		
+		}
+		
 		// 댓글 수정 폼 나오도록
 		function commentUpdate(rNo, content){
 		    var a ='';
 		    
 		    a += '<div>';
-		    a += '<textarea id="upReplyBox" name="content_'+rNo+'" cols=95 style="font-size: 17px; border: 1px solid rgb(220, 220, 220); height: 70px; resize: none;">'+content+'</textarea>';
-		    a += '<div><button class="buttonG" style="width: 50px;" type="button" onclick="commentUpdateProc('+rNo+');">수정</button></div>';
+		    a += '<textarea id="upReplyBox" name="content_'+rNo+'" cols=95 style="width: 85%; font-size: 17px; border: 1px solid rgb(220, 220, 220); height: 70px; resize: none;">'+content+'</textarea>';
+		    a += '<button class="buttonG" style="width: 50px; float: right; bottom: 30px;" type="button" onclick="commentUpdateProc('+rNo+');">수정</button>';
 		    a += '</div>';
 		    
 		    $('.commentContent'+rNo).html(a);

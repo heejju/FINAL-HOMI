@@ -27,7 +27,7 @@
 	
 	<insert id="insertImg" parameterType="Image">
 		insert into image values(
-			seq_img_id.nextval, seq_pno.currval, #{writer}, #{originName}, #{changeName}, #{imgSrc}, sysdate, 0
+			seq_img_id.nextval, seq_pno.currval, null, #{originName}, #{changeName}, #{imgSrc}, sysdate, 0
 		)
 	</insert>
 	

@@ -50,11 +50,11 @@
     .msg-btn2{background:rgb(103, 81, 65);  display:inline-block; color:#fff; padding:5px 5px; box-sizing: border-box; border-radius: 5px; margin-top:-10px; margin-bottom:10px;}
     .msg-btn3{width:12.5%; font-weight:700; box-sizing: border-box;}
     .msg-btn3:hover{background:#000; color:#fff; cursor: pointer;}
-    .msg-btn1{width:12.5%; margin-top:10px; font-weight:700; box-sizing: border-box;}
+    .msg-btn1{width:12.5%; font-weight:700; box-sizing: border-box; background:orange; color:#fff; padding:10px 0; font-size:16px;}
     .msg-btn1:hover{background:#000; color:#fff; cursor: pointer;}
     
     /*이미지 마우스 올렸을때*/
-    .i-img{position:relative; cursor:pointer; /* background-color:#000; */ padding-top:88%; overflow:hidden; margin-bottom:15px;}
+    .i-img{position:relative; cursor:pointer; /* background-color:#000; */ padding-top:100%; overflow:hidden; margin-bottom:15px;}
 	.i-img img{position:absolute; top:0; opacity:0.8; filter:alpha(opacity=80);}
 	.i-img .hover-op{-webkit-transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; opacity:1; filter:alpha(opacity=100); z-index:1; -webkit-filter:blur(0px); filter:blur(0px);}
 	.i-img:hover .hover-op{-webkit-transform:scale(1.2); transform:scale(1.2); opacity:0; filter:alpha(opacity=0); -webkit-filter:blur(1px); filter:blur(1px);}
@@ -74,15 +74,16 @@
 	}
 	.nextPBtn{
 		border: 0px; border-radius: 5px; background: rgb(103, 81, 65); color: white;  width: 40px; height: 36px;
-		padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px; display:inline-block;
+		padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px; display:inline-block;display:inline !important;
 	}
 	.pagingBtn{
 	   border: 0px; border-radius: 5px; background: white; color: black; width: 42px; height: 36px;
-	   padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px; display:inline-block;
+	   padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px; display:inline-block; display:inline !important;
 	}
 	.pagingSelBtn{
 	   border: 0px; border-radius: 5px; background: rgb(136, 140, 67); color: white; font-weight: bold;
 	   padding: 7px 12px 7px 12px; font-weight: bolder; width: 42px; height: 36px; font-size: 16px; display:inline-block;
+	   display:inline !important;
 	}
 	
 	/* 페이징 */
@@ -92,7 +93,7 @@ button:hover{cursor:pointer;}
 #startBtn:hover{font-wieght:bold; background:#675141; color:white}
 #endBtn:hover{font-wieght:bold; background:#675141; color:white}
 .startBtn, .endBtn, .pageNum, #before, #next {width:40px; height:40px; border-radius:5px; border:0px; background-color:white; font-size:16px; padding:5px;}
-a{display:inline !important;}
+ /* a{display:inline !important;}  */
 	
 	
 </style>

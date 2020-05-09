@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>#취미텃밭</title>
+<title>#취미 텃밭</title>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -130,6 +130,8 @@
 					<div class="border" style="width:50%; margin:3% auto;"></div>
 					<div id="groupInform">상세정보</div>
 					<ul id="informList">
+						<li>취미 : ${ gf.hobbyName }
+						</li>
 						<li>지역 : ${ gf.location }</li>
 						<li>인원 : 
 							<b>
@@ -525,6 +527,7 @@
 			<c:url var="bmodify" value="modifyView.gf">
 				<c:param name="postNo" value="${ gf.postNo }"/>
 				<c:param name="page" value="${ page }"/>
+				<c:param name="hobbyNo" value="${ gf.hobbyNo }"/>
 			</c:url>
 			<c:url var="bdelete" value="bdelete.gf">
 				<c:param name="postNo" value="${ gf.postNo }"/>

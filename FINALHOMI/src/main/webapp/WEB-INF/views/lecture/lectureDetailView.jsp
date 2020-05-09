@@ -287,49 +287,6 @@
 		</script>
 		</form>
 		<hr>
-		<!-- 내가한 댓글 -->
-		<!-- 
-		<div class="commentDiv">
-			<c:forEach items="${ rList }" var="reply">
-				<div style="font-size: 14px; text-align: left;">
-					<div style="display: inline-block; vertical-align: top; height: 40px;">
-						<img style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/resources/buploadFiles/${ reply.changeName }">
-					</div>
-					
-					<div style="width: 80%; display: inline-block; height: 40px;">
-					<b>${ reply.rNickName }</b>&nbsp;&nbsp;&nbsp;&nbsp;<label>${ reply.rmodifyDate }</label>
-					<button>수정</button>|<button>삭제</button><br>
-					<label>${ reply.rContent }</label>
-					</div>
-				</div><br>
-			</c:forEach>
-			<form style="vertical-align: middle; height: 60px;" action="insertReply.lec" onsubmit="return insertReply();">
-				<div>
-					${ lb.postNo } // ${ loginUser.userId }
-					<input type="hidden" name="postNo" value="${ lb.postNo }">
-					<input type="hidden" name="rWriter" value="${ loginUser.userId }">
-					<textarea class="replyContent" name="replyContent"></textarea>
-					<button class="replyInsertBtn">등록</button>
-				</div>
-			</form>
-			<script>
-				//insertReply하기 전에 로그인과 댓글내용 있는지 확인
-				function insertReply(){
-					var loginUser = '${ loginUser.userId }';
-					if(loginUser == ""){
-						alert("로그인이 필요한 서비스입니다.");
-						return false;
-					}
-					if($("textarea[class='replyContent']").val() == ""){
-						alert("댓글 내용을 입력해주세요.");
-						return false;
-					}
-					return true;
-				}
-			</script>
-		</div>
-		-->
-		
 		<!-- 연진누나댓글 -->
 		<div id = "commentMain">
 				<div id= "replyTable" style="width:100%; height:auto; position:relative;">
@@ -340,19 +297,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<%-- <tr style="">
-								<td rowspan="2"><img alt="댓글" src="${ contextPath }/resources/images/almond.png" style="width:auto; height:10%; padding:5px;"></td>
-								<td>
-									<span style="font-weight: bold;">작성자</span>&nbsp; &nbsp; 
-									<span style="font-size: 15px; color: rgb(190, 190, 190);">2020-02-25</span>&nbsp; &nbsp; 
-									<span><input type="hidden" value='댓글번호'><span class="replyUpdate">수정</span>&nbsp;|&nbsp;<span class="replyDelete" onclick="replyDelete(this);">삭제</span></span>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span>내용내용내용</span>
-								</td>
-							</tr> --%>
+							
 						</tbody>
 					</table>
 					<br>
@@ -408,13 +353,9 @@
 							
 							$rImg = $('<img src="${ contextPath }/resources/uploadFiles/' + data[i].changeName + '" style="width:auto; height:6%; vertical-align:middle;">');
 							$rWriter = $('<span style="font-weight:bold;" id="replyNickName" onclick="miniMypage(this);">').html(decodeURIComponent(data[i].rNickName)+"<input type='hidden' value='" + data[i].rWriter+"'>");
-							//$rWriter = $('<span style="font-weight:bold;">').text(decodeURI(data[i].rNickName));
 							$rWriteDate = $('<span style="font-size: 15px; color: rgb(190, 190, 190);">').text(data[i].rWriteDate);
 							
 							$rMoDel = $('<span>').html('<input type="hidden" value=' + data[i].rNo + '><span class="replyUpdate">수정</span> | <span class="replyDelete" onclick="replyDelete(this);">삭제</span>');
-							//$rModify = $('<span class="replyUpdate" onclick="replyUpdate(' + data[i].rNo + ', \''+decodeURIComponent(data[i].rContent.replace(/\+/g, " ")) + '\'' + ')">').text('수정');
-							//$rModify = $('<input type="hidden" id="rNo" value=' + data[i].rNo + '/><span class="replyUpdate"').text('수정');
-							//$rDelete = $('<span class="replyDelete">').text('삭제');
 							
 							$rContent = $('<span>').text(decodeURIComponent(data[i].rContent.replace(/\+/g, ' ')));
 							
@@ -428,8 +369,6 @@
 							
 							if($id == data[i].rWriter || $id == "admin") {
 								$td.append($rMoDel);
-								/* $td.append("&nbsp;|&nbsp;");
-								$td.append($rDelete); */
 							}
 							
 							$tr2.append($td2);
@@ -437,20 +376,6 @@
 							
 							$tableBody.append($tr);
 							$tableBody.append($tr2);
-							
-				   <%-- <tr style="">
-							<td><img alt="댓글" src="${ contextPath }/resources/images/almond.png" style="width:auto; height:10%; padding:5px;"></td>
-							<td>
-								<span style="font-weight: bold;">작성자</span>&nbsp; &nbsp; 
-								<span style="font-size: 15px; color: rgb(190, 190, 190);">2020-02-25</span>&nbsp; &nbsp; 
-								<span><input type="hidden" value='댓글번호'><span class="replyUpdate">수정</span>&nbsp;|&nbsp;<span class="replyDelete">삭제</span></span>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span>내용내용내용</span>
-							</td>
-						</tr> --%>
 						}
 					} else {
 						$tr = $('<tr>');
@@ -485,10 +410,8 @@
 				
 				if(inputLength > 300){
 					$('#count').css('color', 'red');
-					//$('#replyBtn').attr('disabled', 'true');
 				} else {
 					$('#count').css('color', 'gray');
-					//$('#replyBtn').attr('disabled', 'false');
 				};
 			});
 		});
@@ -565,10 +488,8 @@
 					
 					if(modifyLength > 300){
 						$('#rModifyCount').css('color', 'red');
-						//$('#replyBtn').attr('disabled', 'true');
 					} else {
 						$('#rModifyCount').css('color', 'gray');
-						//$('#replyBtn').attr('disabled', 'false');
 					};
 				});
 			});
@@ -744,7 +665,6 @@
 					var isTrue = true;
 					var checkBeforeApply = ${checkBeforeApply};
 					if(checkBeforeApply != 0){
-						//return confirm("이전에 들은 강의입니다. 한번 더 신청하시겠습니까?");
 						await swal("이전에 들은 강의입니다. 한번 더 신청하시겠습니까?",{
 							icon : "warning",
 							buttons : ["취소","확인"]
@@ -797,14 +717,12 @@
 				if($('#region').hasClass('on')){
 					boxheight=($(this).find('.box').height()+40);
 					if($(this).hasClass('on')){
-						//$( "#region" ).animate({ "height": "-="+boxheight+"px" }, "slow" );
 						$(this).removeClass('on');
 						b_box=0;
 					}else{
 						$(this).siblings().removeClass('on');
 						plus = boxheight;
 						plus -= b_box;
-						//$( "#region" ).animate({ "height": "+="+plus+"px" }, "slow" );
 						$(this).addClass('on');
 						b_box=boxheight;
 					}
@@ -865,9 +783,6 @@
 				} else {
 					newPosition =$("div[class='body2']")[0].offsetTop+"px";
 				}
-				/* 애니메이션 없이 바로 따라감
-				 $("#floatMenu").css('top', newPosition);
-				 */
 
 				$("div.applyDiv").stop().animate({
 					"top" : newPosition

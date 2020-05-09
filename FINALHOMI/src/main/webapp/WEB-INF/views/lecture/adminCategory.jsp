@@ -186,7 +186,6 @@
 				});
 				return;
 			}
-			//var isTrue = confirm("정말로 "+hobbyName+"를 삭제하시겠습니까?");
 			
 			swal("정말로 "+hobbyName+"를 삭제하시겠습니까?",{
 				icon : "warning",
@@ -227,12 +226,6 @@
 						}
 					}
 				}
-				/*var isTrue = confirm(hobbyNameCheck+"를 정말로 추가하시겠습니까?");
-				if(isTrue){
-					$("#cateForm").submit();
-				} else {
-					return;
-				}*/
 				swal(hobbyNameCheck+"를 정말로 추가하시겠습니까?",{
 					icon : "info",
 					buttons : ["취소","확인"]
@@ -251,12 +244,6 @@
 					});
 					return;
 				} else {
-					/*var isTrue = confirm(hobbyName+"을(를) "+hobbyNameCheck+"로 수정하시겠습니까?");
-					if(isTrue){
-						$("#cateForm").submit();
-					} else {
-						return;
-					}*/
 					swal(hobbyName+"을(를) "+hobbyNameCheck+"로 수정하시겠습니까?",{
 						icon : "warning",
 						buttons : ["취소","확인"]

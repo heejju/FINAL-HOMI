@@ -109,7 +109,7 @@
             margin: 0 2px
         }
         #control a.on {
-            background: #ff6600;
+            background: #888c43;
         }
 	</style>
 </head>

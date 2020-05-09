@@ -142,7 +142,7 @@
 	
 	div.search2 > input.searchValue {
 		border: 3px solid rgb(103, 81, 65); border-radius: 5px; height: 34px; padding: 0px 10px;
-		width: 320px; font-weight: bold; font-size: 20px;
+		width: 320px; font-weight: bold; font-size: 20px; text-align: center;
 	}
 	div.search2 > select{
 		height:40px; border: 3px solid rgb(103, 81, 65); width: 95px; text-align-last : center;
@@ -361,33 +361,128 @@
 		
 		<br><br>
 		
+		<c:set var="i" value="1"/>
 		<div class="listInfo">
 			<c:forEach items="${ lbList }" var="lb">
-				<div class="content" onclick="toDetail(this);">
-					<input type=hidden value="${ lb.postNo }">
-					<div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
-						<div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
-							<p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
-							<p class="contentTime">${ lb.otAllTime } time</p>
-						</div>
-						<div style="width:300px; height: 60px; text-align: right; padding-top: 40px; background: rgba( 255, 255, 255,0.3);">
-							<p class="contentCate">${ lb.hobbyName }</p><br>
-							<p class="contentApply">농부 모집중</p>
-						</div>
-					</div>
-					<div>
-						<hr>
-					</div>
-					<div style="height: 30px;">
-						<div class="contentTitle">${ lb.title }</div>
-						<div class="contentWriter">
-							<div>
-							<label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label>
+				<c:if test="${ i  eq lbList.size() }">
+					<div class="content" onclick="toDetail(this);">
+						<input type=hidden value="${ lb.postNo }">
+						<div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
+							<div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
+								<p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
+								<p class="contentTime">${ lb.otAllTime } time</p>
+							</div>
+							<div style="width:300px; height: 60px; text-align: right; padding-top: 40px; background: rgba( 255, 255, 255,0.3);">
+								<p class="contentCate">${ lb.hobbyName }</p><br>
+								<p class="contentApply">농부 모집중</p>
 							</div>
 						</div>
+						<div>
+							<hr>
+						</div>
+						<div style="height: 30px;">
+							<div class="contentTitle">${ lb.title }</div>
+							<div class="contentWriter">
+								<div>
+								<label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label>
+								</div>
+							</div>
+						</div>
+						<hr>
 					</div>
-					<hr>
-				</div>
+					</div>
+				</c:if>
+					
+				<c:if test="${ i  ne lbList.size() }">
+					<c:if test="${ i mod 3 eq 1 }">
+						<div style="text-align: left;">
+						<div class="content" onclick="toDetail(this);">
+							<input type=hidden value="${ lb.postNo }">
+							<div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
+								<div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
+									<p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
+									<p class="contentTime">${ lb.otAllTime } time</p>
+								</div>
+								<div style="width:300px; height: 60px; text-align: right; padding-top: 40px; background: rgba( 255, 255, 255,0.3);">
+									<p class="contentCate">${ lb.hobbyName }</p><br>
+									<p class="contentApply">농부 모집중</p>
+								</div>
+							</div>
+							<div>
+								<hr>
+							</div>
+							<div style="height: 30px;">
+								<div class="contentTitle">${ lb.title }</div>
+								<div class="contentWriter">
+									<div>
+									<label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label>
+									</div>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</c:if>
+				</c:if>
+				<c:if test="${ i  ne lbList.size() }">
+					<c:if test="${ i mod 3 eq 2 }">
+						<div class="content" onclick="toDetail(this);">
+							<input type=hidden value="${ lb.postNo }">
+							<div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
+								<div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
+									<p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
+									<p class="contentTime">${ lb.otAllTime } time</p>
+								</div>
+								<div style="width:300px; height: 60px; text-align: right; padding-top: 40px; background: rgba( 255, 255, 255,0.3);">
+									<p class="contentCate">${ lb.hobbyName }</p><br>
+									<p class="contentApply">농부 모집중</p>
+								</div>
+							</div>
+							<div>
+								<hr>
+							</div>
+							<div style="height: 30px;">
+								<div class="contentTitle">${ lb.title }</div>
+								<div class="contentWriter">
+									<div>
+									<label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label>
+									</div>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</c:if>
+				</c:if>
+				<c:if test="${ i  ne lbList.size() }">
+					<c:if test="${ i mod 3 eq 0 }">
+						<div class="content" onclick="toDetail(this);">
+							<input type=hidden value="${ lb.postNo }">
+							<div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
+								<div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
+									<p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
+									<p class="contentTime">${ lb.otAllTime } time</p>
+								</div>
+								<div style="width:300px; height: 60px; text-align: right; padding-top: 40px; background: rgba( 255, 255, 255,0.3);">
+									<p class="contentCate">${ lb.hobbyName }</p><br>
+									<p class="contentApply">농부 모집중</p>
+								</div>
+							</div>
+							<div>
+								<hr>
+							</div>
+							<div style="height: 30px;">
+								<div class="contentTitle">${ lb.title }</div>
+								<div class="contentWriter">
+									<div>
+									<label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label>
+									</div>
+								</div>
+							</div>
+							<hr>
+						</div>
+						</div>
+					</c:if>
+				</c:if>
+				<c:set var="i" value="${ i + 1 }"/>
 			</c:forEach>
 		</div>
 		<script>
@@ -405,7 +500,7 @@
 		</div>
 		</c:if>
 		
-		<div>
+		<div style="text-align: center;">
 			<!-- 맨 처음과 이전 버튼 -->
 			<c:if test="${ pi.currentPage <= 1 }">
 				<button type="button" class="nextPBtn" style="background: lightgray; cursor: default;">&lt;&lt;</button>
@@ -456,7 +551,7 @@
 		
 		<br><br>
 		
-		<div class="search2">
+		<div class="search2" style="text-align: center;">
 			<c:if test="${ searchTag.equals('title') }">
 				<select name="searchTag">
 					<option value="title" selected="selected">제목</option>

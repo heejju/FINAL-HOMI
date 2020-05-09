@@ -132,7 +132,7 @@ a{display:inline !important;}
 	        	</c:if>
             <!-- 맨 앞으로 -->
 	             <c:if test="${ pi.currentPage <= 1 }">
-	                <button class="startBtn" style="background:#e0e0e0; color:black" disabled>&lt;&lt;</button>
+	                <button class="startBtn" style="background: lightgray; cursor: default;" disabled>&lt;&lt;</button>
 	             </c:if>
 	             <c:if test="${ pi.currentPage ne 1 }">
 	                <c:url var="first" value="${ loc }">
@@ -148,7 +148,7 @@ a{display:inline !important;}
 	             </c:if>
 	           <!-- [이전] -->
 	           <c:if test="${ pi.currentPage <= 1 }">
-	              <button id="before" style="background:#675141; color:white">&lt;</button>
+	              <button id="before"  style="background: lightgray; cursor: default;">&lt;</button>
 	           </c:if>
 	           <c:if test="${ pi.currentPage > 1 }">
 					<c:url var="before" value="${ loc }">
@@ -185,7 +185,7 @@ a{display:inline !important;}
 	           </c:forEach>
 	           <!-- [다음] -->
 	           <c:if test="${ pi.currentPage >= pi.maxPage }">
-	              <button id="next" style="background:#675141; color:white" disabled>&gt;</button>
+	              <button id="next"  style="background: lightgray; cursor: default;" disabled>&gt;</button>
 	           </c:if>
 	           <c:if test="${ pi.currentPage < pi.maxPage }">
 	              <c:url var="after" value="${ loc }">
@@ -200,7 +200,7 @@ a{display:inline !important;}
 	           
 	           <!-- 맨 뒤로 -->
 	             <c:if test="${ pi.currentPage > pi.maxPage }">
-	                <button class="endBtn" style="font-weight:bold; background:#675141; color:white">&gt;&gt;</button>
+	                <button class="endBtn"  style="background: lightgray; cursor: default;" disabled>&gt;&gt;</button>
 	             </c:if>
 	             <c:if test="${ pi.currentPage <= pi.maxPage }">
 	                <c:url var="last" value="${ loc }">
@@ -226,21 +226,19 @@ a{display:inline !important;}
 		
 		<!-- 검색 -->
 		<div>
-			<form id="searchForm">
-			   <div class="searchArea">
-			      <div class="selectArea">
-			         <select name="nSelect" id="nSelect" style="border-radius:0px;">
-			            <option value="title" selected>제목</option>
-			            <option value="content">내용</option>
-			         </select>
-			               <!-- <input type="hidden" name="searchSelect" id="searchSelect"> -->
-			      </div>
-			      <div class="wordArea">
-			         <input type="text" placeholder="검색어 입력" name="nWord" id="nWord" onKeyDown="if(event.keyCode == 13) search()">
-			         <button type="button" id="searchBtn" onClick="search();">검색</button>
-			       </div>
-			    </div>
-			</form>
+		   <div class="searchArea">
+		      <div class="selectArea">
+		         <select name="nSelect" id="nSelect" style="border-radius:0px;">
+		            <option value="title" selected>제목</option>
+		            <option value="content">내용</option>
+		         </select>
+		               <!-- <input type="hidden" name="searchSelect" id="searchSelect"> -->
+		      </div>
+		      <div class="wordArea">
+		         <input type="text" placeholder="검색어 입력" name="nWord" id="nWord" onKeyDown="if(event.keyCode == 13) search()">
+		         <button  id="searchBtn" onClick="search();">검색</button>
+		       </div>
+		    </div>
 		</div>
 	</section>
 	

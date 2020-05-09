@@ -271,7 +271,7 @@ a{display:inline !important;}
 			      </div>
 			      <div class="wordArea">
 			         <input type="text" placeholder="검색어 입력" name="word" id="word">
-			         <button type="button" id="searchBtn" onclick="search();">검색</button>
+			         <button type="button" id="searchBtn"  onKeyDown="if(event.keyCode == 13) search()">검색</button>
 			       </div>
 			    </div>
 			</form>
@@ -380,9 +380,7 @@ a{display:inline !important;}
 		function search(){
 			var searchSelect = $('#searchSelect').val();
 			var word = $('#word').val();
-			if(window.event.keyCode == 13){
 				location.href="maSearchList.ma?searchSelect=" + searchSelect + "&word=" + word;
-			}
 		}
 	</script>
 

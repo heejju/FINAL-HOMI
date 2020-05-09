@@ -46,10 +46,10 @@ textarea{margin:0 auto; height:500px; border:1px solid #7f7f7f; resize:none; pad
 		$('#bNameAfter').css('cursor', 'pointer');
 		
 		$('#bName').click(function() {
-			location.href="nList.no";
+			location.href="nlist.no";
 		});
 		$('#bNameAfter').click(function() {
-			location.href="nList.no";
+			location.href="nlist.no";
 		});
 	</script>
 	<div class="outer">

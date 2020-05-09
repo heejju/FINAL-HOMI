@@ -49,10 +49,10 @@ input[type="checkbox"]{width:18px; height:18px; display: inline-block; float:lef
 		$('#bNameAfter').css('cursor', 'pointer');
 		
 		$('#bName').click(function() {
-			location.href="nList.no";
+			location.href="nlist.no";
 		});
 		$('#bNameAfter').click(function() {
-			location.href="nList.no";
+			location.href="nlist.no";
 		});
 	</script>
 	

@@ -36,18 +36,20 @@
 				</tr>
 				<tr style="border-bottom: 1px solid gray;">
 					<c:if test="${loginUser.nickName == message.msg_to}">
-						<c:url var="userInfo" value="userInfofo.mp">
-							<c:param name="userId" value="${ message.msg_from }"/>
+						<c:url var="userInfo" value="userInfo.fo">
+							<c:param name="nickName" value="${ message.msg_from }"/>
+							<c:param name="page" value="1"/>
 						</c:url>
 						<th style="width: 100px; padding: 5px;">보낸사람</th>
-						<td><input type="hidden" value="${message.msg_from}" style="width: 90%; border: 0; font-size: 13px;"><a href="${ userInfo }">${message.msg_from}</a></td>
+						<td><input type="hidden" value="${message.msg_from}" style="width: 90%; border: 0; font-size: 13px;"><span style="cursor: pointer;"onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${message.msg_from}</span></td>
 					</c:if>
 					<c:if test="${loginUser.nickName == message.msg_from}">
-						<c:url var="userInfo" value="userInfofo.mp">
-							<c:param name="userId" value="${ message.msg_to }"/>
+						<c:url var="userInfo" value="userInfo.fo">
+							<c:param name="nickName" value="${ message.msg_to }"/>
+							<c:param name="page" value="1"/>
 						</c:url>
 						<th style="width: 100px; padding: 5px;">받는사람</th>
-						<td><input type="hidden" value="${message.msg_to}" style="width: 90%; border: 0; font-size: 13px;"><a href="${ userInfo }">${message.msg_to}</a></td>
+						<td><input type="hidden" value="${message.msg_to}" style="width: 90%; border: 0; font-size: 13px;"><span style="cursor: pointer;"onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${message.msg_to}</span></td>
 					</c:if>
 				</tr>
 				<tr>

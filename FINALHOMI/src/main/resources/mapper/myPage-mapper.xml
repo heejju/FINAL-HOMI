@@ -77,18 +77,18 @@
 			select distinct post_no, title, personnel, end_date, hobby_name, gv.nickname as nickname
 			from gfapp_view g
    				 join gf_view gv using(post_no)
-			where g.user_id = 'homis' and delete_yn = 'N' and end_date >= sysdate
+			where g.user_id = #{id} and delete_yn = 'N' and end_date >= sysdate
 			union
 			select distinct post_no, title, personnel, end_date, hobby_name, gv.nickname as nickname
 			from gfapp_view g
 			    join gf_view gv using(post_no)
-			where gv.writer = 'homis' and delete_yn = 'N' and end_date >= sysdate
+			where gv.writer = #{id} and delete_yn = 'N' and end_date >= sysdate
     	]]>
 	</select>
 	
 	<!-- 시간표 -->
 	<select id="getTimeline" resultMap="timelineResultSet">
-		select post_no, timeline, proposer, m.nickname as nickname, hobby_name, title, board_no, ot_time
+		select post_no, timeline, proposer, m.nickname as nickname, hobby_name, title, learner, ot_time
 		from timetable t
             join conclusion using(post_no)
             join member m on(proposer = m.user_id)
@@ -182,7 +182,7 @@
 		<result property="learnerNick" column="nickname"/>
 		<result property="hobbyName" column="hobby_name"/>
 		<result property="title" column="title"/>
-		<result property="tKind" column="board_no"/>
+		<result property="tKind" column="learner"/>
 		<result property="otTime" column="ot_time"/>
 	</resultMap>
 </mapper>

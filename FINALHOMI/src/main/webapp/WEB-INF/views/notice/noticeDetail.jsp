@@ -51,10 +51,10 @@ img{width:6%;height:6%;}
 		$('#bNameAfter').css('cursor', 'pointer');
 		
 		$('#bName').click(function() {
-			location.href="nList.no";
+			location.href="nlist.no";
 		});
 		$('#bNameAfter').click(function() {
-			location.href="nList.no";
+			location.href="nlist.no";
 		});
 	</script>
 	<!-- swal 선언 -->

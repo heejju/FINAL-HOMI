@@ -73,10 +73,10 @@ a{display:inline !important;}
 		$('#bNameAfter').css('cursor', 'pointer');
 		
 		$('#bName').click(function() {
-			location.href="nList.no";
+			location.href="nlist.no";
 		});
 		$('#bNameAfter').click(function() {
-			location.href="nList.no";
+			location.href="nlist.no";
 		});
 		
 	</script>
@@ -236,8 +236,8 @@ a{display:inline !important;}
 			               <!-- <input type="hidden" name="searchSelect" id="searchSelect"> -->
 			      </div>
 			      <div class="wordArea">
-			         <input type="text" placeholder="검색어 입력" name="nWord" id="nWord">
-			         <button type="button" id="searchBtn" onclick="search();">검색</button>
+			         <input type="text" placeholder="검색어 입력" name="nWord" id="nWord" onKeyDown="if(event.keyCode == 13) search()">
+			         <button type="button" id="searchBtn" onClick="search();">검색</button>
 			       </div>
 			    </div>
 			</form>

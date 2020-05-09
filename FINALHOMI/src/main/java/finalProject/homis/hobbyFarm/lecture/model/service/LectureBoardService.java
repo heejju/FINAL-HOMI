@@ -57,5 +57,7 @@ public interface LectureBoardService {
 
 	int insertTimeline(Timeline timeline);
 
+	int selectCCCount() ;
 
+	ArrayList<LectureBoard> selectCCPage(PageInfo pi);
 }

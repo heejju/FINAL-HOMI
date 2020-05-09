@@ -390,11 +390,7 @@ public class LectureController implements Comparator<ArrayList<String>>{
 			for(int i = 0; i < ableTime0.size(); i++) {
 				for(int j = 1; j < ableTime0.get(i).length; j++) {
 					String[] able = ableTime0.get(i);
-					if(ableTime0.get(i)[0].length() == 7) {
-						ableTime.add("0"+able[0]+" "+able[j]+":00 ~ "+(Integer.parseInt(able[j])+lb.getOtTime())+":00");
-					} else if(ableTime0.get(i)[0].length() == 6){
-						ableTime.add("0"+able[0].split("/")[0]+"/0"+able[0].split("/")[1]+" "+able[j]+":00 ~ "+(Integer.parseInt(able[j])+lb.getOtTime())+":00");
-					}
+					ableTime.add(able[0]+" "+able[j]+":00 ~ "+(Integer.parseInt(able[j])+lb.getOtTime())+":00");
 				}
 			}
 		}

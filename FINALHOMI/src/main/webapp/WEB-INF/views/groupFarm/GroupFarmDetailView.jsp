@@ -378,7 +378,7 @@
                   }
                
                
-        	  /*  var gf = ${gf.personnel};
+        	   var gf = ${gf.personnel};
         	   var personnelCount;
         	   
         	   if('${ gf.teacher }' != ""){
@@ -412,7 +412,7 @@
                               }
                        });
                    });
-               } */
+               }
                
                
                

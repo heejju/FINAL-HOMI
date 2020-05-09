@@ -65,7 +65,7 @@
 		<c:if test="${ list.size() ne 0 }">
 			<div id="list">
 				<c:forEach var="friend" items="${ list }">
-					<c:if test="${ friend.mKind ne 1 }">
+					<c:if test="${ friend.mKind eq 1 }">
 					<c:url var="userInfo" value="userInfo.fo">
 						<c:param name="userId" value="${ friend.userId }"/>
 		                <c:param name="page" value="1"/>

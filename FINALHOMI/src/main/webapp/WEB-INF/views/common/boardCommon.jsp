@@ -15,6 +15,7 @@
 	#subHeader{margin-bottom:50px;}
 	#boardName{width:100%; height:70px; margin-top:10%; border-bottom: 1.5pt solid gray; text-align:center;
 				font-size: 30pt; font-weight: bold; display : inline-table; }
+	#spanWrapper{width:auto; hegith:auto; display:inline;}
 </style>
 </head> 
 <body>
@@ -33,9 +34,11 @@
         
         <div id="subHeader">
 			<div id="boardName">
-				<label>#</label>
-				<label id="bName" style="color:#888c43">동네</label>
-				<label id="bNameAfter" style="color:#675141">텃밭</label>
+				<div id="spanWrapper">
+					<span>#</span>
+					<span id="bName" style="color:#888c43">동네</span>
+					<span id="bNameAfter" style="color:#675141">텃밭</span>
+				</div>
 			</div>
 		</div>
         

@@ -568,6 +568,7 @@ public class GroupFarmController {
 		
 		if(gf != null) {
 			mv.addObject("gf", gf)
+			  .addObject("page", page)
 			  .addObject("img", img)
 			  .addObject("gfaList", gfa)
 			  .addObject("hlist", hlist)
@@ -581,41 +582,42 @@ public class GroupFarmController {
 	
 	// 글 수정 
 	@RequestMapping("bmodify.gf")
-	public String modifyBoard(@RequestParam("postNo") int postNo, @RequestParam("page") Integer page,
+	public String modifyBoard(@RequestParam("postNo") Integer postNo, @RequestParam("page") Integer page,
 								@RequestParam("sido") String sido, @RequestParam("gugun") String gugun,
-								@RequestParam("hobby") int hobbyNo, HttpServletRequest request,
-								@RequestParam("thumbnailImg") MultipartFile thumbnail, ModelAndView mv) {
-		
-		GroupFarmBoard gf = gfService.selectBoard(postNo);
-		Image img = gfService.selectImage(postNo);
+								@RequestParam("hobby") Integer hobbyNo, HttpServletRequest request,
+								@RequestParam("thumbnailImg") MultipartFile thumbnail, ModelAndView mv,
+								GroupFarmBoard gf, Image img) {
 		
 		// 주소 저장
 		gf.setLocation(sido + " " + gugun);
 		gf.setHobbyNo(hobbyNo);
 		
+		img.setPostNo(postNo);
+		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\uploadFiles";
-		
 		
 		// 파일이 있으면 saveFile이라고 하는 메소드에 thumbnail 담아주기
 		if(thumbnail !=null && !thumbnail.isEmpty()) {
 			String renameFileName = saveFile(thumbnail, request);
 
 			// 파일이 저장되었으면
-			if(renameFileName != null) {
-				img.setPostNo(gf.getPostNo());
-				img.setOriginName(thumbnail.getOriginalFilename());
-				img.setChangeName(renameFileName);
-				
-				img.setImgSrc(savePath);
-			}
-		}
+	         if(renameFileName != null) {
+	            img.setPostNo(gf.getPostNo());
+	            img.setOriginName(thumbnail.getOriginalFilename());
+	            img.setChangeName(renameFileName);
+	            
+	            img.setImgSrc(savePath);
+	            
+	            int resultImg = gfService.updateImg(img);
+	         }
+	      }
+	      
+	      int resultBoard = gfService.updateBoard(gf);
+	      int resultGroup = gfService.updateGroup(gf);
 		
-		int result = gfService.updateBoard(gf, img);
-		
-		if(result > 0) {
+		if(resultBoard > 0 && resultGroup > 0) {
 			return "redirect:/bdetail.gf?postNo="+postNo+"&page="+page;
-
 		} else {
 			throw new GroupFarmBoardException("게시글 수정에 실패하였습니다.");
 		}

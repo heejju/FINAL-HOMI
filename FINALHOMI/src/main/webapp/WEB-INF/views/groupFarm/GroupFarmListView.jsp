@@ -303,12 +303,12 @@
 <%-- 		           <c:url var="first" value="blist.gf">
 		              <c:param name="page" value="1"/>
 		           </c:url> --%>
-		           <button type="button" class="startBtn" style="background:#e0e0e0; color:black" onclick="paging(this);">&lt;&lt;</button>
+		           <button type="button" class="startBtn" style="background:#675141; color:white" onclick="paging(this);">&lt;&lt;</button>
 		        </c:if>
 		        
 				<!-- [이전] -->
 				<c:if test="${ pi.currentPage <= 1 }">
-					<button type="button" id="before" style="background:#675141; color:white">&lt;</button>
+					<button type="button" id="before" style="background:#e0e0e0; color:black" disabled>&lt;</button>
 				</c:if>
 				<c:if test="${ pi.currentPage > 1 }">
 					<c:url var="before" value="blist.gf">
@@ -334,7 +334,7 @@
 				
 				<!-- [다음] -->
 				<c:if test="${ pi.currentPage >= pi.maxPage }">
-					<button type="button" id=next style="background:#675141; color:white" disabled>&gt;</button>
+					<button type="button" id=next style="background:#e0e0e0; color:black" disabled>&gt;</button>
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
 					<c:url var="after" value="blist.gf">
@@ -351,7 +351,7 @@
 		           <c:url var="last" value="blist.gf">
 		              <c:param name="page" value="${ pi.maxPage }"/>            
 		           </c:url>
-		              <button type="button" class="endBtn" style="background:#e0e0e0; color:black" onclick="paging(this);">&gt;&gt;</button>
+		              <button type="button" class="endBtn" style="background:#675141; color:white" onclick="paging(this);">&gt;&gt;</button>
 		        </c:if>
 			</div>
 			

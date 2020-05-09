@@ -317,14 +317,24 @@
 		                                    	from gf_view)
 	</select>
 	
-	<update id="updateBoard" parameterType="list">
-		UPDATE BOARD AS B, "GROUP" AS G
-		SET B.POST_NO=#{postNo}, B.WRITER=#{writer}, B.TITLE=#{title}, B.CONTENT=#{content}, 
-			B.MODIFY_DATE=SYSDATE
-		SET G.HOBBY_NO=#{hobbyNo}, G.LOCATION=#{location}, G.PERSONNEL=#{personnel}
-			G.START_DATE=#{startDate}, G.END_DATE=#{endDate}, G.DAY=#{day}
-			G.START_HOUR=#{startHour}, G.END_HOUR=#{endHour}, G.OFFER_YN=#{offerYN}
+	<update id="updateBoard">
+		UPDATE BOARD
+		SET WRITER=#{writer}, TITLE=#{title}, CONTENT=#{content}, MODIFY_DATE=SYSDATE
+		WHERE POST_NO=#{postNo}
 	</update>
 	
+	<update id="updateGroup">
+		UPDATE "GROUP"
+		SET HOBBY_NO=#{hobbyNo}, LOCATION=#{location}, PERSONNEL=#{personnel},
+			START_DATE=#{startDate}, END_DATE=#{endDate}, DAY=#{day},
+			START_HOUR=#{startHour}, END_HOUR=#{endHour}, OFFER_YN=#{offerYN}
+		WHERE POST_NO=#{postNo}
+	</update>
+	
+	<update id="updateImg">
+		UPDATE IMAGE
+		SET ORIGIN_NAME=#{originName}, CHANGE_NAME=#{changeName}, IMG_SRC=#{imgSrc}
+		WHERE POST_NO=#{postNo}
+	</update>
 	
 </mapper>

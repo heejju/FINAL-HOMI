@@ -472,8 +472,14 @@
 						</li>
 						<li>
 							<b>지도 강사</b> : 
-							<input type="radio" name="offerYN" value="Y" id="offerY"/>구인함
-							<input type="radio" name="offerYN" value="N" id="offerN"/>구인안함
+							<c:if test="${ gf.teacher ne null}">
+								<input type="radio" name="offerYN" value="Y" id="offerY" checked/>구인함
+								<input type="radio" name="offerYN" value="N" id="offerN" disabled/>구인안함
+							</c:if>
+							<c:if test="${ gf.teacher eq null}">
+								<input type="radio" name="offerYN" value="Y" id="offerY"/>구인함
+								<input type="radio" name="offerYN" value="N" id="offerN"/>구인안함
+							</c:if>
 							
 							<script>
 								var offerYN = '${ gf.offerYN }';
@@ -488,6 +494,8 @@
 					</ul>
 				</div>
 				<input type="hidden" name="writer" value="${ loginUser.userId }"/>
+				<input type="hidden" name="postNo" value="${ gf.postNo}"/>
+				<input type="hidden" name="page" value="${page}"/>
 			</form>
 			</div>
 			<div class="buttonArea">
@@ -572,7 +580,8 @@
 
                 $("#day").val(dayArr);
                 
-                if($("#inputThumbnailImg").val() == ""){
+                //if($("#inputThumbnailImg").val() == null){
+                if($("#inputThumbnailImg").onerror){
                 	//alert("대표이미지를 선택해주세요.");
   					swal({
   						title : '대표 이미지를 선택해주세요!',
@@ -661,24 +670,26 @@
    						icon : 'error',
    					});
                      return false;
-                }/*  else if(confirm("글을 작성하시겠습니까?")){
-                	
-                	
-                	$('#form').submit();
-                } */
-                else{
+                }/*  else if('${ gf.teacher}' != null && $('#offerYN') == "N"){
                 	swal({
-                		  title: "글을 작성하시겠습니까?",
-                		  text: "회원님이 모집하시는 모임이 모임 텃밭에 등록됩니다.",
+                		title : '마감 시간을 다시 선택해주세요!',
+                		text : '모임이 끝나는 시간은 만나는 시간보다 빠를 수 없습니다.',
+						icon : 'error',
+					});
+                      return false;
+                } */ else{
+                	swal({
+                		  title: "글을 수정하시겠습니까?",
+                		  text: "회원님이 모집하시던 모임 텃밭이 수정됩니다.",
                 		  icon: "warning",
                 		  buttons: true,
                 		  dangerMode: true,
                 		  buttons: ["취소", "확인"]
                 		})
                 		.then(확인 => {
-                		  if(확인) {
+                		  if(확인){
                 		    $('#form').submit();
-                		    swal("모임 텃밭에 등록되었습니다.", {
+                		    swal("모임 텃밭이 수정되었습니다.", {
                 		      icon: "success",
                 		      button: false,
                 		    });

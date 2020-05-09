@@ -61,7 +61,12 @@ public interface GroupFarmService {
 	ArrayList<Member> selectFdList(String userId);
 
 	// 게시글 수정
-	int updateBoard(GroupFarmBoard gf, Image img);
+	int updateBoard(GroupFarmBoard gf);
+
+	int updateGroup(GroupFarmBoard gf);
+	
+	int updateImg(Image img);
+
 
 
 

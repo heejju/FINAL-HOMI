@@ -216,32 +216,38 @@ public class messageController {
 		
 	}
 	
+	// 강사 초대 메세지(친구 초대는 GroupFarmController)
 	@RequestMapping("invite.msg")
-	public String inviteMsg(HttpSession session, String msg_to, String url, String pageTitle) { // 가져와야 할 값 : 페이지 제목, 페이지 접근할 수 있는 url, 받을 사람 id
+	public String inviteMsg(HttpSession session, 
+							@RequestParam("postNo") Integer postNo, 
+							@RequestParam("title") String title, 
+							@RequestParam("to") String msg_to) {
 		Message message = new Message();
 		// 로그인 한 유저 아이디 가져오기
 		String id = ((Member)session.getAttribute("loginUser")).getUserId();
+		String nickName = ((Member)session.getAttribute("loginUser")).getNickName();
+		String url = "\"window.open('bdetail.gf?postNo="+postNo+"')\"";
 		
-		int to_kind = (msgService.findKind(msg_to)).getmKind();
-		//상대방 mkind 가져오기
-		if(to_kind == 1) { // 학생
-			message.setMsg_to(msg_to); //받을사람 id 넣기
-			message.setMsg_from(id);
-			message.setMsg_title(pageTitle + " 모임초대입니다!"); // 앞에 requestparam으로 모임 제목 넣기
-			message.setMsg_content("'<button onclick='" + "'location.href='"+ url +"'>보러가기</button>"); // 버튼 url 넣기
-		} else if(to_kind == 2) { //강사
-			message.setMsg_to(msg_to); //받을사람 id 넣기
-			message.setMsg_from(id);
-			message.setMsg_title(pageTitle + " 모임초대입니다!"); // 앞에 requestparam으로 모임 제목 넣기
-			message.setMsg_content("'<button onclick='" + "'location.href='"+ url +"'>보러가기</button>"); // 버튼 url 넣기
+		System.out.println(url);
+		
+		message.setMsg_to(msg_to); //받을사람 id
+		message.setMsg_from(id);
+		message.setMsg_title("#"+title + " 모임초대입니다!"); //쪽지 제목
+		String content = "<span>안녕하세요, <img id='logo'/>입니다!</span><br>" +
+						 "<span>" + nickName + " 님께서 회원님을 #" + title + " 모임의 <b>지도강사</b>로 초대하셨습니다.</span><br>" + 
+						 "<span>" + nickName + " 님이 모집하고 계신 모임 텃밭이 궁금하시다면 아래 버튼을 눌러 해당 게시글로 바로 이동해보세요!</span><br>" + 
+						 "<div id='boardBtnWrapper'>" + 
+							 "<button id='goDetail' onclick=" + url + "'>보러가기</button>"+
+						 "</div>";
+		
+		message.setMsg_content(content);
+		
+		int result = msgService.insertMsg(message);
+		
+		if(result > 0) {
+			return "redirect:msgList.msg";
+		} else {
+			throw new MessageException("초대 전송에 실패했습니다.");
 		}
-			
-			int result = msgService.insertMsg(message);
-			
-			if(result > 0) {
-				return "redirect:msgList.msg";
-			} else {
-				throw new MessageException("초대 전송에 실패했습니다.");
-			}
 	}
 }

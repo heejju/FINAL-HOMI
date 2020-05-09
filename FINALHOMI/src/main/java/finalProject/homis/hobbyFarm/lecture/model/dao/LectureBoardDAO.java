@@ -112,5 +112,13 @@ public class LectureBoardDAO {
 	public int insertTimeline(SqlSession sqlSession, Timeline timeline) {
 		return sqlSession.insert("lectureMapper.insertTimeline", timeline);
 	}
+	
+	public int selectCCCount(SqlSession sqlSession) {
+		return sqlSession.selectOne("lectureMapper.selectCCCount") ;
+	}
+
+	public ArrayList<LectureBoard> selectCCPage(SqlSession sqlSession, PageInfo pi) {
+		return (ArrayList)sqlSession.selectList("lectureMapper.selectCCPage") ;
+	}
 
 }

@@ -134,4 +134,14 @@ public class LectureBoardServiceImp implements LectureBoardService{
 	public int insertTimeline(Timeline timeline) {
 		return lbDAO.insertTimeline(sqlSession, timeline);
 	}
+	
+	@Override
+	public int selectCCCount() {
+		return lbDAO.selectCCCount(sqlSession) ;
+	}
+	
+	@Override
+	public ArrayList<LectureBoard> selectCCPage(PageInfo pi) {
+		return lbDAO.selectCCPage(sqlSession, pi) ;
+	}
 }

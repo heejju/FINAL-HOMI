@@ -11,6 +11,14 @@ public class Conclusion {
 	
 	private String conTent;
 	public Conclusion() {}
+	
+	public Conclusion(int postNo, String proposer, String startDate, String finishDate) {
+		super();
+		this.postNo = postNo;
+		this.proposer = proposer;
+		this.startDate = startDate;
+		this.finishDate = finishDate;
+	}
 
 	public Conclusion(int postNo, String proposer, String startDate, String finishDate, String conTent) {
 		super();

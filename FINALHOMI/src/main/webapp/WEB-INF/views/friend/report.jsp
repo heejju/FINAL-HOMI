@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${ contextPath }/resources/css/reset.css" type="text/css">
 <link rel="stylesheet" type="text/css" href="css/reset.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>#취미 텃밭</title>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/common/reset.css" type="text/css">
 <style> 
 /* 

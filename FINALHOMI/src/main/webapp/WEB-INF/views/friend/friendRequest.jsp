@@ -82,6 +82,10 @@
         </div>
         <div class="clear-both"></div>
         <div class="content-one">
+        	<c:if test="${ empty list }">
+            	<div class="listNull">친구 요청이 없습니다.</div>
+            </c:if>
+            <c:if test="${ !empty list }">
         	<c:forEach var="f" items="${ list }">
             <div class="friendBox">
                 <div class="user-img">
@@ -108,6 +112,7 @@
                 </div>
             </div>
             </c:forEach>
+            </c:if>
             <!-- 복붙박스 -->
             <script>
             $(".consend-btn").click(function(){    

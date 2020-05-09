@@ -36,7 +36,7 @@
     .uBtn-box{width:10%; float: left;}
     .consend-btn{width:80px; height:30px; background:rgb(103, 81, 65); color:#fff; font-weight: bold; border-radius: 10px;}
     .refused-btn{width:80px; height:30px; background:rgb(162, 166, 78); color:#fff; font-weight: bold; border-radius: 10px;}
-    
+    .listNull{text-align: center; margin-top: 50px; font-weight:700;}
     
     /*버튼*/
     .pageing-box{width:20%; height:30px; margin:0 auto;}
@@ -93,16 +93,29 @@
                 </div>
                 <div class="user-info">
                     <br>
-                    <label style="font-weight:blod;">닉네임 : </label>
+                    <label style="display:inline-block; font-weight:700; font-size:18px; margin-top:5px; margin-right:5px;">닉네임 : </label>
                     <c:url var="userInfo" value="userInfo.fo">
 						<c:param name="userId" value="${ f.userId }"/>
 						<c:param name="page" value="${ pi.currentPage }"/>
 					</c:url>
-                    <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${ f.userName }</label>&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
-                    <label>회원등급 :</label>
-                    <label>${ f.nickName }</label>&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
-                    <label>자기소개 : </label>
-                    <label>${ f.introduction }</label>
+                    <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');" style="display:inline-block; font-weight:650; cursor: pointer;">${ f.nickName }</label>&nbsp;&nbsp;
+                    <c:if test="${f.mKind eq 0}">	
+                    	<label style="display:inline-block; font-weight:900; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;">( 운 영 자 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </c:if>
+                    <c:if test="${f.mKind eq 1}">
+                    	<label style="display:inline-block; font-weight:900; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;">( 농 부 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </c:if>
+                    <c:if test="${f.mKind eq 2}">
+                    	<label style="display:inline-block; font-weight:900; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;">( 모 종 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </c:if><br><br>
+                    <label style="display:inline-block; font-weight:700; margin-bottom:8px;">자기소개 - </label><br>
+                    <c:if test="${ empty f.introduction }">
+                    	<label style=" color:#ccc; font-weight:500;">자기소개 작성을 하지 않으셨습니다</label>
+                    </c:if>
+                    
+                    <c:if test="${ !empty f.introduction }">
+                    	<label style="font-weight:500;">${ f.introduction }</label>
+                    </c:if>
                 </div>
                 <div class="uBtn-box">
                     <br><br>

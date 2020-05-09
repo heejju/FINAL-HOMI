@@ -43,11 +43,9 @@ public class FriendController {
 		}
 		
 		int listCount = fService.getListCount();
-		System.out.println("넌받아???"+listCount);
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		System.out.println("id : "+id) ;
 		ArrayList<Member> list = fService.selectList(pi, id); 
 		if(list != null) {
 	         mv.addObject("list", list);
@@ -71,7 +69,6 @@ public class FriendController {
 			currentPage = page;
 		}
 		int listCount = fService.getSearchList(id);
-		System.out.println("페이지?"+ listCount);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		

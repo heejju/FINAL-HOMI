@@ -15,6 +15,7 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<!-- include summernote css/js-->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
@@ -92,6 +93,10 @@
 		width: 100%; height: 300px; border: 1px solid lightgray
 	}
 	
+	#selectHobbyBtn{
+		border-radius:5px; border:0px;  width:90px; height:30px; background:#A5C3CF; vertical-align: middle;
+		cursor:pointer; color:white; font-weight:bold; font-size:16px;
+	}
 	.selectLocation{
 		height:40px; border: 3px solid rgb(103, 81, 65); text-align-last : center; width: 170px;
 		font-weight: bold; border-radius: 5px; font-size: 20px; box-sizing: border-box; vertical-align: middle;
@@ -201,8 +206,15 @@
 				<br>
 				<textarea class="title" id='title' name='title' placeholder="제목을 입력해주세요.">${ lb.title }</textarea>
 				<p>
+					<c:url var="HBSel" value="selectHobbyView.lec"/>
 					<b class="green" style="vertical-align: middle;">카테고리 : </b>
-					<select name="hobbyNo" id='hobbyNo'><!-- DB에서 불러오기 -->
+					<input type="hidden" name="hobbyNo" id="hobbyNo" value="${ lb.hobbyNo }">
+					<span id="hobbyName" style="width:200px">${ lb.hobbyName }</span>
+					<button type="button" id="selectHobbyBtn" 
+						onclick="window.open('${HBSel}', 'hobbyPopup', 'width=1100px, height=800px, menubar=no, status=no, toolbar=no, resizable=no');">
+						취미 선택
+					</button>
+					<%-- <select name="hobbyNo" id='hobbyNo'><!-- DB에서 불러오기 -->
 						<option style="color: lightgray" value='0'>선택</option>
 						<c:forEach var="hobby" items="${ hList }">
 							<c:if test="${ lb.hobbyNo eq hobby.hobbyNo }">
@@ -212,7 +224,7 @@
 								<option value="${ hobby.hobbyNo }">${ hobby.hobbyName }</option>
 							</c:if>
 						</c:forEach>
-					</select>
+					</select> --%>
 				</p>
 				<p>
 				<b class="green">회당 강의료: </b><b class="brown"><input onkeyup="numberVal(this);" onkeydown="return notMinusAndPlus(this);" name="otTuition" id='otTuition' min="0" type="Number" class="brown inputS" placeholder="수강료를 입력해주세요." style="text-align: right;" value="${ lb.otTuition }">원</b>

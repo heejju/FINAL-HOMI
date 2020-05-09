@@ -32,7 +32,7 @@
 		<div style="width: 100%;">
 			<div>
 				<!-- 답변완료, 수정, 삭제 버튼 -->
-				<div class="utilArea" style="position: relative; left: 60px;">
+				<div class="utilArea" style="position: relative; left: 1%; padding: 10px;">
 					<c:if test="${ loginUser.mKind == 0}">
 						<c:if test="${question.report_yn eq 'N' }">
 							<input type="checkbox" id="report_yn" name="report_yn"> 답변완료 처리하기
@@ -158,7 +158,7 @@
 					$('#report_yn').attr('disabled', true);
 				},
 				error: function(data) {
-					alert("아니 나한테 왜그러는데");
+					alert("답변 상태 바꾸기 실패");
 				}
 			});
 		});

@@ -19,7 +19,7 @@
 		</script>
 	</header>
 	<div class="wrapper">
-		<form id="myPwdForm" method="post" action="changePwd.me">
+		<form id="myPwdForm" method="post">
 			<script>
 				$(document).ready(function() {
 					$('#myPwdForm').attr('onSubmit', false) ;
@@ -48,7 +48,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><pre id="oldPwdCheck" style="text-align: right; color: red;">기존에 사용하시던 비밀번호를 입력하세요.                          </pre></td>
+					<td colspan="2"><pre id="oldPwdCheck" style="text-align: right; color: red; margin-right: 8%;">기존에 사용하시던 비밀번호를 입력하세요.</pre></td>
 				</tr>
 				<tr>
 					<th rowspan="2"><div id="buttonB_upPwd">신규 비밀번호</div></th>
@@ -58,7 +58,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><pre id="userPwdCheck" style="text-align: right; color: red;">비밀번호를 입력하세요.                          </pre></td>
+					<td colspan="2"><pre id="userPwdCheck" style="text-align: right; color: red; margin-right: 8%;">비밀번호를 입력하세요.</pre></td>
 				</tr>
 				<tr>
 					<th rowspan="2"><div id="buttonB_upPwd">신규 비밀번호 확인</div></th>
@@ -68,11 +68,11 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><pre id="userPwd2Check" style="text-align: right; color: red;">비밀번호 확인을 입력하세요.                          </pre></td>
+					<td colspan="2"><pre id="userPwd2Check" style="text-align: right; color: red; margin-right: 8%;">비밀번호 확인을 입력하세요.</pre></td>
 				</tr>
 				<tr>
 					<td colspan="3">
-						<br><button id="buttonG_upPwd" onclick="fn_checkWhenSubmit();">변경하기</button><br><br>
+						<br><div id="buttonG_upPwd" onclick="fn_checkWhenSubmit();">변경하기</div><br><br>
 					</td>
 				</tr>
 			</table>
@@ -83,7 +83,20 @@
 					if($('#isOldPwdUsable').val()	== "truePwd" &&
 					   $('#isUserPwdUsable').val()	== "truePwd" &&
 					   $('#isUserPwd2Usable').val() == "truePwd") {
-						$('#myPwdForm').submit() ;
+						var userPwd = $('#userPwd').val() ;
+						$.ajax({
+							url: 'changePwd.me',
+							data: {userPwd:userPwd},
+							success: function(data) {
+								swal({
+									title: '비밀번호 변경에 성공하였습니다! 😊',
+									text: "다시 로그인해 주세요!",
+									icon: "success"
+								}).then(function() {
+									location.href = "loginView.me" ;
+								}) ;
+							}
+						}) ;
 					} else {
 						swal({
 							title: "잘못 입력하셨습니다!",
@@ -94,19 +107,39 @@
 				}
 			</script>
 			<script>
-				var chkData = "false" ;
-				function checkPwd(userPwd) {
+				function checkPwd(userPwd, string) {
+					var reg = /[A-Za-z0-9]{8,16}/ ;
 					$.ajax({
 						type : "POST",
 						url: 'checkPwd.me',
 						data: {userPwd:userPwd},
 						success: function(data) {
-							if(data == "false") {
-								$('#isOldPwdUsable').val("falsePwd") ;
-								chkData = "false" ;
+							if(string == "old") {
+								if(data == "false") {
+									$('#oldPwdCheck').html("잘못된 비밀번호입니다.") ;
+			 						$('#oldPwdCheck').css('color', 'red') ;
+			 						$('#isOldPwdUsable').val("falsePwd") ;
+								} else {
+									$('#oldPwdCheck').html("비밀번호가 일치합니다.") ;
+			 						$('#oldPwdCheck').css('color', 'green') ;
+			 						$('#isOldPwdUsable').val("truePwd") ;
+								}
 							} else {
-								$('#isOldPwdUsable').val("truePwd") ;
-								chkData = "true"  ;
+								if(reg.test(userPwd)) {
+									if(data == "false") {
+										$('#userPwdCheck').html("사용 가능한 비밀번호입니다.") ;
+										$('#userPwdCheck').css('color', 'green') ;
+										$('#isUserPwdUsable').val("truePwd") ;
+									} else {
+										$('#userPwdCheck').html("잘못된 비밀번호입니다.") ;
+				 						$('#userPwdCheck').css('color', 'red') ;
+				 						$('#isUserPwdUsable').val("falsePwd") ;
+									}
+								} else {
+									$('#userPwdCheck').html("잘못된 비밀번호입니다.") ;
+			 						$('#userPwdCheck').css('color', 'red') ;
+			 						$('#isUserPwdUsable').val("falsePwd") ;
+								}
 							}
 						}
 					}) ;
@@ -116,24 +149,12 @@
 				$('#oldPwd').on('keyup', function() {
 					$oldPwd = $('#oldPwd').val() ;
 					if($oldPwd.trim().length == 0) {
-						$('#oldPwdCheck').html("기존에 사용하시던 비밀번호를 입력하세요.                          ") ;
+						$('#oldPwdCheck').html("기존에 사용하시던 비밀번호를 입력하세요.") ;
 						$('#oldPwdCheck').css('color', 'gray') ;
 						$('#isOldPwdUsable').val("emptyPwd") ;
 					} else {
-						$('#oldPwdCheck').html("기존에 사용하시던 비밀번호를 입력하세요.                          ") ;
-						$('#oldPwdCheck').css('color', 'gray') ;
-						$('#isOldPwdUsable').val("truePwd") ;
+						checkPwd($oldPwd, "old") ;
 					}
-					
-// 					else if(chkData != "false") {
-// 						$('#oldPwdCheck').html("비밀번호가 일치합니다.                          ") ;
-// 						$('#oldPwdCheck').css('color', 'green') ;
-// 						$('#isOldPwdUsable').val("truePwd") ;
-// 					} else {
-// 						$('#oldPwdCheck').html("잘못된 비밀번호입니다.                          ") ;
-// 						$('#oldPwdCheck').css('color', 'red') ;
-// 						$('#isOldPwdUsable').val("falsePwd") ;
-// 					}
 				}) ;
 				
 
@@ -141,25 +162,12 @@
 				$('#userPwd').on('keyup', function() {
 					var $userPwd = $('#userPwd').val() ;
 					var reg = /[A-Za-z0-9]{8,16}/ ;
-					var isUsable = 1 ;
 					if($userPwd.trim().length == 0) {
-						$('#userPwdCheck').html("비밀번호를 입력하세요.                          ") ;
+						$('#userPwdCheck').html("비밀번호를 입력하세요.") ;
 						$('#userPwdCheck').css('color', 'red') ;
 						$('#isUserPwdUsable').val("emptyPwd") ;
-						isUsable = 0 ;
-					} else if(chkData != "false") {
-						$('#userPwdCheck').html("기존의 비밀번호와 일치합니다.                          ") ;
-						$('#userPwdCheck').css('color', 'red') ;
-						$('#isUserPwdUsable').val("falsePwd") ;
-					} else if(reg.test($userPwd)) {
-						$('#userPwdCheck').html("사용 가능한 비밀번호입니다.                          ") ;
-						$('#userPwdCheck').css('color', 'green') ;
-						$('#isUserPwdUsable').val("truePwd") ;
-						isUsable = 0 ;
 					} else {
-						$('#userPwdCheck').html("잘못된 비밀번호입니다.                          ") ;
-						$('#userPwdCheck').css('color', 'red') ;
-						$('#isUserPwdUsable').val("falsePwd") ;
+						checkPwd($userPwd, "asd") ;
 					}
 				}) ;
 				
@@ -167,22 +175,24 @@
 				$('#userPwd2').on('keyup', function() {
 					var $userPwd  = $('#userPwd').val() ;
 					var $userPwd2 = $('#userPwd2').val() ;
-					var isUsable = 1 ;
-					
 					if($userPwd2.trim().length == 0) {
-						$('#userPwd2Check').html("비밀번호 확인을 입력하세요.                          ") ;
+						$('#userPwd2Check').html("비밀번호 확인을 입력하세요.") ;
 						$('#userPwd2Check').css('color', 'red') ;
 						$('#isUserPwd2Usable').val("emptyPwd") ;
-						isUsable = 0 ;
 					} else if($userPwd2 == $userPwd) {
-						$('#userPwd2Check').html("비밀번호가 일치합니다.                          ") ;
+						$('#userPwd2Check').html("비밀번호가 일치합니다.") ;
 						$('#userPwd2Check').css('color', 'green') ;
 						$('#isUserPwd2Usable').val("truePwd") ;
-						isUsable = 0 ;
 					} else {
-						$('#userPwd2Check').html("비밀번호가 다릅니다.                          ") ;
+						$('#userPwd2Check').html("비밀번호가 다릅니다.") ;
 						$('#userPwd2Check').css('color', 'red') ;
 						$('#isUserPwd2Usable').val("falsePwd") ;
+					}
+				}) ;
+				
+				$('.JoinInput').keydown(function(key) {
+					if(key.keyCode == 13) {
+						$('#buttonG_upPwd').click() ;
 					}
 				}) ;
 			</script>

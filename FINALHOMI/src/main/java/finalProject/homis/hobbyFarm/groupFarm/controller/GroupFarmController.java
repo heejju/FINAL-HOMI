@@ -146,6 +146,16 @@ public class GroupFarmController {
 		
 	}
 	
+	@RequestMapping("hList.gf")
+	public ModelAndView selectHobbyList(ModelAndView mv) {
+		
+		ArrayList<Hobby> hlist = gfService.selectHList();
+		
+		mv.addObject("hlist",hlist)
+		  .setViewName("SelectHobby");
+		return mv;
+	}
+	
 	// 게시글 작성 페이지 이동
 	@RequestMapping("insertView.gf")
 	public ModelAndView insertVeiw(ModelAndView mv) {
@@ -204,39 +214,40 @@ public class GroupFarmController {
 
 		int result = gfService.insertBoard(gf, img);
 		int msgResult = 0;
+		
 		if(result > 0) {
-			
-
-			Message message = new Message();
-			String id = ((Member)session.getAttribute("loginUser")).getUserId();
-			String nickName = ((Member)session.getAttribute("loginUser")).getNickName();
-			GroupFarmBoard newGF = gfService.selectLastInsertInfo(id);
-			String url = "\"window.open('bdetail.gf?postNo="+newGF.getPostNo()+"')\"";
-
-			String[] invitedFriends = inviteFriends.split(",");
-			
-			for(int i = 0; i < invitedFriends.length; i++) {
+			if(!inviteFriends.equals("")) {
+				Message message = new Message();
+				String id = ((Member)session.getAttribute("loginUser")).getUserId();
+				String nickName = ((Member)session.getAttribute("loginUser")).getNickName();
+				GroupFarmBoard newGF = gfService.selectLastInsertInfo(id);
+				String url = "\"window.open('bdetail.gf?postNo="+newGF.getPostNo()+"')\"";
 				
-				String content = "<span>안녕하세요, <img id=\"logo\" src=\"${ contextPath }/resources/Logo.png\"/>입니다!</span><br>" +
-						"<span>" + nickName + " 님께서 회원님을 '#" + newGF.getTitle() + "'모임으로 초대하셨습니다.</span><br>" + 
-						"<span>" + nickName + " 님이 모집하고 계신 모임 텃밭이 궁금하시다면 아래 버튼을 눌러 해당 게시글로 바로 이동해보세요!</span><br>" + 
-						"<div id='boardBtnWrapper'>" + 
-						"<button id='goDetail' onclick=" + url + "'>보러가기</button>"+
-						"</div>";
+				String[] invitedFriends = inviteFriends.split(",");
 				
-				message.setMsg_to(invitedFriends[i]); //받을사람 id
-				message.setMsg_from(id);
-				message.setMsg_title(newGF.getTitle() + " 모임초대입니다!"); //쪽지 제목
-				message.setMsg_content(content);
+				for(int i = 0; i < invitedFriends.length; i++) {
+					
+					String content = "<span>안녕하세요, <img id=\"logo\" src=\"${ contextPath }/resources/Logo.png\"/>입니다!</span><br>" +
+							"<span>" + nickName + " 님께서 회원님을 #" + newGF.getTitle() + " 모임으로 초대하셨습니다.</span><br>" + 
+							"<span>" + nickName + " 님이 모집하고 계신 모임 텃밭이 궁금하시다면 아래 버튼을 눌러 해당 게시글로 바로 이동해보세요!</span><br>" + 
+							"<div id='boardBtnWrapper'>" + 
+							"<button id='goDetail' onclick=" + url + "'>보러가기</button>"+
+							"</div>";
+					
+					message.setMsg_to(invitedFriends[i]); //받을사람 id
+					message.setMsg_from(id);
+					message.setMsg_title(newGF.getTitle() + " 모임초대입니다!"); //쪽지 제목
+					message.setMsg_content(content);
+					
+					msgResult += msgService.insertMsg(message);
+				}
 				
-				msgResult += msgService.insertMsg(message);
-			}
-			
-			
-			if(msgResult == invitedFriends.length) {
-				msg = "success";
-			} else {
-				throw new GroupFarmBoardException("초대 메세지 전송에 실패하였습니다.");
+				
+				if(msgResult == invitedFriends.length) {
+					msg = "success";
+				} else {
+					throw new GroupFarmBoardException("초대 메세지 전송에 실패하였습니다.");
+				}
 			}
 			
 			
@@ -316,7 +327,6 @@ public class GroupFarmController {
 	        	randomTList.add(tList.get(2));
 	        	break;
 	        }
-	        
 	        
 			return randomTList;
 	}
@@ -552,9 +562,12 @@ public class GroupFarmController {
 	
 	// 글 수정 View
 	@RequestMapping("modifyView.gf")
-	public ModelAndView modifyView(ModelAndView mv, @RequestParam("postNo") int postNo, @RequestParam("page") Integer page) {
+	public ModelAndView modifyView(ModelAndView mv, @RequestParam("hobbyNo") Integer hobbyNo,
+				@RequestParam("postNo") int postNo, @RequestParam("page") Integer page) {
 		
-		GroupFarmBoard gf = gfService.selectBoard(postNo);
+		GroupFarmBoard gf = new GroupFarmBoard();
+		gf.setHobbyNo(hobbyNo);
+		gf = gfService.selectBoard(postNo);
 		Image img = gfService.selectImage(postNo);
 		ArrayList<GroupFarmApplication> gfa = gfService.selectGfaList(postNo);
 		ArrayList<Hobby> hlist = gfService.selectHList();

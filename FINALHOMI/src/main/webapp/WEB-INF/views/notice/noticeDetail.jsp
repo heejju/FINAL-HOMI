@@ -23,7 +23,7 @@ div.container{width:80%; height:80%; background-color:#fff; align:center; border
 .title-box > div{float:left;}
 .num{font-weight:bold; margin-left:1%;}
 .title{width:60%; font-size:16pt; margin-left:5%;}
-.count{color:#7f7f7f; font-size:12pt; display: inline-block; margin-left:3%;}
+.count{color:#7f7f7f; font-size:12pt; display: inline-block; margin-left:1%;}
 .date{color:#7f7f7f; font-size:12pt; display: inline-block; margin-left:3%;}
 .title-line{width:100%; height:2px; background:#ccc; margin: 20px 0;}
 
@@ -35,7 +35,7 @@ div.container{width:80%; height:80%; background-color:#fff; align:center; border
 img{width:6%;height:6%;}
 
 /* 내용 */
-.content{margin:25% 13%; width:70%; height:100%; min-height:300px; resize:none; padding:10px; border:none; font-size:12pt;}
+.content{margin:25% 13%; width:70%; height:100%; min-height:300px; resize:none; padding:10px; border:none; font-size:12pt; line-height:25px;}
 .button{margin-top:20px; margin-bottom:3%;}
 
 

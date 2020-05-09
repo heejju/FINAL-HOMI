@@ -78,7 +78,6 @@ public class FriendController {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
 			mv.setViewName("friendSearch");
-			System.out.println("페이지?"+pi);
 		} else {
 			throw new FriendsException("회원 전체 조회에 실패하였습니다.");
 		}
@@ -98,7 +97,7 @@ public class FriendController {
 	      }
 	      
 	      Member m = fService.selectUser(userId);
-	      
+	      System.out.println("맴버는 뭐가 나 올까" + m);
 	      ArrayList<Conclusion> cList = fService.selectClass(userId);
 	      
 	      for(Conclusion i : cList)

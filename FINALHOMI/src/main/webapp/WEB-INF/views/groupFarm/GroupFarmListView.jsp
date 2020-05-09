@@ -412,7 +412,7 @@
 				</div>
 				<div class="wordArea">
 					<input type="text" placeholder="검색어 입력" name="searchValue" id="searchValue" 
-						value="${ searchValue }" onKeyDown="if(event.keyCode == 13) search()">
+						value="${ searchValue }" onKeyDown="if(event.keyCode == 13) search();">
 					<button type="button" id="searchBtn" onclick="search();">검색</button>
 				</div>
 			</div>

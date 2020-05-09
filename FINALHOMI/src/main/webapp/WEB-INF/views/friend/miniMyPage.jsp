@@ -63,7 +63,10 @@ img{	border:0;}
 /**/
     #wrap{width:600px; background:#ccc; height:700px;}
     header{width:100%; padding-top:50px;}
-    .profile-img{width:150px; height:150px; margin:0 auto; background:#fff; border-radius:100px; box-shadow: 3px 3px 15px 1px;}
+    .profile-imwidth:150px; height:150px; margin:0 auto; background:#fff; border-radius:100px; box-shadow: 3px 3px 15px 1px; overflow: hidden;}
+    .user-img{width:8.5%; height:150px; margin:13px; border: 1px solid #000; box-sizing: border-box; border-radius: 60px; box-shadow: 5px 3px 6px 0.1px gray; float:left; margin-right:5%; overflow: hidden;}
+    .i-img{width:100%; }
+    .i-img > img {width:100%;}
     .user{width:50%; margin:0 32%; margin-top:30px;}
     .user-id{width:70%; display: inline-block; text-align: center; font-size:1.8rem;}
     .repot{width:25%; display: inline-block; text-align: center;}
@@ -96,13 +99,24 @@ img{	border:0;}
     .close-btn{width:10%; padding:15px 35px; background:#fff; margin:0 auto; font-size:1.5rem; text-align: center; cursor: pointer; border-radius: 5px;} 
     
     
+    /*이미지 마우스 올렸을때*/
+    .i-img{position:relative; cursor:pointer; /* background-color:#000; */ padding-top:100%; overflow:hidden; margin-bottom:15px;}
+	.i-img img{position:absolute; top:0; opacity:0.8; filter:alpha(opacity=80);}
+	.i-img .hover-op{-webkit-transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; opacity:1; filter:alpha(opacity=100); z-index:1; -webkit-filter:blur(0px); filter:blur(0px);}
+	.i-img:hover .hover-op{-webkit-transform:scale(1.2); transform:scale(1.2); opacity:0; filter:alpha(opacity=0); -webkit-filter:blur(1px); filter:blur(1px);}
+    
 </style>
 </head>
 
 <body onload='resizeWindow(this)'>
 	<div id="wrap">
         <header>
-            <div class="profile-img"></div>
+        	<div  class="profile-img">
+           		<div class="i-img">
+               		<img src="${contextPath}/resources/uploadFiles/${member.changeName}"  class="img-responsive hover-op"/>
+               		<img src="${contextPath}/resources/uploadFiles/${member.changeName}"  class="img-responsive hover-st"/>
+              	</div>
+        	</div>
             <c:url var="report" value="report.fo">
             	<c:param name="userId" value="${ member.userId }"/>
             	<c:param name="page" value="${ pi.currentPage }"/>
@@ -153,15 +167,6 @@ img{	border:0;}
 	                </div>
                 </c:forEach>
                 </c:if>
-                <%-- <c:set var="i" value="0" />
-                <c:forEach begin="0" end="2" var="i">
-	                <div class="content-two">
-	                    <div class="c2-Number c2-sharing">${ cList.get(i).postNo }</div>
-	                    <div class="c2-Title c2-sharing">${ cList.get(i).conTent }</div>
-	                    <div class="c2-Date c2-sharing">${ cList.get(i).startDate }</div>
-	                </div>
-	                 <c:set var="i" value="${ i+1 }" />
-                </c:forEach> --%>
             </div>
             <div class="clear-both"></div>
         </section>

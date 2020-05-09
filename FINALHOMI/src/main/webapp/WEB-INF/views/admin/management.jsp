@@ -314,6 +314,7 @@ button:hover{cursor:pointer;}
 		// 회원 탈퇴
 		$('.buttonB').on('click', function(){
 			var checkbox = document.getElementsByName("checkbox");
+			checkVal = "";
 			for(var i = 0; i < checkbox.length; i++){
 				if(checkbox[i].checked == true){
 					checkVal += checkbox[i].value + ",";

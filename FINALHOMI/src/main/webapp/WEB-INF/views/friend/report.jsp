@@ -11,7 +11,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>#취미 텃밭</title>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/common/reset.css" type="text/css">
-<style> 
+<style>
 /* 
 html5doctor.com Reset Stylesheet v1.6.1
 Last Updated: 2010-09-17

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>#취미  텃밭</title>
+<title>#취미  텃밭</title> 
 </head>
 <style>
 	/* 

@@ -61,7 +61,7 @@ button:hover{cursor:pointer;}
 #startBtn:hover{font-wieght:bold; background:#675141; color:white}
 #endBtn:hover{font-wieght:bold; background:#675141; color:white}
 .startBtn, .endBtn, .pageNum, #before, #next {width:40px; height:40px; border-radius:5px; border:0px; background-color:white; font-size:16px; padding:5px;}
-a{display:inline !important;}	
+.a_tag{display:inline !important;}		
 
 /* 검색창 */
 .searchArea{text-align:center; margin:0 20px 20px 20px;}
@@ -182,7 +182,7 @@ a{display:inline !important;}
 	                	</c:if>
 	                	<c:param name="page" value="1"/>            
 	                </c:url>
-	                <a href="${ first }">
+	                <a class="a_tag" href="${ first }">
 	                   <button class="startBtn" style="background:#e0e0e0; color:black">&lt;&lt;</button>
 	                </a>
 	             </c:if>
@@ -198,7 +198,7 @@ a{display:inline !important;}
 	                	</c:if>
 	                 	<c:param name="page" value="${ pi.currentPage - 1 }"/>
 	              	</c:url>
-	             	<a href="${ before }"><button style="background:#675141; color:white" id="before">&lt;</button></a>
+	             	<a class="a_tag" href="${ before }"><button style="background:#675141; color:white" id="before">&lt;</button></a>
 	           </c:if>
 	           <!-- 페이지 -->
 	           <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
@@ -219,7 +219,7 @@ a{display:inline !important;}
 	                		<c:param name="page" value="${ p }"/>
 	                	</c:url>
 	                </c:if>
-	                <a href="${ pagination }"><button class="pageNum" style="font-weight:normal; background:white; color:black;">${ p }</button></a>
+	                <a class="a_tag" href="${ pagination }"><button class="pageNum" style="font-weight:normal; background:white; color:black;">${ p }</button></a>
 	              </c:if>
 	           </c:forEach>
 	           
@@ -235,7 +235,7 @@ a{display:inline !important;}
 	                	</c:if>
 	             	   <c:param name="page" value="${ pi.currentPage + 1 }"/>
 	              </c:url> 
-	              <a href="${ after }"><button id="next" style="background:#675141; color:white">&gt;</button></a>
+	              <a class="a_tag" href="${ after }"><button id="next" style="background:#675141; color:white">&gt;</button></a>
 	           </c:if>
 	           
 	           <!-- 맨 뒤로 -->
@@ -250,7 +250,7 @@ a{display:inline !important;}
 	                	</c:if>
 	                 	<c:param name="page" value="${ pi.maxPage }"/>            
 	                </c:url>
-	                <a href="${ last }">
+	                <a class="a_tag" href="${ last }">
 	                   <button class="endBtn" style="background:#e0e0e0; color:black">&gt;&gt;</button>
 	                </a>
 	             </c:if>
@@ -320,7 +320,6 @@ a{display:inline !important;}
 				}
 			}
 			var mNo = checkVal;
-			console.log(mNo);
 			
 			swal("정말 탈퇴시겠습니까?",{
 				icon : "warning",

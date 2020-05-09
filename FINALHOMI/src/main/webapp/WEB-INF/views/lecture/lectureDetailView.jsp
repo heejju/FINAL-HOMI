@@ -55,7 +55,7 @@
 	
 	div.body2{
 		border: 1px solid lightgray; margin: 0 auto;
-		width: 85%; height: auto; background: white; padding-bottom: 50px;
+		width: 100%; height: auto; background: white; padding-bottom: 50px;
 	}
 	
 	div.header{
@@ -64,16 +64,16 @@
 	}
 	
 	div.header > div.imgDiv{
-		width : 50%; height: 200px; border: 1px solid black; box-sizing:border-box;
+		width : 50%; height: 250px; border: 0px solid black; box-sizing:border-box;
 		float: left; margin: 0 3% 0 3%;
 	}
 	
 	div.header > div.imgDiv > img{
-		width : 100%; height: 100%; border: 1px solid black; box-sizing:border-box;
+		width : auto; height: 100%; border: 0px solid black; box-sizing:border-box;
 	}
 	div.header > div.firstInfo{
-		width: 40%; height: 200px; text-align: center;
-		float: left;
+		width: 40%; height: 250px; text-align: center;
+		float: left; font-size: 22px;
 	}
 	
 	
@@ -178,7 +178,7 @@
 	#modifyBtn{background:#888c43; border-radius:0px;}
 </style>
 </head>
-<body style="overflow-x: hidden; line-height: normal;"><!-- div.body에 인라인블럭하니까 생겨서 없애줌 -->
+<body style="overflow-x: hidden; line-height: normal; min-width: 1100px;"><!-- div.body에 인라인블럭하니까 생겨서 없애줌 -->
 
 	<br><br><br>
 	<div class="body">

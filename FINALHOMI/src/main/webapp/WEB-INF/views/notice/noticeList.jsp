@@ -132,7 +132,7 @@ a{display:inline !important;}
 	        	</c:if>
             <!-- 맨 앞으로 -->
 	             <c:if test="${ pi.currentPage <= 1 }">
-	                <button class="startBtn" style="background:#e0e0e0; color:black" disabled>&lt;&lt;</button>
+	                <button class="startBtn" style="background: lightgray; cursor: default;" disabled>&lt;&lt;</button>
 	             </c:if>
 	             <c:if test="${ pi.currentPage ne 1 }">
 	                <c:url var="first" value="${ loc }">
@@ -148,7 +148,7 @@ a{display:inline !important;}
 	             </c:if>
 	           <!-- [이전] -->
 	           <c:if test="${ pi.currentPage <= 1 }">
-	              <button id="before" style="background:#675141; color:white">&lt;</button>
+	              <button id="before"  style="background: lightgray; cursor: default;">&lt;</button>
 	           </c:if>
 	           <c:if test="${ pi.currentPage > 1 }">
 					<c:url var="before" value="${ loc }">
@@ -185,7 +185,7 @@ a{display:inline !important;}
 	           </c:forEach>
 	           <!-- [다음] -->
 	           <c:if test="${ pi.currentPage >= pi.maxPage }">
-	              <button id="next" style="background:#675141; color:white" disabled>&gt;</button>
+	              <button id="next"  style="background: lightgray; cursor: default;" disabled>&gt;</button>
 	           </c:if>
 	           <c:if test="${ pi.currentPage < pi.maxPage }">
 	              <c:url var="after" value="${ loc }">
@@ -200,7 +200,7 @@ a{display:inline !important;}
 	           
 	           <!-- 맨 뒤로 -->
 	             <c:if test="${ pi.currentPage > pi.maxPage }">
-	                <button class="endBtn" style="font-weight:bold; background:#675141; color:white">&gt;&gt;</button>
+	                <button class="endBtn"  style="background: lightgray; cursor: default;" disabled>&gt;&gt;</button>
 	             </c:if>
 	             <c:if test="${ pi.currentPage <= pi.maxPage }">
 	                <c:url var="last" value="${ loc }">

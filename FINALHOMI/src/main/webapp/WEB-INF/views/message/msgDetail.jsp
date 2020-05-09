@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <style>
 	#title{text-align: center; border-bottom: 1px solid gray; color: #888c43;}
 	
@@ -16,6 +17,7 @@
 	.buttonG{width:100px; background-color:rgb(120, 120, 120); color:#fff; border:none; padding:5px 0; text-align:center; font-size:16px; cursor:pointer; border-radius:5px;}
 	
 	#goDetail{position: relative; left: 28%; width:200px; background-color:#888c43; color:#fff; border:none; padding:10px; text-align:center; font-size:20px; cursor:pointer; border-radius:5px;}
+	#logo{width:110px; height:auto; vertical-align:middle;}
 </style>
 </head>
 <body style="background: #fff6f0;">
@@ -62,7 +64,9 @@
 	</div>
 	
 	<script>
-	
+		$(function(){
+			$('#logo').attr('src','${ contextPath }/resources/images/Logo.png');
+		})
 	</script>
 </body>
 </html>

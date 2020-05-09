@@ -68,19 +68,19 @@
 	
 	div.header{
 		padding-top: 20px; height: auto;
-		width: 100%;
+		width: 80%; margin: 0 auto;
 	}
 	
 	div.header > div.titleImgArea{
-		width : 45%; height: 245px; border: 1px solid lightgray; box-sizing:border-box;
-		margin: 0 0 0 4%; display: inline-block; float: none; padding:5px; text-align: center;
+		width : 49%; height: 245px; border: 1px solid lightgray; box-sizing:border-box;
+		margin: 0 0 0 0; display: inline-block; float: none; padding:5px; text-align: center;
 		cursor: pointer;
 	}
 	
 	div.header > div.firstInfo {
 		text-align:left; padding: 0 0 0 20px;
-		width: 45%; height: auto; border: 1px solid lightgray;
-		display: inline-block; float: right; margin: 0 4% 0 0; box-sizing:border-box;
+		width: 49%; height: auto; border: 1px solid lightgray;
+		display: inline-block; float: right; margin: 0 0 0 0; box-sizing:border-box;
 	}
 	div.firstInfo  select{
 		border: 2px solid rgb(103, 81, 65); border-radius: 5px; height: 27px;
@@ -153,7 +153,7 @@
 	
 </style>
 </head>
-<body style="background: #fff6f0;">
+<body style="background: #fff6f0; min-width: 1100px;">
 	<div class=firstBody>
 	<form method="post" action="insertLecture.lec" onsubmit="return beforeSubmit();" enctype="Multipart/form-data">
 	
@@ -194,9 +194,7 @@
 						reader.readAsDataURL(value.files[0]);
 					}
 				}
-			</script>
-			
-			
+			</script>			
 			<div class="firstInfo">
 				<br>
 				<textarea class="title" id='title' name='title' placeholder="제목을 입력해주세요."></textarea>

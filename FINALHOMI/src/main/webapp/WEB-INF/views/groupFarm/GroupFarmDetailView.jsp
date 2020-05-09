@@ -187,47 +187,68 @@
 								|| (gf.offerYN eq 'Y' && loginUser.mKind eq 2) }"> <!-- 강사를 구인 안하고 로그인한 회원이 강사회원이 아닐 때 -->
 						<div class="border" style="width:50%; margin:3% auto;"></div>
 					</c:if>
-					<%-- <c:if test="${ gf.offerYN eq 'Y' && loginUser.mKind eq 2 }"> <!-- 강사를 구인 안하고 로그인한 회원이 강사회원이 아닐 때 -->
-						<div class="border" style="width:50%; margin:3% auto;"></div>
-					</c:if> --%>
-					
-					<!-- 버튼 URL 연결 -->
-					<%-- <c:url var="closeGroup" value="closeGroup.gf">
-						<c:param name="postNo" value="${ gf.postNo }"/>
-						<c:param name="page" value="${ page }"/>
-					</c:url> --%>
-					
+					<%-- ${ gf.closeYN eq 'N' && gf.personnel ne gfa.size() } --%>
 					<div id="joinBtnArea">
-						<c:if test="${ gf.closeYN eq 'N' && gf.personnel ne gfa.size() }">
-							<!-- 작성자인 경우 -->
-							<c:if test="${ loginUser.nickName eq gf.nickName }">
-         						<input type="button" id="closeBtn" value="모임 마감" onclick="closeGroup();"/>
-								<!-- <button type="button" id="closeBtn" onclick="closeGroup();">모임 마감</button> -->
-							</c:if>
+						<!-- 작성자인 경우 -->
+						<c:if test="${ loginUser.nickName eq gf.nickName }">
+        						<input type="button" id="closeBtn" value="모임 마감" onclick="closeGroup();"/>
+						</c:if>
 
-							<!-- 작성자가 아닌 경우 -->
-							<c:if test="${ loginUser.userId ne gf.writer }">
-								<!-- 참가 인원이 없을 때 -->
-								<c:if test="${ gfaList.size() eq 0}">
-		         					<c:if test = "${ loginUser.mKind eq 1 }">
-		         						<input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/>
-										<!-- <button type="button" id="enterBtn" onclick="enterGroup();">모임 참가</button> -->
+						<!-- 작성자가 아닌 경우 -->
+						<c:if test="${ loginUser.userId ne gf.writer }">
+							<!-- 참가 인원이 없을 때 -->
+							<c:if test="${ gfaList.size() eq 0}">
+	         					<c:if test = "${ loginUser.mKind eq 1 }">
+	         						<input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/>
+								</c:if>
+								<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
+		         					<c:if test = "${ loginUser.mKind eq 2 }">
+		         						<input type="button" id="requestClassBtn" value="강의 신청" onclick="requestClass();"/>
+										<!-- <button type="button" id="requestBtn" onclick="requestClass();">강의 신청</button> -->
 									</c:if>
-									<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
-			         					<c:if test = "${ loginUser.mKind eq 2 }">
-			         						<input type="button" id="requestClassBtn" value="강의 신청" onclick="requestClass();"/>
-											<!-- <button type="button" id="requestBtn" onclick="requestClass();">강의 신청</button> -->
+								</c:if>
+							</c:if>
+							
+							<!-- New! -->
+							<!-- 참가 인원이 있을 때 -->
+							<c:if test="${ gfaList.size() ne 0 }">
+								<c:set var="isId" value="false" />
+								<c:set var="isIdAll" value="false" />
+								<!-- 학생 -->
+								<c:if test="${ loginUser.mKind eq 1 }">
+									<c:forEach var="gfa" items="${ gfaList }">
+										<!-- 참여자일 때 -->
+										<c:if test="${ loginUser.userId eq gfa.userId }">
+											<c:set var="isId" value="true"/>
+											<c:set var="isIdAll" value="true"/>
 										</c:if>
+										<c:if test="${ isId }">
+											<input type="button" id="exeuntBtn" value="모임 탈퇴" onclick="exeuntGroup();"/>
+											<c:set var="isId" value="false"/>
+										</c:if>
+									</c:forEach>
+									
+									<!-- 참여자가 아닐 때 -->
+									<c:if test="${ isIdAll eq false }">
+										<c:choose>
+											<c:when test="${ gf.offerYN eq 'N' && gfaList.size() ne gf.personnel}"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
+											<c:when test="${ gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() ne gf.personnel }"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
+											<c:when test="${ gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 ne gf.personnel }"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
+										</c:choose>
+										<c:choose>
+											<c:when test="${ gf.offerYN eq 'N' && gfaList.size() eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
+											<c:when test="${ gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
+											<c:when test="${ gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
+										</c:choose>
 									</c:if>
 								</c:if>
 								
-								<!-- New! -->
-								<!-- 참가 인원이 있을 때 -->
-								<c:if test="${ gfaList.size() ne 0 }">
-									<c:set var="isId" value="false" />
-									<c:set var="isIdAll" value="false" />
-									<!-- 학생 -->
-									<c:if test="${ loginUser.mKind eq 1 }">
+								<!-- 강사 -->
+								<c:if test="${ loginUser.mKind eq 2 }">
+									<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
+										<input type="button" id="requestClassBtn" value="강의 신청" onclick="requestClass();"/>
+									</c:if>
+									<c:if test="${ gf.offerYN eq 'Y' && !empty gf.teacher}">
 										<c:forEach var="gfa" items="${ gfaList }">
 											<!-- 참여자일 때 -->
 											<c:if test="${ loginUser.userId eq gfa.userId }">
@@ -235,145 +256,24 @@
 												<c:set var="isIdAll" value="true"/>
 											</c:if>
 											<c:if test="${ isId }">
-												<input type="button" id="exeuntBtn" value="모임 탈퇴" onclick="exeuntGroup();"/>
+												<input type="button" id="cancleClassBtn" value="강의 취소" onclick="cancleClass();"/>
 												<c:set var="isId" value="false"/>
 											</c:if>
 										</c:forEach>
-										
-										<!-- 참여자가 아닐 때 -->
-										<c:if test="${ isIdAll eq false }">
-											<c:choose>
-												<c:when test="${ gf.offerYN eq 'N' && gfaList.size() ne gf.personnel}"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
-												<c:when test="${ gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() ne gf.personnel }"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
-												<c:when test="${ gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 ne gf.personnel }"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
-											</c:choose>
-											<c:choose>
-												<c:when test="${ gf.offerYN eq 'N' && gfaList.size() eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
-												<c:when test="${ gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
-												<c:when test="${ gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
-											</c:choose>
-										</c:if>
-									</c:if>
-									
-									<!-- 강사 -->
-									<c:if test="${ loginUser.mKind eq 2 }">
-										<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
-											<input type="button" id="requestClassBtn" value="강의 신청" onclick="requestClass();"/>
-											<c:set var="doneLoop" value="false"/>
-										</c:if>
-										<c:if test="${ gf.offerYN eq 'Y' && !empty gf.teacher}">
-											<c:forEach var="gfa" items="${ gfaList }">
-												<!-- 참여자일 때 -->
-												<c:if test="${ loginUser.userId eq gfa.userId }">
-													<c:set var="isId" value="true"/>
-													<c:set var="isIdAll" value="true"/>
-												</c:if>
-												<c:if test="${ isId }">
-													<input type="button" id="cancleClassBtn" value="강의 취소" onclick="cancleClass();"/>
-													<c:set var="isId" value="false"/>
-												</c:if>
-											</c:forEach>
-										</c:if>
 									</c:if>
 								</c:if>
-								
-								<!-- 참가 인원이 있을 때 -->
-								<%-- <c:if test="${ gfaList.size() ne 0 }">
-									<c:set var="doneLoop" value="false" />
-									<!-- foreach -->
-										 <c:if test="${ doneLoop eq false}">
-											<c:if test="${ loginUser.mKind eq 1 }"> <!-- 학생회원 -->
-												<c:forEach var="gfa" items="${ gfaList }">
-												<!-- 참여자일 때 -->
-												<c:if test="${ loginUser.userId eq gfa.userId }">
-													<input type="button" id="exeuntBtn" value="모임 탈퇴" onclick="exeuntGroup();"/>
-													<c:set var="doneLoop" value="true"/>
-												</c:if>
-												<!-- 참여자가 아닐 때 -->
-												<c:if test="${ loginUser.userId ne gfa.userId }">
-													<c:choose>
-														<c:when test="${ gf.offerYN eq 'N' && gfaList.size() ne gf.personnel}"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
-														<c:when test="${ gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() ne gf.personnel }"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
-														<c:when test="${ gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 ne gf.personnel }"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
-													</c:choose>
-													<c:choose>
-														<c:when test="${ gf.offerYN eq 'N' && gfaList.size() eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
-														<c:when test="${ gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
-														<c:when test="${ gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
-													</c:choose>
-													<c:set var="doneLoop" value="false"/>
-												</c:if>
-												</c:forEach>
-											</c:if>
-											<c:if test="${ loginUser.mKind eq 2 }">
-												<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
-													<input type="button" id="requestClassBtn" value="강의 신청" onclick="requestClass();"/>
-													<c:set var="doneLoop" value="false"/>
-												</c:if>
-												<c:if test="${ gf.offerYN eq 'Y' && !empty gf.teacher && loginUser.userId eq gfa.userId }">
-													<input type="button" id="cancleClassBtn" value="강의 취소" onclick="cancleClass();"/>
-													<c:set var="doneLoop" value="false"/>
-													<!-- <button type="button" id="cancleClassBtn">강의 취소</button> -->
-												</c:if>
-											</c:if>
-										</c:if>
-								</c:if> --%>
 							</c:if>
 						</c:if>
-						<c:if test="${ gf.closeYN eq 'Y' || gf.personnel eq gfa.size() }">
-							<div>마감된 모임입니다 </div><br>
+						<c:if test="${ gf.closeYN eq 'Y'}">
+							<div style="margin-top:10px;">마감된 모임입니다 </div><br>
 							<!-- 작성자인 경우 -->
 							<c:if test="${ loginUser.nickName eq gf.nickName }">
          						<input type="button" id="cancleCloseBtn" value="마감 취소" onclick="cancelClose();"/>
-								<!-- <button type="button" id="closeBtn" onclick="closeGroup();">모임 마감</button> -->
 							</c:if>
 						</c:if>
 					</div>
 				</div>
-				<!-- <script>
-					var gfaList;
-					var loginUser;
-					
-					if(gfaList.size() != 0){
-						var doneLoop = true;
-						
-						for(int i=0; i<gfaList.size(); i++){
-							if(doneLoop){
-								if(loginUser.mKind == 1){
-									if(loginUser.userId == gfaList[i].userId ){
-										'모임탈퇴';
-									} else if(loginUser.userId != gfaList[i].userId){
-										switch(gf){
-										case 1, 2, 3 : '모임참가';
-										// 1 : gf.offerYN == 'N' && gfaList.size() != gf.personnel 
-										//			:: 강사구인x && 참여인원 < 구인인원
-										// 2 : gf.offerYN == 'Y' && empty gf.teacher && gfaList.size() != gf.personnel 
-										// 			:: 강사구인o && 강사x && 참여인원 < 구인인원
-										// 3 : gf.offerYN == 'Y' && !empty gf.teacher && gfaList.size() -1 != gf.personnel
-										// 			:: 강사구인o && 강사o && 참여인원(강사포함) - 1 < 구인인원
-										case 4, 5, 6 : '모집 인원 마감';
-										// 4 : gf.offerYN == 'N' && gfaList.size() eq gf.personnel
-										//			:: 강사구인x && 참여인원 = 구인인원
-										// 5 : gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() eq gf.personnel
-										// 			:: 강사구인o && 강사x && 참여인원 = 구인인원
-										// 6 : gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 eq gf.personnel
-										// 			:: 강사구인o && 강사o && 참여인원(강사포함) - 1 = 구인인원
-										}
-									}
-								} else if(loginUser.mKind == 2){
-									if(gf.offerYN == 'Y' && gf.teacher == null){
-										'강의 신청';
-									} else if(gf.offerYN == 'Y' && gf.teacher != null && loginUser.userId == gfaList[i].userId){
-										'강의 취소';
-									}
-								}
-							}
-						}
-						doneLoop = false;
-					}
-}
-				</script> -->
-				
+
 	        <!-- 모임 버튼 기능 -->
             <script>
                var personnelCount = ${ gfaList.size() };
@@ -387,7 +287,6 @@
                      var userId = "${ loginUser.userId }";
                      var mKind = ${ loginUser.mKind };
                      
-                     // location.href='enterGroup.gf?postNo='+postNo+"&page="+page+"&userId="+userId+"&mKind="+mKind;
                      $.ajax({
                         url: "enterGroup.gf",
                         type: "post",
@@ -412,18 +311,13 @@
                      var userId = "${ loginUser.userId }";
                      var mKind = ${ loginUser.mKind };
                      
-                     //location.href='exeuntGroup.gf?postNo='+postNo+"&page="+page+"&userId="+userId+"&mKind="+mKind;
                      
                      $.ajax({
                         url: "exeuntGroup.gf",
                         type: "post",
                         data: {page:page, postNo:postNo, userId:userId, mKind:mKind},
                         success: function(data){
-//                            if(personnelCount == '0'){
-//                               $('.personnelCount').text(personnelCount);
-//                            } else {
                               $('.personnelCount').text(personnelCount-1);
-//                            }
                            
                            $('#exeuntBtn').attr("onclick","enterGroup();");
                            $('#exeuntBtn').val('모임 참가');
@@ -444,7 +338,6 @@
                         var mKind = ${ loginUser.mKind };
                         var nickName = "${ loginUser.nickName }";
                         
-                        // location.href='enterGroup.gf?postNo='+postNo+"&page="+page+"&userId="+userId+"&mKind="+mKind;
                         $.ajax({
                            url: "requestClass.gf",
                            type: "post",
@@ -481,6 +374,44 @@
                          });
                       }
                   }
+               
+               
+        	  /*  var gf = ${gf.personnel};
+        	   var personnelCount;
+        	   
+        	   if('${ gf.teacher }' != ""){
+            	   personnelCount = ${ gfaList.size() -1 };
+               } else {
+            	   personnelCount = ${ gfaList.size() };
+               }
+        	   
+               if(gf == personnelCount && '${ gf.closeYN eq N }'){
+            	  $(function(){
+                	   var postNo = ${gf.postNo};
+                	   var page = ${page};
+                	   
+               		   $.ajax({
+                              url: "closeGroup.gf",
+                              type: "post",
+                              data: {page:page, postNo:postNo},
+                              success: function(data){
+                            	  swal("모집 인원이 모두 모여 모임이 자동으로 마감되었습니다", {
+                            		  icon: "success",
+                            		  button: true,
+    	                		 }).then(확인 => {
+                       			  //location.href='${refresh}';
+                       		  	});
+                              },
+                              error: function(data){
+                            	  swal("자동 마감에 실패했습니다",{
+                            		  icon: "error",
+                            		  button: false,
+                            	  });
+                              }
+                       });
+                   });
+               } */
+               
                
                
                function closeGroup(){
@@ -526,11 +457,18 @@
                }
                
                function cancelClose(){
-            	   var personnel = '${ gf.personnel }';
+            	   var personnel = ${ gf.personnel };
             	   var postNo = ${gf.postNo};
                    var page = ${page};
+                   
+            	   var personnelCount;
+                   if('${ gf.teacher }' != ""){
+                	   personnelCount = ${ gfaList.size() -1 };
+                   } else {
+                	   personnelCount = ${ gfaList.size() };
+                   }
             	   
-            	   if(personnel == personnelCount ){
+                   if(personnel == personnelCount ){
             		   swal({
                            title: "마감 취소를 할 수 없습니다..! 😥",
                            text: "참여 인원이 찬 모임은 취소 할 수 없어요",
@@ -574,15 +512,14 @@
             		   
             	   }
                }
-               
             </script>
 
-			<c:url var="refresh" value="bdetail.gf">
-				<c:param name="postNo" value="${ gf.postNo }"/>
-                 <c:param name="page" value="${ page }"/>
-			</c:url>				
+				<c:url var="refresh" value="bdetail.gf">
+					<c:param name="postNo" value="${ gf.postNo }"/>
+	                 <c:param name="page" value="${ page }"/>
+				</c:url>				
 			</form>
-			</div>
+		</div>
 			
 			<!-- 버튼 모음 -->
 			<c:url var="bmodify" value="modifyView.gf">
@@ -603,10 +540,10 @@
 					<button id="updateBtn">수정</button>
 					<button id="deleteBtn">삭제</button>
 				</c:if>
-				<script>
 				
+				
+				<script>
 					$('#updateBtn').click(function(){
-						var check =
 						swal({
 	                		  title: "글을 수정하시겠습니까?",
 	                		  text: "모임 텃밭 수정에는 많은 제약이 있습니다.",
@@ -626,8 +563,6 @@
 					});
 					
 					$('#deleteBtn').click(function(){
-						var check = confirm('게시글을 삭제하시겠습니까?');
-						
 						swal({
 	                		  title: "글을 삭제하시겠습니까?",
 	                		  text: "모임이 끝나지 않았다면 참여 회원에게 정보가 제공되지 않습니다.",

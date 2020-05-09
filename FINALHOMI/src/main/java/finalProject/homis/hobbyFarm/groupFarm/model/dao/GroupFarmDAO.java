@@ -176,14 +176,27 @@ public class GroupFarmDAO {
 
 	public int updateBoard(SqlSessionTemplate sqlSession, GroupFarmBoard gf, Image img) {
 		
-		int result = sqlSession.insert("groupFarmMapper.updateBoard", gf);
+		int result = sqlSession.update("groupFarmMapper.updateBoard", gf);
 		
 		if(result > 0) {
-			return sqlSession.insert("groupFarmMapper.updateImg", img);
+			return sqlSession.update("groupFarmMapper.updateImg", img);
 		} else {
 			throw new GroupFarmBoardException("DB등록에 실패하였습니다.");
 		}
 	}
+
+	public int updateBoard(SqlSessionTemplate sqlSession, GroupFarmBoard gf) {
+		return sqlSession.update("groupFarmMapper.updateBoard", gf);
+	}
+
+	public int updateGroup(SqlSessionTemplate sqlSession, GroupFarmBoard gf) {
+		return sqlSession.update("groupFarmMapper.updateGroup", gf);
+	}
+
+	public int updateImg(SqlSessionTemplate sqlSession, Image img) {
+		return sqlSession.update("groupFarmMapper.updateImg", img);
+	}
+
 	
 
 	

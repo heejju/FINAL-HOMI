@@ -162,8 +162,18 @@ public class GroupFarmServiceImpl implements GroupFarmService{
 
 	// 게시글 수정
 	@Override
-	public int updateBoard(GroupFarmBoard gf, Image img) {
-		return gfDAO.updateBoard(sqlSession, gf, img);
+	public int updateBoard(GroupFarmBoard gf) {
+		return gfDAO.updateBoard(sqlSession, gf);
+	}
+
+	@Override
+	public int updateGroup(GroupFarmBoard gf) {
+		return gfDAO.updateGroup(sqlSession, gf);
+	}
+
+	@Override
+	public int updateImg(Image img) {
+		return gfDAO.updateImg(sqlSession, img);
 	}
 
 	

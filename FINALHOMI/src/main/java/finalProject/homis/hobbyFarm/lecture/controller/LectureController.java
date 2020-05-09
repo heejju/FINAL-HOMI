@@ -254,6 +254,13 @@ public class LectureController implements Comparator<ArrayList<String>>{
 			searchTag = "";
 		if(searchValue == null)
 			searchValue = "";
+		System.out.println("hobbyNo = "+hobbyNo);
+		System.out.println("hobbyNo = "+(hobbyNo == null));
+		if(hobbyNo != null) {
+			if(hobbyNo.equals("")) {
+				System.out.println("null 이 라니면서 ''이다.");
+			}
+		}
 		if(hobbyNo != null) {
 			searchCate = Integer.parseInt(hobbyNo);
 		}
@@ -460,7 +467,6 @@ public class LectureController implements Comparator<ArrayList<String>>{
 	public String applyLecture(@RequestParam("postNo") String postNoS,@RequestParam("selectSido") String sido,
 							 @RequestParam("selectGugun") String gugun,@RequestParam("selectDong") String dong,
 							 @RequestParam("ableTime") String ableTime, @RequestParam("userId") String proposer,
-							 
 							 @RequestParam(value="searchSido", required=false) String searchSido,
 							 @RequestParam(value="searchGugun", required=false) String searchGugun,
 							 @RequestParam(value="searchTag", required=false) String searchTag,
@@ -470,7 +476,7 @@ public class LectureController implements Comparator<ArrayList<String>>{
 							 HttpServletRequest request
 			) {
 		int postNo = Integer.parseInt(postNoS);
-		
+		System.out.println("ableTime = "+ableTime);
 		LectureBoard lb = lbService.selectLB(postNo);
 		//CONCLUSION TABLE INSERT
 			//오늘 날짜의 cal생성
@@ -507,7 +513,8 @@ public class LectureController implements Comparator<ArrayList<String>>{
 			int conResult = lbService.insertConclusion(c);
 			
 		//LECTUREBOARD UPDATE 시간 뺴서 저장하기 남은 시간이 없다면 삭제
-			String compareTime = String.valueOf(ableMonth)+"/"+String.valueOf(ableDay)+ableTime.substring(5, 8);
+			String compareTime = ableTime.substring(0, 2)+"/"+ableTime.split("/")[1].substring(0, 2)+ableTime.substring(5, 8);
+			System.out.println("compareTime = "+compareTime);
 			ArrayList<ArrayList> time = new ArrayList<>();
 			// time에 lb.ableTime의 값들을 넣으면서 출력
 			
@@ -582,9 +589,7 @@ public class LectureController implements Comparator<ArrayList<String>>{
 				int result = lbService.insertTimeline(timeline);
 				cal.add(Calendar.DATE, 7);
 			}
-		mv.setViewName("redirect:/list.lec");
 		//?sido="+searchSido+"&gugun="+searchGugun+"&searchTag="+searchTag+"&searchValue="+searchValue+"&hobbyNo="+searchHobbyNo+"&request="+request
-		mv.addObject("applySuccess","applySuccess");
 		request.getSession().setAttribute("applySuccess", "applySuccess");
 		
 		return "redirect:/list.lec";

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.friends.model.vo.Friends;
 import finalProject.homis.hobbyFarm.friends.model.vo.Report;
+import finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
 
 public interface FriendService {
@@ -13,7 +14,7 @@ public interface FriendService {
 
 	ArrayList<Member> selectList(PageInfo pi, String id);
  
-	int getSearchList();
+	int getSearchList(String id);
 
 	ArrayList<Member> searchList(PageInfo pi, String id);
 
@@ -46,4 +47,8 @@ public interface FriendService {
 	void rpCount(Report r);
 
 	int deleteFrd(ArrayList<Friends> fArr) ;
+
+	ArrayList<Conclusion> selectClass(String userId);
+
+	int reportreset(Integer rpNo);
 }

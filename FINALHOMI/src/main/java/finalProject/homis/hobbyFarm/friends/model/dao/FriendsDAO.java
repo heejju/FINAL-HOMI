@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.friends.model.vo.Friends;
 import finalProject.homis.hobbyFarm.friends.model.vo.Report;
+import finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
 
 @Repository("fDAO")
@@ -17,7 +18,13 @@ public class FriendsDAO {
 	public int getListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("friendMapper.getListCount");
 	}
-
+	
+	public int getSearchList(SqlSessionTemplate sqlSession, String id) {
+		int result = sqlSession.selectOne("friendMapper.getSearchList", id);
+		System.out.println("¼ýÀÚ¸É¹ö" + result);
+		return result;
+	}
+	
 	public ArrayList<Member> selectList(SqlSessionTemplate sqlSession, PageInfo pi, String id) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
@@ -25,14 +32,12 @@ public class FriendsDAO {
 		return list ;
 	}
 
-	public int getSearchList(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("friendMapper.getSearchList");
-	}
-
 	public ArrayList<Member> searchList(SqlSessionTemplate sqlSession, PageInfo pi, String id) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("friendMapper.searchList", id, rowBounds);
+		ArrayList<Member> list = (ArrayList)sqlSession.selectList("friendMapper.searchList", id, rowBounds);
+		System.out.println("¸É¹ö°³¼ö"+list);
+		return list;
 	}
 
 	public Member selectUser(SqlSessionTemplate sqlSession, String userId) {
@@ -101,6 +106,15 @@ public class FriendsDAO {
 
 	public int deleteFrd(SqlSessionTemplate sqlSession, Friends friend) {
 		return sqlSession.delete("friendMapper.deleteFrd", friend) ;
+	}
+
+	public ArrayList<Conclusion> selectClass(SqlSessionTemplate sqlSession, String userId) {
+		ArrayList<Conclusion> list = (ArrayList)sqlSession.selectList("friendMapper.selectClass", userId);
+		return list;
+	}
+
+	public int reportreset(SqlSessionTemplate sqlSession, Integer rpNo) {
+		return sqlSession.delete("friendMapper.reportreset", rpNo);
 	}
 
 }

@@ -68,7 +68,7 @@
 							<td class="tr-no"><input type="hidden"></td>
 							<td class="tr-no"></td>
 							<td class="tr-no"></td>
-							<td class="td-msg"><input type="hidden"></td>
+							<td class="tr-no"><input type="hidden" id="id"></td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -86,11 +86,10 @@
 							var hobbyName = tr.children().eq(2);
 							var tKind = tr.children().eq(3);
 							var learnerNick = tr.children().eq(4);
-							var learnerId = tr.children().eq(4).children().eq(0);
+							var learnerId = tr.children().eq(4).children();
 							
 							for(var t in '${timeline}') {
 								var time1 = parseInt('${t.timeline}'.substr(8,2));
-								var time2 = parseInt('${t.timeline}'.substr(8,2)) + ${t.otTime};
 								if(time == time1) {
 									postNo.val('${t.postNo}');
 									title.text('${t.title}');
@@ -104,7 +103,6 @@
 									learnerId.val('${t.learnerId}');
 								}
 							}
-							
 						}
 					}
 					
@@ -123,14 +121,8 @@
 		
 		$(function(){ 
          	$('.tr-no').click(function(){
-         		var postNo = $(this).parents().find('td').eq(1).val();
+         		var postNo = $(this).parents("tr").children().eq(1).val();
          		parent.location.href='detail.lec?postNo=' + postNo;
-         	});
-		});
-		$(function(){ 
-         	$('.td-msg').click(function(){
-         		var userId = $(this).children().val();
-         		window.open('userInfo.fo?userId='+userId,'미니마이페이지','width=600, height=702, menubar=no, status=no, toolbar=no');
          	});
 		});
 	</script>

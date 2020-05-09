@@ -286,18 +286,18 @@
 		<br clear="all">
 		<hr>
 		
-		<div id='content2' style="width: 80%; margin: 0 auto; text-align: center;">
+		<div id='content2' style="width: 80%; margin: 0 auto;">
 			<br>
-			<b class="green" style="font-size: 20px;">수업소개</b><br><br>
-			<br><br>
+			<b class="green" style="font-size: 35px;">수업소개</b><br><br>
+			<br>
 			
-			<textarea id="summernote1" name="content"></textarea>
+			<textarea id="summernote1" name="content" style="text-align: left;"></textarea>
 			
 			<script>
 				/* 썸머노트 관련 설정 */
 				$(document).ready(function() {
 				     $('#summernote1').summernote({
-				             height: 300,                 // set editor height
+				             height: 500,                 // set editor height
 				             toolbar: [
 				     		    ['style', ['style']],
 				     		    ['font', ['bold', 'italic', 'underline', 'clear']],
@@ -309,7 +309,7 @@
 				     		  ]
 				     });
 				     $('#summernote2').summernote({
-			             height: 300,                 // set editor height
+			             height: 500,                 // set editor height
 			             toolbar: [
 			     		    ['style', ['style']],
 			     		    ['font', ['bold', 'italic', 'underline', 'clear']],
@@ -325,12 +325,12 @@
 			</script>
 			
 			<br><br>
-			<b class="brown" style="font-size: 20px;">강사소개</b><br><br>
-			<br><br>
+			<b class="brown" style="font-size: 35px;">강사소개</b><br><br>
+			<br>
 			
-			<textarea id="summernote2" name="teacherInfo"></textarea>
+			<textarea id="summernote2" name="teacherInfo" style="text-align: left;"></textarea>
 			
-			<div id="ableArea">
+			<div id="ableArea" style="text-align: center;">
 				<br><br>
 				<b class="brown" style="font-size: 20px;">가능한 장소</b><br><br>
 				<div>
@@ -375,7 +375,7 @@
 				
 				
 			</div>
-			<div><!-- 가능한 장소의 마지막한줄을 지우는 곳 -->
+			<div  style="text-align: center;"><!-- 가능한 장소의 마지막한줄을 지우는 곳 -->
 				<button class='ablePlaceDeleteBtn' type='button' onclick='ablePlaceDeleteBtn();'>마지막 줄 삭제하기</button>
 				<hr>
 				<script>
@@ -398,7 +398,7 @@
 			<br><br>
 			
 			
-			<div id=ableTime> <!-- 가능한 시간 시작부분 -->
+			<div id=ableTime  style="text-align: center;"> <!-- 가능한 시간 시작부분 -->
 				<div>
 					<b class="green" style="font-size: 20px;">가능한 시간</b><br><br>
 				</div>

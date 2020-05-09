@@ -28,7 +28,7 @@
 	.border{border-bottom:1.2px solid gray; margin-bottom:3%;}
 	#groupIntro{margin-left:3%; font-size:1.5em; font-weight:bold; margin:3%;}
 	#contents{margin:0 5%; width:90%}
-	#contents > p > img {width:auto}
+	#contents > p > img {width:auto; max-width:100%;}
 	#groupInform{margin-left:3%; font-size:1.5em; font-weight:bold; margin:3%;}
 	#informList{margin:0 5%;}
 	#informList > li {padding:5px;}

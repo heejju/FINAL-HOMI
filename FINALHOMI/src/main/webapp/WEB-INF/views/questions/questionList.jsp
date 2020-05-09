@@ -38,8 +38,8 @@
 	<c:import url='../common/boardCommon.jsp'/>
 	<script>
 	$('#bName').text(' 1:1 ');
-	$('#bName').css('cursor', 'pointer');
 	$('#bNameAfter').text('문의게시판');
+	$('#bName').css('cursor', 'pointer');
 	$('#bNameAfter').css('cursor', 'pointer');
 	
 	$('#bName').click(function() {
@@ -106,20 +106,20 @@
 		<div id="pagingArea" style="position: relative;">
 			<!-- 맨 앞 -->
 			  <c:if test="${ pi.currentPage <= 1 }">
-                 <button class="startBtn" style="background:lightgray; color:black" disabled>&lt;&lt;</button>
+                 <button class="startBtn" style="background:lightgray; color:white" disabled>&lt;&lt;</button>
               </c:if>
               <c:if test="${ pi.currentPage ne 1 }">
                  <c:url var="first" value="qlist.qu">
                     <c:param name="page" value="1"/>            
                  </c:url>
                  <a href="${ first }">
-                    <button class="startBtn">&lt;&lt;</button>
+                    <button class="startBtn" style="background:#675141; color:white">&lt;&lt;</button>
                  </a>
               </c:if>
           
             <!-- [이전] -->
             <c:if test="${ pi.currentPage <= 1 }">
-               <button id="before" style="background:lightgray; color:black" disabled>&lt;</button>
+               <button id="before" style="background:lightgray; color:white" disabled>&lt;</button>
             </c:if>
             <c:if test="${ pi.currentPage > 1 }">
                <c:url var="before" value="qlist.qu">
@@ -144,7 +144,7 @@
             
             <!-- [다음] -->
             <c:if test="${ pi.currentPage >= pi.maxPage }">
-               <button id="next" style="background:lightgray; color:black" disabled>&gt;</button>
+               <button id="next" style="background:lightgray; color:white;" disabled>&gt;</button>
             </c:if>
             <c:if test="${ pi.currentPage < pi.maxPage }">
                <c:url var="after" value="qlist.qu">
@@ -155,13 +155,13 @@
             
            <!-- 맨 뒤로 -->
               <c:if test="${ pi.currentPage >= pi.maxPage }">
-                 <button class="end" style="background:lightgray; color:black" disabled>&gt;&gt;</button>
+                 <button class="end" style="background:lightgray; color:white;" disabled>&gt;&gt;</button>
               </c:if>
               <c:if test="${ pi.currentPage < pi.maxPage }">
                  <c:url var="last" value="qlist.qu">
                     <c:param name="page" value="${ pi.maxPage }"/>            
                  </c:url>
-                 <a href="${ last }"><button class="end" >&gt;&gt;</button></a>
+                 <a href="${ last }"><button class="end" style="background:#675141; color:white">&gt;&gt;</button></a>
               </c:if>
 			<div style="float: right;">
 				<c:if test="${ !empty loginUser }">
@@ -178,7 +178,7 @@
 					<option value="content">내용</option>
 					<option value="writer">작성자</option>
 				</select>
-					<input type="text" id="searchContent" name="searchContent" style="height: 35px; width: 200px;">
+					<input type="text" onKeyDown="if(event.keyCode == 13) questionSearch()" id="searchContent" name="searchContent" style="height: 35px; width: 200px;">
 					<button class="pagingBtn" style="background: #888c43; color: white;" onclick="questionSearch();">검색</button>
 			</div>
 		</c:if>

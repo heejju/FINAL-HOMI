@@ -86,6 +86,18 @@
     	]]>
 	</select>
 	
+	<!-- 시간표 -->
+	<select id="getTimeline" resultMap="timelineResultSet">
+		select post_no, timeline, proposer, m.nickname as nickname, hobby_name, title, board_no, ot_time
+		from timetable t
+            join conclusion using(post_no)
+            join member m on(proposer = m.user_id)
+            join lecture using(post_no)
+            join hobby using(hobby_no)
+            join board using(post_no)
+		where t.user_id = #{userId} and timeline LIKE #{date} || '%'
+	</select>
+	
 	
 	<!-- vip로 업그레이드 -->
 	<update id="upgradeVip" parameterType="String">
@@ -161,5 +173,16 @@
 		<result property="teacher" column="TEACHER"/>
 		<result property="closeYN" column="CLOSE_YN"/>
 		<result property="hobbyName" column="HOBBY_NAME"/>
+	</resultMap>
+	
+	<resultMap type="Timeline" id="timelineResultSet">
+		<id property="postNo" column="post_no"/>
+		<result property="timeline" column="timeline"/>
+		<result property="learnerId" column="proposer"/>
+		<result property="learnerNick" column="nickname"/>
+		<result property="hobbyName" column="hobby_name"/>
+		<result property="title" column="title"/>
+		<result property="tKind" column="board_no"/>
+		<result property="otTime" column="ot_time"/>
 	</resultMap>
 </mapper>

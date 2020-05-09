@@ -23,6 +23,7 @@
 	.buttonG{width:150px; background-color:#888c43; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 	.buttonB{width:150px; background-color:rgb(150, 150, 150); color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 	
+	button:hover{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -31,6 +32,8 @@
 	<script>
 	$('#bName').text(' 마이 ');
 	$('#bNameAfter').text('페이지');
+	$('#bName').css('cursor', 'pointer');
+	$('#bNameAfter').css('cursor', 'pointer');
 	
 	$('#bName').click(function() {
 		location.href="teacherPage.mp";

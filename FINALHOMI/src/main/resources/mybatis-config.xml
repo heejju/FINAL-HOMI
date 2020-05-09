@@ -25,7 +25,7 @@
     	<typeAlias type="finalProject.homis.hobbyFarm.myPage.model.vo.myPageCount"				alias="myPageCount"/>
     	<typeAlias type="finalProject.homis.hobbyFarm.friends.model.vo.Report"					alias="Report"/> 
     	<typeAlias type="finalProject.homis.hobbyFarm.common.model.vo.Teacher"					alias="Teacher"/>
-    	<typeAlias type="finalProject.homis.hobbyFarm.lecture.model.vo.Timeline"				alias="Timeline2"/>
+    	<typeAlias type="finalProject.homis.hobbyFarm.myPage.model.vo.Timeline"				alias="Timeline"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mapper/member-mapper.xml"/>

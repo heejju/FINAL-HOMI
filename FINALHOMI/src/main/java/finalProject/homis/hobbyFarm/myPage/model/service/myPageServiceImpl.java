@@ -13,6 +13,7 @@ import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
 import finalProject.homis.hobbyFarm.lecture.model.vo.Search;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
 import finalProject.homis.hobbyFarm.myPage.model.dao.myPageDAO;
+import finalProject.homis.hobbyFarm.myPage.model.vo.Timeline;
 
 @Service("mpService")
 public class myPageServiceImpl implements myPageService {
@@ -79,6 +80,11 @@ public class myPageServiceImpl implements myPageService {
 	@Override
 	public ArrayList<GroupFarmBoard> myFarm(PageInfo pi, String id) {
 		return mpDAO.myFarm(sqlSession, pi, id);
+	}
+
+	@Override
+	public ArrayList<Timeline> getTimeline(Timeline tl) {
+		return mpDAO.getTimeline(sqlSession, tl);
 	}
 
 

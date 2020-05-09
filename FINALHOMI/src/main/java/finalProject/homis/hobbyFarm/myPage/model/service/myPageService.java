@@ -6,6 +6,7 @@ import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.groupFarm.model.vo.GroupFarmBoard;
 import finalProject.homis.hobbyFarm.lecture.model.vo.LectureBoard;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
+import finalProject.homis.hobbyFarm.myPage.model.vo.Timeline;
 
 public interface myPageService {
 
@@ -27,5 +28,7 @@ public interface myPageService {
 	ArrayList<GroupFarmBoard> myFarm(PageInfo pi, String id);
 
 	int getListCount(String id);
+
+	ArrayList<Timeline> getTimeline(Timeline tl);
 
 }

@@ -24,7 +24,7 @@
 	#pagingArea button{font-weight: bold;}
 	
 	.pageNum, #before, #next, #current{width:30px; height:30px; border-radius:5px; border:0px; background-color:white; font-size:14px; padding:5px;}
-	
+	button:hover{cursor:pointer;}
 </style>
 </head>
 <body>
@@ -59,7 +59,7 @@
 				<div id="pagingArea" style="position: absolute; left: 38%; bottom: 20px; text-align: center;">
 				<!-- [이전] -->
 	            <c:if test="${ pi.currentPage <= 1 }">
-	               <button class="pagingBtn" id="before">&lt;</button>
+	               <button class="pagingBtn" id="before" style="background: lightgray;" disabled>&lt;</button>
 	            </c:if>
 	            <c:if test="${ pi.currentPage > 1 }">
 	               <c:url var="before" value="myFarm.mp">
@@ -84,7 +84,7 @@
 	            
 	            <!-- [다음] -->
 	            <c:if test="${ pi.currentPage >= pi.maxPage }">
-	               <button type="button" class="pagingBtn" id=next>&gt;</button>
+	               <button type="button" class="pagingBtn" id=next style="background: lightgray;" disabled>&gt;</button>
 	            </c:if>
 	            <c:if test="${ pi.currentPage < pi.maxPage }">
 	               <c:url var="after" value="myFarm.mp">

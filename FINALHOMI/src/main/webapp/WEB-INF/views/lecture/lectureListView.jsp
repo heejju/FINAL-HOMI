@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>모종 구하기 - 글 목록</title>
+<title>#취미텃밭</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -21,6 +21,19 @@
 <script>
 	$('#bName').text('모종');
 	$('#bNameAfter').text('구하기');
+	
+	
+	$('#bName').click(function(){
+		location.href="list.lec";
+	}).mouseover(function(){
+ 		$(this).css('cursor','pointer');
+ 	});
+	$('#bNameAfter').click(function(){
+		location.href="list.lec";
+	}).mouseover(function(){
+ 		$(this).css('cursor','pointer');
+ 	});
+	
 </script>
 <style type="text/css">
 	body, html, div{padding: 0; margin:0;}
@@ -104,10 +117,10 @@
 	}
 	
 	div.BWrite{
-		width: 85%; text-align: right; margin: 15px auto 15px auto;
+		width: 92%; text-align: right; margin: 15px auto 15px auto;
 	}
 	button.write {
-		padding: 5px 15px 5px 15px; color: white; border-radius: 5px;
+		padding: 5px 15px 5px 15px; color: white; border-radius: 5px; width: 90px; height: 35px; font-size: 18px;
 		background: rgb(136, 140, 67); border: 0px; font-weight: bold; cursor: pointer;
 	}
 	button.write:hover{
@@ -116,15 +129,15 @@
 	
 	button.nextPBtn{
 		border: 0px; border-radius: 5px; background: rgb(103, 81, 65); color: white;  width: 40px; height: 36px;
-		padding: 7px 12px 7px 12px; font-weight: bold; cursor: pointer;
+		padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px;
 	}
 	button.pagingBtn{
 		border: 0px; border-radius: 5px; background: white; color: black; width: 42px; height: 36px;
-		padding: 7px 12px 7px 12px; font-weight: bold; cursor: pointer;
+		padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px;
 	}
 	button.pagingSelBtn{
-		border: 0px; border-radius: 5px; background: rgb(136, 140, 67); color: white;
-		padding: 7px 12px 7px 12px; font-weight: bold; width: 42px; height: 36px;
+		border: 0px; border-radius: 5px; background: rgb(136, 140, 67); color: white; font-weight: bold;
+		padding: 7px 12px 7px 12px; font-weight: bolder; width: 42px; height: 36px; font-size: 16px;
 	}
 	
 	div.search2 > input.searchValue {
@@ -147,14 +160,11 @@
 	$(function(){
 		if("${applySuccess}" == "applySuccess"){
 			swal("신청이 완료되었습니다.",{
-				icon : "warning",
-				buttons : {
-					confirm : true,
-				}
+				icon : "success",
+				buttons : "확인"
 			});
 		}
 	});
-
 </script>
 <form action="list.lec" method="post" id="lecForm" style="width: 1300px; margin: 0 auto;" onsubmit="whereFormGo();">
 <input type="hidden" name=currentPage id=currentPage value="${ currentPage }">
@@ -355,7 +365,7 @@
 			<c:forEach items="${ lbList }" var="lb">
 				<div class="content" onclick="toDetail(this);">
 					<input type=hidden value="${ lb.postNo }">
-					<div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/buploadFiles/${ lb.changeName }');">
+					<div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
 						<div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
 							<p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
 							<p class="contentTime">${ lb.otAllTime } time</p>
@@ -383,7 +393,6 @@
 		<script>
 			//글 클릭시 해당 글번호를 가지와 검색했던조건들을 가지고서 간다
 			function toDetail(e){
-				console.log($(e).children().eq(0).val());
 				$("#postNo").val($(e).children().eq(0).val());
 				$("#lecForm").submit();
 			}
@@ -443,8 +452,6 @@
 				}
 				$("#lecForm").submit();
 			}
-			
-		
 		</script>
 		
 		<br><br>
@@ -470,13 +477,12 @@
 			</c:if>
 			<input type="text" class="searchValue" name="searchValue" value="${ searchValue }" onchange="otherSearch();">
 			<div class="jm-btn">
-				<i onclick="$('#lecForm').submit()" class="fas fa-search" style="background: rgb(136, 140, 67); padding: 3px; border-radius: 3px; width: 34px; height: 34px; vertical-align: middle;"></i>
+				<i onclick="$('#lecForm').submit()" class="fas fa-search" style="background: rgb(136, 140, 67); padding: 3px; border-radius: 3px; width: 34px; height: 34px; cursor:pointer; vertical-align: middle;"></i>
 			</div>
 		</div>
 		<script>
 			//서치 val를 다른것으로 바꿀때 페이지는 1로
 			function otherSearch(){
-				console.log("커런트페이지 1로");
 				$("#currentPage").val(1);
 			}
 			

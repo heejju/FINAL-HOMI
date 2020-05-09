@@ -802,6 +802,15 @@ public class LectureController implements Comparator<ArrayList<String>>{
 		int deleteResult = lbService.deleteBoard(postNo);
 		mv = list(null, null, null, null, null, request);
 		return mv;
-		}
+	}
+	
+	@RequestMapping("selectHobbyView.lec")
+	public ModelAndView selectHobbyView() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<Hobby> hList = lbService.selectHobbyList();
+		mv.addObject("hList",hList);
+		mv.setViewName("hobbySelectView");
+		return mv;
+	}
 }
 

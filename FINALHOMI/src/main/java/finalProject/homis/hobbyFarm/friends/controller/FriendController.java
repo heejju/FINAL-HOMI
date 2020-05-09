@@ -21,13 +21,17 @@ import finalProject.homis.hobbyFarm.friends.model.service.FriendService;
 import finalProject.homis.hobbyFarm.friends.model.vo.Friends;
 import finalProject.homis.hobbyFarm.friends.model.vo.Pagination;
 import finalProject.homis.hobbyFarm.friends.model.vo.Report;
+import finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
+import finalProject.homis.hobbyFarm.message.model.service.MessageService;
 
 @SessionAttributes("loginUser")
 @Controller
 public class FriendController {
 	@Autowired
 	private FriendService fService;
+	@Autowired
+	private MessageService msgService;
 	
 	@RequestMapping("friend.fo")
 	public ModelAndView friendList(@RequestParam(value="page", required=false) Integer page, ModelAndView mv, HttpSession session) {		
@@ -39,12 +43,12 @@ public class FriendController {
 		}
 		
 		int listCount = fService.getListCount();
+		System.out.println("넌받아???"+listCount);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);		
 		
 		System.out.println("id : "+id) ;
 		ArrayList<Member> list = fService.selectList(pi, id); 
-		System.out.println("뭘까"+list);
 		if(list != null) {
 	         mv.addObject("list", list);
 	         mv.addObject("pi", pi);
@@ -66,17 +70,18 @@ public class FriendController {
 		if(page != null) {
 			currentPage = page;
 		}
-		int listCount = fService.getSearchList();
+		int listCount = fService.getSearchList(id);
+		System.out.println("페이지?"+ listCount);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		System.out.println("pi개수"+pi);
+		
 		ArrayList<Member> list = fService.searchList(pi, id);
-		System.out.println("list 마지막"+list);
+		
 		if(list != null) {
 			mv.addObject("list", list);
 			mv.addObject("pi", pi);
 			mv.setViewName("friendSearch");
-			
+			System.out.println("페이지?"+pi);
 		} else {
 			throw new FriendsException("회원 전체 조회에 실패하였습니다.");
 		}
@@ -85,23 +90,39 @@ public class FriendController {
 	}
 	
 	@RequestMapping("userInfo.fo")
-	public ModelAndView userInfo(@RequestParam("userId") String userId , @RequestParam("page") Integer currentPage, ModelAndView mv, HttpSession session) {
-		
-		String id = ((Member)session.getAttribute("loginUser")).getUserId();
-		
-		Member m = fService.selectUser(userId);
-		
-		if(m != null) {
-			mv.addObject("member", m);
-			mv.addObject("page", currentPage);
-			mv.setViewName("miniMyPage");
-			System.out.println("관호쟈식"+id);
-		} else {
-			throw new FriendsException("회원정보 조회 실패");
-		}
-		
-		return mv;
-	}
+	   public ModelAndView userInfo(@RequestParam(value="userId", required=false) String userId , 
+	                         @RequestParam(value="nickName", required=false) String nickName,
+	                        @RequestParam("page") Integer currentPage, 
+	                        ModelAndView mv, HttpSession session) {
+	      
+	      //String id = ((Member)session.getAttribute("loginUser")).getUserId();
+
+	      // 닉네임으로 아이디 찾기
+	      if(userId == null && nickName != null) {
+	         userId = msgService.findNick(nickName).getUserId();
+	      }
+	      
+	      Member m = fService.selectUser(userId);
+	      
+	      ArrayList<Conclusion> cList = fService.selectClass(userId);
+	      
+	      for(Conclusion i : cList)
+	    	  i.setStartDate(i.getStartDate().substring(0,10)) ;
+	      /*ArrayList<Conclusion> list = new ArrayList<Conclusion>() ;
+	      list.add(cList.get(0)) ;
+	      list.add(cList.get(1)) ;
+	      list.add(cList.get(2)) ;*/
+	      if(m != null) {
+	         mv.addObject("member", m);
+	         mv.addObject("cList", cList);
+	         mv.addObject("page", currentPage);
+	         mv.setViewName("miniMyPage");
+	      } else {
+	         throw new FriendsException("회원정보 조회 실패");
+	      }
+	      
+	      return mv;
+	   }
 	
 	@RequestMapping("friendSearch.fo")
 	public ModelAndView friendSearch(@RequestParam(value="page", required=false) Integer page, @RequestParam("searchValue") String searchValue, ModelAndView mv) {
@@ -259,7 +280,7 @@ public class FriendController {
 		int result = fService.reportGo(r);
 		
 		if(result > 0) {
-			mv.setViewName("report");
+			mv.setViewName("rportClose");
 		} else {
 			throw new FriendsException("신고 실패");
 		}
@@ -301,7 +322,6 @@ public class FriendController {
 			Report r = new Report();
 			r.setRpReciever(rpReciever);
 			r.setRpCount(rpCount+1);
-			System.out.println("알피카운트"+rpCount);
 			fService.rpCount(r);
 			return "success";
 		} else {
@@ -328,6 +348,18 @@ public class FriendController {
 			response.getWriter().print(true) ;
 		} else {
 			response.getWriter().print(false) ;
+		}
+	}
+	
+	@RequestMapping("reportreset.fo")
+	@ResponseBody
+	public String reportreset(HttpSession session, @RequestParam("rpNo") Integer rpNo) {
+		int result = fService.reportreset(rpNo);
+		
+		if(result > 0) {
+			return "success";
+		} else {
+			throw new FriendsException("신고 삭제 실패");
 		}
 	}
 }

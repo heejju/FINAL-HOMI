@@ -7,18 +7,21 @@
 		where fd_from = #{id} OR FD_TO = #{id}	
 	</select>
 	<select id="selectList" parameterType="string" resultMap="friendResultset">
-	    SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, I.IMG_SRC, M.M_KIND
-	    FROM    FRIENDS F
-	            JOIN MEMBER M ON(FD_TO     = M.USER_ID)
-	            JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
-	    WHERE   FD_FROM = #{id} AND FD_STATUS = '1'
-	    UNION
-	    SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, I.IMG_SRC, M.M_KIND
-	    FROM    FRIENDS F
-	            JOIN MEMBER M ON(FD_FROM   = M.USER_ID)
-	            JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
-	    WHERE   FD_TO = #{id} AND FD_STATUS = '1'
+	    SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, M.M_KIND,
+             I.IMG_SRC, I.CHANGE_NAME
+	       FROM    FRIENDS F
+	               JOIN MEMBER M ON(FD_TO     = M.USER_ID)
+	               JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
+	       WHERE   FD_FROM = #{id} AND FD_STATUS = '1'
+	       UNION
+	       SELECT  F.FD_NO, F.FD_FROM, F.FD_TO, F.FD_STATUS, M.USER_ID, M.USER_NAME, M.INTRODUCTION ,M.NICKNAME, M.M_KIND,
+	             I.IMG_SRC, I.CHANGE_NAME
+	       FROM    FRIENDS F
+	               JOIN MEMBER M ON(FD_FROM   = M.USER_ID)
+	               JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
+	       WHERE   FD_TO = #{id} AND FD_STATUS = '1'
 	</select>
+	
 	<select id="getSearchList" resultType="_int">
 		SELECT COUNT(*)
 		FROM (
@@ -39,16 +42,17 @@
 	            LEFT JOIN FRIENDS F ON(FD_TO = USER_ID)
 	    WHERE   M.USER_ID != #{id} AND
 	            F.FD_FROM = #{id} AND
-	            F.FD_STATUS = '0'
+	            F.FD_STATUS != '1'
 	    UNION
 	    SELECT  M.*, F.FD_FROM, F.FD_TO, F.FD_STATUS
 	    FROM    MEMBER M
 	            LEFT JOIN FRIENDS F ON(FD_FROM = USER_ID)
 	    WHERE   M.USER_ID != #{id} AND
 	            F.FD_TO = #{id} AND
-	            F.FD_STATUS = '0'
+	            F.FD_STATUS != '1'
 	   ORDER BY FD_STATUS ASC)
 	</select>
+	
 	<select id="searchList" parameterType="string" resultMap="memberResultSet">
 		SELECT  M.*, NULL AS FD_FROM, NULL AS FD_TO, NULL AS FD_STATUS, i.change_name
 	    FROM    MEMBER M
@@ -100,7 +104,7 @@
 		<result property="imgSrc"		column="CHANGE_NAME" />
 		<result property="mKind"		column="M_KIND" />
 	</resultMap>
-	
+	 
 	<resultMap	type="Member"			id="memberResultSet">
 		<id		property="userId"		column="USER_ID"/>
 		<result property="userPwd"		column="USER_PWD"/>
@@ -214,5 +218,27 @@
 		DELETE	FROM FRIENDS
 		WHERE	(FD_FROM = #{fdFrom} AND FD_TO = #{fdTo}) OR
 				(FD_FROM = #{fdTo}   AND FD_TO = #{fdFrom})
+	</delete>
+	
+	
+	<select id="selectClass" resultMap="resultConclusionSet" parameterType="Conclusion">
+		select ROWNUM, proposer, CON_NO, start_date, content
+		from  (SELECT proposer, CON_NO, start_date, content, DENSE_RANK() OVER(ORDER BY  CON_NO  DESC) AS 순위
+	    from conclusion
+	    left join board USING(post_no)
+		where proposer = #{userId} AND ROWNUM <![CDATA[ <= ]]> 3 )
+	</select>
+	
+	<resultMap type="Conclusion" id="resultConclusionSet">
+		<id property="postNo" column="CON_NO"/>
+		<result property="proposer" column="proposer"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="finishDate" column="FINISH_DATE"/>
+		<result property="conTent" column="CONTENT"/>
+	</resultMap>
+	
+	<delete id="reportreset" parameterType="Report">
+		DELETE FROM REPORT
+		WHERE RP_NO = #{rpNo}
 	</delete>
 </mapper>

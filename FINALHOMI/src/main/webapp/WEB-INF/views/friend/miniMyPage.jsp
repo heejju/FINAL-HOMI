@@ -11,6 +11,56 @@
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script> 
 <style>
 
+/* 
+html5doctor.com Reset Stylesheet v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com 
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video{
+    margin:0; padding:0; border:0; outline:0; vertical-align:baseline; background:transparent; margin:0;}    
+
+body { line-height:1em; }
+
+.clear-both{clear: both;}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { display:block; }
+
+ul { list-style:none; }
+
+blockquote, q { quotes:none;}
+
+blockquote:before, blockquote:after,q:before, q:after { content:''; content:none;}
+
+a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; text-decoration:none;	display:block;	-webkit-transition:0.5s ease-in; transition:0.5s ease-in; color:black;}
+ 
+/* change colours to suit your needs */
+ins {background-color:#ff9; color:#000;  text-decoration:none;}
+
+/* change colours to suit your needs */
+mark { background-color:#ff9; color:#000;  font-style:italic; font-weight:bold;}
+del { text-decoration: line-through;}
+abbr[title], dfn[title] { border-bottom:1px dotted; cursor:help;}
+table {border-collapse:collapse; border-spacing:0;}
+/* change border colour to suit your needs 
+hr { display:block; height:1px;  border:0;  border-top:1px solid #cccccc; margin:0; padding:0;}*/
+hr { display:block; border:0;  border-top:1px solid #F0F0F0; margin:0; padding:0;}
+input, select {vertical-align:middle;}
+img{	border:0;}
+
+/**/
     #wrap{width:600px; background:#ccc; height:700px;}
     header{width:100%; padding-top:50px;}
     .profile-img{width:150px; height:150px; margin:0 auto; background:#fff; border-radius:100px; box-shadow: 3px 3px 15px 1px;}
@@ -48,7 +98,8 @@
     
 </style>
 </head>
-<body>
+
+<body onload='resizeWindow(this)'>
 	<div id="wrap">
         <header>
             <div class="profile-img"></div>
@@ -58,8 +109,14 @@
             </c:url>
             <div class="user">
                 <div class="user-id">${ member.userName }</div>
-                <div class="repot" onclick="window.open('${ report }','window팝업','width=400, height=670, menubar=no, status=no, toolbar=no');">신고</div>
+                <div class="repot" onclick="rePort();" >신고</div>
             </div>
+            <script>
+            	function rePort(){
+            		
+            		window.open('${report}','window신고팝업','width=600, height=787, menubar=no, status=no, toolbar=no');
+            	}
+            </script>
             <div class="user-btn">
                 <div class="btn-wrap">
                     <div class="mss-btn">쪽지 전송</div>
@@ -70,7 +127,12 @@
         </header>
         <section>
             <div class="line-sc"></div>
-            <h2 class="user-info">${ member.introduction }</h2> 
+            <c:if test="${!empty member.introduction }">
+            	<h2 class="user-info">${ member.introduction }</h2>
+            </c:if>
+            <c:if test="${empty member.introduction }">
+            	<h2 class="user-info" style="color:red;">자기소개 작성을 하지 않으셨습니다.</h2>
+           	</c:if> 
             <div class="line-sc"></div>
             <div class="content-wrap">
                 <div class="content-one">
@@ -79,21 +141,27 @@
                     <div class="c-Date c-sharing">시작일</div>
                 </div>
                 <div class="clear-both"></div>
-                <div class="content-two">
-                    <div class="c2-Number c2-sharing">No.1</div>
-                    <div class="c2-Title c2-sharing">쪼마난 마을의 레진 공예,민간 자격증 발...</div>
-                    <div class="c2-Date c2-sharing">2020-03-20</div>
-                </div>
-                <div class="content-two">
-                    <div class="c2-Number c2-sharing">No.1</div>
-                    <div class="c2-Title c2-sharing">쪼마난 마을의 레진 공예,민간 자격증 발...</div>
-                    <div class="c2-Date c2-sharing">2020-03-20</div>
-                </div>
-                <div class="content-two">
-                    <div class="c2-Number c2-sharing">No.1</div>
-                    <div class="c2-Title c2-sharing">쪼마난 마을의 레진 공예,민간 자격증 발...</div>
-                    <div class="c2-Date c2-sharing">2020-03-20</div>
-                </div>
+                <c:if test="${ empty cList }">
+                	<div class="listNull" align="center" style="margin-top:25px; color:#fff; font-weight:600; font-size:20px;">현재 진행중인 수업이 없습니다</div>
+                </c:if>
+                <c:if test="${ !empty cList }">
+                <c:forEach var="c" items="${ cList }">
+                	<div class="content-two">
+	                    <div class="c2-Number c2-sharing">${ c.postNo }</div>
+	                    <div class="c2-Title c2-sharing">${ c.conTent }</div>
+	                    <div class="c2-Date c2-sharing">${ c.startDate }</div>
+	                </div>
+                </c:forEach>
+                </c:if>
+                <%-- <c:set var="i" value="0" />
+                <c:forEach begin="0" end="2" var="i">
+	                <div class="content-two">
+	                    <div class="c2-Number c2-sharing">${ cList.get(i).postNo }</div>
+	                    <div class="c2-Title c2-sharing">${ cList.get(i).conTent }</div>
+	                    <div class="c2-Date c2-sharing">${ cList.get(i).startDate }</div>
+	                </div>
+	                 <c:set var="i" value="${ i+1 }" />
+                </c:forEach> --%>
             </div>
             <div class="clear-both"></div>
         </section>

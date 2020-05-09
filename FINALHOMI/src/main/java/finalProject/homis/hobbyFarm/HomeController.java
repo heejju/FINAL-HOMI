@@ -67,7 +67,6 @@ public class HomeController {
 	public ArrayList<LectureBoard> rstList(HttpServletResponse response,
 										   HttpServletRequest request) throws JsonIOException {
 		int listCount = lbService.selectCCCount() ;
-		System.out.println(listCount) ;
 		int currentPage = 1 ;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount) ;
 		ArrayList<LectureBoard> list = lbService.selectCCPage(pi) ;

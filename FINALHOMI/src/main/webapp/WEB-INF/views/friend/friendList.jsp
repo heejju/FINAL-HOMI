@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>#취미 텃밭</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
@@ -41,6 +41,8 @@
     .msg-btn:hover{cursor: pointer; background:#000; color:#fff;}
     #nickNameClick{cursor: pointer;}
     
+    .listNull{text-align: center; margin-top: 50px; font-weight:700;}
+    
     /*버튼*/
     .pageing-box{width:20%; height:30px; margin:0 auto;}
     .page-box1{float:left; background:#fff; margin-right:4%; font-size:1.5rem; width:9.71%; height:30px; line-height: 30px; text-align: center; border-radius: 5px; cursor: pointer;}
@@ -53,7 +55,7 @@
     
     /*버튼2*/
     .btn-box{width:100%; margin: 30px 0 30px 0;}
-    .whole-btn{width:8%; height:40px; float:left; font-size:1.2rem; line-height: 40px; text-align: center; margin-right:2%; background:#fff; margin-left:82%;}
+    .whole-btn{width:8%; height:40px; float:left; font-size:1.2rem; line-height: 40px; text-align: center; margin-right:2%; background:#fff; margin-left:10.5%;}
     .firendDelete{width:8%; height:40px; float:left; font-size:1.2rem; line-height: 40px; text-align: center; background:#fff;}
     
     
@@ -99,7 +101,17 @@
 			</script> 
         </div>
         <div class="clear-both"></div>
+        <div class="btn-box">
+            <div class="whole-btn" onclick="checkAll1();" name="checkAll">전체</div>
+            <div class="firendDelete" onclick="deleteFriends();">삭제</div>
+        </div>
+        <div class="clear-both"></div>
         <div class="content-one">
+            <c:if test="${ empty list }">
+            	<div class="listNull">친구 목록이 비어있습니다.</div>
+            </c:if>
+        	
+        	<c:if test="${ !empty list }">
         	<c:forEach var="f" items="${list}" varStatus="status">
             <div class="friendBox">
                 <input type="checkbox" class="check-box" name="checkbox" value="${ f.userId }">
@@ -133,14 +145,12 @@
                 </div>
             </div>
             </c:forEach>
+            </c:if>
+            
             <!-- 복붙박스 -->
         </div>
         <div class="clear-both"></div>
-        <div class="btn-box">
-            <div class="whole-btn" onclick="checkAll1();" name="checkAll">전체</div>
-            <div class="firendDelete" onclick="deleteFriends();">삭제</div>
-        </div>
-        <div class="clear-both"></div>
+        
         <script type="text/javascript">
 		    function checkAll1(){
 				var checkbox = document.getElementsByName("checkbox");
@@ -173,7 +183,7 @@
 		    		      cancel : "아니요!",
 		    		      defeat : {text:"네!", value:true},
 		    		   }
-		    		}).then((value) => {
+		    		}).then((value) = {
 		    		   if(value == true) {
 		    			   $.ajax({
 		   		    		method: 'POST',

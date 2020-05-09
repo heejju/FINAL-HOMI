@@ -14,7 +14,7 @@ public interface FriendService {
 
 	ArrayList<Member> selectList(PageInfo pi, String id);
  
-	int getSearchList();
+	int getSearchList(String id);
 
 	ArrayList<Member> searchList(PageInfo pi, String id);
 
@@ -49,4 +49,6 @@ public interface FriendService {
 	int deleteFrd(ArrayList<Friends> fArr) ;
 
 	ArrayList<Conclusion> selectClass(String userId);
+
+	int reportreset(Integer rpNo);
 }

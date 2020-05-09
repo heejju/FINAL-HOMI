@@ -7,15 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
-<link rel="stylesheet" href="${ contextPath }/resources/css/reset.css" type="text/css">
-<title>Insert title here</title>
+<%-- <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
+<link rel="stylesheet" href="${ contextPath }/resources/css/reset.css" type="text/css"> --%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture|Nanum+Brush+Script&display=swap" rel="stylesheet">
+<title>#취미 텃밭</title>
 <style>
     section{width:70%; height:100%; margin:0 auto;}
 
 /* 체크박스 */
 input[type=button]{font-weight: bold;}
-input[type=button]:hover{background:#000; color:#888c43; font-weight:bold;}
+input[type=button]:hover{background:#000; color:#888c43; font-weight:bold; cursor: pointer;}
 
 
 .divTable{width:100%; border:1px solid #000; box-sizing:border-box; border-radius:5px; padding:5px 10px; margin-top:5%;}
@@ -30,23 +33,24 @@ input[type=button]:hover{background:#000; color:#888c43; font-weight:bold;}
 .buttonG{width:100px; background-color:#888c43; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 .buttonB{width:100px; background-color:#675141; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 
-.tr-no > th:nth-child(1){width:5%;}
-.tr-no > th:nth-child(2){width:10%;}
-.tr-no > th:nth-child(3){width:10%;}
-.tr-no > th:nth-child(4){width:9%;}
-.tr-no > th:nth-child(5){width:18%;}
-.tr-no > th:nth-child(6){width:20%;}
-.tr-no > th:nth-child(7){width:14%;}
-.tr-no > th:nth-child(8){width:10%;}
 
-.tr-no > td:nth-child(1){width:6%;}
-.tr-no > td:nth-child(2){width:9%;}
-.tr-no > td:nth-child(3){width:11%;}
-.tr-no > td:nth-child(4){width:9%;}
-.tr-no > td:nth-child(5){width:18%;}
-.tr-no > td:nth-child(6){width:20%;}
-.tr-no > td:nth-child(7){width:14%;}
-.tr-no > td:nth-child(8){width:11%;}
+.tr-no > th:nth-child(1){width:10%;}
+.tr-no > th:nth-child(2){width:10%;}
+.tr-no > th:nth-child(3){width:9%;}
+.tr-no > th:nth-child(4){width:18%;}
+.tr-no > th:nth-child(5){width:20%;}
+.tr-no > th:nth-child(6){width:14%;}
+.tr-no > th:nth-child(7){width:10%;}
+.tr-no > th:nth-child(8){width:6%;}
+
+.tr-no > td:nth-child(1){width:9%;}
+.tr-no > td:nth-child(2){width:11%;}
+.tr-no > td:nth-child(3){width:9%;}
+.tr-no > td:nth-child(4){width:18%;}
+.tr-no > td:nth-child(5){width:20%;}
+.tr-no > td:nth-child(6){width:14%;}
+.tr-no > td:nth-child(7){width:11%;}
+.tr-no > td:nth-child(8){width:6%;}
 
 
 input[type=checkbox]{width:18px; height:18px;}
@@ -54,17 +58,43 @@ input[type=checkbox]{width:18px; height:18px;}
 input.searchValue{height:25px;}
 select{height:30px; width:100px;}
     
-    
+/*페이지*/
+	button.nextPBtn{
+		border: 0px; border-radius: 5px; background: rgb(103, 81, 65); color: white;  
+		adding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px; display:inline-block;
+	}
+	button.pagingBtn{
+	   border: 0px; border-radius: 5px; background: white; color: black; 
+	   padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px; display:inline-block;
+	}
+	button.pagingSelBtn{
+	   border: 0px; border-radius: 5px; background: rgb(136, 140, 67); color: white; font-weight: bold;
+	   padding: 7px 12px 7px 12px; font-weight: bolder; font-size: 16px; display:inline-block;
+	}
+	.nextPBtn{
+		border: 0px; border-radius: 5px; background: rgb(103, 81, 65); color: white;  
+		padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px; display:inline-block;
+	}
+	.pagingBtn{
+	   border: 0px; border-radius: 5px; background: white; color: black; 
+	   padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px; display:inline-block;
+	}
+	.pagingSelBtn{
+	   border: 0px; border-radius: 5px; background: rgb(136, 140, 67); color: white; font-weight: bold;
+	   padding: 7px 12px 7px 12px; font-weight: bolder;  font-size: 16px; display:inline-block;
+	}
 </style>
 <body>
-     
+     <script>
+	 	$('#bName').text(' 신고 ');
+	 	$('#bNameAfter').text('목록');
+	 </script>
     <section>		
 		<!-- 표 -->
 		<div class="divTable" align="center">
 			<table class="farmTable">
 				<thead>
 					<tr class="tr-no">
-                        <th>B.T.N</th>
 						<th>신고 번호</th>
 						<th>신고 아이디</th>
 						<th>대상 아이디</th>
@@ -72,6 +102,7 @@ select{height:30px; width:100px;}
 						<th>URL</th>
                         <th>신고 체크</th>
 						<th>신고 일자</th>
+						<th>B.T.N</th>
 					</tr>
 				</thead>
 			</table>
@@ -81,15 +112,17 @@ select{height:30px; width:100px;}
 				<tbody>
 					<c:forEach var="r" items="${ list }">
 					<tr class="tr-no">
-						<td>
-							<input type="hidden" value="${ r.rpNo }" class="checkOn">
-							<input type="hidden" value="${ r.rpReciever }" class="rePId">
-							<input type="hidden" value="${ r.rpCount }" class="rpCount">
-							<input type="button" class="checkbox" name="check" value="check">
-						</td>
 						<td>${ r.rpNo }</td>
-						<td>${ r.rpSender }</td>
-						<td>${ r.rpReciever }</td>
+						<c:url var="userInfo" value="userInfo.fo">
+							<c:param name="userId" value="${ r.rpSender }"/>
+							<c:param name="page" value="${ pi.currentPage }"/>
+						</c:url>	
+						<td onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${ r.rpSender }</td>
+						<c:url var="userInfo2" value="userInfo.fo">
+							<c:param name="userId" value="${ r.rpReciever }"/>
+							<c:param name="page" value="${ pi.currentPage }"/>
+						</c:url>
+						<td onclick="window.open('${ userInfo2 }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${ r.rpReciever }</td>
 						<td>${ r.rpDetail }</td>
 						<td>${ r.rpUrl }</td>
 						<td>
@@ -101,6 +134,13 @@ select{height:30px; width:100px;}
 							</c:if>
 						</td>
 						<td>${ r.rpDate }</td>
+						<td>
+							<input type="hidden" value="${ r.rpNo }" class="checkOn">
+							<input type="hidden" value="${ r.rpReciever }" class="rePId">
+							<input type="hidden" value="${ r.rpCount }" class="rpCount">
+							<input type="button" class="checkbox" name="check" value="확 인" style="width:100%; margin-bottom:10px;">
+							<input type="button" class="resetbox" name="reset" value="삭 제" style="width:100%;">
+						</td>
 					</tr>
 					</c:forEach>
 					
@@ -125,45 +165,66 @@ select{height:30px; width:100px;}
    				 }
    			});
 		});
+		$(".resetbox").click(function(){ 
+			var rpNo = $(this).parent().children(".checkOn").val();
+   			console.log(rpNo);
+   			$.ajax({
+   				url:"reportreset.fo",
+   				data: {rpNo:rpNo},
+   				type:"post",
+   				success: function(data){
+   					if(data == "success"){
+   						location.href="reportList.fo";
+   					}
+   				 }
+   			});
+		});
 	</script>
     <!-- 페이징 -->
-	     <div class="pageing-box" style="text-align: center;">
-            <!-- [이전] -->
-				<c:if test="${ pi.currentPage <= 1 }">
-					<div class="pre-box page-box1"></div>
-				</c:if>
-				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="reportList.fo">
-						<c:param name="page" value="${ pi.currentPage - 1 }"/>
-					</c:url>
-					<a href="${ before }" class="next-box page-box1">&gt;</a> &nbsp;
-				</c:if>
-				
-				<!-- 페이지 -->
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-					<c:if test="${ p eq pi.currentPage }">
-						<font color="white" size="4"><b style="background:#888c43; display:inline-block; width:10%; padding:5px 0; border-radius: 5px;">${ p }</b></font>
-					</c:if>
-					
-					<c:if test="${ p ne pi.currentPage }">
-						<c:url var="pagination" value="reportList.fo">
-							<c:param name="page" value="${ p }"/>
-						</c:url>
-						<a href="${ pagination }">${ p }</a> &nbsp;
-					</c:if>
-				</c:forEach>
-				
-				<!-- [다음] -->
-				<c:if test="${ pi.currentPage >= pi.maxPage }">
-					<div class="next-box page-box1">&gt;</div>
-				</c:if>
-				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="reportList.fo">
-						<c:param name="page" value="${ pi.currentPage + 1 }"/>
-					</c:url> 
-					<a href="${ after }" class="next-box page-box1">&gt;</a>
-				</c:if>
-        </div>
+    <div align="center" style="margin-top:30px; margin-bottom:30px;">
+         <!-- 맨 처음과 이전 버튼 -->
+         <c:if test="${ pi.currentPage <= 1 }">
+            <button type="button" class="nextPBtn" style="background: lightgray; cursor: default;">&lt;&lt;</button>
+            <button type="button" class="nextPBtn" style="background: lightgray; cursor: default;">&lt;</button>
+         </c:if>
+         <c:if test="${ pi.currentPage > 1 }">
+         	<c:url var="before" value="reportList.fo">
+				<c:param name="page" value="${ pi.currentPage - 1 }"/>
+			</c:url>
+			<c:url var="Start" value="reportList.fo">
+				<c:param name="page" value="${ pi.startPage }"/>
+			</c:url> 
+            <a class="nextPBtn" href="${ Start }">&lt;&lt;</a>
+            <a class="nextPBtn" href="${ before }">&lt;</a>
+         </c:if>
+         <!-- 5개의 페이지목록 -->
+         <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+            <c:if test="${ p eq pi.currentPage }">
+               <button type="button" class="pagingSelBtn">${ p }</button>
+            </c:if>
+            <c:if test="${ p ne pi.currentPage }">
+	            <c:url var="pagination" value="reportList.fo">
+					<c:param name="page" value="${ p }"/>
+				</c:url>
+               <a class="pagingBtn" href="${ pagination }" style="">${ p }</a>
+            </c:if>
+         </c:forEach>
+         <!-- 맨끝으로버튼 -->
+         <c:if test="${ pi.currentPage < pi.maxPage }">
+         	<c:url var="after" value="reportList.fo">
+				<c:param name="page" value="${ pi.currentPage + 1 }"/>
+			</c:url> 
+			<c:url var="End" value="reportList.fo">
+				<c:param name="page" value="${ pi.maxPage }"/>
+			</c:url> 
+            <a class="nextPBtn" href="${ after }">&gt;</a>
+            <a class="nextPBtn" href="${ End }">&gt;&gt;</a>
+         </c:if>
+         <c:if test="${ pi.currentPage >= pi.maxPage }">
+            <button type="button" class="nextPBtn" style="background: lightgray; cursor: default;">&gt;</button>
+            <button type="button" class="nextPBtn" style="background: lightgray; cursor: default;">&gt;&gt;</button>
+         </c:if>
+      </div>
 </body>
 </head>
 </html>

@@ -34,8 +34,8 @@ public class FriendServiceImpl implements FriendService {
 	}
 
 	@Override
-	public int getSearchList() {
-		return fDAO.getSearchList(sqlSession);
+	public int getSearchList(String id) {
+		return fDAO.getSearchList(sqlSession, id);
 	}
 
 	@Override
@@ -126,6 +126,11 @@ public class FriendServiceImpl implements FriendService {
 	@Override
 	public ArrayList<Conclusion> selectClass(String userId) {
 		return fDAO.selectClass(sqlSession, userId);
+	}
+
+	@Override
+	public int reportreset(Integer rpNo) {
+		return fDAO.reportreset(sqlSession, rpNo);
 	}
 	
 	

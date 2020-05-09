@@ -20,7 +20,8 @@
 	               JOIN MEMBER M ON(FD_FROM   = M.USER_ID)
 	               JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
 	       WHERE   FD_TO = #{id} AND FD_STATUS = '1'
-      </select>
+	</select>
+	
 	<select id="getSearchList" resultType="_int">
 		SELECT COUNT(*)
 		FROM (
@@ -41,16 +42,17 @@
 	            LEFT JOIN FRIENDS F ON(FD_TO = USER_ID)
 	    WHERE   M.USER_ID != #{id} AND
 	            F.FD_FROM = #{id} AND
-	            F.FD_STATUS = '0'
+	            F.FD_STATUS != '1'
 	    UNION
 	    SELECT  M.*, F.FD_FROM, F.FD_TO, F.FD_STATUS
 	    FROM    MEMBER M
 	            LEFT JOIN FRIENDS F ON(FD_FROM = USER_ID)
 	    WHERE   M.USER_ID != #{id} AND
 	            F.FD_TO = #{id} AND
-	            F.FD_STATUS = '0'
+	            F.FD_STATUS != '1'
 	   ORDER BY FD_STATUS ASC)
 	</select>
+	
 	<select id="searchList" parameterType="string" resultMap="memberResultSet">
 		SELECT  M.*, NULL AS FD_FROM, NULL AS FD_TO, NULL AS FD_STATUS, i.change_name
 	    FROM    MEMBER M
@@ -220,11 +222,11 @@
 	
 	
 	<select id="selectClass" resultMap="resultConclusionSet" parameterType="Conclusion">
-		select *
-		from conclusion
-		    left join board USING(post_no)
-		where proposer=#{userId}
-		order by start_date
+		select ROWNUM, proposer, CON_NO, start_date, content
+		from  (SELECT proposer, CON_NO, start_date, content, DENSE_RANK() OVER(ORDER BY  CON_NO  DESC) AS 순위
+	    from conclusion
+	    left join board USING(post_no)
+		where proposer = #{userId} AND ROWNUM <![CDATA[ <= ]]> 3 )
 	</select>
 	
 	<resultMap type="Conclusion" id="resultConclusionSet">
@@ -234,4 +236,9 @@
 		<result property="finishDate" column="FINISH_DATE"/>
 		<result property="conTent" column="CONTENT"/>
 	</resultMap>
+	
+	<delete id="reportreset" parameterType="Report">
+		DELETE FROM REPORT
+		WHERE RP_NO = #{rpNo}
+	</delete>
 </mapper>

@@ -69,7 +69,7 @@ public class FriendController {
 		if(page != null) {
 			currentPage = page;
 		}
-		int listCount = fService.getSearchList();
+		int listCount = fService.getSearchList(id);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
@@ -105,13 +105,13 @@ public class FriendController {
 	      
 	      for(Conclusion i : cList)
 	    	  i.setStartDate(i.getStartDate().substring(0,10)) ;
-	      ArrayList<Conclusion> list = new ArrayList<Conclusion>() ;
+	      /*ArrayList<Conclusion> list = new ArrayList<Conclusion>() ;
 	      list.add(cList.get(0)) ;
 	      list.add(cList.get(1)) ;
-	      list.add(cList.get(2)) ;
+	      list.add(cList.get(2)) ;*/
 	      if(m != null) {
 	         mv.addObject("member", m);
-	         mv.addObject("cList", list);
+	         mv.addObject("cList", cList);
 	         mv.addObject("page", currentPage);
 	         mv.setViewName("miniMyPage");
 	      } else {
@@ -277,7 +277,7 @@ public class FriendController {
 		int result = fService.reportGo(r);
 		
 		if(result > 0) {
-			mv.setViewName("report");
+			mv.setViewName("rportClose");
 		} else {
 			throw new FriendsException("신고 실패");
 		}
@@ -345,6 +345,18 @@ public class FriendController {
 			response.getWriter().print(true) ;
 		} else {
 			response.getWriter().print(false) ;
+		}
+	}
+	
+	@RequestMapping("reportreset.fo")
+	@ResponseBody
+	public String reportreset(HttpSession session, @RequestParam("rpNo") Integer rpNo) {
+		int result = fService.reportreset(rpNo);
+		
+		if(result > 0) {
+			return "success";
+		} else {
+			throw new FriendsException("신고 삭제 실패");
 		}
 	}
 }

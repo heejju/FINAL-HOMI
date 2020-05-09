@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>#취미 텃밭</title>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 <link rel="stylesheet" href="${ pageContext.servletContext.contextPath }/resources/css/common/reset.css" type="text/css">
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script> 
@@ -127,7 +127,12 @@ img{	border:0;}
         </header>
         <section>
             <div class="line-sc"></div>
-            <h2 class="user-info">${ member.introduction }</h2> 
+            <c:if test="${!empty member.introduction }">
+            	<h2 class="user-info">${ member.introduction }</h2>
+            </c:if>
+            <c:if test="${empty member.introduction }">
+            	<h2 class="user-info" style="color:red;">자기소개 작성을 하지 않으셨습니다.</h2>
+           	</c:if> 
             <div class="line-sc"></div>
             <div class="content-wrap">
                 <div class="content-one">
@@ -136,6 +141,10 @@ img{	border:0;}
                     <div class="c-Date c-sharing">시작일</div>
                 </div>
                 <div class="clear-both"></div>
+                <c:if test="${ empty cList }">
+                	<div class="listNull" align="center" style="margin-top:25px; color:#fff; font-weight:600; font-size:20px;">현재 진행중인 수업이 없습니다</div>
+                </c:if>
+                <c:if test="${ !empty cList }">
                 <c:forEach var="c" items="${ cList }">
                 	<div class="content-two">
 	                    <div class="c2-Number c2-sharing">${ c.postNo }</div>
@@ -143,6 +152,7 @@ img{	border:0;}
 	                    <div class="c2-Date c2-sharing">${ c.startDate }</div>
 	                </div>
                 </c:forEach>
+                </c:if>
                 <%-- <c:set var="i" value="0" />
                 <c:forEach begin="0" end="2" var="i">
 	                <div class="content-two">

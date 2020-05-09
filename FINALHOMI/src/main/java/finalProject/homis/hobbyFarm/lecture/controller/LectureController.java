@@ -336,13 +336,13 @@ public class LectureController implements Comparator<ArrayList<String>>{
 			if(hobbyNo == 0) {
 				int result = lbService.insertCategory(hobbyName);
 				if(result < 0) {
-					throw new LectureBoardException("취미 삭제에 실패했습니다.");
+					throw new LectureBoardException("취미 추가에 실패했습니다.");
 				}
 			} else {
 				Hobby hobby = new Hobby(hobbyNo, hobbyName);
 				int result = lbService.updateCategory(hobby);
 				if(result < 0) {
-					throw new LectureBoardException("취미 삭제에 실패했습니다.");
+					throw new LectureBoardException("취미 업데이트에 실패했습니다.");
 				}
 			}
 		}

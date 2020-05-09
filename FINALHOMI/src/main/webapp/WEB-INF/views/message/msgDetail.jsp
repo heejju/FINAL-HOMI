@@ -55,7 +55,7 @@
 			
 			<div id="btnArea">
 				<c:if test="${loginUser.nickName == message.msg_to}">
-					<button class="buttonO" onclick="location.href='${write}?to=${message.msg_from}'">답장하기</button>
+					<button class="buttonO" onclick="location.href='${write}?nick=${message.msg_from}'">답장하기</button>
 				</c:if>
 				<button class="buttonG" onclick="location.href='${get}'">쪽지함</button>
 			</div>

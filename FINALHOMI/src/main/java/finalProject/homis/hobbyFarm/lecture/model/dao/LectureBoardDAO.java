@@ -37,14 +37,12 @@ public class LectureBoardDAO {
 	public int selectLBCount(SqlSession sqlSession, Search search) {
 		search.setSearchValue("%"+search.getSearchValue()+"%");
 		search.setSearchWhere("%"+search.getSearchWhere()+"%");
-		System.out.println("DAO search = "+search);
 		return sqlSession.selectOne("lectureMapper.selectLBCount", search);
 	}
 
 	public ArrayList<LectureBoard> selectLBPage(SqlSession sqlSession, PageInfo pi, Search search) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		System.out.println("DAO search = "+search);
 		return (ArrayList)sqlSession.selectList("lectureMapper.selectLBPage", search, rowBounds);
 	}
 
@@ -73,7 +71,6 @@ public class LectureBoardDAO {
 	}
 
 	public int insertConclusion(SqlSession sqlSession, Conclusion c) {
-		System.out.println("DAO c = "+c);
 		return sqlSession.insert("lectureMapper.insertConclusion", c);
 	}
 

@@ -11,6 +11,7 @@ import finalProject.homis.hobbyFarm.common.model.vo.PageInfo;
 import finalProject.homis.hobbyFarm.friends.model.dao.FriendsDAO;
 import finalProject.homis.hobbyFarm.friends.model.vo.Friends;
 import finalProject.homis.hobbyFarm.friends.model.vo.Report;
+import finalProject.homis.hobbyFarm.lecture.model.vo.Conclusion;
 import finalProject.homis.hobbyFarm.member.model.vo.Member;
 
 @Service("fService")
@@ -33,8 +34,8 @@ public class FriendServiceImpl implements FriendService {
 	}
 
 	@Override
-	public int getSearchList() {
-		return fDAO.getSearchList(sqlSession);
+	public int getSearchList(String id) {
+		return fDAO.getSearchList(sqlSession, id);
 	}
 
 	@Override
@@ -120,6 +121,16 @@ public class FriendServiceImpl implements FriendService {
 		
 		if(result == fArr.size())	return 1 ;
 		else						return 0 ;
+	}
+
+	@Override
+	public ArrayList<Conclusion> selectClass(String userId) {
+		return fDAO.selectClass(sqlSession, userId);
+	}
+
+	@Override
+	public int reportreset(Integer rpNo) {
+		return fDAO.reportreset(sqlSession, rpNo);
 	}
 	
 	

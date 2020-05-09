@@ -51,9 +51,6 @@ public class GroupFarmController {
 	private GroupFarmService gfService;
 	
 	@Autowired
-	private FriendService fService;
-	
-	@Autowired
 	private MessageService msgService;
 	
 	// 게시글 목록 조회
@@ -221,7 +218,7 @@ public class GroupFarmController {
 			for(int i = 0; i < invitedFriends.length; i++) {
 				
 				String content = "<span>안녕하세요, <img id=\"logo\" src=\"${ contextPath }/resources/Logo.png\"/>입니다!</span><br>" +
-						"<span>" + nickName + " 님께서 회원님을 #" + newGF.getTitle() + " 모임으로 초대하셨습니다.</span><br>" + 
+						"<span>" + nickName + " 님께서 회원님을 '#" + newGF.getTitle() + "'모임으로 초대하셨습니다.</span><br>" + 
 						"<span>" + nickName + " 님이 모집하고 계신 모임 텃밭이 궁금하시다면 아래 버튼을 눌러 해당 게시글로 바로 이동해보세요!</span><br>" + 
 						"<div id='boardBtnWrapper'>" + 
 						"<button id='goDetail' onclick=" + url + "'>보러가기</button>"+

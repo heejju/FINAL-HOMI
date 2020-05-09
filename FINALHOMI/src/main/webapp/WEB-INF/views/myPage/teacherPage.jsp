@@ -125,7 +125,7 @@
 		<div> <!-- 시간표 -->
 			<div class="subTitle">시간표</div>
 			<div style="background: white; margin: 15px; padding: 15px;">
-				<iframe width="100%" height="580" src="timeLine.mp" frameborder="0"></iframe>
+				<iframe width="100%" height="620" src="timeLine.mp" frameborder="0"></iframe>
 			</div>
 		</div>
 	</div>

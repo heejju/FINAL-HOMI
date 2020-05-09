@@ -46,7 +46,7 @@
 	</div>
 		<div style="clear: both; border-bottom: 1px solid gray; padding: 5px;"></div>
 		<table class="table classList" id="timeTable" style="width: 100%; text-align: center;">
-			
+			<thead>
 				<tr style="border-bottom: 1px solid gray; line-height: 30px;">
 					<th style="width: 120px;">시간</th>
 					<th>제목</th>
@@ -54,33 +54,62 @@
 					<th style="width: 80px;">종류</th>
 					<th style="width: 80px;">수강생</th>
 				</tr>
-			<c:if test="${empty timeline}">
-				<tr style="border-bottom: 1px solid rgb(225, 225, 225); line-height: 25px;">
-					<td colspan="5"> 강의 없음! </td>
-				</tr>
-			</c:if>
-			<c:forEach var="t" items="${timeline}">
-				<tr style="border-bottom: 1px solid rgb(225, 225, 225); line-height: 25px;">
-					<td id="time"></td>
-					<td><input type="hidden" value="${t.postNo}">${t.title}</td>
-					<td>${t.hobbyName}</td>
-					<c:if test="${t.tKind == 2}">
-						<td>강의</td>
-					</c:if>
-					<c:if test="${t.tKind == 3}">
-						<td>모임</td>
-					</c:if>
-					<td><input type="hidden" value="${t.learnerId}">${t.learnerNick}</td>
-				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${empty timeline}">
+					<tr style="border-bottom: 1px solid rgb(225, 225, 225); line-height: 25px;">
+						<td colspan="5"> 강의 없음! </td>
+					</tr>
+				</c:if>
+				<c:if test="${!empty timeline}">
+					<c:forEach var="i" begin="9" end="23">
+						<tr style="border-bottom: 1px solid rgb(225, 225, 225); line-height: 25px;">
+							<td class="tr-no" id="time"><input type="hidden" value="${i}">${i}:00 - ${i+1}:00</td>
+							<td class="tr-no"><input type="hidden"></td>
+							<td class="tr-no"></td>
+							<td class="tr-no"></td>
+							<td class="td-msg"><input type="hidden"></td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</tbody>
+	</table>
+		<c:forEach var="t" items="${timeline}">
 				<script>
-					var time1 = parseInt('${t.timeline}'.substr(8,2));
-					var time2 = parseInt('${t.timeline}'.substr(8,2)) + 2;
+					for(var i = 0; i < 15; i++) {
+						var tr = $('#timeTable').children().eq(1).children().eq(i); // 모든 시간(행) 돌기(9~23)
+						for(var j = 0; j < 5; j++) { // 각 행의 td돌기
+							var time = tr.children().eq(0).children().val(); // 시작시간 i 가져오기
+								console.log(time);
+							var postNo = tr.children().eq(1);
+							var title = tr.children().eq(1);
+							var hobbyName = tr.children().eq(2);
+							var tKind = tr.children().eq(3);
+							var learnerNick = tr.children().eq(4);
+							var learnerId = tr.children().eq(4).children().eq(0);
+							
+							for(var t in '${timeline}') {
+								var time1 = parseInt('${t.timeline}'.substr(8,2));
+								var time2 = parseInt('${t.timeline}'.substr(8,2)) + ${t.otTime};
+								if(time == time1) {
+									postNo.val('${t.postNo}');
+									title.text('${t.title}');
+									hobbyName.text('${t.hobbyName}');
+									if('${t.tKind}' == 2) {
+										tKind.text('강의');
+									} else {
+										tKind.text('모임');
+									}
+									learnerNick.text('${t.learnerNick}');
+									learnerId.val('${t.learnerId}');
+								}
+							}
+							
+						}
+					}
 					
-					var time = time1 + " : 00 - " + time2 + " : 00";
-					$('#time').text(time);
-				</script>
-			</c:forEach>
-		</table>
+					</script>
+		</c:forEach>
 		
 	<script>
 		/* 시간표 마우스 오버 효과 */
@@ -90,6 +119,19 @@
 			}).mouseout(function() {
 				$(this).parents("tr").css({"background":"none", "color":"black"});
 			});
+		});
+		
+		$(function(){ 
+         	$('.tr-no').click(function(){
+         		var postNo = $(this).parents().find('td').eq(1).val();
+         		parent.location.href='detail.lec?postNo=' + postNo;
+         	});
+		});
+		$(function(){ 
+         	$('.td-msg').click(function(){
+         		var userId = $(this).children().val();
+         		window.open('userInfo.fo?userId='+userId,'미니마이페이지','width=600, height=702, menubar=no, status=no, toolbar=no');
+         	});
 		});
 	</script>
 </body>

@@ -56,7 +56,7 @@
 	<select id="searchList" parameterType="string" resultMap="memberResultSet">
 		SELECT  M.*, NULL AS FD_FROM, NULL AS FD_TO, NULL AS FD_STATUS, i.change_name
 	    FROM    MEMBER M
-               JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
+               		JOIN IMAGE  I ON(I.USER_ID = M.USER_ID)
 	    WHERE   M.USER_ID != #{id} AND
 	            M.USER_ID NOT IN (
 	                SELECT FD_FROM AS F_USER_ID
@@ -88,7 +88,8 @@
 	<select id="selectUser" parameterType="string" resultMap="memberResultSet">
 		select *
 		from member
-		where user_id = #{userId}
+          left join IMAGE ON(image.user_id = member.user_id)
+		where image.user_id = #{userId}
 	</select>
 	
 	

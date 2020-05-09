@@ -749,7 +749,6 @@
 							icon : "warning",
 							buttons : ["취소","확인"]
 						}).then((YES) => {
-							console.log(YES);
 							if(YES) {
 							} else {
 								isTrue = false;

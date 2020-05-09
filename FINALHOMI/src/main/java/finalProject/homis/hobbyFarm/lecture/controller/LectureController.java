@@ -68,7 +68,7 @@ public class LectureController implements Comparator<ArrayList<String>>{
 						  @RequestParam("allDate") ArrayList<String> allDate) {
 		
 		ArrayList<String> sidoArr = new ArrayList<String>();
-		for(int i = 0; i < 10 ;i++) {
+		for(int i = 0; ;i++) {
 			if(!request.getParameter("sido"+i).equals("")) {
 				sidoArr.add(request.getParameter("sido"+i));
 			} else {
@@ -77,7 +77,7 @@ public class LectureController implements Comparator<ArrayList<String>>{
 		}
 		
 		ArrayList<String> gugunArr = new ArrayList<String>();
-		for(int i = 0; i < 10 ;i++) {
+		for(int i = 0; ;i++) {
 			if(!request.getParameter("gugun"+i).equals("")) {
 				gugunArr.add(request.getParameter("gugun"+i));
 			} else {
@@ -86,7 +86,7 @@ public class LectureController implements Comparator<ArrayList<String>>{
 		}
 		
 		ArrayList<String[]> dongArr = new ArrayList<String[]>();
-		for(int i = 0; i < 10 ; i++) {
+		for(int i = 0; ; i++) {
 			if(request.getParameterValues("dong"+i) != null) {
 				dongArr.add(request.getParameterValues("dong"+i));
 			} else {
@@ -315,7 +315,8 @@ public class LectureController implements Comparator<ArrayList<String>>{
 	}
 		
 	@RequestMapping("adminCate.lec")
-	public String cateInsert(@RequestParam(value="hobbyNo", required=false) String hobbyNoS, @RequestParam("hobbyName") String hobbyName, @RequestParam("delYN") String delYN,
+	public String cateInsert(@RequestParam(value="hobbyNo", required=false) String hobbyNoS, 
+							 @RequestParam("hobbyName") String hobbyName, @RequestParam("delYN") String delYN,
 							 HttpServletRequest request) {
 		int hobbyNo = 0;
 		
@@ -336,13 +337,13 @@ public class LectureController implements Comparator<ArrayList<String>>{
 			if(hobbyNo == 0) {
 				int result = lbService.insertCategory(hobbyName);
 				if(result < 0) {
-					throw new LectureBoardException("취미 삭제에 실패했습니다.");
+					throw new LectureBoardException("취미 추가에 실패했습니다.");
 				}
 			} else {
 				Hobby hobby = new Hobby(hobbyNo, hobbyName);
 				int result = lbService.updateCategory(hobby);
 				if(result < 0) {
-					throw new LectureBoardException("취미 삭제에 실패했습니다.");
+					throw new LectureBoardException("취미 업데이트에 실패했습니다.");
 				}
 			}
 		}
@@ -801,6 +802,15 @@ public class LectureController implements Comparator<ArrayList<String>>{
 		int deleteResult = lbService.deleteBoard(postNo);
 		mv = list(null, null, null, null, null, request);
 		return mv;
-		}
+	}
+	
+	@RequestMapping("selectHobbyView.lec")
+	public ModelAndView selectHobbyView() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<Hobby> hList = lbService.selectHobbyList();
+		mv.addObject("hList",hList);
+		mv.setViewName("hobbySelectView");
+		return mv;
+	}
 }
 

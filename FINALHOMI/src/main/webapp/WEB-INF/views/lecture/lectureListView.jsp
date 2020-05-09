@@ -152,6 +152,11 @@
 		font-weight: bold; font-size: 20px;
 	}
 	.jm-btn{padding-top:5px; display:inline-block;}
+	input.hobbyName{
+		width: 200px; height: 40px; border: 3px solid rgb(103,81,65); font-size: 20px;
+		border-radius: 5px; text-align: center; box-sizing: border-box; font-weight: bold;
+		color : rgb(136, 140, 67); cursor: pointer;
+	}
 </style>
 </head>
 <body>
@@ -225,18 +230,21 @@
 			
 			<div style="display: inline-block; line-height: 30px; font-size: 40px; vertical-align: middle; width:40px; height:40px; text-align: center">//</div>
 			
-			<select name="hobbyNo" id='hobbyNo'><!-- DB에서 불러오기 -->
-				<option style="color: lightgray" value='0'>선택</option>
-				<c:forEach var="hobby" items="${ hList }">
-					<c:if test="${ hobbyNo eq hobby.hobbyNo }">
-						<option value="${ hobby.hobbyNo }" selected="selected">${ hobby.hobbyName }</option>
-					</c:if>
-					<c:if test="${ hobbyNo ne hobby.hobbyNo }">
-						<option value="${ hobby.hobbyNo }">${ hobby.hobbyName }</option>
-					</c:if>
-					
-				</c:forEach>
-			</select>
+			<c:url var="HBSel" value="selectHobbyView.lec"/>
+			<div style="display: inline-block;">
+				<c:if test="${ hobbyNo eq 0 }">
+					<input type="hidden" name='hobbyNo' id='hobbyNo' value ="0">
+					<input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+				</c:if>
+				<c:if test="${ hobbyNo ne 0 }">
+					<c:forEach var="hobby" items="${ hList }">
+						<c:if test="${ hobbyNo eq hobby.hobbyNo }">
+							<input type="hidden" name='hobbyNo' id='hobbyNo' value ="${ hobby.hobbyNo }">
+							<input value="${ hobby.hobbyName }" onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+						</c:if>
+					</c:forEach>
+				</c:if>
+			</div>
 			
 			<i onclick="$('#lecForm').submit()" class="fas fa-search" style="background: rgb(136, 140, 67); padding: 3px; border-radius: 3px; height:40px; width:40px; vertical-align: middle; box-sizing: border-box; cursor: pointer;"></i>
 			
@@ -247,13 +255,17 @@
 			</c:if>
 			<c:url var="adminCate" value="adminCateView.lec"/>
 			<script>
+				//취미선택 누르면 hobbySelectView나옴
+				function toHBSelView(){
+					var height = $("body")[0].clientHeight+"px";
+					window.open('${HBSel}', '_blank','width=1100px, height=1000px, location=no, toolbars=no, scrollbars=no');
+				}
+			
 				//admin login시에 카테고리를 추가할수잇는 버튼 추가
 				function insertCategory(){
 					window.open('${adminCate}', '_blank','width=1100px, height=800px, location=no, toolbars=no, scrollbars=no');
 				}
 			</script>
-			
-			
 		</div>
 		
 		<script>

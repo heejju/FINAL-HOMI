@@ -374,7 +374,7 @@
 				
 			</div>
 			<div  style="text-align: center;"><!-- 가능한 장소의 마지막한줄을 지우는 곳 -->
-				<button class='ablePlaceDeleteBtn' type='button' onclick='ablePlaceDeleteBtn();'>마지막 줄 삭제하기</button>
+				<button class='ablePlaceDeleteBtn' type='button' onclick='ablePlaceDeleteBtn();'>마지막 선택동 삭제</button>
 				<hr>
 				<script>
 					function ablePlaceDeleteBtn(){

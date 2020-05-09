@@ -203,7 +203,7 @@
 								})
 								return;
 							}
-							location.href = 'deleteGetMsg.msg?checkVal=' + checkVal
+							location.href = 'deleteSentMsg.msg?checkVal=' + checkVal
 									+ '&id=${loginUser.userId}';
 						} else {
 							return;

@@ -113,7 +113,10 @@
 			var hobbyNo = $(e)[0].innerText;
 			var hobbyName = $(e).next()[0].innerText;
 			$("#hobbyNo",opener.document).val(hobbyNo);
+
+			$("#hobbyName",opener.document).val(hobbyNo);
 			$("#hobbyName",opener.document).val(hobbyName);
+			$("#hobbyName",opener.document).text(hobbyName);
 			window.close();
 		}
 		//table에서 취미 이름 클릭시 해당 값 input에 넣기
@@ -121,7 +124,10 @@
 			var hobbyNo = $(e).prev()[0].innerText;
 			var hobbyName = $(e)[0].innerText;
 			$("#hobbyNo",opener.document).val(hobbyNo);
+
+			$("#hobbyName",opener.document).val(hobbyNo);
 			$("#hobbyName",opener.document).val(hobbyName);
+			$("#hobbyName",opener.document).text(hobbyName);
 			window.close();
 		}
 	</script>

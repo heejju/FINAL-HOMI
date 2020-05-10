@@ -115,7 +115,7 @@
                     <a href="">서브 메뉴2</a>
                 </div>
             </div>
-            <div class="suv-menu-4">
+            <div class="suv-menu-4"> 
                 <div class="menu-line">
                     <a href="${ reportList }">신고 목록</a>
                     <a href="${statistics }">텃밭 통계</a>

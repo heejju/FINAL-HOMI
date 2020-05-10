@@ -32,15 +32,15 @@
 	<div style=" background: white; padding: 5px; height: 630px;">
 	<table class="table">
 				<tr style="border-bottom: 1px solid gray;">
-					<th style="padding: 10px;">텃밭 이름</th>
+					<th style="overflow: hidden"><div style="overflow: hidden">텃밭 이름</div></th>
 					<th>텃밭 주인</th>
-					<th>모종 종류</th>
+					<th>모종</th>
 					<th>인원</th>
 				</tr>
 				<c:if test="${!empty gfList}">
 					<c:forEach var="gf" items="${gfList}">
-						<tr>
-							<td><input type="hidden" value="글번호넣기">${gf.title}</td>
+						<tr class="tr-no">
+							<td style="overflow: hidden;"><input type="hidden"  value="${gf.postNo}">${gf.title}</td>
 							<td>${gf.nickName}</td>
 							<td>${gf.hobbyName}</td>
 							<td>${gf.personnel}</td>
@@ -56,7 +56,7 @@
 				</c:if>
 			</table>
 			<div class="pagingArea"> <!-- 페이징 -->
-				<div id="pagingArea" style="position: absolute; left: 38%; bottom: 20px; text-align: center;">
+				<div id="pagingArea" style="position: absolute; left: 10%; right: 10%; bottom: 20px; text-align: center;">
 				<!-- [이전] -->
 	            <c:if test="${ pi.currentPage <= 1 }">
 	               <button class="pagingBtn" id="before" style="background: lightgray;" disabled>&lt;</button>

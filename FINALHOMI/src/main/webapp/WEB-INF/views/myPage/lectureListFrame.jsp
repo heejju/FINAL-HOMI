@@ -41,7 +41,7 @@
 		<c:forEach var="lb" items="${lbList}">
 			<tr class="tr-no" style="line-height: 30px;">
 				<td class="align"><div class="status on">진행</div></td>
-				<td><input type="hidden" value="${lb.postNo}">${lb.title}</td>
+				<td style="overflow: hidden;"><input type="hidden" value="${lb.postNo}">${lb.title}</td>
 				<td class="align">${lb.nickName}</td>
 				<td class="align">${lb.hobbyName}</td>
 				<c:if test="${lb.learner eq 'low'}">
@@ -65,7 +65,7 @@
 	</table>
 	
 	<!-- 페이징 -->
-			<div class="pagingArea" style="text-align: center; padding-top: 10px; position: absolute; bottom: 0; left: 28%;">
+			<div class="pagingArea" style="text-align: center; padding-top: 10px; position: absolute; bottom: 0; left: 10%; right: 10%;">
 				<!-- [이전] -->
             <c:if test="${ pi.currentPage <= 1 }">
                <button id="before" style="background:lightgray; color:white" disabled>&lt;</button>

@@ -9,17 +9,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<%@include file="../common/boardCommon.jsp"%>
 	<!-- include libraries(jQuery, bootstrap) -->
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<!-- include summernote css/js-->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <title>#취미텃밭</title>
+<%@include file="../common/boardCommon.jsp"%>
 <script>
 	$('#bName').text('모종');
 	$('#bNameAfter').text('구하기');
@@ -337,15 +336,15 @@
 				     		    ['color', ['color']],
 				     		    ['para', ['ul', 'ol', 'paragraph']],
 				     		    ['height', ['height']],
-				     		    ['insert', ['link', 'hr']],
+				     		    ['insert', ['link', 'hr', 'picture']],
 				     		  ],
 				     		 callbacks:{
 					     		onImageUpload : function(files){
 					     			console.log(files);
 					     			uploadSummernoteImageFile(files[0], this);
 					     		}
-					     	}
-				     }).summernote('code', '${ lb.content }');
+						     }
+				     }).summernote('code', '${lb.content}');
 				     $('#summernote2').summernote({
 			             height: 500,                 // set editor height
 			             toolbar: [
@@ -355,16 +354,17 @@
 			     		    ['color', ['color']],
 			     		    ['para', ['ul', 'ol', 'paragraph']],
 			     		    ['height', ['height']],
-			     		    ['insert', ['link', 'hr']],
-			     		  ],
-			     		 callbacks:{
+			     		    ['insert', ['link', 'hr', 'picture']],
+			     		 ],
+				     	callbacks:{
 				     		onImageUpload : function(files){
 				     			console.log(files);
 				     			uploadSummernoteImageFile(files[0], this);
 				     		}
 				     	}
-			     }).summernote('code', '${ lb.teacherInfo }');
+			     }).summernote('code','${lb.teacherInfo}');
 				});
+				
 				/**
 				* 이미지 파일 업로드
 				*/
@@ -384,6 +384,7 @@
 						}
 					});
 				}
+			
 			</script>
 			
 			<br><br>

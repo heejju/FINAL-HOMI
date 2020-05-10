@@ -381,7 +381,7 @@
       <br><br>
       
       <c:set var="i" value="1"/>
-      <div class="listInfo">
+      <div class="listInfo" style="text-align: left; padding: 0 30px;">
          <c:forEach items="${ lbList }" var="lb">
             <c:if test="${ i  eq lbList.size() }">
                <div class="content" onclick="toDetail(this);">
@@ -409,12 +409,10 @@
                   </div>
                   <hr>
                </div>
-               </div>
             </c:if>
                
             <c:if test="${ i  ne lbList.size() }">
                <c:if test="${ i mod 3 eq 1 }">
-                  <div style="text-align: left; padding: 0 30px">
                   <div class="content" onclick="toDetail(this);">
                      <input type=hidden value="${ lb.postNo }">
                      <div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
@@ -497,7 +495,6 @@
                         </div>
                      </div>
                      <hr>
-                  </div>
                   </div>
                </c:if>
             </c:if>

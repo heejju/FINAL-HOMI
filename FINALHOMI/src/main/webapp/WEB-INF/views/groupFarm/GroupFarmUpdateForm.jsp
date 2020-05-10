@@ -12,6 +12,7 @@
 <title>#취미텃밭</title>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
@@ -324,7 +325,7 @@
 						</li>
 						
 						<li>
-							<b>인원</b> : 최대 <input type="number" name="personnel" id="personnel" min=2 value=${ gf.personnel }> 명
+							<b>인원</b> : 최대 <input type="number" name="personnel" id="personnel" min="2" value=${ gf.personnel }> 명
 							<c:url var="friends" value="fdList.gf"/>
 							<button id="inviteBtn" type="button" onclick="invite();">친구 초대</button>
 							<input type="hidden" name="inviteFriends" id="inviteFriends">
@@ -555,17 +556,7 @@
 	            //도시 선택
 	            $('#sido').val($('#selectSido').val());
 	            $('#gugun').val($('#selectGugun').val());
-	                  
-	           /*  //요일 선택
-                 	var check = $("input:checkbox[name=days]:checked");
-                 	var length = $("input:checkbox:checked").length;
-	                  
-                // 체크
-                .days.attr("checked", true);
-                // 체크 해제
-                days.removeAttr("checked"); */
-                  
-                
+
                 var dayArr = [];
                 var cnt = 0;
                 var days = $(".days");
@@ -620,15 +611,36 @@
   						icon : 'info',
   					});
   					return false;
-  				} else if($('#personnel').val() == "0"){
-  					//alert("모임 인원을 선택해주세요.");
-  					swal({
-  						title : '모임 인원을 선택해주세요!',
-  						text : '회원님을 제외한 모임 인원에 대해 설정해주세요.',
-  						icon : 'info',
-  					});
-  					return false;
-  				} else if($('#day').val() == ""){
+  				} /* else if('${ gf.offerYN eq "Y"}'){
+					if('${ empty gf.teacher }'){
+						if($('#personnel').val() < '${ gfa.size() }'){
+							swal({
+		  						title : '모임 인원을 다시 선택해주세요!',
+		  						text : '현재 참가 인원보다 적게 설정할 수 없습니다.',
+		  						icon : 'info',
+		  					});
+		  					return false;
+						}
+					} else {
+						if($('#personnel').val() < '${ gfa.size() - 1 }'){
+							swal({
+		  						title : '모임 인원을 다시 선택해주세요!',
+		  						text : '현재 참가 인원보다 적게 설정할 수 없습니다.',
+		  						icon : 'info',
+		  					});
+	  					return false;
+						}
+					}
+  				} else if('${ gf.offerYN eq "N"}'){
+  					if($('#personnel').val() < '${ gfa.size() }'){
+						swal({
+	  						title : '모임 인원을 다시 선택해주세요!',
+	  						text : '현재 참가 인원보다 적게 설정할 수 없습니다.',
+	  						icon : 'info',
+	  					});
+	  					return false;
+					}
+  				}  */else if($('#day').val() == ""){
   					//alert("요일을 선택해주세요.");
   					swal({
   						title : '요일을 선택해주세요!',

@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>#취미 텃밭</title>
 
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -191,22 +192,19 @@
 					</c:if>
 					<%-- ${ gf.closeYN eq 'N' && gf.personnel ne gfa.size() } --%>
 					<div id="joinBtnArea">
-						<!-- 작성자인 경우 -->
-						<c:if test="${ loginUser.nickName eq gf.nickName }">
-        						<input type="button" id="closeBtn" value="모임 마감" onclick="closeGroup();"/>
-						</c:if>
-
 						<!-- 작성자가 아닌 경우 -->
 						<c:if test="${ loginUser.userId ne gf.writer }">
 							<!-- 참가 인원이 없을 때 -->
 							<c:if test="${ gfaList.size() eq 0}">
-	         					<c:if test = "${ loginUser.mKind eq 1 }">
-	         						<input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/>
-								</c:if>
-								<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
-		         					<c:if test = "${ loginUser.mKind eq 2 }">
-		         						<input type="button" id="requestClassBtn" value="강의 신청" onclick="requestClass();"/>
-										<!-- <button type="button" id="requestBtn" onclick="requestClass();">강의 신청</button> -->
+								<c:if test="${ gf.closeYN eq 'N' }">
+		         					<c:if test = "${ loginUser.mKind eq 1 }">
+		         						<input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/>
+									</c:if>
+									<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
+			         					<c:if test = "${ loginUser.mKind eq 2 }">
+			         						<input type="button" id="requestClassBtn" value="강의 신청" onclick="requestClass();"/>
+											<!-- <button type="button" id="requestBtn" onclick="requestClass();">강의 신청</button> -->
+										</c:if>
 									</c:if>
 								</c:if>
 							</c:if>
@@ -232,23 +230,30 @@
 									
 									<!-- 참여자가 아닐 때 -->
 									<c:if test="${ isIdAll eq false }">
-										<c:choose>
-											<c:when test="${ gf.offerYN eq 'N' && gfaList.size() ne gf.personnel}"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
-											<c:when test="${ gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() ne gf.personnel }"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
-											<c:when test="${ gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 ne gf.personnel }"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
-										</c:choose>
-										<c:choose>
-											<c:when test="${ gf.offerYN eq 'N' && gfaList.size() eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
-											<c:when test="${ gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
-											<c:when test="${ gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
-										</c:choose>
+										<c:if test="${ gf.closeYN eq 'N' }">
+											<c:choose>
+												<c:when test="${ gf.offerYN eq 'N' && gfaList.size() ne gf.personnel}"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
+												<c:when test="${ gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() ne gf.personnel }"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
+												<c:when test="${ gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 ne gf.personnel }"><input type="button" id="enterBtn" value="모임 참가" onclick="enterGroup();"/></c:when>
+											</c:choose>
+											<c:choose>
+												<c:when test="${ gf.offerYN eq 'N' && gfaList.size() eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
+												<c:when test="${ gf.offerYN eq 'Y' && empty gf.teacher && gfaList.size() eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
+												<c:when test="${ gf.offerYN eq 'Y' && !empty gf.teacher && gfaList.size() - 1 eq gf.personnel }"><div>모집 인원이 마감되었습니다</div></c:when>
+											</c:choose>
+										</c:if>
+										<c:if test="${ gf.closeYN eq 'Y' }">
+											<div style="margin-top:10px;">마감된 모임입니다 </div><br>
+										</c:if>
 									</c:if>
 								</c:if>
 								
 								<!-- 강사 -->
 								<c:if test="${ loginUser.mKind eq 2 }">
-									<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
-										<input type="button" id="requestClassBtn" value="강의 신청" onclick="requestClass();"/>
+									<c:if test="${ gf.closeYN eq 'N' }">
+										<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
+											<input type="button" id="requestClassBtn" value="강의 신청" onclick="requestClass();"/>
+										</c:if>
 									</c:if>
 									<c:if test="${ gf.offerYN eq 'Y' && !empty gf.teacher}">
 										<c:forEach var="gfa" items="${ gfaList }">
@@ -266,10 +271,13 @@
 								</c:if>
 							</c:if>
 						</c:if>
-						<c:if test="${ gf.closeYN eq 'Y'}">
-							<div style="margin-top:10px;">마감된 모임입니다 </div><br>
-							<!-- 작성자인 경우 -->
-							<c:if test="${ loginUser.nickName eq gf.nickName }">
+						<!-- 작성자인 경우 -->
+						<c:if test="${ loginUser.nickName eq gf.nickName }">
+							<c:if test="${ gf.closeYN eq 'N'}">
+        						<input type="button" id="closeBtn" value="모임 마감" onclick="closeGroup();"/>
+							</c:if>
+							<c:if test="${ gf.closeYN eq 'Y'}">
+								<div style="margin-top:10px;">마감된 모임입니다 </div><br>
          						<input type="button" id="cancleCloseBtn" value="마감 취소" onclick="cancelClose();"/>
 							</c:if>
 						</c:if>
@@ -281,89 +289,122 @@
                var personnelCount = ${ gfaList.size() };
                
                function enterGroup(){
-                  var enter = confirm("모임에 참가하시겠습니까?");
-                  
-                  if(enter){
-                     var page = ${ page };
-                     var postNo = ${ gf.postNo };
-                     var userId = "${ loginUser.userId }";
-                     var mKind = ${ loginUser.mKind };
-                     
-                     $.ajax({
-                        url: "enterGroup.gf",
-                        type: "post",
-                        data: {page:page, postNo:postNo, userId:userId, mKind:mKind},
-                        success: function(data){
-                           $('.personnelCount').text(Number($('.personnelCount').text()) + 1);
-                           $('#enterBtn').attr("onclick","exeuntGroup();");
-                           $('#enterBtn').val('모임 탈퇴');
-                           $('#enterBtn').css('background', '#675141');
-                           $('#enterBtn').attr('id', 'exeuntBtn');
-                        }
-                     });
-                  }
+                  swal({
+            		  title: "모임에 참가하시겠습니까?",
+            		  icon: "warning",
+            		  buttons: true,
+            		  dangerMode: true,
+            		  buttons: ["취소", "확인"]
+            		})
+            		.then(확인 => {
+            		  if(확인){
+            			  var page = ${ page };
+                          var postNo = ${ gf.postNo };
+                          var userId = "${ loginUser.userId }";
+                          var mKind = ${ loginUser.mKind };
+                          $.ajax({
+                              url: "enterGroup.gf",
+                              type: "post",
+                              data: {page:page, postNo:postNo, userId:userId, mKind:mKind},
+                              success: function(data){
+                                 $('.personnelCount').text(Number($('.personnelCount').text()) + 1);
+                                 $('#enterBtn').attr("onclick","exeuntGroup();");
+                                 $('#enterBtn').val('모임 탈퇴');
+                                 $('#enterBtn').css('background', '#675141');
+                                 $('#enterBtn').attr('id', 'exeuntBtn');
+                              }
+                           });
+            		  } else {
+            			  swal({title:"모임에 참가하고 싶다면 다시 눌러주세요!"});
+            		  }
+                      
+            		});
                }
                
                function exeuntGroup(){
-                  var enter = confirm("모임에 탈퇴하시겠습니까?");
-                  
-                  if(enter){
-                     var page = ${page};
-                     var postNo = ${gf.postNo};
-                     var userId = "${ loginUser.userId }";
-                     var mKind = ${ loginUser.mKind };
-                     
-                     
-                     $.ajax({
-                        url: "exeuntGroup.gf",
-                        type: "post",
-                        data: {page:page, postNo:postNo, userId:userId, mKind:mKind},
-                        success: function(data){
-                              $('.personnelCount').text(personnelCount-1);
-                           
-                           $('#exeuntBtn').attr("onclick","enterGroup();");
-                           $('#exeuntBtn').val('모임 참가');
-                           $('#exeuntBtn').css('background', '#888c43');
-                           $('#exeuntBtn').attr('id', 'enterBtn');
-                        }
-                     });
-                  }
+                  swal({
+            		  title: "모임에서 탈퇴하시겠습니까?",
+            		  icon: "warning",
+            		  buttons: true,
+            		  dangerMode: true,
+            		  buttons: ["취소", "확인"]
+            		})
+            		.then(확인 => {
+            		  if(확인){
+            			  var page = ${ page };
+                          var postNo = ${ gf.postNo };
+                          var userId = "${ loginUser.userId }";
+                          var mKind = ${ loginUser.mKind };
+                          $.ajax({
+                              url: "exeuntGroup.gf",
+                              type: "post",
+                              data: {page:page, postNo:postNo, userId:userId, mKind:mKind},
+                              success: function(data){
+                                    $('.personnelCount').text(personnelCount-1);
+                                 
+                                 $('#exeuntBtn').attr("onclick","enterGroup();");
+                                 $('#exeuntBtn').val('모임 참가');
+                                 $('#exeuntBtn').css('background', '#888c43');
+                                 $('#exeuntBtn').attr('id', 'enterBtn');
+                              }
+                           });
+            		  } else {
+            			  swal({title:"모임에 탈퇴하고 싶다면 다시 눌러주세요!"});
+            		  }
+                      
+            		});
                }
                
                function requestClass(){
-               	   var enter = confirm("강의를 신청하시겠습니까?");
-                      
-                     if(enter){
-                        var page = ${ page };
-                        var postNo = ${ gf.postNo };
-                        var userId = "${ loginUser.userId }";
-                        var mKind = ${ loginUser.mKind };
-                        var nickName = "${ loginUser.nickName }";
-                        
-                        $.ajax({
-                           url: "requestClass.gf",
-                           type: "post",
-                           data: {page:page, postNo:postNo, userId:userId, mKind:mKind, nickName:nickName},
-                           success: function(data){
-                              $('#requestClassBtn').attr("onclick","cancleClass();");
-                              $('#requestClassBtn').val('강의 취소');
-                              $('#requestClassBtn').css('background', '#675141');
-                              $('#requestClassBtn').attr('id', 'cancleClassBtn');
-                           }
-                        });
-                     }
-                  }
-               
-               function cancleClass(){
-               	   var enter = confirm("강의를 취소하시겠습니까?");
-                      
-                      if(enter){
-                         var page = ${ page };
+            	   swal({
+             		  title: "모임의 지도강사로 신청하시겠습니까?",
+             		  icon: "warning",
+             		  buttons: true,
+             		  dangerMode: true,
+             		  buttons: ["취소", "확인"]
+             		})
+             		.then(확인 => {
+             		  if(확인){
+             			 var page = ${ page };
                          var postNo = ${ gf.postNo };
                          var userId = "${ loginUser.userId }";
                          var mKind = ${ loginUser.mKind };
+                         var nickName = "${ loginUser.nickName }";
                          
                          $.ajax({
+                             url: "requestClass.gf",
+                             type: "post",
+                             data: {page:page, postNo:postNo, userId:userId, mKind:mKind, nickName:nickName},
+                             success: function(data){
+                                $('#requestClassBtn').attr("onclick","cancleClass();");
+                                $('#requestClassBtn').val('강의 취소');
+                                $('#requestClassBtn').css('background', '#675141');
+                                $('#requestClassBtn').attr('id', 'cancleClassBtn');
+                             }
+                          });
+             		  } else {
+             			  swal({title:"지도 강사를 취소하시려면 다시 눌러주세요!"});
+             		  }
+                       
+             		});
+               	}
+               
+               function cancleClass(){
+            	   swal({
+              		  title: "모임의 강의를 취소하시겠습니까?",
+              		  icon: "warning",
+              		  buttons: true,
+              		  dangerMode: true,
+              		  buttons: ["취소", "확인"]
+              		})
+              		.then(확인 => {
+              		  if(확인){
+              			var page = ${ page };
+                        var postNo = ${ gf.postNo };
+                        var userId = "${ loginUser.userId }";
+                        var mKind = ${ loginUser.mKind };;
+                          
+                        $.ajax({
                             url: "cancleClass.gf",
                             type: "post",
                             data: {page:page, postNo:postNo, userId:userId, mKind:mKind},
@@ -374,11 +415,16 @@
                                $('#cancleClassBtn').attr('id', 'requestClassBtn');
                             }
                          });
-                      }
+              		  } else {
+              			  swal({title:"지도 강사를 취소하시려면 다시 눌러주세요!"});
+              		  }
+                        
+              		});
+               	   
                   }
-               
-               
-        	   var gf = ${gf.personnel};
+				
+               // 자동 마감
+               var gf = ${gf.personnel};
         	   var personnelCount;
         	   
         	   if('${ gf.teacher }' != ""){
@@ -538,7 +584,7 @@
 			</c:url>
 		
 			<div class="buttonArea">
-				<a href="blist.gf"><button id="list">목록으로</button></a>
+				<a href="${ blist }"><button id="list">목록으로</button></a>
 				<c:if test="${ loginUser.nickName eq gf.nickName }">
 					<button id="updateBtn">수정</button>
 					<button id="deleteBtn">삭제</button>

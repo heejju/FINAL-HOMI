@@ -61,7 +61,8 @@
 	#personnel{width:80px;}
 	#hobbyArea, .locationArea{align:center; width:20%; height:5%; background-color:white;
 					border-radius:5px; display:inline-block; margin:0px auto;}
-	#hobbyName{width:165px; height:13px; padding:5px;}
+	.hobbyName{width:165px; height:13px; padding:5px;}
+	.hobbyName:hover{cursor:pointer}
 	.locationArea > select {width:180px; height:25px;}
 	#startDate > img{width:30px;}
 	.date, .time{padding:5px; height:10px;}

@@ -305,7 +305,7 @@
                           $.ajax({
                               url: "enterGroup.gf",
                               type: "post",
-                              data: {page:page, postNo:postNo, userId:userId, mKind:mKind},
+                              data: {postNo:postNo, userId:userId, mKind:mKind},
                               success: function(data){
                                  $('.personnelCount').text(Number($('.personnelCount').text()) + 1);
                                  $('#enterBtn').attr("onclick","exeuntGroup();");
@@ -338,7 +338,7 @@
                           $.ajax({
                               url: "exeuntGroup.gf",
                               type: "post",
-                              data: {page:page, postNo:postNo, userId:userId, mKind:mKind},
+                              data: {postNo:postNo, userId:userId, mKind:mKind},
                               success: function(data){
                                     $('.personnelCount').text(personnelCount-1);
                                  
@@ -374,7 +374,7 @@
                          $.ajax({
                              url: "requestClass.gf",
                              type: "post",
-                             data: {page:page, postNo:postNo, userId:userId, mKind:mKind, nickName:nickName},
+                             data: {postNo:postNo, userId:userId, mKind:mKind, nickName:nickName},
                              success: function(data){
                             	$('#teacher').text('${loginUser.nickName}');
                                 $('#requestClassBtn').attr("onclick","cancleClass();");
@@ -408,7 +408,7 @@
                         $.ajax({
                             url: "cancleClass.gf",
                             type: "post",
-                            data: {page:page, postNo:postNo, userId:userId, mKind:mKind},
+                            data: {postNo:postNo, userId:userId, mKind:mKind},
                             success: function(data){
                            	   $('#teacher').text('구인중');
                                $('#cancleClassBtn').attr("onclick","requestClass();");
@@ -438,12 +438,12 @@
                if(gf == personnelCount && '${ gf.closeYN eq N }'){
             	  $(function(){
                 	   var postNo = ${gf.postNo};
-                	   var page = ${page};
+                	   /* var page = ${page}; */
                 	   
                		   $.ajax({
                               url: "closeGroup.gf",
                               type: "post",
-                              data: {page:page, postNo:postNo},
+                              data: {postNo:postNo},
                               success: function(data){
                             	  swal("모집 인원이 모두 모여 모임이 자동으로 마감되었습니다", {
                             		  icon: "success",
@@ -467,7 +467,7 @@
                function closeGroup(){
                   
                   var postNo = ${gf.postNo};
-                  var page = ${page};
+                  /* var page = ${page}; */
                   
                   swal({
             		  title: "모임을 마감하시겠습니까?",
@@ -482,7 +482,7 @@
             			 $.ajax({
                               url: "closeGroup.gf",
                               type: "post",
-                              data: {page:page, postNo:postNo},
+                              data: {postNo:postNo},
                               success: function(data){
                             	  swal("모임이 마감되었습니다", {
                             		  icon: "success",
@@ -509,7 +509,7 @@
                function cancelClose(){
             	   var personnel = ${ gf.personnel };
             	   var postNo = ${gf.postNo};
-                   var page = ${page};
+                   /* var page = ${page}; */
                    
             	   var personnelCount;
                    if('${ gf.teacher }' != ""){
@@ -538,7 +538,7 @@
 	                			 $.ajax({
 	                                  url: "cancleClose.gf",
 	                                  type: "post",
-	                                  data: {page:page, postNo:postNo},
+	                                  data: {postNo:postNo},
 	                                  success: function(data){
 	                                	  swal("모임을 진행합니다", {
 	                                		  icon: "success",

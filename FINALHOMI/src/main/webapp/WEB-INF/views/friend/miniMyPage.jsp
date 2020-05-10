@@ -104,7 +104,7 @@ img{	border:0;}
     
     /*이미지 마우스 올렸을때*/
     .i-img{position:relative; /* background-color:#000; */ padding-top:100%; overflow:hidden; margin-bottom:15px;}
-	.i-img img{position:absolute; top:0; opacity:0.8; filter:alpha(opacity=80);}
+	.i-img img{position:absolute; top:0; opacity:0.8; filter:alpha(opacity=80); height:100%; width:100%;}
 	.i-img .hover-op{-webkit-transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; opacity:1; filter:alpha(opacity=100); z-index:1; -webkit-filter:blur(0px); filter:blur(0px);}
 	.i-img:hover .hover-op{-webkit-transform:scale(1.2); transform:scale(1.2); opacity:0; filter:alpha(opacity=0); -webkit-filter:blur(1px); filter:blur(1px);}
     
@@ -125,7 +125,7 @@ img{	border:0;}
             	<c:param name="page" value="${ pi.currentPage }"/>
             </c:url>
             <div class="user">
-                <div class="user-id">${ member.userName }</div>
+                <div class="user-id">${ member.nickName }</div>
                 <div class="repot" onclick="rePort();" >
                 	<img alt="신고" src="${ contextPath }/resources/images/icon.png">
                 </div>

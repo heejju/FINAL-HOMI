@@ -144,7 +144,7 @@ button:hover{cursor:pointer;}
             <div class="friendBox">
                 <div class="user-img">
                    <div class="i-img">
-                    	<img src="${contextPath}/resources/uploadFiles/${f.changeName}"  class="img-responsive hover-op"	/>
+                    	<img src="${contextPath}/resources/uploadFiles/${f.changeName}"  class="img-responsive hover-op" />
                     	<img src="${contextPath}/resources/uploadFiles/${f.changeName}"  class="img-responsive hover-st" />
                    	</div>
                 </div>

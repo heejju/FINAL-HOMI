@@ -98,7 +98,7 @@
       height: 100%; text-align: center; overflow: hidden; float: left;
    }
    div.contentWriter{
-      display: inline-block; width: 90px; font-size: 12px;
+      display: inline-block; width: 90px; font-size: 12px; text-align: center;
    }
    p.contentTime{
       background: rgba(103, 81, 65, 0.8); color: rgb(136, 140, 67); width: auto;

@@ -34,7 +34,7 @@
 				
 	/* 게시글 부분 */			
 	.postArea{width:80%; margin:0px auto; margin-top:5%; overflow:hidden;}
-	.postDetail{width:25%; max-heigth:480px; height:480px; background-color:white; font-weight:bold; text-align:center;
+	.postDetail{width:25%; max-heigth:20%; height:20%; background-color:white; font-weight:bold; text-align:center;
 				 display:inline-block; float:left; overflow:hidden; margin:20px 4%;}
 	.group_status{padding:5%; color:#888c43; text-align:center; margin:5% auto;}
 	.group_status:after{content: ""; text-align:center; display: block; width:80%; border-bottom: 1.5px solid gray; margin:5% auto;}

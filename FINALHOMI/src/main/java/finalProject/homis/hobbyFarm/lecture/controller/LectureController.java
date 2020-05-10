@@ -254,13 +254,6 @@ public class LectureController implements Comparator<ArrayList<String>>{
 			searchTag = "";
 		if(searchValue == null)
 			searchValue = "";
-		System.out.println("hobbyNo = "+hobbyNo);
-		System.out.println("hobbyNo = "+(hobbyNo == null));
-		if(hobbyNo != null) {
-			if(hobbyNo.equals("")) {
-				System.out.println("null 이 라니면서 ''이다.");
-			}
-		}
 		if(hobbyNo != null) {
 			searchCate = Integer.parseInt(hobbyNo);
 		}
@@ -476,7 +469,6 @@ public class LectureController implements Comparator<ArrayList<String>>{
 							 HttpServletRequest request
 			) {
 		int postNo = Integer.parseInt(postNoS);
-		System.out.println("ableTime = "+ableTime);
 		LectureBoard lb = lbService.selectLB(postNo);
 		//CONCLUSION TABLE INSERT
 			//오늘 날짜의 cal생성
@@ -514,7 +506,6 @@ public class LectureController implements Comparator<ArrayList<String>>{
 			
 		//LECTUREBOARD UPDATE 시간 뺴서 저장하기 남은 시간이 없다면 삭제
 			String compareTime = ableTime.substring(0, 2)+"/"+ableTime.split("/")[1].substring(0, 2)+ableTime.substring(5, 8);
-			System.out.println("compareTime = "+compareTime);
 			ArrayList<ArrayList> time = new ArrayList<>();
 			// time에 lb.ableTime의 값들을 넣으면서 출력
 			
@@ -817,5 +808,30 @@ public class LectureController implements Comparator<ArrayList<String>>{
 		mv.setViewName("hobbySelectView");
 		return mv;
 	}
+	
+	@RequestMapping("uploadSummernoteImageFile.lec")
+	public void imageUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile file) {
+		Image img = new Image();
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\uploadFiles";
+		if(file != null && !file.isEmpty()) {
+			String renameFileName = saveFile(file, request);
+			
+			if(renameFileName != null) {
+				img.setOriginName(file.getOriginalFilename());
+				img.setChangeName(renameFileName);
+				img.setImgSrc(savePath);
+				img.setFileLevel(0);//0은 썸네일
+			}
+		}
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		try {
+			gson.toJson(img.getChangeName(), response.getWriter());
+		} catch (JsonIOException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 }
 

@@ -255,7 +255,6 @@
          
          <i onclick="$('#lecForm').submit()" class="fas fa-search" style="background: rgb(136, 140, 67); padding: 3px; border-radius: 3px; height:40px; width:40px; vertical-align: middle; box-sizing: border-box; cursor: pointer;"></i>
          
-         
          <!-- admin만 보이는 cateinsertBtn -->
          <c:if test="${ loginUser.userId.equals('admin') }">
             <i onclick="insertCategory();" class="fas fa-plus-square" style="width:40px; height:40px; cursor:pointer; vertical-align: middle;"></i>

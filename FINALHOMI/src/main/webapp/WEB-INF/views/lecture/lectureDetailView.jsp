@@ -237,13 +237,13 @@
 			<br>
 			
 			<div style="width: 70%; margin: 0 auto;">
-				<b class="green" style="font-size: 20px;">수업소개</b><br><br>
+				<b class="green" style="font-size: 35px;">수업소개</b><br><br>
 				<hr>
 				<div style="text-align: left;">${ lb.content }</div>
 				
 				<br>
 				
-				<b class="green" style="font-size: 20px;">강사정보</b><br><br>
+				<b class="green" style="font-size: 35px;">강사정보</b><br><br>
 				<hr>
 				<div style="text-align: left;">${ lb.teacherInfo }</div>
 				

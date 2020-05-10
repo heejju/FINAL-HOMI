@@ -30,10 +30,6 @@
 		.table td{padding: 4px;}
 	.align{text-align: center;} /* 가운데 정렬 */
 	
-	/* 상태 버튼 */
-	.status{border: none; color: white; border-radius: 3px; padding: 3px 0;}
-		.on{background: #888c43;} /* 진행 */
-		.off{background: rgb(120, 120, 120);} /* 마감 */
 	
 	/* 페이징 div */
 	.pagingArea{text-align: center; padding: 30px;}

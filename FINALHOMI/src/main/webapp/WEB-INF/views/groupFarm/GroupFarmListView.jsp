@@ -550,7 +550,7 @@
 		/* console.log(title.eq(0)[0].innerText.length); */
 		for(var k=0; k<title.length; k++){
 			if(title.eq(k)[0].innerText.length < 16){
-				$(title.eq(k)).css("line-height","320%");
+				$(title.eq(k)).css("line-height","300%");
 			} else {
 				$(title.eq(k)).css("line-height","160%");
 			}

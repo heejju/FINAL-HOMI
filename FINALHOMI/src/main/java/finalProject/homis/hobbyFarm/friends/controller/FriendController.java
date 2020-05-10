@@ -52,7 +52,7 @@ public class FriendController {
 	         mv.addObject("pi", pi);
 	         mv.setViewName("friendList");
 	      } else {
-	         throw new FriendsException("Ä£±¸ ÀüÃ¼ Á¶È¸¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
+	         throw new FriendsException("Ä£ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 	      }
 		
 		return mv;
@@ -79,7 +79,7 @@ public class FriendController {
 			mv.addObject("pi", pi);
 			mv.setViewName("friendSearch");
 		} else {
-			throw new FriendsException("È¸¿ø ÀüÃ¼ Á¶È¸¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
+			throw new FriendsException("È¸ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		}
 
 		return mv;
@@ -91,13 +91,13 @@ public class FriendController {
 	                        @RequestParam("page") Integer currentPage, 
 	                        ModelAndView mv, HttpSession session) {
 
-	      // ´Ð³×ÀÓÀ¸·Î ¾ÆÀÌµð Ã£±â
+	      // ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½
 	      if(userId == null && nickName != null) {
 	         userId = msgService.findNick(nickName).getUserId();
 	      }
 	      
 	      Member m = fService.selectUser(userId);
-	      System.out.println("¸É¹ö´Â ¹¹°¡ ³ª ¿Ã±î" + m);
+	      System.out.println("ï¿½É¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã±ï¿½" + m);
 	      ArrayList<Conclusion> cList = fService.selectClass(userId);
 	      
 	      for(Conclusion i : cList)
@@ -108,7 +108,7 @@ public class FriendController {
 	         mv.addObject("page", currentPage);
 	         mv.setViewName("miniMyPage");
 	      } else {
-	         throw new FriendsException("È¸¿øÁ¤º¸ Á¶È¸ ½ÇÆÐ");
+	         throw new FriendsException("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½");
 	      }
 	      
 	      return mv;
@@ -135,7 +135,7 @@ public class FriendController {
 		if(searchFList != null) {
 			mv.addObject("list", searchFList).addObject("pi", pi).setViewName("friendSearch");
 		} else {
-	         throw new FriendsException("Ä£±¸ °Ë»ö¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù.");
+	         throw new FriendsException("Ä£ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 	    }
 		
 		return mv;
@@ -154,7 +154,7 @@ public class FriendController {
 		if(result > 0) {
 			return "success";
 		} else {
-			throw new FriendsException("Ä£±¸ ¿äÃ» ½ÇÆÐ");
+			throw new FriendsException("Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 	}
@@ -172,7 +172,7 @@ public class FriendController {
 		if(result > 0) {
 			return "success";
 		} else {
-			throw new FriendsException("Ä£±¸ ¿äÃ» ½ÇÆÐ");
+			throw new FriendsException("Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 	}
@@ -196,7 +196,7 @@ public class FriendController {
 			mv.addObject("pi", pi);
 			mv.setViewName("friendRequest");
 		} else {
-			throw new FriendsException("Ä£±¸ ¿äÃ» ½ÇÆÐ");
+			throw new FriendsException("Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		return mv;
@@ -215,7 +215,7 @@ public class FriendController {
 		if(result > 0) {
 			return "success";
 		} else {
-			throw new FriendsException("°ÅÀý ½ÇÆÐ");
+			throw new FriendsException("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 	}
@@ -234,7 +234,7 @@ public class FriendController {
 		if(result > 0) {
 			return "success";
 		} else {
-			throw new FriendsException("¼ö¶ô ½ÇÆÐ");
+			throw new FriendsException("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 	}
@@ -250,7 +250,7 @@ public class FriendController {
 			mv.addObject("loginUser");
 			mv.setViewName("report");
 		} else {
-			throw new FriendsException("È¸¿øÁ¤º¸ Á¶È¸ ½ÇÆÐ");
+			throw new FriendsException("È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		return mv;
@@ -272,7 +272,7 @@ public class FriendController {
 		if(result > 0) {
 			mv.setViewName("rportClose");
 		} else {
-			throw new FriendsException("½Å°í ½ÇÆÐ");
+			throw new FriendsException("ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		return mv;
 	}
@@ -296,7 +296,7 @@ public class FriendController {
 			mv.addObject("pi", pi);
 			mv.setViewName("reportList");
 		} else {
-			throw new FriendsException("½Å°í¸®½ºÆ® ¿äÃ» ½ÇÆÐ");
+			throw new FriendsException("ï¿½Å°ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		return mv;
@@ -314,7 +314,7 @@ public class FriendController {
 			fService.rpCount(r);
 			return "success";
 		} else {
-			throw new FriendsException("Ä£±¸ ¿äÃ» ½ÇÆÐ");
+			throw new FriendsException("Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½");
 		}
 	}
 	
@@ -348,7 +348,8 @@ public class FriendController {
 		if(result > 0) {
 			return "success";
 		} else {
-			throw new FriendsException("½Å°í »èÁ¦ ½ÇÆÐ");
+			throw new FriendsException("ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 	}
+	
 }

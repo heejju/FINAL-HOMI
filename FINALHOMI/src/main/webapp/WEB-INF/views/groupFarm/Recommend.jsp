@@ -97,7 +97,7 @@
 							<div id="T_location">${ teacher.activeLoc }</div>
 						</div>
 						<div id="MsgBtnWarpper">
-							<button class="sendMsgBtn" type="button">쪽지</button>
+							<button class="sendMsgBtn" type="button">초대</button>
 						</div>
 					</div>
 					<c:set var="i" value="${ i + 1 }"/>

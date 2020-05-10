@@ -142,8 +142,12 @@ button:hover{cursor:pointer;}
         <div class="content-one">
             <c:forEach var="f" items="${ list }">
             <div class="friendBox">
+           		<c:url var="userInfo" value="userInfo.fo">
+						<c:param name="userId" value="${ f.userId }"/>
+						<c:param name="page" value="${ pi.currentPage }"/>
+				</c:url>
                 <div class="user-img">
-                   <div class="i-img">
+                   <div class="i-img" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">
                     	<img src="${contextPath}/resources/uploadFiles/${f.changeName}"  class="img-responsive hover-op" />
                     	<img src="${contextPath}/resources/uploadFiles/${f.changeName}"  class="img-responsive hover-st" />
                    	</div>
@@ -151,10 +155,6 @@ button:hover{cursor:pointer;}
                 <div class="user-info">
                     <br>
                     <label style="display:inline-block; font-weight:700; font-size:18px; margin-top:5px; margin-right:5px;">닉네임 : </label>
-                    <c:url var="userInfo" value="userInfo.fo">
-						<c:param name="userId" value="${ f.userId }"/>
-						<c:param name="page" value="${ pi.currentPage }"/>
-					</c:url>
                     <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');" style="display:inline-block; font-weight:650; cursor: pointer;">${ f.nickName }</label>&nbsp;&nbsp;
                     <c:if test="${f.mKind eq 0}">	
                     	<label style="display:inline-block; font-weight:500; font-family: 'Black Han Sans', sans-serif;">( 운 영 자 )</label>&nbsp;&nbsp;&nbsp;&nbsp;

@@ -28,7 +28,7 @@
 		width:70%; min-height:50px; margin:auto; 
 	}
 	
-	a{display: inline !important; }
+	.a_tag{display: inline !important; }
 	button:hover{cursor:pointer;}
 	
 </style>
@@ -112,7 +112,7 @@
                  <c:url var="first" value="qlist.qu">
                     <c:param name="page" value="1"/>            
                  </c:url>
-                 <a href="${ first }">
+                 <a class="a_tag" href="${ first }">
                     <button class="startBtn" style="background:#675141; color:white">&lt;&lt;</button>
                  </a>
               </c:if>
@@ -125,7 +125,7 @@
                <c:url var="before" value="qlist.qu">
                   <c:param name="page" value="${ pi.currentPage - 1 }"/>
                </c:url>
-               <a href="${ before }"><button style="background:#675141; color:white" id="before">&lt;</button></a>
+               <a class="a_tag" href="${ before }"><button style="background:#675141; color:white" id="before">&lt;</button></a>
             </c:if>
             
             <!-- 페이지 -->
@@ -138,7 +138,7 @@
                   <c:url var="pagination" value="qlist.qu">
                      <c:param name="page" value="${ p }"/>
                   </c:url>
-                  <a href="${ pagination }"><button class=pageNum>${ p }</button></a>
+                  <a class="a_tag" href="${ pagination }"><button class=pageNum>${ p }</button></a>
                </c:if>
             </c:forEach>
             
@@ -150,7 +150,7 @@
                <c:url var="after" value="qlist.qu">
                   <c:param name="page" value="${ pi.currentPage + 1 }"/>
                </c:url> 
-               <a href="${ after }"><button type="button" id="next" style="background:#675141; color:white">&gt;</button></a>
+               <a class="a_tag" href="${ after }"><button type="button" id="next" style="background:#675141; color:white">&gt;</button></a>
             </c:if>
             
            <!-- 맨 뒤로 -->
@@ -161,7 +161,7 @@
                  <c:url var="last" value="qlist.qu">
                     <c:param name="page" value="${ pi.maxPage }"/>            
                  </c:url>
-                 <a href="${ last }"><button class="end" style="background:#675141; color:white">&gt;&gt;</button></a>
+                 <a class="a_tag" href="${ last }"><button class="end" style="background:#675141; color:white">&gt;&gt;</button></a>
               </c:if>
 			<div style="float: right;">
 				<c:if test="${ !empty loginUser }">

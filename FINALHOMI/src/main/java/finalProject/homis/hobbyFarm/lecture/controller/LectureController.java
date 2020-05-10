@@ -254,7 +254,7 @@ public class LectureController implements Comparator<ArrayList<String>>{
 			searchTag = "";
 		if(searchValue == null)
 			searchValue = "";
-		if(hobbyNo != null) {
+		if(hobbyNo != null && !hobbyNo.equals("")) {
 			searchCate = Integer.parseInt(hobbyNo);
 		}
 		if(gugun.equals(""))

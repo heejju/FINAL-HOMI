@@ -90,7 +90,7 @@ public class FriendsDAO {
 	public ArrayList<Report> rePortPage(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		ArrayList<Report> list = (ArrayList)sqlSession.selectList("friendMapper.rePortPage", rowBounds);
+		ArrayList<Report> list = (ArrayList)sqlSession.selectList("friendMapper.rePortPage",null, rowBounds);
 		return list ;
 	}
 

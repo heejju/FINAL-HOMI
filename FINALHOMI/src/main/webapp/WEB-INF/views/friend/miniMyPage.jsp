@@ -61,7 +61,7 @@ input, select {vertical-align:middle;}
 img{	border:0;}
 
 /**/
-    #wrap{width:600px; background:#ccc; height:700px;}
+    #wrap{width:600px; background: rgb(253, 250, 234); height:700px;}
     header{width:100%; padding-top:50px;}
     .profile-img{width:150px; height:150px; margin:0 auto; background:#fff; border-radius:100px; box-shadow: 3px 3px 15px 1px; overflow: hidden;}
     .user-img{width:8.5%; height:150px; margin:13px; border: 1px solid #000; box-sizing: border-box; border-radius: 60px; box-shadow: 5px 3px 6px 0.1px gray; float:left; margin-right:5%; overflow: hidden;}
@@ -77,13 +77,13 @@ img{	border:0;}
     
     
     section{margin-bottom:40px;}
-    .line-sc{width:70%; height:2px; background:#fff; margin:30px auto; }
+    .line-sc{width:70%; height:2px; background:#ccc; margin:30px auto; }
     .user-info{font-size:1.6rem; text-align: center; font-style: italic;}
     
     
     .content-wrap{width:100%;}
     .content-one{width:90%; height:30px; margin:0 auto; border:1px solid #000; box-sizing: border-box; border-radius: 10px; margin-bottom: 10px;}
-    .c-sharing{text-align: center; font-weight:bold; font-size:1.3rem; height:30px; line-height: 28px; float:left;}
+    .c-sharing{text-align: center; font-weight:bold; font-size:1.1rem; height:30px; line-height: 28px; float:left;}
     .c-Number{width:15%;}
     .c-Title{width:60%;}
     .c-Date{width:25%;}
@@ -96,11 +96,12 @@ img{	border:0;}
     
     
     footer{width:100%;}
-    .close-btn{width:10%; padding:15px 35px; background:#fff; margin:0 auto; font-size:1.5rem; text-align: center; cursor: pointer; border-radius: 5px;} 
+    .close-btn{width:10%; padding:15px 35px; background:rgba(0,0,0, 0.7); color:#fff; margin:0 auto; font-size:1.5rem; text-align: center; cursor: pointer; border-radius: 5px;}
+    .close-btn:hover{background:#000;} 
     
     
     /*이미지 마우스 올렸을때*/
-    .i-img{position:relative; cursor:pointer; /* background-color:#000; */ padding-top:100%; overflow:hidden; margin-bottom:15px;}
+    .i-img{position:relative; /* background-color:#000; */ padding-top:100%; overflow:hidden; margin-bottom:15px;}
 	.i-img img{position:absolute; top:0; opacity:0.8; filter:alpha(opacity=80);}
 	.i-img .hover-op{-webkit-transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; transition:transform 0.5s ease, opacity 0.5s ease, blur 0.5s ease; opacity:1; filter:alpha(opacity=100); z-index:1; -webkit-filter:blur(0px); filter:blur(0px);}
 	.i-img:hover .hover-op{-webkit-transform:scale(1.2); transform:scale(1.2); opacity:0; filter:alpha(opacity=0); -webkit-filter:blur(1px); filter:blur(1px);}
@@ -187,9 +188,9 @@ img{	border:0;}
                 <c:if test="${ !empty cList }">
                 <c:forEach var="c" items="${ cList }">
                 	<div class="content-two">
-	                    <div class="c2-Number c2-sharing">${ c.postNo }</div>
-	                    <div class="c2-Title c2-sharing">${ c.conTent }</div>
-	                    <div class="c2-Date c2-sharing">${ c.startDate }</div>
+	                    <div class="c2-Number c2-sharing" style="color:#888c43; font-weight:600;">${ c.postNo }</div>
+	                    <div class="c2-Title c2-sharing" style="color:#888c43; font-weight:600;">${ c.conTent }</div>
+	                    <div class="c2-Date c2-sharing" style="color:#888c43; font-weight:600;">${ c.startDate }</div>
 	                </div>
                 </c:forEach>
                 </c:if>

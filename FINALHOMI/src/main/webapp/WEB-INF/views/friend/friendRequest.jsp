@@ -89,7 +89,7 @@
         	<c:forEach var="f" items="${ list }">
             <div class="friendBox">
                 <div class="user-img">
-                    <div class="i-img"><img src="${imgSrc}" /></div>
+                    <div class="i-img"><img src="${imgSrc}" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');" style="display:inline-block; font-weight:650; cursor: pointer;"/></div>
                 </div>
                 <div class="user-info">
                     <br>

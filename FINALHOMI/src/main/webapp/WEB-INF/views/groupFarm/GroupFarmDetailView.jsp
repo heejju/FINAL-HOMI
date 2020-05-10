@@ -298,7 +298,7 @@
             		})
             		.then(확인 => {
             		  if(확인){
-            			  var page = ${ page };
+            			  //var page = ${ page };
                           var postNo = ${ gf.postNo };
                           var userId = "${ loginUser.userId }";
                           var mKind = ${ loginUser.mKind };
@@ -331,7 +331,7 @@
             		})
             		.then(확인 => {
             		  if(확인){
-            			  var page = ${ page };
+            			  //var page = ${ page };
                           var postNo = ${ gf.postNo };
                           var userId = "${ loginUser.userId }";
                           var mKind = ${ loginUser.mKind };
@@ -365,7 +365,7 @@
              		})
              		.then(확인 => {
              		  if(확인){
-             			 var page = ${ page };
+             			 //var page = ${ page };
                          var postNo = ${ gf.postNo };
                          var userId = "${ loginUser.userId }";
                          var mKind = ${ loginUser.mKind };
@@ -400,7 +400,7 @@
               		})
               		.then(확인 => {
               		  if(확인){
-              			var page = ${ page };
+              			//var page = ${ page };
                         var postNo = ${ gf.postNo };
                         var userId = "${ loginUser.userId }";
                         var mKind = ${ loginUser.mKind };;

@@ -24,12 +24,11 @@
     
     /* 筌롫뗀�뤀 */
     #renav{width:100%; overflow: hidden; transition:0.4s ease-out; position: fixed; top:0; left:-100%;}
-    #renav.active{width:100%; height:100%; background: rgba(255,255,255,0); padding:0; margin:0; left:0; }
+    #renav.active{width:100%; height:100%; background: rgba(255,255,255,0); padding:0; margin:0; left:0; z-index:9999;}
     
     .nav-wrap{width:15%; height:inherit; background:rgb(255,255,255,0.5); float:left; }
     .login{width:100%; padding-top: 10%; margin-bottom: 50px; margin-top:100px;}
-    .login-btn{width: 40%; height:30px;  float: left;  line-height: 30px; text-align: center; font-weight: bold; border-radius: 10px; margin:0 5% 0 0; height:30px; line-height: 30px; background:#000; color:#fff;
-    }
+    .login-btn{width: 40%; height:30px;  float: left;  line-height: 30px; text-align: center; font-weight: bold; border-radius: 10px; margin:0 5% 0 0; height:30px; line-height: 30px; background:#000; color:#fff;}
     .login-btn:hover{background:rgb(136, 140, 67); color:#fff;}
     .join-btn{width:40%; float:left; margin:0; height:30px; line-height: 30px; text-align: center;
      box-sizing: border-box; border-radius: 10px; border: 1px solid black; background:#000; color:#fff;}
@@ -49,10 +48,10 @@
     .suv-menu-3{width:100%; float:left;}
     .text-menu{width:10%; float:left; padding: 20px 0; text-align: center; font-weight:bold; border-bottom:1px dashed #ccc;}
     /*.text-menu > span{opacity: 0;}*/
-    .nav-wrap2{width:0%; height:100%; background:rgb(255,255,255,0.5); float:left; text-align: center; overflow: hidden;}
+    .nav-wrap2{width:0%; height:100%; background:rgb(255,255,255,1); float:left; text-align: center; overflow: hidden;}
     .binClass{height:5%;}
-    .menu-line{width:80%; margin:0 auto;}
-    .suv-menu-2 > div > a, .suv-menu-4 > div > a{padding:20px 0; border-bottom: 1px solid #000;}
+    .menu-line{width:90%; margin:0 auto;}
+    .suv-menu-2 > div > a, .suv-menu-4 > div > a{padding:20px 0; border-bottom: 1px dashed #ccc;}
     .suv-menu-2{width:95%; height:75%; margin-top: 65%; display: none;}
     .suv-menu-4{width:100%; height:60%; margin-top: 161%; display: none; font-weight:700;}
-    .menu-line > a:hover{background:orange; color:#fff;}
+    .menu-line > a:hover{color:orange; transform:rotate(360deg) translateX(0px) translateY(0px); transform:rotate(360deg) translateX(0px) translateY(0px);}

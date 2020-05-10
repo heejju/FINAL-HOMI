@@ -9,6 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture|Nanum+Brush+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <c:import url="../common/boardCommon.jsp"/>
 
 <style>
@@ -20,7 +21,7 @@
     .hf-txt{width:15%; height:80px; font-size:2.5rem; float:left; line-height:70px; text-align: center; font-family: 'Nanum Gothic', sans-serif; font-weight:600;}
     .f-menubar{height:80px; float:right;}
     .f-menubar > li{display: inline-block; font-size:1.6rem;}
-    .f-menubar > li > a{font-size:2rem; line-height: 70px; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;}
+    .f-menubar > li > a{font-size:2rem; line-height: 70px; font-family: 'Black Han Sans', sans-serif;}
     .f-menubar > li > a:hover{font-size:3.5rem;}
     .right-w{width:70%; margin-top:25px;}
     .h-right{width:50%;  float:right; height:80px;}
@@ -33,7 +34,7 @@
     .friendBox{width:48%; background:rgb(253, 250, 234); margin:1%; height:120px; border:2px dashed rgb(162, 166, 78); float:left; box-sizing: border-box;}
     .user-img{width:18%; overflow: hidden; height:90px; margin:13px; box-sizing: border-box; border-radius: 60px; box-shadow: 5px 3px 6px 0.1px gray; float:left; margin-right:5%;}
     .i-img{width:100%; }
-    .i-img > img {width:100%;}
+    .i-img > img {width:100%; height:100%;}
     .user-info{width:55%; height:inherit; float:left;}
     .uBtn-box{width:10%; float: left;}
     .u-btn{width:80px; height:30px; background:rgb(103, 81, 65); color:#fff; font-weight: bold;}
@@ -156,13 +157,13 @@ button:hover{cursor:pointer;}
 					</c:url>
                     <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');" style="display:inline-block; font-weight:650; cursor: pointer;">${ f.nickName }</label>&nbsp;&nbsp;
                     <c:if test="${f.mKind eq 0}">	
-                    	<label style="display:inline-block; font-weight:900; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;">( 운 영 자 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    	<label style="display:inline-block; font-weight:500; font-family: 'Black Han Sans', sans-serif;">( 운 영 자 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     </c:if>
                     <c:if test="${f.mKind eq 1}">
-                    	<label style="display:inline-block; font-weight:900; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;">( 농 부 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    	<label style="display:inline-block; font-weight:500; font-family: 'Black Han Sans', sans-serif;">( 농 부 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     </c:if>
                     <c:if test="${f.mKind eq 2}">
-                    	<label style="display:inline-block; font-weight:900; font-family: 'Black And White Picture', sans-serif; font-family: 'Nanum Brush Script', cursive;">( 모 종 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    	<label style="display:inline-block; font-weight:500; font-family: 'Black Han Sans', sans-serif;">( 모 종 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     </c:if><br><br>
                     <label style="display:inline-block; font-weight:700; margin-bottom:8px;">자기소개 - </label><br>
                     <c:if test="${ empty f.introduction }">

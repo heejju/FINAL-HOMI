@@ -69,7 +69,9 @@ img{	border:0;}
     .i-img > img {width:100%;}
     .user{width:50%; margin:0 32%; margin-top:30px;}
     .user-id{width:70%; display: inline-block; text-align: center; font-size:1.8rem;}
-    .repot{width:25%; display: inline-block; text-align: center; cursor: pointer; font-weight:600;}
+    .repot{width:10%; display: inline-block; text-align: center; cursor: pointer; font-weight:600;}
+    .repot > img {width:100%; transform: rotateY(180deg);}
+    .repot > img:hover{transform: scale(0.85) rotateY(180deg)}
     .user-btn{width:100%;}
     .btn-wrap{width:50%; margin:0 auto; margin-top: 20px;}
     .mss-btn{width:34%; padding:10px 15px; font-weight:bold; font-size:1.2rem; color:#fff; float:left; text-align: center; background:rgb(136, 140, 67); margin-right:8%; border-radius: 10px; cursor: pointer;}
@@ -124,7 +126,9 @@ img{	border:0;}
             </c:url>
             <div class="user">
                 <div class="user-id">${ member.userName }</div>
-                <div class="repot" onclick="rePort();" >신고</div>
+                <div class="repot" onclick="rePort();" >
+                	<img alt="신고" src="${ contextPath }/resources/images/icon.png">
+                </div>
             </div>
             <script>
             	function rePort(){
@@ -139,10 +143,10 @@ img{	border:0;}
             <div class="user-btn">
                 <div class="btn-wrap">
                     <div class="mss-btn" onclick="window.open('insertForm.msg?to=${member.userId}','쪽지보내기','resizable = no, scrollbars = no, width = 500, height = 550');">쪽지 전송</div>
-                    <c:if test="${ member.fdStatus == '0' }">
+                    <c:if test="${ empty member.fdStatus }"> 
                     	<div class="fd-btn">친구 요청</div>
                     </c:if>
-                    <c:if test="${ empty member.fdStatus }"> 
+                    <c:if test="${ member.fdStatus == '0' }">
                     	<div class="fd-btn">요청중</div>
                     </c:if>
                     <input type="hidden" value="${ member.userId }" class="hiddenName">
@@ -183,7 +187,7 @@ img{	border:0;}
                 </div>
                 <div class="clear-both"></div>
                 <c:if test="${ empty cList }">
-                	<div class="listNull" align="center" style="margin-top:25px; color:#fff; font-weight:600; font-size:20px;">현재 진행중인 수업이 없습니다</div>
+                	<div class="listNull" align="center" style="margin-top:25px; color:#ccc; font-weight:600; font-size:20px;">현재 진행중인 수업이 없습니다</div>
                 </c:if>
                 <c:if test="${ !empty cList }">
                 <c:forEach var="c" items="${ cList }">

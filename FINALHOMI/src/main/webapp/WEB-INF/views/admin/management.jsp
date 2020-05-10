@@ -145,7 +145,7 @@ button:hover{cursor:pointer;}
 								<font color='black'>일반</font>
 							</c:if>
 							<c:if test="${ m.reportCount eq 1 }">
-								<font color='gold'>주의</font>
+								<font color='green'>주의</font>
 							</c:if>
 							<c:if test="${ m.reportCount eq 2 }">
 								<font color='orange'>경고</font>
@@ -324,12 +324,10 @@ button:hover{cursor:pointer;}
 			
 			swal("정말 탈퇴시겠습니까?",{
 				icon : "warning",
-				buttons : {
-					cancel : true,
-					confirm : true,
-				}
-			}).then((result) => { 
-				if(result) {
+				buttons : ["취소", "확인"]
+				
+			}).then((YES) => { 
+				if(YES) {
 					location.href="madelete.ma?mNo=" + mNo;
 				}
 			});

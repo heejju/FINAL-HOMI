@@ -52,10 +52,12 @@
 		<div class="swiper-wrapper">
 			<c:forEach var="lb" items="${lbList}">
 				<div class="swiper-slide">
-				 			<a target="_blank" href="detail.lec?postNo=${lb.postNo}"><img class="thumbnail" src="${ contextPath }/resources/uploadFiles/${ lb.changeName }"></a>	
+							<a target="_blank" href="detail.lec?postNo=${lb.postNo}"><img width="100%" style="opacity: 0.7;"class="thumbnail" src="${ contextPath }/resources/uploadFiles/${ lb.changeName }"></a>	
 						<div style="position: absolute; bottom: 5px;">
+							<div style="width: 295px; height: 35px; margin-bottom: -5px; overflow: hidden; font-size: 25px; vertical-align: middle; color: white; background: rgba(0, 0, 0, 0.6);">
 							<input type="hidden" value="${lb.postNo}">
 							${lb.title}
+							</div>
 						</div>
 				</div>
 			</c:forEach>

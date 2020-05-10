@@ -161,16 +161,15 @@ $('.suv-menu-2').mouseover(function(){
 $('.suv-menu-3').mouseover(function(){
      $('.nav-wrap2').css({'width':'15%', 'transition':'0.5s ease-in'});
     $('.suv-menu-4').css('display','block');
-    $('.suv-menu-2').css('display','none');
 });
-$('.suv-menu-4, .nav-wrap2').mouseout(function(){
+$('.nav-wrap2').mouseout(function(){
     $('.nav-wrap2').css({'width':'0%', 'transition':'0.5s ease-in'});
 });
 $('.suv-menu-4').mouseover(function(){
      $('.nav-wrap2').css({'width':'15%', 'transition':'0.5s ease-in'});
     $('.suv-menu-4').css('display','block');
 });
- $('.nav-wrap , .suv-menu-3').mouseout(function(){
+ $('.nav-wrap').mouseout(function(){
      $('.nav-wrap2').css({'width':'0%', 'transition':'0.5s ease-in'});
 });
 

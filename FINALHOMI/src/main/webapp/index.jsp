@@ -73,12 +73,14 @@
             text-decoration: none;
         }
         #visual {
-            width: 1000px;
+        	
+            width: 1200px;
             margin: 0 auto;
             position: relative;
             top: 200px;
         }
         #pic {
+      		left:100px;
             height: 563px;
             overflow: hidden;
             position: relative;
@@ -185,10 +187,10 @@
 	</script>
 	<div id="visual">
         <div id="pic">
-            <div><a href="#"><img src="${ contextPath }/resources/images/f1.jpg" alt="1" style="width:1000px; "></a></div>
-            <div><a href="#"><img src="${ contextPath }/resources/images/f2.jpg" alt="2" style="width:1000px; "></a></div>
-            <div><a href="#"><img src="${ contextPath }/resources/images/f3.jpg" alt="3" style="width:1000px; "></a></div>
-            <div><a href="#"><img src="${ contextPath }/resources/images/f4.jpg" alt="4" style="width:1000px; "></a></div>
+            <div><a href="#"><img src="${ contextPath }/resources/images/main_Img1.png" alt="1" style="width:1000px; "></a></div>
+            <div><a href="#"><img src="${ contextPath }/resources/images/main_Img2.png" alt="2" style="width:1000px; "></a></div>
+            <div><a href="#"><img src="${ contextPath }/resources/images/main_Img3.png" alt="3" style="width:1000px; "></a></div>
+            <div><a href="#"><img src="${ contextPath }/resources/images/main_Img4.png" alt="4" style="width:1000px; "></a></div>
         </div>
         <div id="control">
             <a href="#">1</a>

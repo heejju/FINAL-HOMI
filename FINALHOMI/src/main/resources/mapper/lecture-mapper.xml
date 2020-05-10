@@ -250,4 +250,10 @@
 		<result column="TITLE" property="title"/>
 		<result column="CHANGE_NAME" property="changeName"/>
 	</resultMap>
+	
+	<update id="updateStatics">
+		update statics
+		set COUNT_CONCLUDED = COUNT_CONCLUDED + 1
+		where to_char(COUNT_DATE, 'YYYYMMDD') = to_char(sysdate, 'YYYYMMDD')
+	</update>
 </mapper>

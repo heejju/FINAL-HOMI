@@ -582,6 +582,8 @@ public class LectureController implements Comparator<ArrayList<String>>{
 			}
 		//?sido="+searchSido+"&gugun="+searchGugun+"&searchTag="+searchTag+"&searchValue="+searchValue+"&hobbyNo="+searchHobbyNo+"&request="+request
 		request.getSession().setAttribute("applySuccess", "applySuccess");
+		//statics에 값증가
+		int applyResult = lbService.updateStatics();
 		
 		return "redirect:/list.lec";
 	}

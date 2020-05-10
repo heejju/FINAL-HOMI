@@ -240,24 +240,24 @@
 								</c:if>
 							</div>
 							
-							<div class="title">
-								<c:choose>
-									<c:when test="${fn:length(b.title) > 24}">
-										<c:out value="${ fn:substring(b.title, 0, 23) }"/>...
-					           		</c:when>
-						           	<c:otherwise>
-						           		<c:out value="${b.title}"/>
-						           	</c:otherwise> 
-					          	</c:choose>
-								<%-- <c:if test="${ fn:length(b.title) > 24}">
-									${ fn:replace(str, ${ b.title }, "were") } <br>
-									replace 후 str : ${ str }<br>
-									문자열 길이 : ${ fn:length(str) }<br>
-									${ b.title }
-								</c:if>
-								<c:if test=" ${ fn:length(b.title) <= 24}">
-								</c:if> --%>
-							</div>
+							<c:if test="${ b.closeYN eq 'N'}">
+			                    <div class="time" style="background:RGBA(136,140,67,0.7)">
+			                       <span>
+			                          <fmt:formatDate value="${b.startDate}" pattern="MM월 dd일"/> | 
+			                          ${ b.startHour } - ${ b.endHour } 
+			                            	 참여가능
+			                       </span>
+			                    </div>
+			                </c:if>
+		                    <c:if test="${ b.closeYN eq 'Y'}">
+		                       <div class="time" style="background:RGBA(103,81,65,0.7)">
+			                       <span>
+			                          <fmt:formatDate value="${b.startDate}" pattern="MM월 dd일"/> | 
+			                          ${ b.startHour } - ${ b.endHour } 
+			                             	참여마감
+			                       </span>
+		                       </div>
+		                    </c:if>
 							
 							<div class="location">${ b.location }</div>
 							

@@ -98,7 +98,7 @@
       height: 100%; text-align: center; overflow: hidden; float: left;
    }
    div.contentWriter{
-      display: inline-block; width: 90px; font-size: 12px;
+      display: inline-block; width: 90px; font-size: 12px; text-align: center;
    }
    p.contentTime{
       background: rgba(103, 81, 65, 0.8); color: rgb(136, 140, 67); width: auto;
@@ -159,6 +159,11 @@
       width: 200px; height: 40px; border: 3px solid rgb(103,81,65); font-size: 20px;
       border-radius: 5px; text-align: center; box-sizing: border-box; font-weight: bold;
       color : rgb(136, 140, 67); cursor: pointer;
+   }
+   button.hobbyEmpty{
+   		border: 3px solid rgb(103, 81, 65); background:white; color: rgb(136, 140, 67);
+   		height: 40px; box-sizing: border-box; font-weight: bold; cursor: pointer; vertical-align: middle;
+   		font-size: 20px; border-radius: 5px;
    }
 </style>
 </head>
@@ -255,6 +260,10 @@
          
          <i onclick="$('#lecForm').submit()" class="fas fa-search" style="background: rgb(136, 140, 67); padding: 3px; border-radius: 3px; height:40px; width:40px; vertical-align: middle; box-sizing: border-box; cursor: pointer;"></i>
          
+
+         <i class="fas fa-times-circle" onclick="$('#hobbyNo').val(0); $('#hobbyName').val(''); $('#sido').val('');$('#gugun').val('');$('#searchValue').val('');" style="vertical-align: middle; height: 40px; width: 40px; cursor:pointer;"></i>
+         
+
          <!-- admin만 보이는 cateinsertBtn -->
          <c:if test="${ loginUser.userId.equals('admin') }">
             <i onclick="insertCategory();" class="fas fa-plus-square" style="width:40px; height:40px; cursor:pointer; vertical-align: middle;"></i>
@@ -585,7 +594,7 @@
                <option value="writer">작성자</option>
             </select>
          </c:if>
-         <input type="text" class="searchValue" name="searchValue" value="${ searchValue }" onchange="otherSearch();">
+         <input id="searchValue" type="text" class="searchValue" name="searchValue" value="${ searchValue }" onchange="otherSearch();">
          <div class="jm-btn">
             <i onclick="$('#lecForm').submit()" class="fas fa-search" style="background: rgb(136, 140, 67); padding: 3px; border-radius: 3px; width: 34px; height: 34px; cursor:pointer; vertical-align: middle;"></i>
          </div>

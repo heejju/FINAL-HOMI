@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../common/boardCommon.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture|Nanum+Brush+Script&display=swap" rel="stylesheet">
 <title>#취미 텃밭</title>
+<%@ include file="../common/boardCommon.jsp" %>
 <style>
     section{width:70%; height:100%; margin:0 auto;}
 
@@ -24,7 +24,7 @@ input[type=button]:hover{background:#000; color:#888c43; font-weight:bold; curso
 .divTable{width:100%; border:1px solid #000; box-sizing:border-box; border-radius:5px; padding:5px 10px; margin-top:5%;}
 .farmTable{width:100%; border-collapse:collapse; text-align:center;}
 .farmTable>thead{color:#675141;}
-.farmTable>thead>th, td{padding:15px;}
+.farmTable>thead>th, td{height:50px;}
 .farmTable>thead>th{width:20%; padding:10px;}
 .farmTable>thead>th:first-child{border-radius:5% 0 0 5%;}
 .farmTable>thead>th:last-child{border-radius:0 5% 5% 0;}
@@ -34,23 +34,23 @@ input[type=button]:hover{background:#000; color:#888c43; font-weight:bold; curso
 .buttonB{width:100px; background-color:#675141; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 
 
-.tr-no > th:nth-child(1){width:10%;}
-.tr-no > th:nth-child(2){width:10%;}
+.tr-no > th:nth-child(1){width:7%;}
+.tr-no > th:nth-child(2){width:11%;}
 .tr-no > th:nth-child(3){width:9%;}
 .tr-no > th:nth-child(4){width:18%;}
-.tr-no > th:nth-child(5){width:20%;}
+.tr-no > th:nth-child(5){width:25%;}
 .tr-no > th:nth-child(6){width:14%;}
 .tr-no > th:nth-child(7){width:10%;}
 .tr-no > th:nth-child(8){width:6%;}
 
-.tr-no > td:nth-child(1){width:9%;}
-.tr-no > td:nth-child(2){width:11%;}
-.tr-no > td:nth-child(3){width:9%;}
-.tr-no > td:nth-child(4){width:18%;}
-.tr-no > td:nth-child(5){width:20%;}
-.tr-no > td:nth-child(6){width:14%;}
-.tr-no > td:nth-child(7){width:11%;}
-.tr-no > td:nth-child(8){width:6%;}
+.tr-no  td:nth-child(1){width:7%;}
+.tr-no  td:nth-child(2){width:11%;}
+.tr-no  td:nth-child(3){width:9%;}
+.tr-no  td:nth-child(4){height:15px; overflow:hidden; display:block; width:100%; margin-top:38px;}
+.tr-no  td:nth-child(5){width:25%;}
+.tr-no  td:nth-child(6){width:14%;}
+.tr-no  td:nth-child(7){width:10%;}
+.tr-no  td:nth-child(8){width:6%;}
 
 
 input[type=checkbox]{width:18px; height:18px;}
@@ -111,7 +111,7 @@ select{height:30px; width:100px;}
 			<table class="farmTable">
 				<tbody>
 					<c:forEach var="r" items="${ list }">
-					<tr class="tr-no">
+					<tr class="tr-no" style="height:  88px;">
 						<td>${ r.rpNo }</td>
 						<c:url var="userInfo" value="userInfo.fo">
 							<c:param name="userId" value="${ r.rpSender }"/>
@@ -123,8 +123,8 @@ select{height:30px; width:100px;}
 							<c:param name="page" value="${ pi.currentPage }"/>
 						</c:url>
 						<td onclick="window.open('${ userInfo2 }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${ r.rpReciever }</td>
-						<td>${ r.rpDetail }</td>
-						<td>${ r.rpUrl }</td>
+						<td style="">${ r.rpDetail }</td>
+						<td><a href="${ r.rpUrl }">${ r.rpUrl }</a></td>
 						<td>
 							<c:if test="${ r.check eq 'N' }">
 								미확인

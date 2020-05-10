@@ -131,8 +131,8 @@
 					title: "해당 아이디로 로그인하시겠어요? 😊",
 					text: "[네!] 버튼을 누르면 로그인하실 수 있어요!",
 					buttons: {
-						cancel : "아니요!",
-						defeat : {text:"네!", value:true},
+						cancel : "취소",
+						defeat : {text:"확인", value:true},
 					}
 				}).then((value) => {
 					if(value == true) {

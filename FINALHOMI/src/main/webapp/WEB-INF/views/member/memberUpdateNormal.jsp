@@ -132,9 +132,15 @@
 							</select>
 							<script>
 								$(document).ready(function() {
-									$('#year option[value=2020]').attr('selected', 'selected') ;
-									$('#month option[value='+("${loginUser.birthDate}".substring(5,7))+']').attr('selected', 'selected') ;
-									$('#date option[value='+("${loginUser.birthDate}".substring(8,10))+']').attr('selected', 'selected') ;
+									var month = ("${loginUser.birthDate}".substring(5,7)) ;
+									if(month.substring(0,1) == "0")
+										month = month.substring(1,2) ;
+									var date  = ("${loginUser.birthDate}".substring(8,10)) ;
+									if(date.substring(0,1) == "0")
+										date  = date.substring(1,2) ;
+									$('#year option[value='+("${loginUser.birthDate}".substring(0,4))+']').attr('selected', true) ;
+									$('#month option[value='+month+']').attr('selected', true) ;
+									$('#date option[value='+date+']').attr('selected', true) ;
 								}) ;
 							</script>
 						</td>
@@ -438,18 +444,15 @@
 			$('#userName').on('keyup', function() {
 				var $userName = $('#userName').val() ;
 				var reg = /[가-힣]/ ;
-				var isUsable = 1 ;
 				
 				if($userName.trim().length == 0) {
 					$('#userNameCheck').html("이름을 입력하세요.") ;
 					$('#userNameCheck').css('color', 'red') ;
 					$('#isUserNameUsable').val("emptyName") ;
-					isUsable = 0 ;
 				} else if(reg.test($userName)) {
 					$('#userNameCheck').html("사용 가능한 이름입니다.") ;
 					$('#userNameCheck').css('color', 'green') ;
 					$('#isUserNameUsable').val("trueName") ;
-					isUsable = 0 ;
 				} else {
 					$('#userNameCheck').html("잘못된 이름입니다.") ;
 					$('#userNameCheck').css('color', 'red') ;

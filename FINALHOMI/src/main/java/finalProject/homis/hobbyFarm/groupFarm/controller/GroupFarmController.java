@@ -474,7 +474,7 @@ public class GroupFarmController {
 	@RequestMapping(value = { "/enterGroup.gf", "/requestClass.gf" })
 	@ResponseBody
 	public String enterGroup(@ModelAttribute GroupFarmApplication gfa, RedirectAttributes redirect,
-								@RequestParam("page") Integer page, @RequestParam("postNo") Integer postNo, 
+								@RequestParam(value="page", required=false) Integer page, @RequestParam("postNo") Integer postNo, 
 								@RequestParam("userId") String userId, @RequestParam("mKind") Integer mKind,
 								@RequestParam(value="nickName", required = false) String nickName) {
 		gfa.setPostNo(postNo);
@@ -508,7 +508,7 @@ public class GroupFarmController {
 	@RequestMapping(value = { "/exeuntGroup.gf", "/cancleClass.gf" })
 	@ResponseBody
 	public String exeuntGroup(@ModelAttribute GroupFarmApplication gfa, RedirectAttributes redirect,
-								@RequestParam("page") Integer page, @RequestParam("postNo") Integer postNo, 
+								@RequestParam(value="page", required=false) Integer page, @RequestParam("postNo") Integer postNo, 
 								@RequestParam("userId") String userId, @RequestParam("mKind") Integer mKind) {
 		
 		gfa.setPostNo(postNo);
@@ -531,7 +531,7 @@ public class GroupFarmController {
 	// 모임 마감
 	@RequestMapping("closeGroup.gf")
 	public String closeGroup(RedirectAttributes redirect, 
-							@RequestParam("postNo") int postNo, @RequestParam("page") Integer page) {
+							@RequestParam("postNo") int postNo, @RequestParam(value="page", required=false) Integer page) {
 		
 		int result = gfService.closeGroup(postNo);
 		
@@ -549,7 +549,7 @@ public class GroupFarmController {
 	
 	@RequestMapping("cancleClose.gf")
 	@ResponseBody
-	public String cancleClose(@RequestParam("postNo") int postNo, @RequestParam("page") Integer page) {
+	public String cancleClose(@RequestParam("postNo") int postNo, @RequestParam(value="page", required=false) Integer page) {
 		
 		int result = gfService.cancleClose(postNo);
 		

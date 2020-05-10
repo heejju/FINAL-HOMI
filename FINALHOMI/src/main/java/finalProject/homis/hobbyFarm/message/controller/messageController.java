@@ -245,7 +245,7 @@ public class messageController {
 		int result = msgService.insertMsg(message);
 		
 		if(result > 0) {
-			return "redirect:msgList.msg";
+			return "redirect:blist.gf";
 		} else {
 			throw new MessageException("초대 전송에 실패했습니다.");
 		}

@@ -376,6 +376,7 @@
                              type: "post",
                              data: {page:page, postNo:postNo, userId:userId, mKind:mKind, nickName:nickName},
                              success: function(data){
+                            	$('#teacher').text('${loginUser.nickName}');
                                 $('#requestClassBtn').attr("onclick","cancleClass();");
                                 $('#requestClassBtn').val('강의 취소');
                                 $('#requestClassBtn').css('background', '#675141');
@@ -409,6 +410,7 @@
                             type: "post",
                             data: {page:page, postNo:postNo, userId:userId, mKind:mKind},
                             success: function(data){
+                           	   $('#teacher').text('구인중');
                                $('#cancleClassBtn').attr("onclick","requestClass();");
                                $('#cancleClassBtn').val('강의 신청');
                                $('#cancleClassBtn').css('background', '#888c43');

@@ -90,16 +90,13 @@
                     <a href="${ lecList }" class="suv-menu-1">모종 구하기</a>
                 </li>
                 <li class="main-menu">
-                    <a href="${ gflist }" class="suv-menu-3">동네 텃밭</a>
+                    <a href="${ gflist }" class="suv-menu-5">동네 텃밭</a>
                 </li>
                 <li class="main-menu">
                     <a href="${qlist}" class="suv-menu-5">1:1 문의</a>
                 </li>
                 <li class="main-menu">
-                    <a href="${mlist }" class="suv-menu-5">텃밭 관리</a>
-                </li>
-                <li class="main-menu">
-                    <a href="${statistics }" class="suv-menu-5">텃밭 통계</a>
+                    <a href="${mlist }" class="suv-menu-3">텃밭 관리</a>
                 </li>
             </ul>
         </div>
@@ -114,9 +111,8 @@
             </div>
             <div class="suv-menu-4">
                 <div class="menu-line">
-                    <a href="${ reportList }">서브 메뉴3</a>
-                    <a href="">서브 메뉴4</a>
-                    <a href="">서브 메뉴5</a>
+                    <a href="${ reportList }">신고 목록</a>
+                    <a href="${statistics }">텃밭 통계</a>
                 </div>
             </div>
         </div>
@@ -127,15 +123,18 @@
 
 $("#toggle").click(function(){
     $(this).toggleClass("on");
-    $("#renav").toggleClass("active");	
+    $("#renav").toggleClass("active");
 });
-    
-    
+  
+$("#renav").click(function(){
+	$(this).removeClass("active");
+	$("#toggle").removeClass("on");
+}) ;     
     
 $('.suv-menu-1').mouseover(function(){
-    $('.nav-wrap2').css({'width':'15%', 'transition':'0.5s ease-in'});
+    /* $('.nav-wrap2').css({'width':'15%', 'transition':'0.5s ease-in'});
     $('.suv-menu-2').css('display','block');
-    $('.suv-menu-4').css('display','none');
+    $('.suv-menu-4').css('display','none'); */
     $(this).text('강의 구하기');
 }).mouseout(function(){
     $(this).text('모종 구하기');
@@ -143,43 +142,30 @@ $('.suv-menu-1').mouseover(function(){
 
 $('.suv-menu-2, .nav-wrap2').mouseout(function(){
      $('.nav-wrap2').css({'width':'0%', 'transition':'0.5s ease-in'});
-//    $('.nav-wrap2').css('display', 'none');
-//    $('.suv-menu-2').css({'transition':'5s ease-in','display':'none'});
 });
 $('.suv-menu-2').mouseover(function(){
      $('.nav-wrap2').css({'width':'15%', 'transition':'0.5s ease-in'});
-//    $('.nav-wrap2').css('display','block');
     $('.suv-menu-2').css('display','block');
     
 });
  $('.nav-wrap , .suv-menu-1').mouseout(function(){
      $('.nav-wrap2').css({'width':'0%', 'transition':'0.5s ease-in'});
-//    $('.nav-wrap2').css('display', 'none');
-//    $('.suv-menu-2').css({'transition':'5s ease-in','display':'none'});
 });
     
 $('.suv-menu-3').mouseover(function(){
      $('.nav-wrap2').css({'width':'15%', 'transition':'0.5s ease-in'});
-//    $('.nav-wrap2').css('display', 'block');
     $('.suv-menu-4').css('display','block');
     $('.suv-menu-2').css('display','none');
-    /*$('.text-menu>span').css('opacity','1');*/
 });
 $('.suv-menu-4, .nav-wrap2').mouseout(function(){
     $('.nav-wrap2').css({'width':'0%', 'transition':'0.5s ease-in'});
-//    $('.nav-wrap2').css('display', 'none');
-//    $('.suv-menu-4').css({'transition':'5s ease-in','display':'none'});
 });
 $('.suv-menu-4').mouseover(function(){
      $('.nav-wrap2').css({'width':'15%', 'transition':'0.5s ease-in'});
-//    $('.nav-wrap2').css('display', 'block');
     $('.suv-menu-4').css('display','block');
 });
  $('.nav-wrap , .suv-menu-3').mouseout(function(){
      $('.nav-wrap2').css({'width':'0%', 'transition':'0.5s ease-in'});
-//    $('.nav-wrap2').css('display', 'none');
-//    $('.suv-menu-4').css({'transition':'5s ease-in','display':'none'});
-     /*$('.text-menu>span').css('opacity','0');*/
 });
 
  function msgPopup() {

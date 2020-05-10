@@ -8,9 +8,9 @@
     
     
     
-    /* �넗湲� */
+    /* 占쎈꽅疫뀐옙 */
     
-    #toggle{position:absolute; top:50px; left:50px; width:30px; height:40px; cursor:pointer; z-index: 9999;}
+    #toggle{position:fixed; top:50px; left:50px; width:30px; height:40px; cursor:pointer; z-index: 9999;}
     #toggle .span{height:2px; background-color:#000; -webkit-transition:0.5s ease-out; transition:0.5s ease-out; backface-visibility:hidden; margin:5px 0;}
     #one{width:100%;}
     #two{width:70%;}
@@ -22,7 +22,7 @@
     #toggle.on #four{width : 100%; -webkit-transform:rotate(-45deg) translateX(0px) translateY(-15px); transform:rotate(-45deg) translateX(0px) translateY(-15px);}
     
     
-    /* 硫붾돱 */
+    /* 筌롫뗀�뤀 */
     #renav{width:100%; overflow: hidden; transition:0.4s ease-out; position: fixed; top:0; left:-100%;}
     #renav.active{width:100%; height:100%; background: rgba(255,255,255,0); padding:0; margin:0; left:0; }
     
@@ -54,4 +54,5 @@
     .menu-line{width:80%; margin:0 auto;}
     .suv-menu-2 > div > a, .suv-menu-4 > div > a{padding:20px 0; border-bottom: 1px solid #000;}
     .suv-menu-2{width:95%; height:75%; margin-top: 65%; display: none;}
-    .suv-menu-4{width:100%; height:60%; margin-top: 84%; display: none;}
+    .suv-menu-4{width:100%; height:60%; margin-top: 128%; display: none; font-weight:700;}
+    .menu-line > a:hover{background:orange; color:#fff;}

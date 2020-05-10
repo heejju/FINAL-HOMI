@@ -106,14 +106,14 @@
                 </c:if>
             </ul>
         </div>
-        
+          
         <div class="nav-wrap2">
             <div class="binClass"></div>
             <div class="suv-menu-2">
                 <div class="menu-line">
                     <a href="">서브 메뉴1</a>
                     <a href="">서브 메뉴2</a>
-                </div>
+                </div> 
             </div>
             <div class="suv-menu-4"> 
                 <div class="menu-line">

@@ -80,7 +80,7 @@ img{	border:0;}
     
     section{margin-bottom:40px;}
     .line-sc{width:70%; height:2px; background:#ccc; margin:30px auto; }
-    .user-info{font-size:1.6rem; text-align: center; font-style: italic;}
+    .user-info{font-size:1.6rem; text-align: center; font-style: italic; line-height:1.6rem;}
     
     
     .content-wrap{width:100%;}

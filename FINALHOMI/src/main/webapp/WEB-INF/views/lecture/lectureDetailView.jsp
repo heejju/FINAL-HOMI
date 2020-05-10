@@ -84,7 +84,7 @@
 		border: 0px; background: white; cursor: pointer;
 	}
 	div.modifyButton{
-		width: 85%; text-align: right; margin: 15px auto 15px auto;
+		width: 100%; text-align: right; margin: 15px auto 15px auto;
 	}
 	button.modifyButton {
 		padding: 5px 15px 5px 15px; color: white; border-radius: 5px;

@@ -36,6 +36,9 @@
    
 </script>
 <style type="text/css">
+	body{
+		line-height: 17px;
+	}
    body, html, div{padding: 0; margin:0;}
    br{line-height: 30%;}
    hr, h3{margin: 5px 0 5px 0;}
@@ -396,7 +399,7 @@
                   <div>
                      <hr>
                   </div>
-                  <div style="height: 30px;">
+                  <div style="height: 33px;">
                      <div class="contentTitle">${ lb.title }</div>
                      <div class="contentWriter">
                         <div>
@@ -427,7 +430,7 @@
                      <div>
                         <hr>
                      </div>
-                     <div style="height: 30px;">
+                     <div style="height: 33px;">
                         <div class="contentTitle">${ lb.title }</div>
                         <div class="contentWriter">
                            <div>
@@ -456,7 +459,7 @@
                      <div>
                         <hr>
                      </div>
-                     <div style="height: 30px;">
+                     <div style="height: 33px;">
                         <div class="contentTitle">${ lb.title }</div>
                         <div class="contentWriter">
                            <div>
@@ -485,7 +488,7 @@
                      <div>
                         <hr>
                      </div>
-                     <div style="height: 30px;">
+                     <div style="height: 33px;">
                         <div class="contentTitle">${ lb.title }</div>
                         <div class="contentWriter">
                            <div>

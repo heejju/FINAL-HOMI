@@ -175,7 +175,6 @@
 						<li>
 							<c:url var="hList" value="hList.gf"/>
 							<b>취미</b> : 
-							<c:url var="hList" value="hList.gf"/>
 							<div id="hobbyArea">
 								<c:if test="${ selectedHobby eq null }">
 					               <input type="hidden" name='hobby' id='hobby' value ="0">

@@ -72,11 +72,9 @@
 		width : auto; height: 100%; border: 0px solid black; box-sizing:border-box;
 	}
 	div.header > div.firstInfo{
-		width: 40%; height: 250px; text-align: center;
+		width: 40%; height: 250px; text-align: left;
 		float: left; font-size: 22px;
 	}
-	
-	
 	button{
 		border: 0px; background: white;
 	}
@@ -212,7 +210,7 @@
 					</p>
 					
 					
-					<div style="text-align: center;">
+					<div style="text-align: left;">
 						<div style="display: inline-block;">
 						<i class="far fa-clock" style="color: rgb(136, 140, 67); width: 40px; height: 40px;"></i>
 						</div>

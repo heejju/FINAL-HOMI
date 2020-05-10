@@ -7,9 +7,13 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${ contextPath }/resources/css/reset.css" type="text/css">
 <link rel="stylesheet" href="${ contextPath }/resources/css/menu.css"  type="text/css">
-
+<meta name="google-signin-client_id" content="1039608716257-rpi2mbri0nh18klpqq0r99ar6g0gh719.apps.googleusercontent.com">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;display=swap" rel="stylesheet">
 <style>
+	body {
+			font-family: 'Nanum Gothic', sans-serif;
+		}
 	#logoWrapper{width:20%; float:right; margin-top:50px; margin-right:30px;}
 	#logo{width:100%; height:100%;}
 	#subHeader{margin-bottom:50px;}
@@ -177,7 +181,22 @@ $('.suv-menu-4').mouseover(function(){
 		window.open(url, "쪽지함", option);
 		
 	}
-
+	
+// function logout() {
+// 	signOut() ;
+// 	alert('logout') ;
+// 	location.href="logout.me" ;
+// }
+ 
+// function signOut() {
+// 	var auth2 = gapi.auth2.getAuthInstance() ;
+// 	auth2.signOut() ;
+// 	auth2.disconnect();
+// 	$('#googleEmail').html("[입력되지 않음]") ;
+// 	$('#googleEmail').css('font-weight', 'normal') ;
+// 	$('#googleId').html("#none") ;
+// 	$('#signOutGoogle').css('display', 'none') ;
+// }
 
 </script>
 </html>

@@ -61,7 +61,8 @@
 	#personnel{width:80px;}
 	#hobbyArea, .locationArea{align:center; width:20%; height:5%; background-color:white;
 					border-radius:5px; display:inline-block; margin:0px auto;}
-	#hobbyArea > select , .locationArea > select {width:180px; height:25px;}
+	#hobbyName{width:165px; height:13px; padding:5px;}
+	.locationArea > select {width:180px; height:25px;}
 	#startDate > img{width:30px;}
 	.date, .time{padding:5px; height:10px;}
 	
@@ -168,7 +169,6 @@
 						<textarea name="content" id="content"></textarea>
 					</div>
 					
-					
 					<div class="border" style="width:50%; margin:3% auto;"></div>
 					<div id="groupInform">상세정보</div>
 					<ul id="informList">
@@ -176,12 +176,29 @@
 							<c:url var="hList" value="hList.gf"/>
 							<b>취미</b> : 
 							<div id="hobbyArea">
-								<span id="hobbyName" style="width:200px"></span>
-								<button type="button" id="selectHobbyBtn" 
-									onclick="window.open('${hList}', 'hobbyPopup', 'width=1100px, height=800px, menubar=no, status=no, toolbar=no, resizable=no');">
-									취미 선택
-								</button>
+								<c:if test="${ selectedHobby eq null }">
+					               <input type="hidden" name='hobby' id='hobby' value ="0">
+					               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+					            </c:if>
+					            <c:if test="${ selectedHobby eq 0 }">
+					               <input type="hidden" name='hobby' id='hobby' value ="0">
+					               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+					            </c:if>
+					            <c:if test="${ selectedHobby ne null }">
+					               <c:forEach var="hobby" items="${ hlist }">
+					                  <c:if test="${ selectedHobby eq hobby.hobbyNo }">
+					                     <input type="hidden" name='hobby' id='hobby' value ="${ hobby.hobbyNo }">
+					                     <input value="${ hobby.hobbyName }" onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+					                  </c:if>
+					               </c:forEach>
+					            </c:if>
 							</div>
+							<script>
+								function toHBSelView(){
+					               var height = $("body")[0].clientHeight+"px";
+					               window.open('${hList}', '_blank','width=1100px, height=1000px, location=no, toolbars=no, scrollbars=no');
+					            }
+							</script>
 						</li>
 						<li>
 							<b>지역</b> :

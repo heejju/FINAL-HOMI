@@ -164,9 +164,10 @@
 	</select>
 	
 	<select id="RequestPage" resultType="string" resultMap="memberResultSet">
-		select m.*, fd_to, fd_status
+		select m.*, fd_to, fd_status, i.change_name
 		from member m
-   		join friends on(user_id = fd_from)
+   		LEFT join friends on(user_id = fd_from)
+        LEFT JOIN IMAGE I ON(I.USER_ID = M.USER_ID)
 		where fd_to = #{id} and fd_status = '0'
 	</select>
 	<delete id="fReSetRequest" parameterType="Friends">
@@ -223,8 +224,8 @@
 	
 	
 	<select id="selectClass" resultMap="resultConclusionSet" parameterType="Conclusion">
-		select ROWNUM, proposer, CON_NO, start_date, content
-		from  (SELECT proposer, CON_NO, start_date, content, DENSE_RANK() OVER(ORDER BY  CON_NO  DESC) AS 순위
+		select ROWNUM, proposer, CON_NO, start_date, TITLE
+		from  (SELECT proposer, CON_NO, start_date, TITLE, DENSE_RANK() OVER(ORDER BY  CON_NO  DESC) AS 순위
 	    from conclusion
 	    left join board USING(post_no)
 		where proposer = #{userId} AND ROWNUM <![CDATA[ <= ]]> 3 )
@@ -235,7 +236,7 @@
 		<result property="proposer" column="proposer"/>
 		<result property="startDate" column="START_DATE"/>
 		<result property="finishDate" column="FINISH_DATE"/>
-		<result property="conTent" column="CONTENT"/>
+		<result property="conTent" column="TITLE"/>
 	</resultMap>
 	
 	<delete id="reportreset" parameterType="Report">

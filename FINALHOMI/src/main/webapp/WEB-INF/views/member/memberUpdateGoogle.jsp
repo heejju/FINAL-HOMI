@@ -120,9 +120,15 @@
 							</select>
 							<script>
 								$(document).ready(function() {
-									$('#year option[value=2020]').attr('selected', 'selected') ;
-									$('#month option[value='+("${loginUser.birthDate}".substring(5,7))+']').attr('selected', 'selected') ;
-									$('#date option[value='+("${loginUser.birthDate}".substring(8,10))+']').attr('selected', 'selected') ;
+									var month = ("${loginUser.birthDate}".substring(5,7)) ;
+									if(month.substring(0,1) == "0")
+										month = month.substring(1,2) ;
+									var date  = ("${loginUser.birthDate}".substring(8,10)) ;
+									if(date.substring(0,1) == "0")
+										date  = date.substring(1,2) ;
+									$('#year option[value='+("${loginUser.birthDate}".substring(0,4))+']').attr('selected', true) ;
+									$('#month option[value='+month+']').attr('selected', true) ;
+									$('#date option[value='+date+']').attr('selected', true) ;
 								}) ;
 							</script>
 						</td>

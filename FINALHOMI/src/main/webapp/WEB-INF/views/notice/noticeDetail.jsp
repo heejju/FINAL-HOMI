@@ -112,11 +112,8 @@ img{width:6%;height:6%;}
 		function ndelete(){
 			swal("정말 삭제하시겠습니까?",{
 				icon : "warning",
-				buttons : {
-					cancel : true,
-					confirm : true,
-				}
-			}).then((result) => {
+				buttons : ["취소", "확인"]
+			}).then((result) => { 
 				if(result) {
 					location.href='${ ndelete }';
 				}

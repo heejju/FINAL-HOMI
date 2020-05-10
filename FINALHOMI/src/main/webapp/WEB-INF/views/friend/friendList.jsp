@@ -196,8 +196,12 @@
         	<c:forEach var="f" items="${list}" varStatus="status">
             <div class="friendBox">
                 <input type="checkbox" class="check-box" name="checkbox" value="${ f.userId }">
+                    <c:url var="userInfo" value="userInfo.fo">
+						<c:param name="userId" value="${ f.userId }"/>
+						<c:param name="page" value="${ pi.currentPage }"/>
+					</c:url>
                 <div class="user-img">
-                    <div class="i-img">
+                    <div class="i-img" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">
                     	<img src="${contextPath}/resources/uploadFiles/${f.imgSrc}"  class="img-responsive hover-op"/>
                     	<img src="${contextPath}/resources/uploadFiles/${f.imgSrc}"  class="img-responsive hover-st"/>
                    	</div>
@@ -205,10 +209,6 @@
                 <div class="user-info">
                     <br>
                     <label>닉네임 : </label>
-                    <c:url var="userInfo" value="userInfo.fo">
-						<c:param name="userId" value="${ f.userId }"/>
-						<c:param name="page" value="${ pi.currentPage }"/>
-					</c:url>
 					<input type="hidden" class="frNick${status.count}" value="${f.userId}">
                     <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');" style="display:inline-block; font-weight:650;">${ f.nickName }${f.mKind}</label>&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
                     <c:if test="${f.mKind eq 0}">	

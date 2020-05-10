@@ -23,17 +23,18 @@
 					border-radius:5px; display:inline-block; margin:0px auto;}
 	#hobbyArea{align:center; width:20%; height:5%; background-color:white; padding:0.5%;
 				border-radius:5px; display:inline-block; margin:0% auto;}
-	.selectLocation, #hobby, #searchSelect
-			{border-raidus:5px; width:100%; height:100%; padding:5px; margin:0px auto;
+	.selectLocation, #hobbyName, #searchSelect
+			{border-raidus:5px; width:100%; height:100%; padding:5px; margin:0px auto; border:0px;
 			font-size:14px; font-family: 'Nanum Gothic', sans-serif; font-weight:bold;}
+	#hobbyName{width:95%;}
 	#nextIcon{width:5%; height:5%; vertical-align:middle;}
 	#filterBtn{padding:1%; display:inline-block; background-color:#3498db; vertical-align:middle;
 				border-radius:5px; border:0px; color:white; margin-left:3%;
 				font-family: 'Nanum Gothic', sans-serif; font-weight:bold; font-size:17px;}
 				
 	/* 게시글 부분 */			
-	.postArea{width:80%; margin:0px auto; margin-top:5%; overflow:hidden; }
-	.postDetail{width:25%; heigth:480px; background-color:white; font-weight:bold; text-align:center;
+	.postArea{width:80%; margin:0px auto; margin-top:5%; overflow:hidden;}
+	.postDetail{width:25%; max-heigth:20%; height:20%; background-color:white; font-weight:bold; text-align:center;
 				 display:inline-block; float:left; overflow:hidden; margin:20px 4%;}
 	.group_status{padding:5%; color:#888c43; text-align:center; margin:5% auto;}
 	.group_status:after{content: ""; text-align:center; display: block; width:80%; border-bottom: 1.5px solid gray; margin:5% auto;}
@@ -52,7 +53,7 @@
 				border:0px; width:7%; padding:8px; border-radius:5px; font-weight:bold; font-family: 'Nanum Gothic', sans-serif;}
 	
 	/* 페이징 */
-	a{display:inline !important;}
+	/* a{display:inline !important;} */
 	#paging{margin: auto; width: 400px;}
 	#buttonTab > button {width:40px; height:40px; border-radius:5px; border:0px; background-color:white; font-size:16px; padding:5px;}
 	.startBtn, .endBtn, #pageNum, #before, #next {width:40px; height:40px; border-radius:5px; border:0px; background-color:white; font-size:16px; padding:5px;}
@@ -139,11 +140,27 @@
 				<select name="gugun" class="selectLocation" id="gugun">
 				</select>
 			</div>
-			<!-- selectedSido
-			selectedgugun -->
+			<!-- selectedSido selectedgugun -->
 			<label style="margin-left:3%; font-weight:bold; font-size:20px; margin-left:3%; margin-right:1%;">취미</label>
+			<c:url var="hList" value="hList.gf"/>
 			<div id="hobbyArea">
-				<select name="hobby" id="hobby">
+				<c:if test="${ selectedHobby eq null }">
+	               <input type="hidden" name='hobby' id='hobby' value ="0">
+	               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+	            </c:if>
+	            <c:if test="${ selectedHobby eq 0 }">
+	               <input type="hidden" name='hobby' id='hobby' value ="0">
+	               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+	            </c:if>
+	            <c:if test="${ selectedHobby ne null }">
+	               <c:forEach var="hobby" items="${ hlist }">
+	                  <c:if test="${ selectedHobby eq hobby.hobbyNo }">
+	                     <input type="hidden" name='hobby' id='hobby' value ="${ hobby.hobbyNo }">
+	                     <input value="${ hobby.hobbyName }" onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+	                  </c:if>
+	               </c:forEach>
+	            </c:if>
+				<%-- <select name="hobby" id="hobby">
 					<option value="">취미를 선택하세요</option>
 					<c:forEach var="h" items="${ hlist }"> <!-- 정의 안될 경우 begin=0 / end=items-1 -->
 						<c:if test="${ h.hobbyNo == selectedHobby }">
@@ -153,19 +170,23 @@
 							<option value="${ h.hobbyNo }" id="${ h.hobbyName }">${ h.hobbyName }</option>
 						</c:if>
 					</c:forEach>
-				</select>
+				</select> --%>
 			</div>
 			
 			<button type="button" id="filterBtn" onclick="filterSearch();">필터 검색</button>
 			
 			<script>
+			function toHBSelView(){
+	               var height = $("body")[0].clientHeight+"px";
+	               window.open('${hList}', '_blank','width=1100px, height=1000px, location=no, toolbars=no, scrollbars=no');
+	            }
+			
 				function filterSearch(){
 					var sido = $('#sido').val();
 					var gugun = $('#gugun').val();
 					var hobby = $('#hobby').val();
 					
-					
-					 if(sido == "" && gugun == "" && hobby == ""){
+					if(sido == "" && gugun == "" && hobby == ""){
 							swal({
 			            		  title: "지역 및 취미를 선택해주세요!",
 			            		  text: "필터 검색은 회원님이 선택하신 정보를 기반으로 진행됩니다.",

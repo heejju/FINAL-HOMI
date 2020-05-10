@@ -106,11 +106,14 @@
 								type: "password",
 							},
 						},
-						buttons: {cancel: true, confirm: true},
+						buttons: {
+							cancel : "취소",
+							defeat : {text:"확인", value:true},
+						},
 						dangerMode: true
 					}).then(password => {
-						alert(password) ;
-						if(!password) throw null ;
+						if(!password)
+							throw null ;
 						checkPwd2(password) ;
 						if(chkData == "true") {
 							var userId = "${loginUser.userId}" ;

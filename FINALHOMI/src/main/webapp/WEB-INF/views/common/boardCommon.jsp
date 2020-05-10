@@ -95,9 +95,11 @@
                 <li class="main-menu">
                     <a href="${qlist}" class="suv-menu-5">1:1 문의</a>
                 </li>
+                <c:if test="${ loginUser.mKind == 0 }">
                 <li class="main-menu">
                     <a href="${mlist }" class="suv-menu-3">텃밭 관리</a>
                 </li>
+                </c:if>
             </ul>
         </div>
         

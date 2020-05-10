@@ -118,4 +118,8 @@ public class LectureBoardDAO {
 		return (ArrayList)sqlSession.selectList("lectureMapper.selectCCPage") ;
 	}
 
+	public int updateStatics(SqlSession sqlSession) {
+		return sqlSession.update("lectureMapper.updateStatics");
+	}
+
 }

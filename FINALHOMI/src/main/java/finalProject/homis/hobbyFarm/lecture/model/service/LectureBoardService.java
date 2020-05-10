@@ -60,4 +60,6 @@ public interface LectureBoardService {
 	int selectCCCount() ;
 
 	ArrayList<LectureBoard> selectCCPage(PageInfo pi);
+
+	int updateStatics();
 }

@@ -144,4 +144,9 @@ public class LectureBoardServiceImp implements LectureBoardService{
 	public ArrayList<LectureBoard> selectCCPage(PageInfo pi) {
 		return lbDAO.selectCCPage(sqlSession, pi) ;
 	}
+	
+	@Override
+	public int updateStatics() {
+		return lbDAO.updateStatics(sqlSession);
+	}
 }

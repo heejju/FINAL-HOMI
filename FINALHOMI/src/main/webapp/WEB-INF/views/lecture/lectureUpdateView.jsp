@@ -57,7 +57,7 @@
 		padding: 0 5px 0 5px;
 	}
 	.title{
-		width: 90%; height: 42px; font-size: 20px; color: rgb(136, 140, 67);
+		width: 90%; height: 50px; font-size: 18px;
 		font-weight: bold; overflow: hidden; resize: none;
 	}
 	
@@ -79,7 +79,7 @@
 	
 	div.header > div.firstInfo {
 		text-align:left; padding: 0 0 0 20px;
-		width: 49%; height: auto; border: 1px solid lightgray;
+		width: 49%; height: 250px; border: 1px solid lightgray;
 		display: inline-block; float: right; margin: 0 0 0 0; box-sizing:border-box;
 	}
 	div.firstInfo  select{
@@ -154,6 +154,10 @@
 	span.selectDong{
 		vertical-align: middle; cursor: pointer; line-height: 36px; color: rgb(136,140,67);
 	}
+	input.hobbySelInputText{
+		text-align: center; width: 200px; border: 0px solid black; color: rgb(103, 81, 65);
+		font-weight: bold; cursor: pointer;
+	}
 	
 </style>
 </head>
@@ -208,11 +212,7 @@
 					<c:url var="HBSel" value="selectHobbyView.lec"/>
 					<b class="green" style="vertical-align: middle;">카테고리 : </b>
 					<input type="hidden" name="hobbyNo" id="hobbyNo" value="${ lb.hobbyNo }">
-					<span id="hobbyName" style="width:200px">${ lb.hobbyName }</span>
-					<button type="button" id="selectHobbyBtn" 
-						onclick="window.open('${HBSel}', 'hobbyPopup', 'width=1100px, height=800px, menubar=no, status=no, toolbar=no, resizable=no');">
-						취미 선택
-					</button>
+					<input class="hobbySelInputText" type="text" id="hobbyName" value="${ lb.hobbyName }" placeholder="취미선택" readonly onclick="window.open('${HBSel}', 'hobbyPopup', 'width=1100px, height=800px, menubar=no, status=no, toolbar=no, resizable=no');">
 					<%-- <select name="hobbyNo" id='hobbyNo'><!-- DB에서 불러오기 -->
 						<option style="color: lightgray" value='0'>선택</option>
 						<c:forEach var="hobby" items="${ hList }">
@@ -438,7 +438,7 @@
 				
 			</div>
 			<div style="text-align: center;"><!-- 가능한 장소의 마지막한줄을 지우는 곳 -->
-				<button class='ablePlaceDeleteBtn' type='button' onclick='ablePlaceDeleteBtn();'>마지막 선택동 삭제</button>
+				<button class='ablePlaceDeleteBtn' type='button' onclick='ablePlaceDeleteBtn();'>마지막 선택 동 삭제</button>
 				<hr>
 				<script>
 					function ablePlaceDeleteBtn(){

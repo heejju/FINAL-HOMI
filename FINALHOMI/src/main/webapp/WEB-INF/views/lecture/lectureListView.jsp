@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
    String applySuccess = "applySuccess";
    
@@ -50,7 +51,7 @@
    div.body{
       margin: 0 auto;
       text-align: center; border: 0px solid lightgray;
-      width: 80%; height: auto; padding-bottom: 50px;
+      width: 100%; height: auto; padding-bottom: 50px;
    }
    
    select{
@@ -82,42 +83,54 @@
    }
    
    div.content{
-      background: white; width: 300px; height: 255px; display: inline-block;
-      margin: 10px; border: 1px solid lightgray; cursor:pointer;
+      background: white; width: 31.33333333333333%; height: 450px; display: inline-block;
+      border: 1px solid lightgray; cursor:pointer; float:left; margin:20px 0.7%;
    }
    div.img{
-      width:300px; height: 200px; background-size: 300px 200px;
+      width:100%; height: 350px; background-size:cover;
       text-align: left;
    }
-   .contentTitle{
-      width: 190px; display: inline-block; font-weight: bold; display: inline-block; margin: 0; height: 100%;
-   }
+  
    div.contentTitle{
-      width: 190px; font-weight: bold; text-overflow: ellipsis; display: inline-block;
-      margin: 0; padding : 0 5px 0 5px;
-      height: 100%; text-align: center; overflow: hidden; float: left;
+      width: 100%; font-weight: bold; display:block; padding:0 5%; 
+      margin: 15px 0; font-size:1.6rem; 
+      /* height: 1.2rem; overflow: hidden; */ float: left;
    }
    div.contentWriter{
-      display: inline-block; width: 90px; font-size: 12px; text-align: center;
+      display: inline-block; width: 40%; font-size: 12px; text-align: center; float:right;
+   }   
+   .brown > b{font-size:12px; margin-bottom:10px; display:block; float:left; width:30%; font-weight:900;}
+   .green > b{font-size:18px; display:block; width:65%; float:left; text-align: center;}
+   
+   .img-div1{width:100%; height: 250px; background: rgba(255, 255, 255, 0.3); position: relative;}
+   .img-div2{width:100%; height: 100px; text-align: right; background: rgba( 255, 255, 255,0.3); position: relative;}
+   
+   p.contentPrice{
+      background: rgba(136, 140, 67, 0.8); color: #fff; 
+      display: inline-block; padding: 5px 10px; margin: 5px 0 0 0; font-weight: bold; position: absolute; left:15px; top:10px;
    }
    p.contentTime{
-      background: rgba(103, 81, 65, 0.8); color: #fff; width: auto;
-      display: inline-block; padding: 0 10px 0 10px; margin: 5px 0 0 0; font-weight: bold;
-   }
-   p.contentPrice{
-      background: rgba(136, 140, 67, 0.8); color: #fff; width: auto; 
-      display: inline-block; padding: 0 10px 0 10px; margin: 5px 0 0 0; font-weight: bold;
+      background: rgba(103, 81, 65, 0.8); color: #fff; 
+      display: inline-block; padding: 5px 10px; margin: 5px 0 0 0; font-weight: bold; position: absolute; left:15px; top: 45px;
    }
    p.contentCate{
-      background: rgba(103, 81, 65, 0.8); color: #fff; width: auto; 
-      display: inline-block; padding: 0 10px 0 10px; margin: 5px 0 0 0;
-      vertical-align: bottom; font-weight: bold;
+      background: rgba(103, 81, 65, 0.8); color: #fff; 
+      display: block; padding:5px 10px; margin: 5px 0 0 0;
+  	  font-weight: bold; position: absolute; right:15px; bottom:45px;
    }
    p.contentApply{
-      background: rgba(136, 140, 67, 0.8); color: #fff; width: auto; 
-      display: inline-block; padding: 0 10px 0 10px; margin: 5px 0 0 0;
-      vertical-align: bottom; font-weight: bold;
+      background: rgba(136, 140, 67, 0.8); color: #fff; 
+      display: block; padding:5px 10px; margin: 5px 0 0 0;
+      font-weight: bold; position: absolute; right: 15px; bottom:10px;
    }
+   
+   
+   
+   
+   .tit-bottom{height:78px;}
+   
+   
+   
    
    div.BWrite{
       width: 92%; text-align: right; margin: 15px auto 15px auto;
@@ -165,6 +178,8 @@
    		height: 40px; box-sizing: border-box; font-weight: bold; cursor: pointer; vertical-align: middle;
    		font-size: 20px; border-radius: 5px;
    }
+   
+   
 </style>
 </head>
 <body>
@@ -389,17 +404,17 @@
       <br><br>
       
       <c:set var="i" value="1"/>
-      <div class="listInfo" style="text-align: left; padding: 0 30px;">
+      <div class="listInfo" style="width:100%; text-align: left;">
          <c:forEach items="${ lbList }" var="lb">
             <c:if test="${ i  eq lbList.size() }">
                <div class="content" onclick="toDetail(this);">
                   <input type=hidden value="${ lb.postNo }">
                   <div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
-                     <div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
+                     <div class="img-div1">
                         <p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
                         <p class="contentTime">${ lb.otAllTime } time</p>
                      </div>
-                     <div style="width:300px; height: 60px; text-align: right; padding-top: 40px; background: rgba( 255, 255, 255,0.3);">
+                     <div class="img-div2" style="">
                         <p class="contentCate">${ lb.hobbyName }</p><br>
                         <p class="contentApply">농부 모집중</p>
                      </div>
@@ -407,12 +422,20 @@
                   <div>
                      <hr>
                   </div>
-                  <div style="height: 33px;">
-                     <div class="contentTitle">${ lb.title }</div>
+                  <div class="tit-bottom">
+                     <%-- <div class="contentTitle">${ lb.title }</div> --%>
+                     <div class="contentTitle">
+                        <c:choose>
+                           <c:when test="${fn:length(lb.title) > 18}">
+                              <c:out value="${ fn:substring(lb.title, 0, 17) }"/>...
+                                </c:when>
+                                <c:otherwise>
+                                   <c:out value="${b.title}"/>
+                                </c:otherwise> 
+                            </c:choose>
+                     </div>
                      <div class="contentWriter">
-                        <div>
-                        <label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label>
-                        </div>
+                        	<label class="brown"><b>강 사</b></label><label class="green"><b>${ lb.nickName }</b></label>
                      </div>
                   </div>
                   <hr>
@@ -424,11 +447,11 @@
                   <div class="content" onclick="toDetail(this);">
                      <input type=hidden value="${ lb.postNo }">
                      <div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
-                        <div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
+                        <div class="img-div1" >
                            <p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
                            <p class="contentTime">${ lb.otAllTime } time</p>
                         </div>
-                        <div style="width:300px; height: 60px; text-align: right; padding-top: 40px; background: rgba( 255, 255, 255,0.3);">
+                        <div class="img-div2">
                            <p class="contentCate">${ lb.hobbyName }</p><br>
                            <p class="contentApply">농부 모집중</p>
                         </div>
@@ -436,12 +459,20 @@
                      <div>
                         <hr>
                      </div>
-                     <div style="height: 33px;">
-                        <div class="contentTitle">${ lb.title }</div>
+                     <div class="tit-bottom" >
+                        <%-- <div class="contentTitle">${ lb.title }</div> --%>
+                        <div class="contentTitle">
+                        <c:choose>
+                           <c:when test="${fn:length(lb.title) > 18}">
+                              <c:out value="${ fn:substring(lb.title, 0, 17) }"/>...
+                                </c:when>
+                                <c:otherwise>
+                                   <c:out value="${b.title}"/>
+                                </c:otherwise> 
+                            </c:choose>
+                     </div>
                         <div class="contentWriter">
-                           <div>
-                           <label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label>
-                           </div>
+                           <label class="brown"><b>강 사</b></label><label class="green"><b>${ lb.nickName }</b></label>
                         </div>
                      </div>
                      <hr>
@@ -453,11 +484,11 @@
                   <div class="content" onclick="toDetail(this);">
                      <input type=hidden value="${ lb.postNo }">
                      <div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
-                        <div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
+                        <div class="img-div1">
                            <p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
                            <p class="contentTime">${ lb.otAllTime } time</p>
                         </div>
-                        <div style="width:300px; height: 60px; text-align: right; padding-top: 40px; background: rgba( 255, 255, 255,0.3);">
+                        <div class="img-div2">
                            <p class="contentCate">${ lb.hobbyName }</p><br>
                            <p class="contentApply">농부 모집중</p>
                         </div>
@@ -465,12 +496,22 @@
                      <div>
                         <hr>
                      </div>
-                     <div style="height: 33px;">
-                        <div class="contentTitle">${ lb.title }</div>
+                     <div class="tit-bottom" >
+                       <%--  <div class="contentTitle">${ lb.title }</div> --%>
+                       	<div class="contentTitle">
+                        <c:choose>
+                           <c:when test="${fn:length(lb.title) > 18}">
+                              <c:out value="${ fn:substring(lb.title, 0, 17) }"/>...
+                                </c:when>
+                                <c:otherwise>
+                                   <c:out value="${b.title}"/>
+                                </c:otherwise> 
+                            </c:choose>
+                     </div>
                         <div class="contentWriter">
-                           <div>
-                           <label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label>
-                           </div>
+                           
+                           <label class="brown"><b>강 사</b></label><label class="green"><b>${ lb.nickName }</b></label>
+                           
                         </div>
                      </div>
                      <hr>
@@ -482,11 +523,11 @@
                   <div class="content" onclick="toDetail(this);">
                      <input type=hidden value="${ lb.postNo }">
                      <div class="img" style="background-image: url('${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }');">
-                        <div style="width:300px; height: 100px; background: rgba(255, 255, 255, 0.3);">
+                        <div class="img-div1">
                            <p class="contentPrice">\ ${ String.format('%,d',lb.otTuition * lb.otAllTime) }</p><br>
                            <p class="contentTime">${ lb.otAllTime } time</p>
                         </div>
-                        <div style="width:300px; height: 60px; text-align: right; padding-top: 40px; background: rgba( 255, 255, 255,0.3);">
+                        <div class="img-div2">
                            <p class="contentCate">${ lb.hobbyName }</p><br>
                            <p class="contentApply">농부 모집중</p>
                         </div>
@@ -494,12 +535,20 @@
                      <div>
                         <hr>
                      </div>
-                     <div style="height: 33px;">
-                        <div class="contentTitle">${ lb.title }</div>
+                     <div class="tit-bottom">
+                        <%-- <div class="contentTitle">${ lb.title }</div> --%>
+                        <div class="contentTitle">
+                        <c:choose>
+                           <c:when test="${fn:length(lb.title) > 18}">
+                              <c:out value="${ fn:substring(lb.title, 0, 17) }"/>...
+                                </c:when>
+                                <c:otherwise>
+                                   <c:out value="${b.title}"/>
+                                </c:otherwise> 
+                            </c:choose>
+                     </div>
                         <div class="contentWriter">
-                           <div>
-                           <label class="brown"><b>글쓴이</b></label><br><label class="green"><b>${ lb.nickName }</b></label>
-                           </div>
+                           <label class="brown"><b>강 사</b></label><label class="green"><b>${ lb.nickName }</b></label>
                         </div>
                      </div>
                      <hr>
@@ -509,6 +558,7 @@
             <c:set var="i" value="${ i + 1 }"/>
          </c:forEach>
       </div>
+      <div class="clear-both"></div>
       <script>
          //글 클릭시 해당 글번호를 가지와 검색했던조건들을 가지고서 간다
          function toDetail(e){

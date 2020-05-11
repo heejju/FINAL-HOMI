@@ -145,11 +145,11 @@
 			<c:url var="hList" value="hList.gf"/>
 			<div id="hobbyArea">
 				<c:if test="${ selectedHobby eq null }">
-	               <input type="hidden" name='hobby' id='hobby' value ="0">
+	               <input type="hidden" name='hobby' id='hobby'>
 	               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
 	            </c:if>
 	            <c:if test="${ selectedHobby eq 0 }">
-	               <input type="hidden" name='hobby' id='hobby' value ="0">
+	               <input type="hidden" name='hobby' id='hobby'>
 	               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
 	            </c:if>
 	            <c:if test="${ selectedHobby ne null }">
@@ -231,8 +231,8 @@
 							
 							<div class="title">
 								<c:choose>
-									<c:when test="${fn:length(b.title) > 24}">
-										<c:out value="${ fn:substring(b.title, 0, 23) }"/>...
+									<c:when test="${fn:length(b.title) > 18}">
+										<c:out value="${ fn:substring(b.title, 0, 18) }"/>...
 					           		</c:when>
 						           	<c:otherwise>
 						           		<c:out value="${b.title}"/>
@@ -556,7 +556,7 @@
 		/* console.log(title.eq(0)[0].innerText.length); */
 		for(var k=0; k < title.length; k++){
 			if(title.eq(k)[0].innerText.length < 16){
-				$(title.eq(k)).css("line-height","320%");
+				$(title.eq(k)).css("line-height","160%");
 			} else {
 				$(title.eq(k)).css("line-height","160%");
 			}

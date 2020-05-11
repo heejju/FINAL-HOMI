@@ -55,6 +55,7 @@
 	/* 댓글 */
 	#commentMain{min-height:130px; background-color: white; margin:10% auto;
 				overflow:hidden; height:auto; padding:3% 6%; font-size: 16px;}
+	.replyImg{overflow:hidden; display:inline-block; width:3%; height:3%; vertical-align:middle;}
 	#replyNickName{cursor: pointer; padding-left:5px;}
 	.replyUpdate, .replyDelete{cursor: pointer; font-size: 15px;}
 	.contentTR{display:inline-block; margin: 5px 0 15px 0; word-break:break-all; wrap:hard;}
@@ -137,20 +138,15 @@
 						<li>인원 : 
 							<b>
 							<c:if test="${ gfaList.size() ne 0 }">
-								<c:set var="loop_flag" value="true" />
-								<c:forEach var="gfa" items="${ gfaList }" varStatus="status">
-								    <c:if test="${ loop_flag }">
-										<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
-											<span class="personnelCount">${ gfaList.size() }</span>
-										</c:if>
-										<c:if test="${ gf.offerYN eq 'Y' && !empty gf.teacher }">
-										<%-- <c:if test="${fn:contains(gfa, 2)}">
-										</c:if> --%>
-											<span class="personnelCount"><c:out value="${ gfaList.size() - 1 }"/></span>
-										</c:if>
-							        	<c:set var="loop_flag" value="false" />
-							    	</c:if>
-								</c:forEach>
+								<c:if test="${ gf.offerYN eq 'N' }">
+									<span class="personnelCount">${ gfaList.size() }</span>
+								</c:if>
+								<c:if test="${ gf.offerYN eq 'Y' && empty gf.teacher }">
+									<span class="personnelCount">${ gfaList.size() }</span>
+								</c:if>
+								<c:if test="${ gf.offerYN eq 'Y' && !empty gf.teacher }">
+									<span class="personnelCount">${ gfaList.size() - 1 }</span>
+								</c:if>
 							</c:if>
 							<c:if test="${ gfaList.size() eq 0 }">
 								<span class="personnelCount">0</span>
@@ -587,7 +583,7 @@
 		
 			<div class="buttonArea">
 				<a href="${ blist }"><button id="list">목록으로</button></a>
-				<c:if test="${ loginUser.nickName eq gf.nickName }">
+				<c:if test="${ loginUser.nickName eq gf.nickName || loginUser.userId eq 'admin' }">
 					<button id="updateBtn">수정</button>
 					<button id="deleteBtn">삭제</button>
 				</c:if>
@@ -728,7 +724,7 @@
 							$td = $('<td>');
 							$td2 = $('<td class="contentTd" id="rContent' + data[i].rNo +'">');
 							
-							$rImg = $('<img src="${ contextPath }/resources/uploadFiles/' + data[i].changeName + '" style="width:auto; height:6%; vertical-align:middle;">');
+							$rImg = $('<div class="replyImg"><img src="${ contextPath }/resources/uploadFiles/' + data[i].changeName + '" style="width:100%; height:100%; vertical-align:middle;"></div>');
 							$rWriter = $('<span style="font-weight:bold;" id="replyNickName" onclick="miniMypage(this);">').html(decodeURIComponent(data[i].rNickName)+"<input type='hidden' value='" + data[i].rWriter+"'>");
 							//$rWriter = $('<span style="font-weight:bold;" onclick="window.open(\'location.href=userId=\'+data[i].rWriter+\'&page=1\', \'window팝업\', \'width=600, height=702\').text(decodeURIComponent(data[i].rNickName));
 							$rWriteDate = $('<span style="font-size: 15px; color: rgb(190, 190, 190);">').text(data[i].rWriteDate);

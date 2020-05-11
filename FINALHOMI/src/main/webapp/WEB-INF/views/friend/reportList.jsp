@@ -30,7 +30,7 @@ input[type=button]:hover{background:#000; color:#888c43; font-weight:bold; curso
 .farmTable>thead>th:last-child{border-radius:0 5% 5% 0;}
 
 .farmTable>tbody tr:hover{cursor:pointer; background: #888c43; color:#fff;}
-.farmTable>tbody tr:hover{cursor:pointer; background: #888c43; color:#fff;}
+.farmTable>tbody tr:hover td:nth-child(2){cursor:pointer; background: #888c43; color:#fcf82c;}
 .buttonG{width:100px; background-color:#888c43; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 .buttonB{width:100px; background-color:#675141; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 
@@ -114,7 +114,7 @@ select{height:30px; width:100px;}
 				<tbody>
 					<c:forEach var="r" items="${ list }">
 					<tr class="tr-no" style="height:  88px;">
-						<	d>${ r.rpNo }</td>
+						<td>${ r.rpNo }</td>
 						<c:url var="userInfo" value="userInfo.fo">
 							<c:param name="userId" value="${ r.rpSender }"/>
 							<c:param name="page" value="${ pi.currentPage }"/>

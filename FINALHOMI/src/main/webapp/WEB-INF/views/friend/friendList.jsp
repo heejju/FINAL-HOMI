@@ -207,10 +207,10 @@
                    	</div>
                 </div>
                 <div class="user-info">
-                    <br>
+                    <br><br>
                     <label>닉네임 : </label>
 					<input type="hidden" class="frNick${status.count}" value="${f.userId}">
-                    <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');" style="display:inline-block; font-weight:650;">${ f.nickName }${f.mKind}</label>&nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+                    <label id="nickNameClick" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');" style="display:inline-block; font-weight:650;">${ f.nickName }${f.mKind}</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     <c:if test="${f.mKind eq 0}">	
                     	<label style="display:inline-block; font-weight:500; font-family: 'Black Han Sans', sans-serif;">( 운 영 자 )</label>&nbsp;&nbsp;&nbsp;&nbsp;
                     </c:if>

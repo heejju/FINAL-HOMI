@@ -98,7 +98,7 @@
 		<!-- 참여한 동네 텃밭 -->
 		<div style="width: 300px; float: left; margin: 10px;"> 
 			<div class="subTitle" >참여한 동네 텃밭</div>
-			<iframe style="width:100%; height:660px;"" src="myFarm.mp" frameborder="0"></iframe>
+			<iframe style="width:100%; height:660px;" src="myFarm.mp" frameborder="0"></iframe>
 		</div>
 		<div style="width: 650px; float: left; margin: 10px;">
 			<div class="subTitle" style="width: 600px;">주문한 모종</div>

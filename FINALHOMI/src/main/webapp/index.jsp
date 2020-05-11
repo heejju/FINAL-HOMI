@@ -187,10 +187,10 @@
 	</script>
 	<div id="visual">
         <div id="pic">
-            <div><a href="#"><img src="${ contextPath }/resources/images/main_Img1.png" alt="1" style="width:1000px; "></a></div>
+            <div><a href="#"><img src="${ contextPath }/resources/images/main_Img3.png" alt="1" style="width:1000px; "></a></div>
             <div><a href="#"><img src="${ contextPath }/resources/images/main_Img2.png" alt="2" style="width:1000px; "></a></div>
-            <div><a href="#"><img src="${ contextPath }/resources/images/main_Img3.png" alt="3" style="width:1000px; "></a></div>
-            <div><a href="#"><img src="${ contextPath }/resources/images/main_Img4.png" alt="4" style="width:1000px; "></a></div>
+            <div><a href="#"><img src="${ contextPath }/resources/images/main_Img4.png" alt="3" style="width:1000px; "></a></div>
+            <div><a href="#"><img src="${ contextPath }/resources/images/main_Img1.png" alt="4" style="width:1000px; "></a></div>
         </div>
         <div id="control">
             <a href="#">1</a>

@@ -25,15 +25,21 @@
 	
 	.pageNum, #before, #next, #current{width:30px; height:30px; border-radius:5px; border:0px; background-color:white; font-size:14px; padding:5px;}
 	button:hover{cursor:pointer;}
+	
+	.tr-1{border-bottom: 1px solid gray; padding:10px; height:32px;}
+	.tr-no{font-size:13px;}
+	.tr-1 th:nth-child(1){width:60%;}
+	.tr-1 th:nth-child(2){width:20%;}
+	.tr-1 th:nth-child(3){width:20%;}
+	
 </style>
 </head>
 <body>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<div style=" background: white; padding: 5px; height: 630px;">
 	<table class="table">
-				<tr style="border-bottom: 1px solid gray;">
+				<tr class="tr-1">
 					<th style="overflow: hidden"><div style="overflow: hidden">텃밭 이름</div></th>
-					<th>텃밭 주인</th>
 					<th>모종</th>
 					<th>인원</th>
 				</tr>
@@ -41,9 +47,8 @@
 					<c:forEach var="gf" items="${gfList}">
 						<tr class="tr-no">
 							<td style="overflow: hidden;"><input type="hidden"  value="${gf.postNo}">${gf.title}</td>
-							<td>${gf.nickName}</td>
-							<td>${gf.hobbyName}</td>
-							<td>${gf.personnel}</td>
+							<td style="text-align:center;">${gf.hobbyName}</td>
+							<td style="text-align:center;">${gf.personnel}</td>
 						</tr>
 					</c:forEach>
 				</c:if>

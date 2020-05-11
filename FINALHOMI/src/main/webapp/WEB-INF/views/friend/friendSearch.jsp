@@ -49,7 +49,7 @@
     .numBox{font-size:1.2rem;}
     
     .msg-btn2{background:rgb(103, 81, 65);  display:inline-block; color:#fff; padding:5px 5px; box-sizing: border-box; border-radius: 5px; margin-top:-10px; margin-bottom:10px;}
-    .msg-btn3{width:12.5%; font-weight:700; box-sizing: border-box;}
+    .msg-btn3{width:12.5%; box-sizing: border-box; background:#ccc; height:30px; font-family: 'Nanum Gothic', sans-serif; font-weight:700;}
     .msg-btn3:hover{background:#000; color:#fff; cursor: pointer;}
     .msg-btn1{width:12.5%; font-weight:700; box-sizing: border-box; background:orange; color:#fff; padding:10px 0; font-size:16px;}
     .msg-btn1:hover{background:#000; color:#fff; cursor: pointer;}
@@ -179,7 +179,7 @@ button:hover{cursor:pointer;}
                     <input type="hidden" value="${ f.userId }" class="hiddenName">
                     <c:if test="${ f.fdStatus == '0' }">
                     	<div class="msg-btn2">진 행 중</div>
-                    	<input type="button" value="취 소" class="msg-btn3">	
+                    	<input type="button" value="취 소" class="msg-btn3" >	
                     </c:if>
                     <c:if test="${ empty f.fdStatus }"> 
                     	<input type="button" value="요 청" class="msg-btn1">

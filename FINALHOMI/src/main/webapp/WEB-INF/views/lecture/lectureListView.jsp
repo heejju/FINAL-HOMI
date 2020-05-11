@@ -53,38 +53,25 @@
       text-align: center; border: 0px solid lightgray;
       width: 100%; height: auto; padding-bottom: 50px;
    }
-   
-   select{
-      height:30px; border: 3px solid rgb(103, 81, 65); width: 95px; text-align-last : center;
-      color: rgb(136, 140, 67); font-weight: bold; border-radius: 5px; font-family: ;
-   }
-   div.search1{
-      width: 100%; height: 100%; margin: 0 auto;
-   }
-   
-   div.search1 > select{
-      height:40px; border: 3px solid rgb(103, 81, 65); width: 95px; text-align-last : center;
-      color: rgb(136, 140, 67); font-weight: bold; border-radius: 5px; font-size: 20px; width: 200px;
-   }
-   
-   div.search1 > select > option{
-      font-weight: bold;
-   }
-   div.search1 > select > option:first-child{
-      font-weight: bold; color: lightgray;
-   }
-   
-   form.search1{
-      width: auto; height: auto;
-   }
-   
-   svg{
-      color: rgb(103, 81, 65);
-   }
+ 
+    #searchFilter{align:center; width:97%; height:8%; background-color:#e0e0e0; padding:5px; margin:0% auto;}
+	.locationArea{align:center; width:20%; height:5%; background-color:white; padding:0.5%;
+					border-radius:5px; display:inline-block; margin:0px auto;}
+	#hobbyArea{align:center; width:20%; height:5%; background-color:white; padding:0.5%;
+				border-radius:5px; display:inline-block; margin:0% auto;}
+	.selectLocation, #hobbyName, #searchSelect
+			{border-raidus:5px; width:100%; height:100%; padding:5px; margin:0px auto; border:0px;
+			font-size:14px; font-family: 'Nanum Gothic', sans-serif; font-weight:bold;}
+	#hobbyName{width:95%;}
+	#nextIcon{width:5%; height:5%; vertical-align:middle;}
+	#filterBtn{padding:1%; display:inline-block; background-color:#3498db; vertical-align:middle;
+				border-radius:5px; border:0px; color:white; margin-left:3%;
+				font-family: 'Nanum Gothic', sans-serif; font-weight:bold; font-size:17px;}
+   svg{color:gray;}
    
    div.content{
       background: white; width: 31.33333333333333%; height: 450px; display: inline-block;
-      border: 1px solid lightgray; cursor:pointer; float:left; margin:20px 0.7%;
+      border: 1px solid lightgray; cursor:pointer; float:left; margin:20px 0.9%;
    }
    div.img{
       width:100%; height: 350px; background-size:cover;
@@ -123,15 +110,7 @@
       display: block; padding:5px 10px; margin: 5px 0 0 0;
       font-weight: bold; position: absolute; right: 15px; bottom:10px;
    }
-   
-   
-   
-   
    .tit-bottom{height:78px;}
-   
-   
-   
-   
    div.BWrite{
       width: 92%; text-align: right; margin: 15px auto 15px auto;
    }
@@ -144,16 +123,16 @@
    }
    
    button.nextPBtn{
-      border: 0px; border-radius: 5px; background: rgb(103, 81, 65); color: white;  width: 40px; height: 36px;
-      padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px;
+      border: 0px; border-radius: 5px; background: rgb(103, 81, 65); color: white;  width: 40px; height: 40px;
+      /* padding: 7px 12px 7px 12px;  */cursor: pointer; font-size: 16px;
    }
    button.pagingBtn{
-      border: 0px; border-radius: 5px; background: white; color: black; width: 42px; height: 36px;
+      border: 0px; border-radius: 5px; background: white; color: black;  width: 40px; height: 40px;
       padding: 7px 12px 7px 12px; cursor: pointer; font-size: 16px;
    }
    button.pagingSelBtn{
       border: 0px; border-radius: 5px; background: rgb(136, 140, 67); color: white; font-weight: bold;
-      padding: 7px 12px 7px 12px; font-weight: bolder; width: 42px; height: 36px; font-size: 16px;
+      padding: 7px 12px 7px 12px; font-weight: bolder;  width: 40px; height: 40px; font-size: 16px;
    }
    
    div.search2 > input.searchValue {
@@ -168,11 +147,11 @@
       font-weight: bold; font-size: 20px;
    }
    .jm-btn{padding-top:5px; display:inline-block;}
-   input.hobbyName{
+   /* input.hobbyName{
       width: 200px; height: 40px; border: 3px solid rgb(103,81,65); font-size: 20px;
       border-radius: 5px; text-align: center; box-sizing: border-box; font-weight: bold;
       color : rgb(136, 140, 67); cursor: pointer;
-   }
+   } */
    button.hobbyEmpty{
    		border: 3px solid rgb(103, 81, 65); background:white; color: rgb(136, 140, 67);
    		height: 40px; box-sizing: border-box; font-weight: bold; cursor: pointer; vertical-align: middle;
@@ -194,7 +173,7 @@
       }
    });
 </script>
-<form action="list.lec" method="post" id="lecForm" style="width: 1300px; margin: 0 auto;" onsubmit="whereFormGo();">
+<form action="list.lec" method="post" id="lecForm" style="width: 75%; margin: 0 auto;" onsubmit="whereFormGo();">
 <input type="hidden" name=currentPage id=currentPage value="${ currentPage }">
 <input type="hidden" name="postNo" id="postNo" value="0">
 <c:set var="applySuccess" value='<%=request.getSession().getAttribute("applySuccess") %>'/>
@@ -209,28 +188,61 @@
 </script>
 <%request.getSession().setAttribute("applySuccess", null); %>
    <div class="body">
-      <div class="search1">
-         <br>
-         <select name="sido" class="selectLocation" id="sido" onchange="categoryChange()">
-            <option value=''>시/도 선택</option>
-            <option value='서울특별시'>서울특별시</option>
-            <option value='경기도'>경기도</option>
-            <option value='인천광역시'>인천광역시</option>
-            <option value='강원도'>강원도</option>
-            <option value='충청북도'>충청북도</option>
-            <option value='충청남도'>충청남도</option>
-            <option value='대전광역시'>대전광역시</option>
-            <option value='세종특별자치시'>세종특별자치시</option>
-            <option value='전라북도'>전라북도</option>
-            <option value='전라남도'>전라남도</option>
-            <option value='광주광역시'>광주광역시</option>
-            <option value='대구광역시'>대구광역시</option>
-            <option value='경상북도'>경상북도</option>
-            <option value='경상남도'>경상남도</option>
-            <option value='울산광역시'>울산광역시</option>
-            <option value='부산광역시'>부산광역시</option>
-            <option value='제주특별자치도'>제주특별자치도</option>
-         </select>
+   		<div id="searchFilter">
+			<label style="margin-left:3%; font-weight:bold; font-size:20px; margin-right:1%; margin-left:1%;">지역</label>
+			<div class="locationArea">
+				<select name="sido" class="selectLocation" id="sido" onchange="categoryChange()">
+					<option value=''>시/도 를 선택하세요</option>
+					<option value='서울특별시'>서울특별시</option>
+					<option value='경기도'>경기도</option>
+					<option value='인천광역시'>인천광역시</option>
+					<option value='강원도'>강원도</option>
+					<option value='충청북도'>충청북도</option>
+					<option value='충청남도'>충청남도</option>
+					<option value='대전광역시'>대전광역시</option>
+					<option value='세종특별자치시'>세종특별자치시</option>
+					<option value='전라북도'>전라북도</option>
+					<option value='전라남도'>전라남도</option>
+					<option value='광주광역시'>광주광역시</option>
+					<option value='대구광역시'>대구광역시</option>
+					<option value='경상북도'>경상북도</option>
+					<option value='경상남도'>경상남도</option>
+					<option value='울산광역시'>울산광역시</option>
+					<option value='부산광역시'>부산광역시</option>
+					<option value='제주특별자치도'>제주특별자치도</option>
+				</select>
+			</div>
+			
+			<img src="${ contextPath }/resources/images/nextIcon.png" id="nextIcon"/>
+			<div class="locationArea" id="gugunArea" >
+				<select name="gugun" class="selectLocation" id="gugun">
+				</select>
+			</div>
+			<!-- selectedSido selectedgugun -->
+			<label style="margin-left:2%; font-weight:bold; font-size:20px; margin-left:3%; margin-right:1%;">취미</label>
+			<div id="hobbyArea">
+				<c:url var="HBSel" value="selectHobbyView.lec"/>
+	            <c:if test="${ hobbyNo eq null }">
+	               <input type="hidden" name='hobbyNo' id='hobbyNo' value ="0">
+	               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+	            </c:if>
+	            <c:if test="${ hobbyNo eq 0 }">
+	               <input type="hidden" name='hobbyNo' id='hobbyNo' value ="0">
+	               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+	            </c:if>
+	            <c:if test="${ hobbyNo ne null }">
+	               <c:forEach var="hobby" items="${ hList }">
+	                  <c:if test="${ hobbyNo eq hobby.hobbyNo }">
+	                     <input type="hidden" name='hobbyNo' id='hobbyNo' value ="${ hobby.hobbyNo }">
+	                     <input value="${ hobby.hobbyName }" onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
+	                  </c:if>
+	               </c:forEach>
+	            </c:if>
+         </div>
+	        <i class="fas fa-times-circle" onclick="$('#hobbyNo').val(0); $('#hobbyName').val(''); $('#sido').val('');$('#gugun').val('');$('#searchValue').val('');" style="vertical-align: middle; height: 40px; width: 40px; cursor:pointer;"></i>
+			<button type="button" id="filterBtn" onclick="$('#lecForm').submit();">필터 검색</button>
+		</div>
+      
          <script>
             // 만약 처음으로 list에 온게 아니라 검색으로 다시 왔을 경우 검색시 사용한 도시를 자동으로 셀렉
             $(function(){
@@ -245,38 +257,6 @@
             });
          </script>
          
-         <i class="fas fa-arrow-alt-circle-right" style="vertical-align: middle; height: 40px; width: 40px;"></i>
-         
-         <select name="gugun" class="selectLocation" id="gugun">
-            <option value=''>구/군 선택</option>
-         </select>
-         
-         <div style="display: inline-block; line-height: 30px; font-size: 40px; vertical-align: middle; width:40px; height:40px; text-align: center">//</div>
-         
-         <c:url var="HBSel" value="selectHobbyView.lec"/>
-         <div style="display: inline-block;">
-            <c:if test="${ hobbyNo eq null }">
-               <input type="hidden" name='hobbyNo' id='hobbyNo' value ="0">
-               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
-            </c:if>
-            <c:if test="${ hobbyNo eq 0 }">
-               <input type="hidden" name='hobbyNo' id='hobbyNo' value ="0">
-               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
-            </c:if>
-            <c:if test="${ hobbyNo ne null }">
-               <c:forEach var="hobby" items="${ hList }">
-                  <c:if test="${ hobbyNo eq hobby.hobbyNo }">
-                     <input type="hidden" name='hobbyNo' id='hobbyNo' value ="${ hobby.hobbyNo }">
-                     <input value="${ hobby.hobbyName }" onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
-                  </c:if>
-               </c:forEach>
-            </c:if>
-         </div>
-         
-         <i onclick="$('#lecForm').submit()" class="fas fa-search" style="background: rgb(136, 140, 67); padding: 3px; border-radius: 3px; height:40px; width:40px; vertical-align: middle; box-sizing: border-box; cursor: pointer;"></i>
-         
-
-         <i class="fas fa-times-circle" onclick="$('#hobbyNo').val(0); $('#hobbyName').val(''); $('#sido').val('');$('#gugun').val('');$('#searchValue').val('');" style="vertical-align: middle; height: 40px; width: 40px; cursor:pointer;"></i>
          
 
          <!-- admin만 보이는 cateinsertBtn -->
@@ -364,8 +344,6 @@
              var sudemongu = [];
              var suchogu = [];
              
-             
-             
              switch(sido){
                 case "" : gugun = gugun; break;
                 case "서울특별시" : gugun = seoul; break;
@@ -388,7 +366,7 @@
              }
       
              $('#gugun').empty();
-             $('#gugun').append($("<option value=''>구/군 선택</option>"));
+             $('#gugun').append($("<option value=''>시/군 을 선택하세요</option>"));
             for(var i = 0; i < gugun.length; i++){
                if('${ gugun }' == gugun[i]){
                   var option = $("<option value='"+gugun[i]+"' selected=selected>"+gugun[i]+"</option>");
@@ -404,7 +382,7 @@
       <br><br>
       
       <c:set var="i" value="1"/>
-      <div class="listInfo" style="width:100%; text-align: left;">
+      <div class="listInfo" style="width:100%; text-align: left; margin:0px auto;">
          <c:forEach items="${ lbList }" var="lb">
             <c:if test="${ i  eq lbList.size() }">
                <div class="content" onclick="toDetail(this);">
@@ -622,7 +600,7 @@
             $("#lecForm").submit();
          }
       </script>
-      
+  
       <br><br>
       
       <div class="search2" style="text-align: center; margin-bottom:5%;">
@@ -656,9 +634,6 @@
          }
          
       </script>
-      
-      
-   </div>
 </form>
 </body>
 

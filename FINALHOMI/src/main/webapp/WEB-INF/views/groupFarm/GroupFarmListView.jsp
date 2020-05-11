@@ -13,12 +13,13 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 <style>
 	.clear-both{clear:both;}
 	div{margin:0; padding:0;}
 	body{background-color: #fff6f0; font-family: 'Nanum Gothic', sans-serif; margin:0; padding:0;}
-	#searchFilter{align:center; width:80%; height:8%; background-color:#e0e0e0; padding:8px; margin:0% auto;}
+	#searchFilter{align:center; width:72%; height:8%; background-color:#e0e0e0; padding:5px; margin:0% auto;}
 	.locationArea{align:center; width:20%; height:5%; background-color:white; padding:0.5%;
 					border-radius:5px; display:inline-block; margin:0px auto;}
 	#hobbyArea{align:center; width:20%; height:5%; background-color:white; padding:0.5%;
@@ -26,12 +27,14 @@
 	.selectLocation, #hobbyName, #searchSelect
 			{border-raidus:5px; width:100%; height:100%; padding:5px; margin:0px auto; border:0px;
 			font-size:14px; font-family: 'Nanum Gothic', sans-serif; font-weight:bold;}
+	.selectLocation select option{font-weight:bold;}
 	#hobbyName{width:95%;}
 	#nextIcon{width:5%; height:5%; vertical-align:middle;}
+	svg{color:gray;}/* 필터 삭제 */
 	#filterBtn{padding:1%; display:inline-block; background-color:#3498db; vertical-align:middle;
 				border-radius:5px; border:0px; color:white; margin-left:3%;
 				font-family: 'Nanum Gothic', sans-serif; font-weight:bold; font-size:17px;}
-				
+	
 	/* 게시글 부분 */			
 	.postArea{width:80%; margin:0px auto; margin-top:5%; overflow:hidden;}
 	.postDetail{width:25%; max-heigth:20%; height:20%; background-color:white; font-weight:bold; text-align:center;
@@ -98,7 +101,7 @@
 			<label style="margin-left:3%; font-weight:bold; font-size:20px; margin-right:1%; margin-left:4%;">지역</label>
 			<div class="locationArea">
 				<select name="sido" class="selectLocation" id="sido" onchange="categoryChange()">
-					<option value=''>시/도 선택</option>
+					<option value=''>시/도 를 선택하세요</option>
 					<option value='서울특별시'>서울특별시</option>
 					<option value='경기도'>경기도</option>
 					<option value='인천광역시'>인천광역시</option>
@@ -145,7 +148,6 @@
 			<c:url var="hList" value="hList.gf"/>
 			<div id="hobbyArea">
 				<c:if test="${ selectedHobby eq null }">
-
 	               <input type="hidden" name='hobby' id='hobby'>
 	               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
 	            </c:if>
@@ -162,7 +164,8 @@
 	               </c:forEach>
 	            </c:if>
 			</div>
-			
+
+            <i class="fas fa-times-circle" onclick="$('#hobbyNo').val(''); $('#hobbyName').val(''); $('#sido').val('');$('#gugun').val('');$('#searchValue').val('');" style="vertical-align: middle; height: 40px; width: 40px; cursor:pointer;"></i>
 			<button type="button" id="filterBtn" onclick="filterSearch();">필터 검색</button>
 			
 			<script>

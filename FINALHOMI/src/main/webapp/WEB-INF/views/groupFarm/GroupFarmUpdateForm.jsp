@@ -527,7 +527,7 @@
 				}
 				
 				function cancle(){
-					location.href="blist.gf?postNo="+${gf.postNo}+"&page="+'${page}';
+					location.href="blist.gf?postNo="+${gf.postNo};
 				}
 			</script>
 			

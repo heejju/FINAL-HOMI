@@ -61,20 +61,36 @@
 	div.header{
 		padding-top: 20px;
 		width: 100%;
+		margin-bottom:150px;
 	}
 	
 	div.header > div.imgDiv{
-		width : 50%; height: 250px; border: 0px solid black; box-sizing:border-box;
-		float: left; margin: 0 3% 0 3%;
+		width : 90%; height:700px; border: 0px solid black; box-sizing:border-box; margin:0 auto;
+		background-image: url("${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }"); 
+		background-size: cover; display:block;
 	}
 	
 	div.header > div.imgDiv > img{
 		width : auto; height: 100%; border: 0px solid black; box-sizing:border-box;
 	}
 	div.header > div.firstInfo{
-		width: 40%; height: 250px; text-align: left;
+		width: 100%; height: 250px; text-align: left;
 		float: left; font-size: 22px;
 	}
+	.firstInfo > p{float:left; width:100%;}
+	.firstInfo > p:nth-child(1){text-align: right; width:95%; margin-right:5%;}
+	.firstInfo > p:nth-child(1) > label.green{font-size:2rem; display:inline-block; margin-right::5%; margin-top:30px; }
+	.firstInfo > p > label.green > b{}
+	.firstInfo > p:nth-child(1) > label.brown{font-size:2rem; display:inline-block;}
+	.firstInfo > p > label.brown > b{}
+	.firstInfo > p:nth-child(2){width:100%; text-align: center;}
+	.firstInfo > p:nth-child(2) > b{font-size:3rem; display:inline-block;}
+	.firstInfo > p:nth-child(2) > label.green{display:inline-block;}
+	.firstInfo > p:nth-child(2) > label.brown{display:inline-block;}
+	.firstInfo > p:nth-child(3){width:40%; float:left; margin-left:10%; height:150px;}
+	.firstInfo > p:nth-child(4){width:45%; float:right; text-align: right; margin-right:5%; font-size:2rem; margin-top:35px;}
+	.firstInfo > p:last-child{float:right; display:inline-block; }
+	.firstInfo > div{float:right; width:45%; margin-right:5%; font-size:2rem; margin-bottom:30px; text-align: right; margin-top:10px;} 
 	button{
 		border: 0px; background: white;
 	}
@@ -85,16 +101,16 @@
 		width: 100%; text-align: right; margin: 15px auto 15px auto;
 	}
 	button.modifyButton {
-		padding: 5px 15px 5px 15px; color: white; border-radius: 5px;
-		background: rgb(136, 140, 67);
+		padding: 15px 25px 15px 25px; color: white; border-radius: 5px;
+		background: rgb(136, 140, 67); font-size:18px;
 	}
 	button.deleteButton {
-		padding: 5px 15px 5px 15px; color: white; border-radius: 5px;
-		background: rgb(103, 81, 65);
+		padding: 15px 20px 15px 20px; color: white; border-radius: 5px;
+		background: rgb(103, 81, 65); font-size:18px;
 	}
 	button.listButton {
-		padding: 5px 15px 5px 15px; color: white; border-radius: 5px;
-		background: lightgray; 
+		padding: 10px 25px 10px 25px; color: white; border-radius: 5px;
+		background: lightgray; font-size:16px;
 	}
 	button.modifyButton:hover{
 		background: rgba(136, 140, 67, 0.65);
@@ -103,7 +119,7 @@
 		background: rgba(103, 81, 65, 0.65);
 	}
 	button.listButton:hover{
-		background: rgba(211, 211, 211, 0.65);
+		background: rgba(211, 211, 211, 0.65); color:rgba(0,0,0, 0.8);
 	}
 	
 	div.commentDiv{
@@ -124,8 +140,8 @@
 	}
 	
 	select{
-		height: 35px; border: 3px solid rgb(103, 81, 65); width: 130px; text-align: center; font-weight: bold; font-size: 18px;
-		color: rgb(136, 140, 67); font-weight: bold; border-radius: 5px; text-align-last: center;
+		height: 35px; border: 2px solid rgb(103, 81, 65); width: 130px; text-align: center; font-weight: bold; font-size: 18px;
+		color: rgb(136, 140, 67); font-weight: bold; border-radius: 5px; text-align-last: center; margin:0px 0px 5px 0px;
 		
 	}
 	div.ableTime{
@@ -194,7 +210,7 @@
 		<div class="body2">
 			<div class="header">
 				<div class="imgDiv">
-					<img src="${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }">
+					<%-- <img src="${pageContext.request.contextPath}/resources/uploadFiles/${ lb.changeName }"> --%>
 				</div>
 				<div class="firstInfo">
 					<p>
@@ -202,23 +218,8 @@
 					<label class="brown"><b>${ lb.nickName }</b></label>
 					</p>
 					<p>
-					<b style="font-size: 18px;">${ lb.title }</b>
+					<b>${ lb.title }</b>
 					</p>
-					
-					<p>
-					<b class="green">수강료: </b><b class="brown">${ String.format('%,d',lb.otTuition * lb.otAllTime) }원</b>
-					</p>
-					
-					
-					<div style="text-align: left;">
-						<div style="display: inline-block;">
-						<i class="far fa-clock" style="color: rgb(136, 140, 67); width: 40px; height: 40px;"></i>
-						</div>
-						<div style="display: inline-block;">
-							<b class="brown">총 ${ lb.otAllTime }회(${ lb.otTime }시간/회)<br>${ String.format('%,d',lb.otTuition) }원/회</b>
-						</div>
-					</div>
-					
 					<p>
 					<b class="green">수강 대상: </b>
 					<b class="brown">
@@ -227,25 +228,42 @@
 						<c:if test='${ lb.learner.equals("higt") }'>고급자</c:if>
 					</b>
 					</p>
+					
+					<p style="margin-bottom:15px;">
+					<b class="green">수강료: </b><b class="brown">${ String.format('%,d',lb.otTuition * lb.otAllTime) }원</b>
+					</p>
+					
+					
+					<div>
+						<div style="display: inline-block;">
+						<i class="far fa-clock" style="color: rgb(136, 140, 67); width: 70px; height: 70px;"></i>
+						</div>
+						<div style="display: inline-block;">
+							<b class="brown">총 ${ lb.otAllTime }회(${ lb.otTime }시간/회)<br>${ String.format('%,d',lb.otTuition) }원/회</b>
+						</div>
+					</div>
+					
 				</div>
 				
 				<br clear="all">
 				
-				<hr>
 			</div>
 			
 			<br>
 			
 			<div style="width: 70%; margin: 0 auto;">
-				<b class="green" style="font-size: 35px;">수업소개</b><br><br>
+				
+				<b class="green" style="font-size: 55px;">수업소개</b><br><br>
 				<hr>
 				<div style="text-align: left;">${ lb.content }</div>
+				<hr>
 				
 				<br>
 				
-				<b class="green" style="font-size: 35px;">강사정보</b><br><br>
+				<b class="green" style="font-size: 55px;">강사정보</b><br><br>
 				<hr>
 				<div style="text-align: left;">${ lb.teacherInfo }</div>
+				<hr>
 				
 				
 				

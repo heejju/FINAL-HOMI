@@ -68,7 +68,7 @@ img{	border:0;}
     .i-img{width:100%; }
     .i-img > img {width:100%;}
     .user{width:50%; margin:0 32%; margin-top:30px;}
-    .user-id{width:70%; display: inline-block; text-align: center; font-size:1.8rem;}
+    .user-id{width:70%; display: inline-block; text-align: center; font-size:1.5rem; font-weight:600;}
     .repot{width:10%; display: inline-block; text-align: center; cursor: pointer; font-weight:600;}
     .repot > img {width:100%; transform: rotateY(180deg);}
     .repot > img:hover{transform: scale(0.85) rotateY(180deg)}

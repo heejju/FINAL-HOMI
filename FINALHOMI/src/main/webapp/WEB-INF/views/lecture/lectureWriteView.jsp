@@ -57,8 +57,8 @@
 		padding: 0 5px 0 5px;
 	}
 	.title{
-		width: 90%; height: 50px; font-size: 18px;
-		font-weight: bold; overflow: hidden; resize: none;
+		width: 95%; height: 80px; font-size: 40px; margin:0 auto; padding:15px 0;
+		font-weight: bold; overflow: hidden; resize: none; display:block; text-align: center; margin-bottom:50px;
 	}
 	
 	div.firstBody{
@@ -72,22 +72,24 @@
 	}
 	
 	div.header > div.titleImgArea{
-		width : 49%; height: 245px; border: 1px solid lightgray; box-sizing:border-box;
+		width : 100%; height: 450px; border: 1px solid lightgray; box-sizing:border-box;
 		margin: 0 0 0 0; display: inline-block; float: none; padding:5px; text-align: center;
-		cursor: pointer;
+		cursor: pointer;  margin-bottom:10px;
 	}
 	
 	div.header > div.firstInfo {
-		text-align:left; padding: 0 0 0 20px;
-		width: 49%; height: 250px; border: 1px solid lightgray;
-		display: inline-block; float: right; margin: 0 0 0 0; box-sizing:border-box;
+		text-align:left;
+		width: 100%; height: 380px; border: 1px solid lightgray;
+		display: inline-block; float: right; margin: 0 0 0 0; box-sizing:border-box; position:relative;
 	}
 	div.firstInfo  select{
-		border: 2px solid rgb(103, 81, 65); border-radius: 5px; height: 27px;
+		border: 2px solid rgb(103, 81, 65); border-radius: 3px; height: 35px; font-size:25px;
 		font-weight: bold; vertical-align: middle;
 	}
 	::placeholder { text-align: center; color: lightgray; vertical-align: middle;}
-	
+	.firstInfo p{width: 45%; font-size:25px; margin-top:20px; float:left; margin-left:5%;}
+	.firstInfo .info-categori{width:100%;}
+	.firstInfo p b input{width:45%; font-size:20px;}
 	textarea{
 		width: 100%; height: 300px; border: 1px solid lightgray
 	}
@@ -134,12 +136,12 @@
 	
 	
 	div.date{
-		height: 40px; border: 2px solid rgb(103, 81, 65); text-align:center; display: inline-block; width: 95px; cursor: pointer;
-		font-weight: bold; border-radius: 5px; font-size: 20px; box-sizing: border-box; color: rgb(103, 81, 65);
+		height: 40px; border: 1px solid rgb(103, 81, 65); text-align:center; display: inline-block; width: 95px; cursor: pointer;
+		font-weight: bold; border-radius: 3px; font-size: 15px; box-sizing: border-box; color: rgb(103, 81, 65);
 	}
 	div.time{
-		height: 120px; border: 2px solid rgb(103, 81, 65); text-align:center; display: inline-block; width: 95px;
-		font-weight: bold; border-radius: 5px; font-size: 20px; box-sizing: border-box; color:rgb(136, 140, 67);
+		height: 120px; border: 1px solid rgb(103, 81, 65); text-align:center; display: inline-block; width: 95px;
+		font-weight: bold; border-radius: 3px; font-size: 20px; box-sizing: border-box; color:rgb(136, 140, 67);
 		overflow: auto;
 	}
 	input.insertBtn{
@@ -205,7 +207,7 @@
 			<div class="firstInfo">
 				<br>
 				<textarea class="title" id='title' name='title' placeholder="제목을 입력해주세요."></textarea>
-				<p>
+				<p class="info-categori">
 					<c:url var="HBSel" value="selectHobbyView.lec"/>
 					<b class="green" style="vertical-align: middle;">카테고리 : </b>
 					<input type="hidden" name="hobbyNo" id="hobbyNo">
@@ -218,11 +220,17 @@
 					</select> --%>
 				</p>
 				<p>
-				<b class="green">회당 강의료: </b><b class="brown"><input onkeyup="numberVal(this);" onkeydown="return notMinusAndPlus(this);" name="otTuition" id='otTuition' min="0" type="Number" class="brown inputS" placeholder="수강료를 입력해주세요." style="text-align: right;">원</b>
+				<b class="green">수강 대상: </b>
+					<b class="brown">
+						<select name="learner" id='learner' style="font-size:18px; display:inline-block;"><!-- DB에서 불러오기 -->
+							<option style="color: lightgray" value="">선택</option>
+							<option value="low">초급자</option>
+							<option value="middle">중급자</option>
+							<option value="high">고급자</option>
+						</select>
+					</b>
 				</p>
-				<p>
-				<b class="green">회당 시간: </b><b class="brown"><input onkeyup="numberVal(this);" onkeydown="return notMinusAndPlus(this);" name="otTime" id='otTime' type="text" class="brown inputS" placeholder="회당 시간을 입력해주세요" style="text-align: right;">시간</b>
-				</p>
+				
 				<p>
 				<b class="green">총 횟수: </b><b class="brown"><input onkeyup="numberVal(this);" onkeydown="return notMinusAndPlus(this);" name="otAllTime" id='otAllTime' min="0" type="Number" class="brown inputS" placeholder="총횟수를 입력해주세요" style="text-align: right;">회</b>
 				</p>
@@ -276,18 +284,14 @@
 					}
 				</script>
 				
-				<p>
-				<b class="green">수강 대상: </b>
-					<b class="brown">
-						<select name="learner" id='learner'><!-- DB에서 불러오기 -->
-							<option style="color: lightgray" value="">선택</option>
-							<option value="low">초급자</option>
-							<option value="middle">중급자</option>
-							<option value="high">고급자</option>
-						</select>
-					</b>
-				</p>
+				
 			
+				<p>
+				<b class="green">회당 강의료: </b><b class="brown"><input onkeyup="numberVal(this);" onkeydown="return notMinusAndPlus(this);" name="otTuition" id='otTuition' min="0" type="Number" class="brown inputS" placeholder="수강료를 입력해주세요." style="text-align: right;">원</b>
+				</p>
+				<p style="position:absolute; bottom:50px;">
+				<b class="green">회당 시간: </b><b class="brown"><input onkeyup="numberVal(this);" onkeydown="return notMinusAndPlus(this);" name="otTime" id='otTime' type="text" class="brown inputS" placeholder="회당 시간을 입력해주세요" style="text-align: right;">시간</b>
+				</p>
 			
 			</div>
 		</div>
@@ -478,7 +482,7 @@
 					
 					<div id=calendar style="font-size: 0px;">
 						<%for(int i = 0; i < 7; i++) {%>
-						<div id=calDate style="display: inline-block;">
+						<div id=calDate style="display: inline-block; margin:0 5px;">
 							<div class="date"></div>
 							<br>
 							<div class="time"></div>

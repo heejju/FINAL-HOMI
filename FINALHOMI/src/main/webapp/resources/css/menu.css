@@ -10,7 +10,7 @@
     
     /* 占쎈꽅疫뀐옙 */
     
-    #toggle{position:fixed; top:50px; left:50px; width:30px; height:40px; cursor:pointer; z-index: 9999;}
+    #toggle{position:fixed; top:50px; left:50px; width:30px; height:40px; cursor:pointer; z-index: 9999999;}
     #toggle .span{height:2px; background-color:#000; -webkit-transition:0.5s ease-out; transition:0.5s ease-out; backface-visibility:hidden; margin:5px 0;}
     #one{width:100%;}
     #two{width:70%;}

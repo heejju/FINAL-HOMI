@@ -97,9 +97,9 @@
       /* height: 1.2rem; overflow: hidden; */ float: left;
    }
    div.contentWriter{
-      display: inline-block; width: 40%; font-size: 12px; text-align: center; float:right;
+      display: inline-block; width: 45%; font-size: 12px; text-align: center; float:right;
    }   
-   .brown > b{font-size:12px; margin-bottom:10px; display:block; float:left; width:30%; font-weight:900;}
+   .brown > b{font-size:12px; margin-bottom:10px; display:block; float:left; width:15%; font-weight:900;margin-left:20%;}
    .green > b{font-size:18px; display:block; width:65%; float:left; text-align: center;}
    
    .img-div1{width:100%; height: 250px; background: rgba(255, 255, 255, 0.3); position: relative;}

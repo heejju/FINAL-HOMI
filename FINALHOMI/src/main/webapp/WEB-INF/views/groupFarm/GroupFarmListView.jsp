@@ -145,11 +145,11 @@
 			<c:url var="hList" value="hList.gf"/>
 			<div id="hobbyArea">
 				<c:if test="${ selectedHobby eq null }">
-	               <input type="hidden" name='hobby' id='hobby' value ="0">
+	               <input type="hidden" name='hobby' id='hobby' value ="">
 	               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
 	            </c:if>
 	            <c:if test="${ selectedHobby eq 0 }">
-	               <input type="hidden" name='hobby' id='hobby' value ="0">
+	               <input type="hidden" name='hobby' id='hobby' value ="">
 	               <input onclick="toHBSelView();" class="hobbyName" type="text" id='hobbyName' value="" placeholder="취미선택" readonly>
 	            </c:if>
 	            <c:if test="${ selectedHobby ne null }">

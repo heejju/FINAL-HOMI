@@ -41,13 +41,13 @@ div.container > div.mini-container > div > div {float:left;}
 
 
 /* 이미지 */
-img{width:100px; height:100px; align:right;}
+.icon{width:100px; height:100px; align:right;}
 
 /* 빅 컨테이너 */
 div.container > div.big-container{width:100%; height: 100%; }
 div.graph{width:100%; height:600px; margin:2% 2%;}
-#listArea {background:#fff; margin:4% 0.5%;}
-#listArea > thead{font-size:15px; line-height:25px; padding:2%; border-bottom: 2px solid #5A5A5A;}
+#listArea {background:#fff; margin:4% 0.5%; display:block; width:45%;  height:500px; overflow-x: hidden; float:left;}
+#listArea > thead{font-size:17px; line-height:25px; padding:2%; border-bottom: 2px solid #5A5A5A;}
 #listArea > thead tr td {padding:2%; width:200px; text-align:center;}
 #listArea > tbody {padding:2%;}
 #listArea > tbody tr {border-bottom: 1px solid #d9d9d9;}
@@ -69,21 +69,21 @@ div.graph{width:100%; height:600px; margin:2% 2%;}
 			<div class="mini-container">
 				<div class="mini-first">
 					<div id="number1">${ visitCount }</div>
-					<div id="icon1"><img src="${ contextPath }/resources/images/group.png"></div>
+					<div id="icon1"><img class="icon" src="${ contextPath }/resources/images/group.png"></div>
 					<div class="clear-both"></div>
 					<div id="text1">총 방문자 수</div>
 					<div class="mini-line"></div>
 				</div>
 				<div class="mini-second">
 					<div id="number2">${ lectureCount }</div>
-					<div id="icon1"><img src="${ contextPath }/resources/images/book.png"></div>
+					<div id="icon1"><img class="icon" src="${ contextPath }/resources/images/book.png"></div>
 					<div class="clear-both"></div>
 					<div id="text1">총 강의 수</div>
 					<div class="mini-line"></div>
 				</div>
 				<div class="mini-third">
 					<div id="number3">${ memberCount }</div>
-					<div id="icon1"><img src="${ contextPath }/resources/images/group.png"></div>
+					<div id="icon1"><img class="icon" src="${ contextPath }/resources/images/group.png"></div>
 					<div class="clear-both"></div>
 					<div id="text1">총 회원 수</div>
 					<div class="mini-line"></div>
@@ -134,11 +134,11 @@ div.graph{width:100%; height:600px; margin:2% 2%;}
 				</div>
 				<div class="wrap">
 				<div class="graph" style="width:50%; float:left; ">
-					<canvas id="myChart1" style="width:500px; height:500px; display:none;"></canvas>
-					<canvas id="myChart2" style="width:500px; height:500px; display:none;"></canvas>
-					<canvas id="myChart3" style="width:500px; height:500px; display:none;"></canvas>
+					<canvas id="myChart1" style="width:500px; height:400px; display:none;"></canvas>
+					<canvas id="myChart2" style="width:500px; height:400px; display:none;"></canvas>
+					<canvas id="myChart3" style="width:500px; height:400px; display:none;"></canvas>
 				</div>
-				<table id="listArea" style="display:block; width:45%; height:500px; overflow-x: hidden; float:left;">
+				<table id="listArea" style="">
 						<thead>
 							<tr>
 								<td>날짜</td>

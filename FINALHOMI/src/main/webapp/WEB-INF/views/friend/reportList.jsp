@@ -30,6 +30,7 @@ input[type=button]:hover{background:#000; color:#888c43; font-weight:bold; curso
 .farmTable>thead>th:last-child{border-radius:0 5% 5% 0;}
 
 .farmTable>tbody tr:hover{cursor:pointer; background: #888c43; color:#fff;}
+.farmTable>tbody tr:hover{cursor:pointer; background: #888c43; color:#fff;}
 .buttonG{width:100px; background-color:#888c43; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 .buttonB{width:100px; background-color:#675141; color:#fff; border:none; padding:10px 0; text-align:center; font-size:15px; margin:4px; cursor:pointer; border-radius:5px;}
 
@@ -37,20 +38,21 @@ input[type=button]:hover{background:#000; color:#888c43; font-weight:bold; curso
 .tr-no > th:nth-child(1){width:7%;}
 .tr-no > th:nth-child(2){width:11%;}
 .tr-no > th:nth-child(3){width:9%;}
-.tr-no > th:nth-child(4){width:18%;}
-.tr-no > th:nth-child(5){width:25%;}
-.tr-no > th:nth-child(6){width:14%;}
-.tr-no > th:nth-child(7){width:10%;}
-.tr-no > th:nth-child(8){width:6%;}
+.tr-no > th:nth-child(4){width:43%;}
+/* .tr-no > th:nth-child(5){width:25%;} */
+.tr-no > th:nth-child(5){width:14%;}
+.tr-no > th:nth-child(6){width:10%;}
+.tr-no > th:nth-child(7){width:6%;}
 
-.tr-no  td:nth-child(1){width:7%;}
-.tr-no  td:nth-child(2){width:11%;}
-.tr-no  td:nth-child(3){width:9%;}
-.tr-no  td:nth-child(4){height:15px; overflow:hidden; display:block; width:100%; margin-top:38px;}
-.tr-no  td:nth-child(5){width:25%;}
-.tr-no  td:nth-child(6){width:14%;}
-.tr-no  td:nth-child(7){width:10%;}
-.tr-no  td:nth-child(8){width:6%;}
+.tr-no  td{font-weight:500; font-size:18px;}
+.tr-no  td:nth-child(1){width:7%; font-weight:700;}
+.tr-no  td:nth-child(2){width:11%; font-weight:600; color:brown;}
+.tr-no  td:nth-child(3){width:9%; font-weight:700; color:red;}
+.tr-no  td:nth-child(4){height:18px; overflow:hidden; display:block; width:95%; margin-top:38px; text-align: left; margin-left:5%;}
+/* .tr-no  td:nth-child(5){width:25%;} */
+.tr-no  td:nth-child(5){width:14%;}
+.tr-no  td:nth-child(6){width:10%;}
+.tr-no  td:nth-child(7){width:6%;}
 
 
 input[type=checkbox]{width:18px; height:18px;}
@@ -99,7 +101,7 @@ select{height:30px; width:100px;}
 						<th>신고 아이디</th>
 						<th>대상 아이디</th>
 						<th>신고 사유</th>
-						<th>URL</th>
+						<!-- <th>URL</th> -->
                         <th>신고 체크</th>
 						<th>신고 일자</th>
 						<th>B.T.N</th>
@@ -112,7 +114,7 @@ select{height:30px; width:100px;}
 				<tbody>
 					<c:forEach var="r" items="${ list }">
 					<tr class="tr-no" style="height:  88px;">
-						<td>${ r.rpNo }</td>
+						<	d>${ r.rpNo }</td>
 						<c:url var="userInfo" value="userInfo.fo">
 							<c:param name="userId" value="${ r.rpSender }"/>
 							<c:param name="page" value="${ pi.currentPage }"/>
@@ -124,7 +126,7 @@ select{height:30px; width:100px;}
 						</c:url>
 						<td onclick="window.open('${ userInfo2 }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">${ r.rpReciever }</td>
 						<td style="">${ r.rpDetail }</td>
-						<td><a href="${ r.rpUrl }">${ r.rpUrl }</a></td>
+						<%-- <td><a href="${ r.rpUrl }">${ r.rpUrl }</a></td> --%>
 						<td>
 							<c:if test="${ r.check eq 'N' }">
 								미확인

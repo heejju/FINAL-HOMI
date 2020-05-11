@@ -15,7 +15,7 @@ section{width:70%; height:100%; margin:0 auto;}
 input[type=checkbox]{width:18px; height:18px;}
 
 /* 이미지 */
-img{width:20px; height:20px;}
+.pin{width:20px; height:20px;}
 
 /* 테이블 */
 
@@ -105,7 +105,7 @@ button:hover{cursor:pointer;}
 						<td id="no"><input type="hidden" name="post_no" id="post_no" value="${ n.post_no }">${ n.post_no }</td>
 					</c:if>
 					<c:if test="${ n.post_fix ne 'N' }">
-						<td id="no"><input type="hidden" name="post_no" id="post_no" value="${ n.post_no }"><img src="${ contextPath }/resources/images/pin.png"></td>
+						<td id="no"><input type="hidden" name="post_no" id="post_no" value="${ n.post_no }"><img class="pin" src="${ contextPath }/resources/images/pin.png"></td>
 					</c:if>
 					<td>${ n.title }</td>
 					<c:if test="${ n.writer eq 'admin'}">

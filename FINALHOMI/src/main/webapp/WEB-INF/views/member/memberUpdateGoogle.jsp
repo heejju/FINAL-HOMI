@@ -93,7 +93,7 @@
 							</script>
 							<select id="gender" name="gender" class="JoinInput" >
 								<option id="male" value="M">남자</option>
-								<option id="female" value="F">여자</option>
+								<option id="female" value="W">여자</option>
 							</select>
 						</td>
 					</tr>
@@ -461,7 +461,7 @@
 			}) ;
 			
 			// 성별 변경 시 표시
-			$('#gender').on('keyup', function() {
+			$('#gender').on('change', function() {
 				var $gender = $('#gender').val() ;
 				var Ngender = ($gender == "M") ? "남자" : "여자" ;
 				$('#genderCheck').html("입력하신 성별은 ["+Ngender+"]네요! 계속하시죠!") ;

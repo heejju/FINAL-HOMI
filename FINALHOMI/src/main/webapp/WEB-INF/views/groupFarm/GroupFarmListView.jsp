@@ -160,17 +160,6 @@
 	                  </c:if>
 	               </c:forEach>
 	            </c:if>
-				<%-- <select name="hobby" id="hobby">
-					<option value="">취미를 선택하세요</option>
-					<c:forEach var="h" items="${ hlist }"> <!-- 정의 안될 경우 begin=0 / end=items-1 -->
-						<c:if test="${ h.hobbyNo == selectedHobby }">
-							<option value="${ h.hobbyNo }" id="${ h.hobbyName }" selected>${ h.hobbyName }</option>
-						</c:if>
-						<c:if test="${ h.hobbyNo != selectedHobby }">
-							<option value="${ h.hobbyNo }" id="${ h.hobbyName }">${ h.hobbyName }</option>
-						</c:if>
-					</c:forEach>
-				</select> --%>
 			</div>
 			
 			<button type="button" id="filterBtn" onclick="filterSearch();">필터 검색</button>
@@ -240,24 +229,16 @@
 								</c:if>
 							</div>
 							
-							<c:if test="${ b.closeYN eq 'N'}">
-			                    <div class="time" style="background:RGBA(136,140,67,0.7)">
-			                       <span>
-			                          <fmt:formatDate value="${b.startDate}" pattern="MM월 dd일"/> | 
-			                          ${ b.startHour } - ${ b.endHour } 
-			                            	 참여가능
-			                       </span>
-			                    </div>
-			                </c:if>
-		                    <c:if test="${ b.closeYN eq 'Y'}">
-		                       <div class="time" style="background:RGBA(103,81,65,0.7)">
-			                       <span>
-			                          <fmt:formatDate value="${b.startDate}" pattern="MM월 dd일"/> | 
-			                          ${ b.startHour } - ${ b.endHour } 
-			                             	참여마감
-			                       </span>
-		                       </div>
-		                    </c:if>
+							<div class="title">
+								<c:choose>
+									<c:when test="${fn:length(b.title) > 24}">
+										<c:out value="${ fn:substring(b.title, 0, 23) }"/>...
+					           		</c:when>
+						           	<c:otherwise>
+						           		<c:out value="${b.title}"/>
+						           	</c:otherwise> 
+					          	</c:choose>
+							</div>
 							
 							<div class="location">${ b.location }</div>
 							
@@ -288,20 +269,24 @@
 								</div>
 							</div>
 							
-							<div class="time">
-								<span>
-									<fmt:formatDate value="${b.startDate}" pattern="MM월 dd일"/> | 
-									${ b.startHour } - ${ b.endHour } 
-									<c:if test="${ b.closeYN eq 'N'}">
-										참여가능
-										<script>$(".time").css("background","RGBA(136,140,67,0.7)")</script>
-									</c:if>
-									<c:if test="${ b.closeYN eq 'Y'}">
-										참여마감
-										<script>$(".time").css("background","RGBA(103,81,65,0.7)")</script>
-									</c:if>
-								</span>
-							</div>
+							<c:if test="${ b.closeYN eq 'N'}">
+			                    <div class="time" style="background:RGBA(136,140,67,0.7)">
+			                       <span>
+			                          <fmt:formatDate value="${b.startDate}" pattern="MM월 dd일"/> | 
+			                          ${ b.startHour } - ${ b.endHour } 
+			                            	 참여가능
+			                       </span>
+			                    </div>
+			                </c:if>
+		                    <c:if test="${ b.closeYN eq 'Y'}">
+		                       <div class="time" style="background:RGBA(103,81,65,0.7)">
+			                       <span>
+			                          <fmt:formatDate value="${b.startDate}" pattern="MM월 dd일"/> | 
+			                          ${ b.startHour } - ${ b.endHour } 
+			                             	참여마감
+			                       </span>
+		                       </div>
+		                    </c:if>
 						</div>
 					</c:forEach>
 				</div>
@@ -569,9 +554,9 @@
 		// 게시글 제목
 		var title = $(".title");
 		/* console.log(title.eq(0)[0].innerText.length); */
-		for(var k=0; k<title.length; k++){
+		for(var k=0; k < title.length; k++){
 			if(title.eq(k)[0].innerText.length < 16){
-				$(title.eq(k)).css("line-height","300%");
+				$(title.eq(k)).css("line-height","320%");
 			} else {
 				$(title.eq(k)).css("line-height","160%");
 			}

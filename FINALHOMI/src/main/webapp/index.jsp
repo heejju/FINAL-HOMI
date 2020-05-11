@@ -31,7 +31,7 @@
 			width: 200px;
 			height: 200px;
 			background-color: white;
-			text-align: center;
+			text-align: left;
 			cursor: pointer;
 		}
 		
@@ -40,6 +40,7 @@
 			background-color: #515050;
 			padding: 10px 0;
 			margin-top: -2%;
+			height: 100px;
 		}
 		
 		.rstImg {
@@ -52,7 +53,7 @@
 			width: 200px;
 			height: 200px;
 			background-color: white;
-			text-align: center;
+			text-align: left;
 			cursor: pointer;
 		}
 		
@@ -61,6 +62,7 @@
 			background-color: #515050;
 			padding: 10px 0;
 			margin-top: -2%;
+			height: 100px;
 		}
 		
         li {
@@ -112,6 +114,22 @@
         #control a.on {
             background: #888c43;
         }
+        .newImgB2{
+        	width: 100px; height: 20px; text-overflow: ellipsis; overflow: hidden;
+        	line-height: 22px; padding : 0 10px; text-align: left;
+        }
+        .newImgB1{
+        	text-align: right;
+        	margin-right: 5%;
+        }
+        .rstImgB2{
+        	width: 100px; height: 20px; text-overflow: ellipsis; overflow: hidden;
+        	line-height: 22px; padding : 0 10px; text-align: left;
+        }
+        .rstImgB1{
+        	text-align: right;
+        	margin-right: 5%;
+        }
 	</style>
 </head>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
@@ -154,16 +172,6 @@
 						$('#rstImgPostNo'+(i+1)).val(data[i].postNo) ;
 						$('#rstImg'+(i+1)).attr("src", "${contextPath}/resources/uploadFiles/"+data[i].changeName) ;
 					}
-					
-// 					for(var i=1; i<=5; i++) {
-// 						if($('#rstImgPost#rstImgPostNo'+i).val() == null) {
-// 							$('#rstImgP'+(i+1)).text(" ") ;
-// 							$('#rstImgB1'+(i+1)).text('게시글이 ') ;
-// 							$('#rstImgB2'+(i+1)).text('없습니다!') ;
-// 							$('#rstImgPostNo'+(i+1)).val('0') ;
-// 							$('#rstImg'+(i+1)).attr("src", "${contextPath}/resources/images/default_board_icon.png") ;
-// 						}
-// 					}
 				}
 			}) ;
 		}
@@ -215,40 +223,71 @@
 					<div id="newImgDiv1" class="newImgDiv" onclick="toDetail('new', '1');">
 						<input type="hidden" id="newImgPostNo1" class="newImgPostNo" value="">
 						<img id="newImg1" class="newImg" src="">
-						<p class="newImgP"><b id="newImgB11" class="newImgB1">작성자</b> - <b id="newImgB21" class="newImgB2">글제목</b></p>
+						<div class="newImgP">
+							<b id="newImgB21" class="newImgB2">글제목</b>
+							<br>
+							<div style="width: 100%; text-align: right;">
+							<b id="newImgB11" class="newImgB1">작성자</b>
+							</div>
+						</div>
 					</div>
 				</td>
 				<td id="newTd2" class="newTd">
 					<div id="newImgDiv2" class="newImgDiv" onclick="toDetail('new', '2');">
 						<input type="hidden" id="newImgPostNo2" class="newImgPostNo" value="">
 						<img id="newImg2" class="newImg" src="">
-						<p class="newImgP"><b id="newImgB12" class="newImgB1">작성자</b> - <b id="newImgB22" class="newImgB2">글제목</b></p>
+						<div class="newImgP">
+							<b id="newImgB22" class="newImgB2">글제목</b>
+							<br>
+							<div style="width: 100%; text-align: right;">
+							<b id="newImgB12" class="newImgB1">작성자</b>
+							</div>
+						</div>
 					</div>
 				</td>
 				<td id="newTd3" class="newTd">
 					<div id="newImgDiv3" class="newImgDiv" onclick="toDetail('new','3');">
 						<input type="hidden" id="newImgPostNo3" class="newImgPostNo" value="">
 						<img id="newImg3" class="newImg" src="">
-						<p class="newImgP"><b id="newImgB13" class="newImgB1">작성자</b> - <b id="newImgB23" class="newImgB2">글제목</b></p>
+						<div class="newImgP">
+							<b id="newImgB23" class="newImgB2">글제목</b>
+							<br>
+							<div style="width: 100%; text-align: right;">
+							<b id="newImgB13" class="newImgB1">작성자</b>
+							</div>
+						</div>
 					</div>
 				</td>
 				<td id="newTd4" class="newTd">
 					<div id="newImgDiv4" class="newImgDiv" onclick="toDetail('new', '4');">
 						<input type="hidden" id="newImgPostNo4" class="newImgPostNo" value="">
 						<img id="newImg4" class="newImg" src="">
-						<p class="newImgP"><b id="newImgB14" class="newImgB1">작성자</b> - <b id="newImgB24" class="newImgB2">글제목</b></p>
+						<div class="newImgP">
+							<b id="newImgB24" class="newImgB2">글제목</b>
+							<br>
+							<div style="width: 100%; text-align: right;">
+							<b id="newImgB14" class="newImgB1">작성자</b>
+							</div>
+						</div>
 					</div>
 				</td>
 				<td id="newTd5" class="newTd">
 					<div id="newImgDiv5" class="newImgDiv" onclick="toDetail('new', '5');">
 						<input type="hidden" id="newImgPostNo5" class="newImgPostNo" value="">
 						<img id="newImg5" class="newImg" src="">
-						<p class="newImgP"><b id="newImgB15" class="newImgB1">작성자</b> - <b id="newImgB25" class="newImgB2">글제목</b></p>
+						<div class="newImgP">
+							<b id="newImgB25" class="newImgB2">글제목</b>
+							<br>
+							<div style="width: 100%; text-align: right;">
+							<b id="newImgB15" class="newImgB1">작성자</b>
+							</div>
+						</div>
 					</div>
 				</td>
 			</tr>
 		</table>
 		<br><br><br><br>
+		<br><br><br><br><br><br><br>
 		<table class="rankTable">
 			<tr>
 				<td colspan="5">
@@ -260,35 +299,65 @@
 					<div id="rstImgDiv1" class="rstImgDiv" onclick="toDetail('rst', '1');">
 						<input type="hidden" id="rstImgPostNo1" class="rstImgPostNo" value="">
 						<img id="rstImg1" class="rstImg" src="">
-						<p class="rstImgP"><b id="rstImgB11" class="rstImgB1">작성자</b> - <b id="rstImgB21" class="rstImgB2">글제목</b></p>
+						<div class="rstImgP">
+							<b id="rstImgB21" class="rstImgB2">글제목</b>
+							<br>
+							<div style="width: 100%; text-align: right;">
+							<b id="rstImgB11" class="rstImgB1">작성자</b>
+							</div>
+						</div>
 					</div>
 				</td>
 				<td id="rstTd2" class="rstTd">
 					<div id="rstImgDiv2" class="rstImgDiv" onclick="toDetail('rst', '2');">
 						<input type="hidden" id="rstImgPostNo2" class="rstImgPostNo" value="">
 						<img id="rstImg2" class="rstImg" src="">
-						<p class="rstImgP"><b id="rstImgB12" class="rstImgB1">작성자</b> - <b id="rstImgB22" class="rstImgB2">글제목</b></p>
+						<div class="rstImgP">
+							<b id="rstImgB22" class="rstImgB2">글제목</b>
+							<br>
+							<div style="width: 100%; text-align: right;">
+							<b id="rstImgB12" class="rstImgB1">작성자</b>
+							</div>
+						</div>
 					</div>
 				</td>
 				<td id="rstTd3" class="rstTd">
 					<div id="rstImgDiv3" class="rstImgDiv" onclick="toDetail('rst', '3');">
 						<input type="hidden" id="rstImgPostNo3" class="rstImgPostNo" value="">
 						<img id="rstImg3" class="rstImg" src="">
-						<p class="rstImgP"><b id="rstImgB13" class="rstImgB1">작성자</b> - <b id="rstImgB23" class="rstImgB2">글제목</b></p>
+						<div class="rstImgP">
+							<b id="rstImgB23" class="rstImgB2">글제목</b>
+							<br>
+							<div style="width: 100%; text-align: right;">
+							<b id="rstImgB13" class="rstImgB1">작성자</b>
+							</div>
+						</div>
 					</div>
 				</td>
 				<td id="rstTd4" class="rstTd">
 					<div id="rstImgDiv4" class="rstImgDiv" onclick="toDetail('rst', '4');">
 						<input type="hidden" id="rstImgPostNo4" class="rstImgPostNo" value="">
 						<img id="rstImg4" class="rstImg" src="">
-						<p class="rstImgP"><b id="rstImgB14" class="rstImgB1">작성자</b> - <b id="rstImgB24" class="rstImgB2">글제목</b></p>
+						<div class="rstImgP">
+							<b id="rstImgB24" class="rstImgB2">글제목</b>
+							<br>
+							<div style="width: 100%; text-align: right;">
+							<b id="rstImgB14" class="rstImgB1">작성자</b>
+							</div>
+						</div>
 					</div>
 				</td>
 				<td id="rstTd5" class="rstTd">
 					<div id="rstImgDiv5" class="rstImgDiv" onclick="toDetail('rst', '5');">
 						<input type="hidden" id="rstImgPostNo5" class="rstImgPostNo" value="">
 						<img id="rstImg5" class="rstImg" src="">
-						<p class="rstImgP"><b id="rstImgB15" class="rstImgB1">작성자</b> - <b id="rstImgB25" class="rstImgB2">글제목</b></p>
+						<div class="rstImgP">
+							<b id="rstImgB25" class="rstImgB2">글제목</b>
+							<br>
+							<div style="width: 100%; text-align: right;">
+							<b id="rstImgB15" class="rstImgB1">작성자</b>
+							</div>
+						</div>
 					</div>
 				</td>
 			</tr>

@@ -241,7 +241,7 @@
 		JOIN	MEMBER		M  ON(B.WRITER	 = M.USER_ID)
 		JOIN	IMAGE		I  ON(C.POST_NO	 = I.POST_NO)
 		WHERE	B.BOARD_NO = 2 AND L.POST_NO = C.POST_NO
-		ORDER	BY C.POST_NO DESC;
+		ORDER	BY C.POST_NO DESC
 	</select>
 	
 	<resultMap type="LectureBoard" id="CCResultSet">

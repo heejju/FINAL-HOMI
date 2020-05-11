@@ -101,20 +101,20 @@
       display: inline-block; width: 90px; font-size: 12px; text-align: center;
    }
    p.contentTime{
-      background: rgba(103, 81, 65, 0.8); color: rgb(136, 140, 67); width: auto;
+      background: rgba(103, 81, 65, 0.8); color: #fff; width: auto;
       display: inline-block; padding: 0 10px 0 10px; margin: 5px 0 0 0; font-weight: bold;
    }
    p.contentPrice{
-      background: rgba(136, 140, 67, 0.8); color: rgb(103, 81, 65); width: auto; 
+      background: rgba(136, 140, 67, 0.8); color: #fff; width: auto; 
       display: inline-block; padding: 0 10px 0 10px; margin: 5px 0 0 0; font-weight: bold;
    }
    p.contentCate{
-      background: rgba(103, 81, 65, 0.8); color: rgb(136, 140, 67); width: auto; 
+      background: rgba(103, 81, 65, 0.8); color: #fff; width: auto; 
       display: inline-block; padding: 0 10px 0 10px; margin: 5px 0 0 0;
       vertical-align: bottom; font-weight: bold;
    }
    p.contentApply{
-      background: rgba(136, 140, 67, 0.8); color: rgb(103, 81, 65); width: auto; 
+      background: rgba(136, 140, 67, 0.8); color: #fff; width: auto; 
       display: inline-block; padding: 0 10px 0 10px; margin: 5px 0 0 0;
       vertical-align: bottom; font-weight: bold;
    }

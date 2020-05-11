@@ -93,7 +93,7 @@ img{	border:0;}
     .content-two{width:90%; height:30px; margin:0 auto;}
     .c2-sharing{float:left; text-align: center;}
     .c2-Number{width:15%;}
-    .c2-Title{width:60%;}
+    .c2-Title{width:60%; display:block; overflow: hidden; height:15px;}
     .c2-Date{width:25%;}
     
     

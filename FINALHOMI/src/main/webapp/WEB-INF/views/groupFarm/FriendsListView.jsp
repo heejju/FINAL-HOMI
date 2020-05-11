@@ -35,7 +35,7 @@
 	#inviteBtnWarpper{display:inline-block; height:80px;}
 	.cinviteBtn{border-radius:30px; border:0px; width:80px; height:30px;
 				color:white; font-weight:bold; font-size:15px; background:#888c43;}
-	#cancleBtn{border-radius:30px; border:0px; width:80px; height:30px;
+	.cancleBtn{border-radius:30px; border:0px; width:80px; height:30px;
 				color:white; font-weight:bold; font-size:15px; background:#675141;}		
 		
 	#noApp{text-align:center; font-size:18px; font-weight:bold; line-height:400px;}
@@ -138,16 +138,15 @@
                 console.log("초대");
                 
 				idArr.push(userId);
-				console.log(userId);
 				console.log(idArr);
 				
                 $(this).css('background-color', '#675141');
-                $(this).attr('id', 'cancleBtn');
+                $(this).attr('class', 'cancleBtn');
                 $(this).text('초대 취소');
                // console.log($(this));
 			});
 			
-			$(document).on('click', '#cancleBtn', function(){	
+			$(document).on('click', '.cancleBtn', function(){	
 				var userId = $(this).parent().children().eq(0).val();
 				
 				console.log("취소");
@@ -160,7 +159,7 @@
 				console.log(idArr);
 				
                 $(this).css('background-color', '#888c43');
-                $(this).attr('id', 'cinviteBtn');
+                $(this).attr('class', 'cinviteBtn');
                 $(this).text('초대 하기');
                // console.log($(this));
 			});

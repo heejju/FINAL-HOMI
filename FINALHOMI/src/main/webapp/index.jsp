@@ -155,15 +155,15 @@
 						$('#rstImg'+(i+1)).attr("src", "${contextPath}/resources/uploadFiles/"+data[i].changeName) ;
 					}
 					
-					for(var i=1; i<=5; i++) {
-						if($('#rstImgPost#rstImgPostNo'+i).val() == null) {
-							$('#rstImgP'+(i+1)).text(" ") ;
-							$('#rstImgB1'+(i+1)).text('게시글이 ') ;
-							$('#rstImgB2'+(i+1)).text('없습니다!') ;
-							$('#rstImgPostNo'+(i+1)).val('0') ;
-							$('#rstImg'+(i+1)).attr("src", "${contextPath}/resources/images/default_board_icon.png") ;
-						}
-					}
+// 					for(var i=1; i<=5; i++) {
+// 						if($('#rstImgPost#rstImgPostNo'+i).val() == null) {
+// 							$('#rstImgP'+(i+1)).text(" ") ;
+// 							$('#rstImgB1'+(i+1)).text('게시글이 ') ;
+// 							$('#rstImgB2'+(i+1)).text('없습니다!') ;
+// 							$('#rstImgPostNo'+(i+1)).val('0') ;
+// 							$('#rstImg'+(i+1)).attr("src", "${contextPath}/resources/images/default_board_icon.png") ;
+// 						}
+// 					}
 				}
 			}) ;
 		}

@@ -98,11 +98,11 @@
 		cursor:pointer; color:white; font-weight:bold; font-size:16px;
 	}
 	.selectLocation{
-		height:40px; border: 3px solid rgb(103, 81, 65); text-align-last : center; width: 170px;
+		height:40px; border: 2px solid rgb(103, 81, 65); text-align-last : center; width: 170px;
 		font-weight: bold; border-radius: 5px; font-size: 20px; box-sizing: border-box; vertical-align: middle;
 	}
 	button.ablePlaceDeleteBtn {
-		font-size: 15px; font-weight: bold; height: 30px; box-sizing: border-box;
+		font-size: 20px; font-weight: bold;  box-sizing: border-box; padding:15px 30px;
 		border: 0px solid rgb(103, 81, 65); border-radius: 5px; background: rgb(136, 140, 67); color: white;
 	}
 	
@@ -136,11 +136,12 @@
 	
 	
 	div.date{
-		height: 40px; border: 1px solid rgb(103, 81, 65); text-align:center; display: inline-block; width: 95px; cursor: pointer;
-		font-weight: bold; border-radius: 3px; font-size: 15px; box-sizing: border-box; color: rgb(103, 81, 65);
+		height: 40px; /* border: 2px solid rgb(103, 81, 65); */ border-bottom:2px solid rgb(103, 81, 65); text-align:center; display: inline-block; width: 95px; cursor: pointer;
+		font-weight: bold; border-radius: 3px; font-size: 20px; box-sizing: border-box; color: rgb(103, 81, 65); line-height:40px;
+		
 	}
 	div.time{
-		height: 120px; border: 1px solid rgb(103, 81, 65); text-align:center; display: inline-block; width: 95px;
+		height: 120px; /* border: 2px solid rgb(103, 81, 65); */ text-align:center; display: inline-block; width: 95px;
 		font-weight: bold; border-radius: 3px; font-size: 20px; box-sizing: border-box; color:rgb(136, 140, 67);
 		overflow: auto;
 	}
@@ -714,7 +715,7 @@
 											// for문으로 시간마다 div사용해서 넣기
 											var timediv = "";
 											for(var j = 0; j < timeArr.length; j++){
-												timediv += "<div onclick='return deleteTime(this);'>"+timeArr[j]+":00</div>";
+												timediv += "<div onclick='return deleteTime(this);' style='margin:5px 0;'>"+timeArr[j]+":00</div>";
 											}
 											$("div.date").eq(i).parent().children().eq(2)[0].innerHTML = timediv;
 											var inDate = false;

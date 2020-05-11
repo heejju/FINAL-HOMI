@@ -349,7 +349,7 @@
 							$td = $('<td>');
 							$td2 = $('<td class="contentTd" id="rContent' + data[i].rNo +'">');
 							
-							$rImg = $('<img src="${ contextPath }/resources/uploadFiles/' + data[i].changeName + '" style="width:auto; height:30px; vertical-align:middle;">');
+							$rImg = $('<img src="${ contextPath }/resources/uploadFiles/' + data[i].changeName + '" style="width:auto; height:30px; vertical-align:middle; margin-right:1%;">');
 							$rWriter = $('<span style="font-weight:bold;" id="replyNickName" onclick="miniMypage(this);">').html(decodeURIComponent(data[i].rNickName)+"<input type='hidden' value='" + data[i].rWriter+"'>");
 							$rWriteDate = $('<span style="font-size: 15px; color: rgb(190, 190, 190);">').text(data[i].rWriteDate);
 							

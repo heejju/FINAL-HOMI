@@ -202,8 +202,8 @@
 					</c:url>
                 <div class="user-img">
                     <div class="i-img" onclick="window.open('${ userInfo }','window팝업','width=600, height=702, menubar=no, status=no, toolbar=no');">
-                    	<img src="${contextPath}/resources/uploadFiles/${f.imgSrc}"  class="img-responsive hover-op"/>
-                    	<img src="${contextPath}/resources/uploadFiles/${f.imgSrc}"  class="img-responsive hover-st"/>
+                    	<img src="${contextPath}/resources/uploadFiles/${f.changeName}"  class="img-responsive hover-op"/>
+                    	<img src="${contextPath}/resources/uploadFiles/${f.changeName}"  class="img-responsive hover-st"/>
                    	</div>
                 </div>
                 <div class="user-info">

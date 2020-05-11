@@ -123,7 +123,7 @@ background:url(${contextPath}/resources/images/checkIcon.png) gold no-repeat cen
 						<c:forEach var="friendList" items="${friendList}">
 							<tr>
 								<td style="width: 20%;">
-									<img id="thumbnail" src="${ contextPath }/resources/uploadFiles/${friendList.imgSrc}">
+									<img id="thumbnail" src="${ contextPath }/resources/uploadFiles/${friendList.changeName}">
 								</td>
 								<td style="width: 90%;">${friendList.nickName}</td>
 								<td style="width: 10%;">

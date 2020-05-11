@@ -445,7 +445,6 @@
 								
 								$("#endHour").timepicker();
 							});
-							
 						</script>
 						</li>
 						<li>
@@ -458,11 +457,10 @@
 				<input type="hidden" name="writer" value="${ loginUser.userId }"/>
 			</form>
 			</div>
-			
 			<div class="buttonArea">
 				<!-- <button id="insertBtn" onclick="ok();">확인하기</button> -->
 				<button type="button" id="insertBtn">등록하기</button>
-				<button type="button" id="cancleBtn" onclick="cancle();">취소</button>
+				<button type="button" id="cancleBtn" onclick="location.href='blist.gf'">취소</button>
 				<div class="clear-both"></div>
 			</div>
 			

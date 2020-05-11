@@ -524,7 +524,7 @@
       </div>
       </c:if>
       
-      <div style="text-align: center;">
+      <div style="text-align: center; margin:2%;">
          <!-- 맨 처음과 이전 버튼 -->
          <c:if test="${ pi.currentPage <= 1 }">
             <button type="button" class="nextPBtn" style="background: lightgray; cursor: default;">&lt;&lt;</button>
@@ -575,7 +575,7 @@
       
       <br><br>
       
-      <div class="search2" style="text-align: center;">
+      <div class="search2" style="text-align: center; margin-bottom:5%;">
          <c:if test="${ searchTag.equals('title') }">
             <select name="searchTag">
                <option value="title" selected="selected">제목</option>

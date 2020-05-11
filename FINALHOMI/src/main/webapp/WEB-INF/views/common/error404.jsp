@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>#취미텃밭</title>
 <style>
-	#errorImg{width:auto; display:block; align:center; margin:0 auto;}
+	#errorImg{width:38%; display:block; align:center; margin:0 auto;}
 	#btnArea{margin:3% auto;}
 	button{width:120px; height:50px; border:0px; border-radius:5px; font-size:20px; font-weight:bold; color:white;}
 	button:hover{cursor:pointer;}

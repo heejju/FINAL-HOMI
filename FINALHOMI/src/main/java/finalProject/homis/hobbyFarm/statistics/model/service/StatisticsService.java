@@ -17,35 +17,51 @@ public interface StatisticsService {
 
 	int getStudentCount();
 
-	int getArtCount();
-
-	int getCraftsCount();
-
-	int getMusicCount();
-
-	int getDesignCount();
-
-	int getPictureCount();
-
-	int getCookCount();
-
-	int getDanceCount();
-
-	int getSportsCount();
+	
 
 	ArrayList<Statistics> selectList(String yearMonth);
 
-	int getArtCount2();
+	int getSportsCount();
 
-	int getCraftsCount2();
+	int getCookCount();
 
-	int getMusicCount2();
+	int getPictureCount();
 
-	int getDesignCount2();
+	int getDesignCount();
+
+	int getMusicCount();
+
+	int getCraftsCount();
+
+	int getArtCount();
+
+	int getBeautyCount();
+
+	int getLanguageCount();
+
+	int getOtherCount();
+	
+
+	int getSportsCount2();
 
 	int getCookCount2();
 
-	int getDanceCount2();
+	int getPictureCount2();
+
+	int getDesignCount2();
+
+	int getMusicCount2();
+
+	int getCraftsCount2();
+
+	int getArtCount2();
+
+	int getBeautyCount2();
+
+	int getLanguageCount2();
+
+	int getOtherCount2();
+
 
 
 }

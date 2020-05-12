@@ -43,24 +43,30 @@ public class StatisticsController {
 		int visitCount = sService.getVisitCount(); // 방문자 수
 		
 		// 강의 수
-		int artCount = sService.getArtCount(); // 미술
-		int craftsCount = sService.getCraftsCount(); // 공예
-		int musicCount = sService.getMusicCount(); // 음악
-		int designCount = sService.getDesignCount(); // 디자인,개발
-		int pictureCount = sService.getPictureCount(); // 사진,영상
-		int cookCount = sService.getCookCount(); // 요리
-		int danceCount = sService.getDanceCount(); // 댄스
 		int sportsCount = sService.getSportsCount(); // 스포츠
+		int cookCount = sService.getCookCount(); // 요리
+		int pictureCount = sService.getPictureCount(); // 미디어
+		int designCount = sService.getDesignCount(); // 디자인
+		int musicCount = sService.getMusicCount(); // 음악
+		int craftsCount = sService.getCraftsCount(); // 공예
+		int artCount = sService.getArtCount(); // 예술
+		int beautyCount = sService.getBeautyCount(); // 미용
+		int languageCount = sService.getLanguageCount(); // 언어
+		int otherCount = sService.getOtherCount(); // 기타
+		
 		
 		// 성사된 강의 수
-		int artCount2 = sService.getArtCount2(); // 미술
-		int craftsCount2 = sService.getCraftsCount2(); // 공예
-		int musicCount2 = sService.getMusicCount2(); // 음악
-		int designCount2 = sService.getDesignCount2(); // 디자인,개발
-		int pictureCount2 = sService.getPictureCount(); // 사진,영상
+		
+		int sportsCount2 = sService.getSportsCount2(); // 스포츠
 		int cookCount2 = sService.getCookCount2(); // 요리
-		int danceCount2 = sService.getDanceCount2(); // 댄스
-		int sportsCount2 = sService.getSportsCount(); // 스포츠
+		int pictureCount2 = sService.getPictureCount2(); // 미디어
+		int designCount2 = sService.getDesignCount2(); // 디자인
+		int musicCount2 = sService.getMusicCount2(); // 음악
+		int craftsCount2 = sService.getCraftsCount2(); // 공예
+		int artCount2 = sService.getArtCount2(); // 예술
+		int beautyCount2 = sService.getBeautyCount2(); // 미용
+		int languageCount2 = sService.getLanguageCount2(); // 언어
+		int otherCount2 = sService.getOtherCount2(); // 기타
 		
 		if(memberCount != 0) {
 			mv.addObject("memberCount", memberCount);
@@ -74,17 +80,20 @@ public class StatisticsController {
 			mv.addObject("designCount", designCount);
 			mv.addObject("pictureCount", pictureCount);
 			mv.addObject("cookCount", cookCount);
-			mv.addObject("danceCount", danceCount);
 			mv.addObject("sportsCount", sportsCount);
+			mv.addObject("beautyCount", beautyCount);
+			mv.addObject("languageCount", languageCount);
+			mv.addObject("otherCount", otherCount);
 			mv.addObject("artCount2", artCount2);
 			mv.addObject("craftsCount2", craftsCount2);
 			mv.addObject("musicCount2", musicCount2);
 			mv.addObject("designCount2", designCount2);
 			mv.addObject("pictureCount2", pictureCount2);
 			mv.addObject("cookCount2", cookCount2);
-			mv.addObject("danceCount2", danceCount2);
 			mv.addObject("sportsCount2", sportsCount2);
-			
+			mv.addObject("beautyCount2", beautyCount2);
+			mv.addObject("languageCount2", languageCount2);
+			mv.addObject("otherCount2", otherCount2);
 			mv.setViewName("statistics");
 		}
 		

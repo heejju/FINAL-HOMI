@@ -55,12 +55,20 @@ public class StatisticsDAO {
 		return sqlSession.selectOne("statisticsMapper.getCookCount");
 	}
 
-	public int getDanceCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("statisticsMapper.getDanceCount");
-	}
-
 	public int getSportsCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("statisticsMapper.getSportsCount");
+	}
+
+	public int getBeautyCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("statisticsMapper.getBeautyCount");
+	}
+
+	public int getLanguageCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("statisticsMapper.getLanguageCount");
+	}
+
+	public int getOtherCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("statisticsMapper.getOtherCount");
 	}
 
 	public ArrayList<Statistics> selectList(SqlSessionTemplate sqlSession, String yearMonth) {
@@ -87,8 +95,25 @@ public class StatisticsDAO {
 		return sqlSession.selectOne("statisticsMapper.getDesignCount2");
 	}
 
-	public int getDanceCount2(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("statisticsMapper.getDanceCount2");
+	public int getSportsCount2(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("statisticsMapper.getSportsCount2");
 	}
+
+	public int getPictureCount2(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("statisticsMapper.getPictureCount2");
+	}
+
+	public int getBeautyCount2(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("statisticsMapper.getBeautyCount2");
+	}
+
+	public int getLanguageCount2(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("statisticsMapper.getLanguageCount2");
+	}
+
+	public int getOtherCount2(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("statisticsMapper.getOtherCount2");
+	}
+
 
 }

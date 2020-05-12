@@ -90,7 +90,7 @@
 					
 				<div class="heightSet">
 					<div class="infoTable" style="color: rgb(103, 81, 65);"><a href="${myinfo}" style="font-size: 15px;">${loginUser.nickName} 님</a></div>
-					<c:if test="${loginUser.vipYn == 'Y' }">
+					<c:if test="${loginUser.vipYn eq 'Y' }">
 						<div class="infoTable" style="width: 50px;">
 							<img style="width: 30px;" src="${contextPath }/resources/images/VIP.png">
 						</div>

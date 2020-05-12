@@ -137,7 +137,7 @@ button:hover{cursor:pointer;}
 								정상
 							</c:if>
 							<c:if test="${ m.mStatus ne 'N'}">
-								탈퇴
+								<span style="color:orangered; font-size:18px; font-weight:bold;">탈퇴</span>
 							</c:if>
 						</td>
 						<td>
@@ -145,13 +145,13 @@ button:hover{cursor:pointer;}
 								<font color='black'>일반</font>
 							</c:if>
 							<c:if test="${ m.reportCount eq 1 }">
-								<font color='green'>주의</font>
+								<font color='green'><b>주의</b></font>
 							</c:if>
 							<c:if test="${ m.reportCount eq 2 }">
-								<font color='orange'>경고</font>
+								<font color='orange'><b>경고</b></font>
 							</c:if>
 							<c:if test="${ m.reportCount eq 3 }">
-								<font color='red'>블랙</font>
+								<font color='red'><b>블랙</b></font>
 							</c:if>
 						</td>
 					</tr>

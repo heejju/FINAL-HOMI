@@ -65,10 +65,11 @@ public class MemberController {
 							Model model) throws IOException {
 		Member m = new Member() ;
 		m.setUserId(userId) ;
-		m.setUserPwd(userPwd) ;
+		m.setUserPwd(userPwd);
 		Member loginUser = mService.memberLogin(m) ;
+		
 		if(loginUser != null) {
-			boolean passMatch = passEncoder.matches(m.getUserPwd(), loginUser.getUserPwd()) ;
+			boolean passMatch = passEncoder.matches(userPwd, loginUser.getUserPwd()) ;
 			if(passMatch) {
 				String sysdate = new SimpleDateFormat("yy/MM/dd").format(Calendar.getInstance().getTime()) ;
 				mService.countVisit(sysdate) ;
@@ -177,11 +178,6 @@ public class MemberController {
 			m.setlAddress(address2) ;
 		}
 		
-		if(mKind == 2) {
-			int tmpRst = mService.insertTeacher(m.getUserId()) ;
-			if(tmpRst < 1)
-				throw new MemberException("일반 회원가입에 실패하였습니다. (id:"+m.getUserId()+")") ;
-		}
 		
 		if(uploadFile != null && !uploadFile.isEmpty()) {
 			String filePath = request.getSession().getServletContext().getRealPath("resources") + "\\uploadFiles" ;
@@ -197,6 +193,11 @@ public class MemberController {
 		int result2 = mService.insertUserImg(m) ;
 		
 		if(result > 0 && result2 > 0) {
+			if(mKind == 2) {
+				int tmpRst = mService.insertTeacher(m.getUserId()) ;
+				if(tmpRst < 1)
+					throw new MemberException("일반 회원가입에 실패하였습니다. (id:"+m.getUserId()+")") ;
+			}
 			String sysdate = new SimpleDateFormat("yy/MM/dd").format(Calendar.getInstance().getTime()) ;
 			mService.countUser(sysdate) ;
 			return "redirect:loginView.me" ;
@@ -312,6 +313,11 @@ public class MemberController {
 		int result2 = mService.insertUserImg(m) ;
 		
 		if(result1>0 && result2>0) {
+			if(mKind == 2) {
+				int tmpRst = mService.insertTeacher(m.getUserId()) ;
+				if(tmpRst < 1)
+					throw new MemberException("구글 회원가입에 실패하였습니다. (id:"+m.getUserId()+")") ;
+			}
 			return "redirect:loginView.me" ;
 		} else {
 			throw new MemberException("일반 회원가입에 실패하였습니다. (id:"+m.getUserId()+")") ;

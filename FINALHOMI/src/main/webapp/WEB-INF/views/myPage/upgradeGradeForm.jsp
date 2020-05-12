@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../common/boardCommon.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +88,7 @@
 						if(everythings_fine) {
 						}
 					});
-					 location.replace("<%=request.getContextPath()%>/teacherPage.mp?msg=true");
+					 location.href="goUp.mp";
 				} else {
 					swal("결제가 취소되었습니다.",{
 						icon : "info",

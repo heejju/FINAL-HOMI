@@ -545,11 +545,11 @@
          }
       
       </script>
-      <c:if test="${ loginUser.mKind == 2 }">
-      <div class="BWrite">
-         <c:url var="write" value="write.lec"/>
-         <button class="write" type="button" onclick="location.href='${ write }'">글쓰기</button>
-      </div>
+      <c:if test="${ loginUser.mKind == 2 && loginUser.vipYn eq 'Y' }">
+	      <div class="BWrite">
+	         <c:url var="write" value="write.lec"/>
+	         <button class="write" type="button" onclick="location.href='${ write }'">글쓰기</button>
+	      </div>
       </c:if>
       
       <div style="text-align: center; margin:2%;">

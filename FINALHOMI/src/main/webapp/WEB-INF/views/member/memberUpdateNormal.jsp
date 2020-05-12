@@ -499,10 +499,20 @@
 								$('#emailCheck').html("인증번호를 입력하세요!") ;
 								$('#emailCheck').css('color', 'red') ;
 								$('#isEmailUsable').val("falseEmail") ;
+								swal({
+									title: "이메일이 전송되었습니다!",
+									text: "전송된 이메일의 인증번호를 확인해 주세요!",
+									icon: "success"
+								}) ;
 							} else {
 								$('#emailCheck').html("중복된 이메일 입니다.다시 입력하세요!") ;
 								$('#emailCheck').css('color', 'red') ;
 								$('#isEmailUsable').val("dupEmail") ;
+								swal({
+									title: "중복된 이메일입니다!",
+									text: "이메일을 다시 입력해 주세요!",
+									icon: "error"
+								}) ;
 							}
 						}
 					}) ;
